@@ -3,7 +3,6 @@ import Seo from './strapi/seo'
 import { Typography, Header } from '@originprotocol/origin-storybook'
 import Image from 'next/image'
 import Link from 'next/link'
-import Layout from 'components/layout'
 import styles from '../styles/Article.module.css'
 import { assetRootPath } from 'utils/image'
 import formatSeo from 'utils/seo'
@@ -19,7 +18,6 @@ const Article = ({ locale, article, navLinks }) => {
   return (
     <>
       <Seo seo={seo} />
-      <Layout locale={locale}>
         <section className="page black">
           <Header mappedLinks={navLinks} webProperty="ousd" />
           <div className="max-w-screen-2xl mx-auto mt-[20px] md:mt-16 px-8 md:px-[134px] md:pb-40">
@@ -89,7 +87,6 @@ const Article = ({ locale, article, navLinks }) => {
             </div>
           </div>
         </section>
-      </Layout>
     </>
   )
 }

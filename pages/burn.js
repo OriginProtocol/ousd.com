@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import { fbt } from 'fbt-runtime'
-import Layout from 'components/layout'
 import Countdown, { zeroPad } from 'react-countdown'
 import { useStoreState } from 'pullstate'
 import ContractStore from 'stores/ContractStore'
@@ -198,7 +197,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
   }, [ogv, veogv, currentBlock])
 
   return (
-    <Layout locale={locale}>
+    <>
       <section className="burn black">
         <Header mappedLinks={navLinks} webProperty="ousd" />
         <div className="container d-flex flex-column text-align-left ml-lg-5 pl-lg-5">
@@ -728,7 +727,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
           }
         }
       `}</style>
-    </Layout>
+    </>
   )
 }
 

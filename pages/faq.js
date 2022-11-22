@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Typography, Header } from '@originprotocol/origin-storybook'
 import { fbt } from 'fbt-runtime'
-import Layout from 'components/layout'
 import { useRouter } from 'next/router'
 import { fetchAPI } from '../lib/api'
 import Seo from '../src/components/strapi/seo'
@@ -18,7 +17,6 @@ const Faq = ({ locale, onLocale, faq, seo, navLinks }) => {
   return (
     <>
       <Seo seo={seo} />
-      <Layout locale={locale}>
         <section className="page black">
           <Header mappedLinks={navLinks} webProperty="ousd" active={'FAQ'} />
           <div className="max-w-screen-2xl mt-[20px] md:mt-16 mx-auto pb-[132px] px-[16px] md:px-[134px] text-left">
@@ -80,7 +78,6 @@ const Faq = ({ locale, onLocale, faq, seo, navLinks }) => {
             </Typography.H5>
           </div>
         </section>
-      </Layout>
     </>
   )
 }

@@ -2,7 +2,6 @@ import React from 'react'
 import { Typography, Header } from '@originprotocol/origin-storybook'
 import { fbt } from 'fbt-runtime'
 import News from 'components/News'
-import Layout from 'components/layout'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { fetchAPI } from '../lib/api'
@@ -26,7 +25,6 @@ const Blog = ({
   return (
     <>
       <Seo seo={seo} />
-      <Layout locale={locale}>
         <section className="page black">
           <Header mappedLinks={navLinks} webProperty="ousd" active={active} />
           <div className="max-w-screen-2xl mt-[20px] md:mt-16 mx-auto px-8 md:px-[134px] pb-12">
@@ -38,7 +36,6 @@ const Blog = ({
             )}
           </div>
         </section>
-      </Layout>
     </>
   )
 }
