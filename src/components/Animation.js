@@ -4,11 +4,11 @@ import Link from 'next/link'
 import { Typography, Header } from '@originprotocol/origin-storybook'
 //import CountUp from 'react-countup'
 //import AccountListener from 'components/AccountListener'
-import { assetRootPath } from 'utils/image'
+import { assetRootPath } from '../utils/image'
 import { useStoreState } from 'pullstate'
-import ContractStore from 'stores/ContractStore'
-import { formatCurrency } from 'utils/math'
-import { adjustLinkHref } from 'utils/utils'
+import ContractStore from '../stores/ContractStore'
+import { formatCurrency } from '../utils/math'
+import { adjustLinkHref } from '../utils/utils'
 
 const Animation = ({ navLinks, active }) => {
   const [totalOusd, setTotalOusd] = useState()

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { fbt } from 'fbt-runtime'
 import { Typography } from '@originprotocol/origin-storybook'
-import { assetRootPath } from 'utils/image'
+import { assetRootPath } from '../utils/image'
 import { PieChart } from 'react-minimal-pie-chart'
 import { formatCurrency } from '../utils/math'
-import { tokenColors } from 'utils/constants'
+import { tokenColors } from '../utils/constants'
 
 const Collateral = ({ collateral, allocation }) => {
   // temporary calculation, waiting for metastrategy integration into analytics

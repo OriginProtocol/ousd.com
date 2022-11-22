@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { fbt } from 'fbt-runtime'
 import { Typography } from '@originprotocol/origin-storybook'
-import { assetRootPath } from 'utils/image'
+import { assetRootPath } from '../utils/image'
 import { useStoreState } from 'pullstate'
 import useCirculatingSupplyQuery from '../queries/useCirculatingSupplyQuery'
 import usePriceQuery from '../queries/usePriceQuery'
 import useTotalSupplyQuery from '../queries/useTotalSupplyQuery'
-import ContractStore from 'stores/ContractStore'
-import { formatCurrency } from 'utils/math'
+import ContractStore from '../stores/ContractStore'
+import { formatCurrency } from '../utils/math'
 
 const Ogv = () => {
   const price = useStoreState(ContractStore, (s) => {

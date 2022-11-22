@@ -6,13 +6,13 @@ import { Chart } from 'react-chartjs-2'
 import LineChart from '../components/Chart'
 import { Typography } from '@originprotocol/origin-storybook'
 import { useStoreState } from 'pullstate'
-import ContractStore from 'stores/ContractStore'
+import ContractStore from '../stores/ContractStore'
 import zipObject from 'lodash/zipObject'
-import { formatCurrency } from 'utils/math'
-import { adjustLinkHref } from 'utils/utils'
+import { formatCurrency } from '../utils/math'
+import { adjustLinkHref } from '../utils/utils'
 import useApyQuery from '../queries/useApyQuery'
 import useApyHistoryQuery from '../queries/useApyHistoryQuery'
-import { apyDayOptions } from 'utils/constants'
+import { apyDayOptions } from '../utils/constants'
 
 const Apy = ({ apy }) => {
   const [loaded, setLoaded] = useState()

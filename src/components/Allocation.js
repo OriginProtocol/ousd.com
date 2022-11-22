@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { fbt } from 'fbt-runtime'
 import { Typography } from '@originprotocol/origin-storybook'
-import { assetRootPath } from 'utils/image'
+import { assetRootPath } from '../utils/image'
 import { LinearProgress } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
-import { formatCurrency } from 'utils/math'
-import { theme } from 'utils/constants'
+import { formatCurrency } from '../utils/math'
+import { theme } from '../utils/constants'
 
 const Allocation = ({ allocation }) => {
   const [open, setOpen] = useState({})

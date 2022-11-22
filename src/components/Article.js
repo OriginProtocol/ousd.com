@@ -4,11 +4,11 @@ import { Typography, Header } from '@originprotocol/origin-storybook'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Article.module.css'
-import { assetRootPath } from 'utils/image'
-import formatSeo from 'utils/seo'
+import { assetRootPath } from '../utils/image'
+import formatSeo from '../utils/seo'
 import sanitizeHtml from 'sanitize-html'
 import he from 'he'
-import { sanitizationOptions } from 'utils/constants'
+import { sanitizationOptions } from '../utils/constants'
 
 const Article = ({ locale, article, navLinks }) => {
   const imageUrl = article.cover?.url

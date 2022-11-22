@@ -7,9 +7,9 @@ import { getStrapiMedia } from "../lib/media"
 import "../styles/globals.css"
 import bundledCss from "@originprotocol/origin-storybook/lib/styles.css"
 import { QueryClient, QueryClientProvider } from "react-query"
-import analytics from "utils/analytics"
+import analytics from "../src/utils/analytics"
 import { AnalyticsProvider } from "use-analytics"
-import { setUserSource } from "utils/user"
+import { setUserSource } from "../src/utils/user"
 
 const queryClient = new QueryClient();
 export const GlobalContext = createContext({});

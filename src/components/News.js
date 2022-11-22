@@ -1,7 +1,7 @@
 import { Card, Select } from '@originprotocol/origin-storybook'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { assetRootPath } from 'utils/image'
+import { assetRootPath } from '../utils/image'
 import { capitalize } from 'lodash'
 
 const Category = ({ categories, setCategory }) => {

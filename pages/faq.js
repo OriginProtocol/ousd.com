@@ -6,7 +6,7 @@ import { fetchAPI } from '../lib/api'
 import Seo from '../src/components/strapi/seo'
 import formatSeo from '../src/utils/seo'
 import transformLinks from '../src/utils/transformLinks'
-import { assetRootPath } from 'utils/image'
+import { assetRootPath } from '../src/utils/image'
 import { capitalize } from 'lodash'
 
 const Faq = ({ locale, onLocale, faq, seo, navLinks }) => {
