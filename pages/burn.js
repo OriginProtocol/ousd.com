@@ -232,7 +232,9 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
           </div>
           <div className="text-container mt-5">
             {burnOver ? (
-              {'OGV burned'}
+              <>
+                OGV burned
+              </>
             ) : (
               <>
                 Estimated burn amount{' '}
