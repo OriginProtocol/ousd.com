@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Typography } from '@originprotocol/origin-storybook'
+import Image from 'next/image'
 import { assetRootPath } from '../utils/image'
 import { useStoreState } from 'pullstate'
 import useCirculatingSupplyQuery from '../queries/useCirculatingSupplyQuery'
@@ -509,10 +510,13 @@ const Ogv = () => {
                 <Typography.Body3 className="mt-[16px] lg:text-left">
                   {"OUSD's future is shaped by voters who lock their OGV and participate in decentralized governance."}
                 </Typography.Body3>
-                <img
-                  src={assetRootPath(`/images/ogv.svg`)}
-                  className="mt-8 lg:mt-8 mx-auto block lg:hidden"
-                />
+                <div className='mt-8 lg:mt-8 mx-auto block lg:hidden'>
+                  <Image
+                    src={assetRootPath(`/images/ogv.svg`)}
+                    width='186'
+                    height='186'
+                  />
+                </div>
                 <div className="flex flex-col justify-between w-full my-16 lg:w-4/5 text-left font-weight-bold">
                   <div className="flex flex-row justify-between">
                     <div className="w-96">
@@ -579,10 +583,14 @@ const Ogv = () => {
               </span>*/}
               </div>
               <div>
-                <img
-                  src={assetRootPath(`/images/ogv.svg`)}
-                  className="hidden lg:block"
-                />
+                <div className='hidden lg:block'>
+                  <Image
+                    src={assetRootPath(`/images/ogv.svg`)}
+                    width='397'
+                    height='397'
+                    className='hidden lg:block'
+                  />
+                </div>
                 <Typography.Body3 className="mt-8 text-center text-white opacity-75">
                   OGV is listed on top exchanges
                 </Typography.Body3>
@@ -654,8 +662,10 @@ const Ogv = () => {
             </div>
           </div>
         </div>
-        <img
+        <Image
           src={assetRootPath(`/images/splines21.png`)}
+          width='1073'
+          height='1058'
           className="absolute w-3/5 left-0 bottom-0 -z-10"
         />
       </section>
