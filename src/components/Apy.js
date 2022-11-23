@@ -119,7 +119,7 @@ const Apy = ({ apy }) => {
             DeFi strategy
           </Typography.H6>
           <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto text-[#b5beca]">
-            Grow your stablecoin portfolio by swapping USDC, USDT, or DAI to OUSD. Yields are generated on-chain, distributed directly to your wallet, and compounded automatically. Your funds are never risked on speculative positions.'
+            Grow your stablecoin portfolio by swapping USDC, USDT, or DAI to OUSD. Yields are generated on-chain, distributed directly to your wallet, and compounded automatically. Your funds are never risked on speculative positions.
           </Typography.Body3>
           {loaded && (
             <div className="max-w-[1432px] mx-auto flex flex-col mt-20 mb-16 p-[16px] md:p-10 rounded-xl bg-[#141519]">

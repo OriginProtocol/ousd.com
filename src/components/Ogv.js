@@ -507,7 +507,7 @@ const Ogv = () => {
                   Governed by OGV stakers
                 </Typography.H2>
                 <Typography.Body3 className="mt-[16px] lg:text-left">
-                  OUSD's future is shaped by voters who lock their OGV and participate in decentralized governance.
+                  {"OUSD's future is shaped by voters who lock their OGV and participate in decentralized governance."}
                 </Typography.Body3>
                 <img
                   src={assetRootPath(`/images/ogv.svg`)}
@@ -636,7 +636,7 @@ const Ogv = () => {
                   </span>
                 </Typography.H2>
                 <Typography.Body3 className="mt-[16px] mb-10 font-normal text-[#fafbfb]">
-                  Fees and voting rights accrue to OGV stakers. Control the future of OUSD'{' '}
+                  Fees and voting rights accrue to OGV stakers. Control the future of OUSD{' '}
                   <br className="hidden lg:block" />
                   and profit from its growth.
                 </Typography.Body3>
