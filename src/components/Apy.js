@@ -13,10 +13,10 @@ import useApyQuery from '../queries/useApyQuery'
 import useApyHistoryQuery from '../queries/useApyHistoryQuery'
 import { apyDayOptions } from '../utils/constants'
 
-const Apy = ({ apy }) => {
+const Apy = ({ apy, apyData }) => {
   const [loaded, setLoaded] = useState()
 
-  const apyQuery = useApyQuery({
+  /*const apyQuery = useApyQuery({
     onSuccess: (apy) => {
       ContractStore.update((s) => {
         s.apy = apy
@@ -27,7 +27,8 @@ const Apy = ({ apy }) => {
     apyDayOptions.map((d) => {
       return s.apy[`apy${d}`] || 0
     })
-  )
+  )*/
+  const apyOptions = apy
   const daysToApy = zipObject(apyDayOptions, apyOptions)
   const [apyDays, setApyDays] = useState(
     process.browser &&
@@ -39,7 +40,7 @@ const Apy = ({ apy }) => {
       : 30
   )
 
-  const apyHistoryQuery = useApyHistoryQuery(apy)
+  const apyHistoryQuery = useApyHistoryQuery(apyData)
 
   const apyHistory = useMemo(
     () => apyHistoryQuery.data,

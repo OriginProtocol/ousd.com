@@ -9,6 +9,10 @@ import Footer from '../src/components/Footer'
 import Seo from '../src/components/strapi/seo'
 import { useRouter } from 'next/router'
 import { fetchAPI } from '../lib/api'
+import { fetchApy } from '../lib/apy'
+import { fetchApyHistory } from '../lib/apyHistory'
+import { fetchAllocation } from '../lib/allocation'
+import { fetchCollateral } from '../lib/collateral'
 import formatSeo from '../src/utils/seo'
 import transformLinks from '../src/utils/transformLinks'
 import { Typography } from '@originprotocol/origin-storybook'
@@ -20,12 +24,12 @@ import ContractStore from '../src/stores/ContractStore'
 import useAllocationQuery from '../src/queries/useAllocationQuery'
 import useCollateralQuery from '../src/queries/useCollateralQuery'
 
-const Home = ({ locale, onLocale, seo, navLinks, apy = {} }) => {
+const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, collateral = {} }) => {
   const { pathname } = useRouter()
   const active = capitalize(pathname.slice(1))
   const [loaded, setLoaded] = useState()
 
-  const allocation = useStoreState(ContractStore, (s) => {
+  /*const allocation = useStoreState(ContractStore, (s) => {
     return s.allocation || {}
   })
 
@@ -53,7 +57,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy = {} }) => {
     allocationQuery.refetch()
     collateralQuery.refetch()
     setLoaded(true)
-  }, [])
+  }, [])*/
 
   return (
     <>
@@ -61,7 +65,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy = {} }) => {
       <>
       <Seo seo={seo} />
         <Animation navLinks={navLinks} active={active} />
-        <Apy apy={apy} />
+        <Apy apy={apy} apyData={apyHistory} />
         <Allocation allocation={allocation} />
         <Collateral collateral={collateral} allocation={allocation} />
         <section className="home black">
@@ -138,28 +142,6 @@ const Home = ({ locale, onLocale, seo, navLinks, apy = {} }) => {
   )
 }
 
-export async function fetchApyHistory() {
-  const apyDayOptions = [7, 30, 365]
-  const apyHistory = await Promise.all(
-    apyDayOptions.map(async (days) => {
-      const endpoint = `${process.env.ANALYTICS_ENDPOINT}/api/v1/apr/trailing_history/${days}`
-      const response = await fetch(endpoint)
-      if (!response.ok) {
-        throw new Error(`Failed to fetch ${days}-day trailing APY history`)
-      }
-      const json = await response.json()
-      return json.trailing_history
-    })
-  ).catch(function (err) {
-    console.log(err.message)
-  })
-  const data = {}
-  apyDayOptions.map((days, i) => {
-    data[`apy${days}`] = apyHistory ? apyHistory[i] : []
-  })
-  return data
-}
-
 export async function getStaticProps() {
   const articlesRes = await fetchAPI('/ousd/blog/en')
   const seoRes = await fetchAPI('/ousd/page/en/%2F')
@@ -173,14 +155,20 @@ export async function getStaticProps() {
 
   const navLinks = transformLinks(navRes.data)
 
-  const apy = await fetchApyHistory()
+  const apy = await fetchApy()
+  const apyHistory = await fetchApyHistory()
+  const allocation = await fetchAllocation()
+  const collateral = await fetchCollateral()
 
   return {
     props: {
       articles: articlesRes.data,
       seo: formatSeo(seoRes?.data),
       navLinks,
-      apy: apy || [],
+      apy,
+      apyHistory: apyHistory || [],
+      allocation,
+      collateral,
       fallback: true,
     },
     revalidate: 5 * 60, // Cache response for 5m
