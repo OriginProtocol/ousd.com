@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { Typography } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../utils/image'
 import { PieChart } from 'react-minimal-pie-chart'
@@ -66,10 +67,12 @@ const Collateral = ({ collateral, allocation }) => {
                       className="flex flex-row my-[2px] md:my-0"
                       key={token.name}
                     >
-                      <img
-                        src={assetRootPath(`/images/${token.name}-logo.svg`)}
-                        className="w-12 md:w-[72px]"
-                      ></img>
+                      <div className='relative w-12 md:w-[72px]'>
+                        <Image
+                          src={assetRootPath(`/images/${token.name}-logo.svg`)}
+                          layout='fill'
+                        />
+                      </div>
                       <div className="ml-[8px] md:ml-8">
                         <Typography.H7 className="text-base md:text-[32px] font-bold">
                           {`${formatCurrency((realTotal / total) * 100, 2)}%`}

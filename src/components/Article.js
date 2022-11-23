@@ -60,7 +60,7 @@ const Article = ({ locale, article, navLinks }) => {
                   <div className="flex items-center">
                     <div>
                       {article.author?.avatar && (
-                        <img
+                        <Image
                           src={article.author.avatar.url}
                           alt={article.author.avatar.alternativeText}
                           style={{
@@ -68,8 +68,8 @@ const Article = ({ locale, article, navLinks }) => {
                             borderRadius: '20%',
                             height: 60,
                           }}
-                          width="64px"
-                          height="64px"
+                          width="64"
+                          height="64"
                         />
                       )}
                     </div>

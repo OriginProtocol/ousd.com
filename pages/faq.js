@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { Typography, Header } from '@originprotocol/origin-storybook'
 import { useRouter } from 'next/router'
 import { fetchAPI } from '../lib/api'
@@ -43,8 +44,10 @@ const Faq = ({ locale, onLocale, faq, seo, navLinks }) => {
                       >
                         {q.attributes.question}
                       </Typography.H7>
-                      <img
+                      <Image
                         src={assetRootPath(`/images/caret.svg`)}
+                        width='23'
+                        height='14'
                         className={`w-4 md:w-6 ml-[16px] md:ml-8 mb-2 inline ${
                           open[i] ? 'rotate-180' : ''
                         }`}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Typography, Header } from '@originprotocol/origin-storybook'
 //import CountUp from 'react-countup'
@@ -70,11 +71,13 @@ const Animation = ({ navLinks, active }) => {
           </div>
           <div className="container self-end lg:self-start flex-1 relative mt-20 lg:mt-14 xl:mt-0 md:pb-10">
             <div className="hidden lg:block">
-              <img
-                src={assetRootPath('/images/ousd.svg')}
-                className="ousd m-auto pb-4"
-                alt="ousd"
-              />
+              <div className="relative ousd m-auto pb-4">
+                <Image
+                  src={assetRootPath('/images/ousd.svg')}
+                  layout='fill'
+                  alt="ousd"
+                />
+              </div>
             </div>
             {totalOusd && (
               <div className="lg:absolute lg:bottom-0 lg:left-0 lg:right-0 text-center">
@@ -103,11 +106,13 @@ const Animation = ({ navLinks, active }) => {
                     </Typography.Body3>
                   </div>
                   <div className="absolute -top-12 -right-12 z-0 lg:hidden">
-                    <img
-                      src={assetRootPath('/images/ousd.svg')}
-                      className="ousd ml-3 w-40 md:w-64"
-                      alt="ousd"
-                    />
+                    <div className="relative ousd ml-3 w-40 md:w-64">
+                      <Image
+                        src={assetRootPath('/images/ousd.svg')}
+                        layout='fill'
+                        alt="ousd"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

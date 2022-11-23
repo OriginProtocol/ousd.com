@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
 import Animation from '../src/components/Animation'
 import Apy from '../src/components/Apy'
 import Allocation from '../src/components/Allocation'
@@ -89,14 +90,16 @@ const Home = ({ locale, onLocale, seo, navLinks, apy = {} }) => {
                       key={audit.name}
                     >
                       <div className="item relative rounded-full w-[140px] h-[140px] md:w-[200px] md:h-[200px] lg:w-[130px] lg:h-[130px] xl:w-[170px] xl:h-[170px] 2xl:w-[200px] 2xl:h-[200px]">
-                        <img
-                          src={assetRootPath(
-                            `/images/${audit.name
-                              .replace(/ /g, '-')
-                              .toLowerCase()}.svg`
-                          )}
-                          className="h-[56px] md:h-[80px] lg:h-[56px] 2xl:h-[80px] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                        />
+                        <div className="relative h-[56px] md:h-[80px] lg:h-[56px] 2xl:h-[80px] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                          <Image
+                            src={assetRootPath(
+                              `/images/${audit.name
+                                .replace(/ /g, '-')
+                                .toLowerCase()}.svg`
+                            )}
+                            layout='fill'
+                          />
+                        </div>
                       </div>
                       <Typography.Body className="mt-[8px] md:mt-6 opacity-75">
                         {audit.name}

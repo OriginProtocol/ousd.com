@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { ethers } from 'ethers'
 import Countdown, { zeroPad } from 'react-countdown'
 import { useStoreState } from 'pullstate'
@@ -201,8 +202,10 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
         <Header mappedLinks={navLinks} webProperty="ousd" />
         <div className="container d-flex flex-column text-align-left ml-lg-5 pl-lg-5">
           <h2 className="mt-4">
-            <img
+            <Image
               src={assetRootPath('/images/ogv-logo.svg')}
+              width='100'
+              height='100'
               className="ogv-logo pb-lg-3 inline"
               alt="OGV logo"
             />
@@ -264,8 +267,10 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
                 rel="noopener noreferrer"
               >
                 <span className="text-2">Liquid OGV airdrop contract</span>
-                <img
+                <Image
                   src={assetRootPath('/images/external-link.svg')}
+                  width='100'
+                  height='100'
                   className="external-link"
                   alt="External link"
                 />
@@ -282,8 +287,10 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
                 <span className="text-gradient2">
                   Locked OGV airdrop contract
                 </span>
-                <img
+                <Image
                   src={assetRootPath('/images/external-link.svg')}
+                  width='100'
+                  height='100'
                   className="external-link"
                   alt="External link"
                 />
@@ -318,8 +325,10 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
                 rel="noopener noreferrer"
               >
                 <span className="text-gradient2">Learn more</span>
-                <img
+                <Image
                   src={assetRootPath('/images/external-link.svg')}
+                  width='100'
+                  height='100'
                   className="external-link"
                   alt="External link"
                 />
@@ -340,8 +349,10 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
                 <div className={`d-flex layout`}>
                   <div className={`mr-lg-5 mr-md-3 ${isMobile ? 'mb-3' : ''}`}>
                     <div className="text-container">
-                      <img
+                      <Image
                         src={assetRootPath('/images/purple-dot-dark.svg')}
+                        width='100'
+                        height='100'
                         className="purple-dot mr-2"
                         alt="Purple dot"
                       />
@@ -355,8 +366,10 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
                   </div>
                   <div>
                     <div className="text-container">
-                      <img
+                      <Image
                         src={assetRootPath('/images/purple-dot-light.svg')}
+                        width='100'
+                        height='100'
                         className="purple-dot mr-2"
                         alt="Purple dot"
                       />
