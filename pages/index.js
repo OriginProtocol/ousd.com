@@ -68,15 +68,15 @@ const Home = ({ locale, onLocale, seo, navLinks, apy = {} }) => {
           <div className="py-[120px] px-[16px] md:px-[134px] lg:px-[200px] text-center">
             <Typography.H6
               className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"
-              style={{ fontWeight: 700 }}
+              style={{ fontWeight: 700, fontDisplay: 'swap' }}
             >
               Audited by leading security experts
             </Typography.H6>
-            <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto text-[#b5beca]">
+            <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto text-[#b5beca]" style={{ fontDisplay: 'swap' }}>
               Securing your funds is OUSD’s top priority. Changes to the protocol are reviewed by internal and external auditors on an ongoing basis.
             </Typography.Body3>
             <div className="audits max-w-[1134px] mx-auto mt-20 mb-16 rounded-xl px-[16px] xl:px-[86px] py-6 md:py-[56px]">
-              <Typography.H7 className="font-bold">
+              <Typography.H7 className="font-bold" style={{ fontDisplay: 'swap' }}>
                 Existing audits
               </Typography.H7>
               <div className="grid grid-rows-2 grid-cols-2 gap-y-10 lg:flex lg:flex-row lg:justify-between mt-6 md:mt-[56px] mx-auto">
@@ -101,7 +101,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy = {} }) => {
                           />
                         </div>
                       </div>
-                      <Typography.Body className="mt-[8px] md:mt-6 opacity-75">
+                      <Typography.Body className="mt-[8px] md:mt-6 opacity-75" style={{ fontDisplay: 'swap' }}>
                         {audit.name}
                       </Typography.Body>
                     </a>
@@ -115,7 +115,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy = {} }) => {
               rel="noopener noreferrer"
               className="bttn gradient2"
             >
-              <Typography.H7 className="font-normal">
+              <Typography.H7 className="font-normal" style={{ fontDisplay: 'swap' }}>
                 Review audits
               </Typography.H7>
             </a>
