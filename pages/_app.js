@@ -11,12 +11,12 @@ import analytics from "../src/utils/analytics"
 import { AnalyticsProvider } from "use-analytics"
 import { setUserSource } from "../src/utils/user"
 
-const queryClient = new QueryClient();
-export const GlobalContext = createContext({});
+const queryClient = new QueryClient()
+export const GlobalContext = createContext({})
 
 const MyApp = ({ Component, pageProps }) => {
-  const { global } = pageProps;
-  const router = useRouter();
+  const { global } = pageProps
+  const router = useRouter()
 
   const trackPageView = (url, lastURL) => {
     const data = {
@@ -24,15 +24,15 @@ const MyApp = ({ Component, pageProps }) => {
     };
 
     if (lastURL) {
-      data.fromURL = lastURL;
+      data.fromURL = lastURL
     }
 
-    analytics.page(data);
+    analytics.page(data)
 
     if (url.indexOf("?") > 0) {
       const searchParams = new URLSearchParams(
         url.substr(url.indexOf("?") + 1)
-      );
+      )
       const utmSource = searchParams.get("utm_source");
       if (utmSource) {
         setUserSource(utmSource);
@@ -43,7 +43,7 @@ const MyApp = ({ Component, pageProps }) => {
        */
       setUserSource("unknown");
     }
-  };
+  }
 
   useEffect(() => {
     let lastURL = window.location.pathname + window.location.search;
@@ -60,16 +60,16 @@ const MyApp = ({ Component, pageProps }) => {
         return;
       }
       // track when user navigates to a new page
-      trackPageView(url, lastURL);
-      lastURL = url;
+      trackPageView(url, lastURL)
+      lastURL = url
     };
 
-    router.events.on("routeChangeComplete", handleRouteChange);
+    router.events.on("routeChangeComplete", handleRouteChange)
 
     return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, []);
+      router.events.off("routeChangeComplete", handleRouteChange)
+    }
+  }, [])
 
   return (
     <>
@@ -87,8 +87,8 @@ const MyApp = ({ Component, pageProps }) => {
         </QueryClientProvider>
       </GlobalContext.Provider>
     </>
-  );
-};
+  )
+}
 
 // getInitialProps disables automatic static optimization for pages that don't
 // have getStaticProps. So article, category and home pages still get SSG.
@@ -96,7 +96,7 @@ const MyApp = ({ Component, pageProps }) => {
 // https://github.com/vercel/next.js/discussions/10949
 MyApp.getInitialProps = async (ctx) => {
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
-  const appProps = await App.getInitialProps(ctx);
+  const appProps = await App.getInitialProps(ctx)
 
   // Fetch global site settings from Strapi
   const globalRes = await fetchAPI("/global", {
@@ -106,7 +106,7 @@ MyApp.getInitialProps = async (ctx) => {
         populate: "*",
       },
     },
-  });
+  })
 
   // Pass the data to our page via props
   return {
@@ -124,7 +124,7 @@ MyApp.getInitialProps = async (ctx) => {
         <></>
       ),
     ],
-  };
-};
+  }
+}
 
-export default MyApp;
+export default MyApp

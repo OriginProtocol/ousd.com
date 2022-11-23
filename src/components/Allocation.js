@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { fbt } from 'fbt-runtime'
 import { Typography } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../utils/image'
 import { LinearProgress } from '@mui/material'
@@ -22,23 +21,14 @@ const Allocation = ({ allocation }) => {
             className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"
             style={{ fontWeight: 700 }}
           >
-            {fbt(
-              'Fully transparent on the Ethereum blockchain',
-              'Fully transparent on the Ethereum blockchain'
-            )}
+            Fully transparent on the Ethereum blockchain
           </Typography.H6>
           <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto text-[#b5beca]">
-            {fbt(
-              'Funds are deployed to automated, on-chain, blue-chip stablecoin strategies. There are no gatekeepers or centralized money managers and governance is entirely decentralized.',
-              'Funds are deployed to automated, on-chain, blue-chip stablecoin strategies. There are no gatekeepers or centralized money managers and governance is entirely decentralized.'
-            )}
+            Funds are deployed to automated, on-chain, blue-chip stablecoin strategies. There are no gatekeepers or centralized money managers and governance is entirely decentralized.
           </Typography.Body3>
           <div className="allocation max-w-[1432px] mx-auto mt-20 mb-16 rounded-xl divide-black divide-y-2">
             <Typography.H7 className="font-bold px-[16px] py-[22px] md:p-10">
-              {fbt(
-                'Current yield sources & allocations',
-                'Current yield sources & allocations'
-              )}
+              Current yield sources & allocations
             </Typography.H7>
             <div className="flex flex-col px-[16px] md:px-10 py-[10px] md:py-8">
               <ThemeProvider theme={theme}>
@@ -210,7 +200,7 @@ const Allocation = ({ allocation }) => {
             className="bttn gradient2"
           >
             <Typography.H7 className="font-normal">
-              {fbt('See how yield is generated', 'See how yield is generated')}
+              See how yield is generated
             </Typography.H7>
           </a>
         </div>

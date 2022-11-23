@@ -12,14 +12,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --write \"src/**/*.js\" \"pages/**/*.js\"",
+    "prettier:check": "prettier -c \"src/**/*.js\" \"pages/**/*.js\""
   },
   "dependencies": {
     "@analytics/google-analytics": "^1.0.3",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.15",
-    "@originprotocol/origin-storybook": "^0.24.2",
+    "@next/bundle-analyzer": "^13.0.4",
+    "@originprotocol/origin-storybook": "^0.22.9",
     "@sentry/nextjs": "^7.15.0",
     "analytics": "^0.8.1",
     "chart.js": "^3.9.1",
@@ -27,11 +30,9 @@
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.4",
     "ethers": "^5.7.2",
-    "fbjs": "^3.0.4",
-    "fbt-runtime": "^0.9.4",
     "he": "^1.2.0",
     "lodash": "^4.17.21",
-    "next": "13.0.4",
+    "next": "^13.0.4",
     "per-env": "^1.0.2",
     "prettier": "^2.7.1",
     "pullstate": "^1.23.0",
@@ -46,13 +47,11 @@
     "react-query": "^3.39.2",
     "sanitize-html": "^2.7.3",
     "sentry": "^0.1.2",
-    "tailwindcss": "^3.2.4",
+    "tailwindcss": "^3.1.8",
     "use-analytics": "^0.0.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",
-    "eslint": "8.23.0",
-    "eslint-config-next": "12.2.5",
     "postcss": "^8.4.17",
     "tailwind": "^4.0.0"
   }

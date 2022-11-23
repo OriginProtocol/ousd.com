@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { fbt } from 'fbt-runtime'
 import { Typography } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../utils/image'
 import { useStoreState } from 'pullstate'
@@ -505,13 +504,10 @@ const Ogv = () => {
                   className="text-[32px] md:text-[72px] lg:text-left"
                   style={{ fontWeight: 700 }}
                 >
-                  {fbt('Governed by OGV stakers', 'Governed by OGV stakers')}
+                  Governed by OGV stakers
                 </Typography.H2>
                 <Typography.Body3 className="mt-[16px] lg:text-left">
-                  {fbt(
-                    "OUSD's future is shaped by voters who lock their OGV and participate in decentralized governance.",
-                    "OUSD's future is shaped by voters who lock their OGV and participate in decentralized governance."
-                  )}
+                  OUSD's future is shaped by voters who lock their OGV and participate in decentralized governance.
                 </Typography.Body3>
                 <img
                   src={assetRootPath(`/images/ogv.svg`)}
@@ -565,7 +561,7 @@ const Ogv = () => {
                     className="bttn bg-black ml-0"
                   >
                     <Typography.H7 className="font-normal">
-                      {fbt('Buy OGV', 'Buy OGV')}
+                      Buy OGV
                     </Typography.H7>
                   </a>
                 </span>
@@ -577,7 +573,7 @@ const Ogv = () => {
                   className="bttn gradient2"
                 >
                   <Typography.H7 className="font-normal">
-                    {fbt('View dashboard', 'View dashboard')}
+                    View dashboard
                   </Typography.H7>
                 </a>
               </span>*/}
@@ -588,10 +584,7 @@ const Ogv = () => {
                   className="hidden lg:block"
                 />
                 <Typography.Body3 className="mt-8 text-center text-white opacity-75">
-                  {fbt(
-                    'OGV is listed on top exchanges',
-                    'OGV is listed on top exchanges'
-                  )}
+                  OGV is listed on top exchanges
                 </Typography.Body3>
                 <div className="flex flex-row justify-between items-center mt-[12px] md:mx-32 lg:mx-0">
                   <a
@@ -626,7 +619,7 @@ const Ogv = () => {
                   className="bttn bg-black block lg:hidden text-center mt-5"
                 >
                   <Typography.H7 className="font-normal">
-                    {fbt('Buy OGV', 'Buy OGV')}
+                    Buy OGV
                   </Typography.H7>
                 </a>
               </div>
@@ -636,21 +629,16 @@ const Ogv = () => {
             <div className="overflow-hidden max-w-screen-2xl mx-auto py-[120px] px-8 md:px-[134px] text-center">
               <div>
                 <Typography.H2 className="font-normal">
-                  {fbt('Stake OGV', 'Stake OGV')} <br className="block" />
+                  Stake OGV
+                  <br className="block" />
                   <span className="text-gradient1 font-bold py-1">
-                    {fbt('To Earn OGV', 'To Earn OGV')}
+                    To Earn OGV
                   </span>
                 </Typography.H2>
                 <Typography.Body3 className="mt-[16px] mb-10 font-normal text-[#fafbfb]">
-                  {fbt(
-                    'Fees and voting rights accrue to OGV stakers. Control the future of OUSD',
-                    'Fees and voting rights accrue to OGV stakers. Control the future of OUSD'
-                  )}{' '}
+                  Fees and voting rights accrue to OGV stakers. Control the future of OUSD'{' '}
                   <br className="hidden lg:block" />
-                  {fbt(
-                    'and profit from its growth.',
-                    'and profit from its growth.'
-                  )}
+                  and profit from its growth.
                 </Typography.Body3>
                 <a
                   href="https://governance.ousd.com/stake"
@@ -659,7 +647,7 @@ const Ogv = () => {
                   className="bttn bg-black"
                 >
                   <Typography.H7 className="font-normal">
-                    {fbt('Earn rewards', 'Earn rewards')}
+                    Earn rewards
                   </Typography.H7>
                 </a>
               </div>

@@ -6,7 +6,7 @@ export default class ApyService {
       apyDayOptions.map(async (days) => {
         let endpoint, varName
         if (apyDayOptions.includes(days)) {
-          endpoint = `${process.env.APR_ANALYTICS_ENDPOINT}/${days}`
+          endpoint = `${process.env.NEXT_PUBLIC_ANALYTICS_ENDPOINT}/api/v1/apr/trailing/${days}`
           varName = `apy${days}`
         } else {
           throw new Error(`Unexpected days param: ${days}`)

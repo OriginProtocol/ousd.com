@@ -1,6 +1,6 @@
 export default class PriceService {
   async fetchPrice() {
-    const endpoint = `${process.env.COINGECKO_API}/simple/price?ids=origin-protocol%2Corigin-dollar-governance&vs_currencies=usd`
+    const endpoint = `${process.env.NEXT_PUBLIC_COINGECKO_API}/simple/price?ids=origin-protocol%2Corigin-dollar-governance&vs_currencies=usd`
     const response = await fetch(endpoint)
     if (!response.ok) {
       throw new Error(`Failed to fetch price`, err)

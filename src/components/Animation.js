@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { fbt } from 'fbt-runtime'
 import Link from 'next/link'
 import { Typography, Header } from '@originprotocol/origin-storybook'
 //import CountUp from 'react-countup'
@@ -52,23 +51,20 @@ const Animation = ({ navLinks, active }) => {
           <div className='flex flex-col lg:flex-row justify-between max-w-[1432px] mx-auto'>
           <div className="lg:w-1/2 xl:w-7/12">
             <Typography.H2 as="h1" className="font-normal">
-              {fbt('The self-custodial,', 'The self-custodial,')}{' '}
+              The self-custodial{' '}
               <br className="hidden md:block" />
               <span className="text-gradient2 font-bold py-1">
-                {fbt('yield-generating,', 'yield-generating,')}{' '}
+                yield-generating,{' '}
               </span>
               <br className="hidden lg:block" />
-              {fbt('stablecoin', 'stablecoin')}
+              stablecoin
             </Typography.H2>
             <Typography.Body3 className="mt-6 mb-10 text-[#b5beca]">
-              {fbt(
-                'Origin Dollar simplifies DeFi by eliminating the need for staking or lock-ups. Hold OUSD in any Ethereum wallet and watch your balance increase every day.',
-                'Origin Dollar simplifies DeFi by eliminating the need for staking or lock-ups. Hold OUSD in any Ethereum wallet and watch your balance increase every day.'
-              )}
+              Origin Dollar simplifies DeFi by eliminating the need for staking or lock-ups. Hold OUSD in any Ethereum wallet and watch your balance increase every day.
             </Typography.Body3>
             <Link href={adjustLinkHref('/swap')} target="_blank" className="bttn ml-0 gradient2 w-auto">
               <Typography.H7 className="mx-8 md:mx-0 font-normal">
-                {fbt('Get OUSD', 'Get OUSD')}
+                Get OUSD
               </Typography.H7>
             </Link>
           </div>
@@ -103,10 +99,7 @@ const Animation = ({ navLinks, active }) => {
                       */}
                     </Typography.H2>
                     <Typography.Body3 className="text-sm md:text-base text-[#b5beca] pt-[0px] md:pt-[8px]">
-                      {fbt(
-                        'Total value of OUSD wallet balances',
-                        'Total value of OUSD wallet balances'
-                      )}
+                      Total value of OUSD wallet balances
                     </Typography.Body3>
                   </div>
                   <div className="absolute -top-12 -right-12 z-0 lg:hidden">

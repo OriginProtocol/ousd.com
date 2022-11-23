@@ -1,4 +1,3 @@
-import { fbt } from 'fbt-runtime'
 import analytics from '../utils/analytics'
 import { getDocsLink } from '../utils/getDocsLink'
 import { assetRootPath } from '../utils/image'
@@ -44,7 +43,7 @@ export default function Footer({ locale }) {
                 }}
               >
                 <Typography.Body3 className="text-[#fafbfb]">
-                  {fbt('Governance', 'Governance link')}
+                  Governance
                 </Typography.Body3>
               </a>
               <a
@@ -57,7 +56,7 @@ export default function Footer({ locale }) {
                 }}
               >
                 <Typography.Body3 className="text-[#fafbfb]">
-                  {fbt('Docs', 'Documentation link')}
+                  Docs
                 </Typography.Body3>
               </a>
               <a
@@ -70,7 +69,7 @@ export default function Footer({ locale }) {
                 }}
               >
                 <Typography.Body3 className="text-[#fafbfb]">
-                  {fbt('Blog', 'Blog link')}
+                  Blog
                 </Typography.Body3>
               </a>
               {/*<a
@@ -83,7 +82,7 @@ export default function Footer({ locale }) {
                 }}
               >
                 <Typography.Body3 className="text-[#fafbfb]">
-                  {fbt('FAQ', 'FAQ link')}
+                  FAQ
                 </Typography.Body3>
               </a>*/}
               <a
@@ -98,7 +97,7 @@ export default function Footer({ locale }) {
                 }}
               >
                 <Typography.Body3 className="text-[#fafbfb]">
-                  {fbt('OGV', 'OGV link')}
+                  OGV
                 </Typography.Body3>
               </a>
               <br className="block lg:hidden" />
@@ -121,10 +120,7 @@ export default function Footer({ locale }) {
               rel="noopener noreferrer"
             >
               <Typography.Caption2>
-                {fbt(
-                  'Originally released by Origin Protocol',
-                  'Originally released by Origin Protocol'
-                )}
+                Originally released by Origin Protocol
               </Typography.Caption2>
             </a>
             <div className="flex flex-row lg:justify-between mt-2 lg:mt-0">
@@ -135,12 +131,12 @@ export default function Footer({ locale }) {
                 className="mr-4 lg:mr-0"
               >
                 <Typography.Caption2>
-                  {fbt('Terms of Service', 'Terms of Service')}
+                  Terms of Service
                 </Typography.Caption2>
               </a>
               <a href={privacyURL} target="_blank" rel="noopener noreferrer">
                 <Typography.Caption2>
-                  {fbt('Privacy Policy', 'Privacy Policy')}
+                  Privacy Policy
                 </Typography.Caption2>
               </a>
             </div>

@@ -4,7 +4,7 @@ export default class ApyHistoryService {
   async fetchApyHistory() {
     const apyHistory = await Promise.all(
       apyDayOptions.map(async (days) => {
-        const endpoint = `${process.env.ANALYTICS_ENDPOINT}/api/v1/apr/trailing_history/${days}`
+        const endpoint = `${process.env.NEXT_PUBLIC_ANALYTICS_ENDPOINT}/api/v1/apr/trailing_history/${days}`
         const response = await fetch(endpoint)
         if (!response.ok) {
           throw new Error(`Failed to fetch ${days}-day trailing APY history`)

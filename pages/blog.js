@@ -1,6 +1,5 @@
 import React from 'react'
 import { Typography, Header } from '@originprotocol/origin-storybook'
-import { fbt } from 'fbt-runtime'
 import News from '../src/components/News'
 import Head from 'next/head'
 import { useRouter } from 'next/router'

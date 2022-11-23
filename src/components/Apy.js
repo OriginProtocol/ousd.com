@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { fbt } from 'fbt-runtime'
 import Link from 'next/link'
 import { Chart as ChartJS } from 'chart.js/auto'
 import { Chart } from 'react-chartjs-2'
@@ -113,17 +112,14 @@ const Apy = ({ apy }) => {
             className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"
             style={{ fontWeight: 700 }}
           >
-            {fbt('The simplest', 'The simplest')}{' '}
+            The simplest{' '}
             <span className="text-gradient2 py-1">
-              {fbt('market-neutral', 'market-neutral')}{' '}
+              market-neutral{' '}
             </span>
-            {fbt('DeFi strategy', 'DeFi strategy')}
+            DeFi strategy
           </Typography.H6>
           <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto text-[#b5beca]">
-            {fbt(
-              'Grow your stablecoin portfolio by swapping USDC, USDT, or DAI to OUSD. Yields are generated on-chain, distributed directly to your wallet, and compounded automatically. Your funds are never risked on speculative positions.',
-              'Grow your stablecoin portfolio by swapping USDC, USDT, or DAI to OUSD. Yields are generated on-chain, distributed directly to your wallet, and compounded automatically. Your funds are never risked on speculative positions.'
-            )}
+            Grow your stablecoin portfolio by swapping USDC, USDT, or DAI to OUSD. Yields are generated on-chain, distributed directly to your wallet, and compounded automatically. Your funds are never risked on speculative positions.'
           </Typography.Body3>
           {loaded && (
             <div className="max-w-[1432px] mx-auto flex flex-col mt-20 mb-16 p-[16px] md:p-10 rounded-xl bg-[#141519]">
@@ -136,7 +132,7 @@ const Apy = ({ apy }) => {
                 </div>
                 <div className="flex flex-col w-[286px] sm:w-[425px] mt-6 lg:mt-0 mx-[auto] lg:mx-0">
                   <Typography.Body3 className="text-[#b5beca]">
-                    {fbt('Moving average', 'Moving average')}
+                    Moving average
                   </Typography.Body3>
                   <div className="flex flex-row justify-between mt-[12px]">
                     {apyDayOptions.map((days) => {
@@ -182,7 +178,7 @@ const Apy = ({ apy }) => {
           )}
           <Link href={adjustLinkHref('/swap')} target="_blank" className="bttn gradient2">
             <Typography.H7 className="font-normal">
-              {fbt('Start earning now', 'Start earning now')}
+              Start earning now
             </Typography.H7>
           </Link>
         </div>

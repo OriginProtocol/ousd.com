@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
-import { fbt } from 'fbt-runtime'
 import Countdown, { zeroPad } from 'react-countdown'
 import { useStoreState } from 'pullstate'
 import ContractStore from '../src/stores/ContractStore'
@@ -16,7 +15,7 @@ const BurnCountdown = ({ days, hours, minutes, seconds }) => {
   return (
     <>
       <div className="text mt-5">
-        {fbt('Countdown to burn', 'Countdown to burn')}
+        Countdown to burn
       </div>
       <div className="d-flex flex-row text-center">
         <div className="d-flex flex-column">
@@ -207,13 +206,10 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
               className="ogv-logo pb-lg-3 inline"
               alt="OGV logo"
             />
-            {fbt('OGV BURN', 'OGV BURN')}
+            OGV BURN
           </h2>
           <div className="text-container mb-5">
-            {fbt(
-              'On October 10th, 2022 at 0:00UTC all unclaimed tokens from the OGV airdrop were burned forever.',
-              'On October 10th, 2022 at 0:00UTC all unclaimed tokens from the OGV airdrop were burned forever.'
-            )}
+            On October 10th, 2022 at 0:00UTC all unclaimed tokens from the OGV airdrop were burned forever.
           </div>
           <Countdown date={'2022-10-10T00:00:00.000Z'} renderer={renderer} />
           <div className="flex-row mt-5 mb-5">
@@ -236,12 +232,12 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
           </div>
           <div className="text-container mt-5">
             {burnOver ? (
-              fbt('OGV burned', 'OGV burned')
+              {'OGV burned'}
             ) : (
               <>
-                {fbt('Estimated burn amount', 'Estimated burn amount')}{' '}
+                Estimated burn amount{' '}
                 <span className="subtext">
-                  {fbt('(currently unclaimed OGV)', '(currently unclaimed OGV')}
+                  (currently unclaimed OGV)
                 </span>
               </>
             )}
@@ -254,7 +250,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
               (burnAmount / initialSupply) * 100,
               2
             )}% `}</span>
-            {fbt('of initial supply', ' of initial supply')}
+            of initial supply
           </h3>
           <div className="links">
             <div className="link">
@@ -298,7 +294,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
         <div className="container ml-lg-5 pl-lg-5">
           <div className="d-flex flex-column align-items-start">
             <div className="text-container">
-              {fbt('The OGV airdrop', 'The OGV airdrop')}
+              The OGV airdrop
             </div>
             <div className="subtext-container">
               As of July 12th, over 40,000 OGN holders and all OUSD holders

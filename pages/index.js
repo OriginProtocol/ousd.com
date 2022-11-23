@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { fbt } from 'fbt-runtime'
 import Animation from '../src/components/Animation'
 import Apy from '../src/components/Apy'
 import Allocation from '../src/components/Allocation'
@@ -23,6 +22,7 @@ import useCollateralQuery from '../src/queries/useCollateralQuery'
 const Home = ({ locale, onLocale, seo, navLinks, apy = {} }) => {
   const { pathname } = useRouter()
   const active = capitalize(pathname.slice(1))
+  const [loaded, setLoaded] = useState()
 
   const allocation = useStoreState(ContractStore, (s) => {
     return s.allocation || {}
@@ -51,10 +51,13 @@ const Home = ({ locale, onLocale, seo, navLinks, apy = {} }) => {
   useEffect(() => {
     allocationQuery.refetch()
     collateralQuery.refetch()
+    setLoaded(true)
   }, [])
 
   return (
     <>
+      {loaded &&
+      <>
       <Seo seo={seo} />
         <Animation navLinks={navLinks} active={active} />
         <Apy apy={apy} />
@@ -66,20 +69,14 @@ const Home = ({ locale, onLocale, seo, navLinks, apy = {} }) => {
               className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"
               style={{ fontWeight: 700 }}
             >
-              {fbt(
-                'Audited by leading security experts',
-                'Audited by leading security experts'
-              )}
+              Audited by leading security experts
             </Typography.H6>
             <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto text-[#b5beca]">
-              {fbt(
-                'Securing your funds is OUSD’s top priority. Changes to the protocol are reviewed by internal and external auditors on an ongoing basis.',
-                'Securing your funds is OUSD’s top priority. Changes to the protocol are reviewed by internal and external auditors on an ongoing basis.'
-              )}
+              Securing your funds is OUSD’s top priority. Changes to the protocol are reviewed by internal and external auditors on an ongoing basis.
             </Typography.Body3>
             <div className="audits max-w-[1134px] mx-auto mt-20 mb-16 rounded-xl px-[16px] xl:px-[86px] py-6 md:py-[56px]">
               <Typography.H7 className="font-bold">
-                {fbt('Existing audits', 'Existing audits')}
+                Existing audits
               </Typography.H7>
               <div className="grid grid-rows-2 grid-cols-2 gap-y-10 lg:flex lg:flex-row lg:justify-between mt-6 md:mt-[56px] mx-auto">
                 {audits.map((audit, i) => {
@@ -116,7 +113,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy = {} }) => {
               className="bttn gradient2"
             >
               <Typography.H7 className="font-normal">
-                {fbt('Review audits', 'Review audits')}
+                Review audits
               </Typography.H7>
             </a>
           </div>
@@ -132,6 +129,8 @@ const Home = ({ locale, onLocale, seo, navLinks, apy = {} }) => {
           }
         `}</style>
       <Footer locale={locale} />
+      </>
+        }
     </>
   )
 }
