@@ -900,10 +900,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@originprotocol/origin-storybook@^0.22.9":
-  version "0.22.9"
-  resolved "https://registry.yarnpkg.com/@originprotocol/origin-storybook/-/origin-storybook-0.22.9.tgz#56143de57cc03539c6cf97f0bdff2bccdeb83864"
-  integrity sha512-VwcVS6MHMl/JoQRYuATrOodbrtoPCDLjGat2qawTDwql3R0e7O9Eb1HdMNszhSRbkM6zAxy9TFH1ocdLhAzF0A==
+"@originprotocol/origin-storybook@^0.24.5":
+  version "0.24.5"
+  resolved "https://registry.yarnpkg.com/@originprotocol/origin-storybook/-/origin-storybook-0.24.5.tgz#a9004560f74d199ca86915461c5df131b56ee0d5"
+  integrity sha512-tzJdQzkCDeWZcbCPjK8n6pk3bmZpNV+zSudk+l7+porXP/FSSPWIy6GGvGzldQQ+u0/8gHVQSt6ee5bVdlZ5qw==
   dependencies:
     "@heroicons/react" "^2.0.11"
     next "^10.2.3 || ^12.3.1"
@@ -4791,7 +4791,7 @@ tailwind@^4.0.0:
     uuidv4 "3.0.1"
     ws "6.2.0"
 
-tailwindcss@^3.1.8:
+tailwindcss@^3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.2.4.tgz#afe3477e7a19f3ceafb48e4b083e292ce0dc0250"
   integrity sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==
