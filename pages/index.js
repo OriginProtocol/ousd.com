@@ -149,6 +149,11 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
 }
 
 export async function getStaticProps() {
+  const apyHistory = await fetchApyHistory()
+  const apy = await fetchApy()
+  const allocation = await fetchAllocation()
+  const collateral = await fetchCollateral()
+  
   const articlesRes = await fetchAPI('/ousd/blog/en')
   const seoRes = await fetchAPI('/ousd/page/en/%2F')
   const navRes = await fetchAPI('/ousd-nav-links', {
@@ -160,11 +165,6 @@ export async function getStaticProps() {
   })
 
   const navLinks = transformLinks(navRes.data)
-
-  const apy = await fetchApy()
-  const apyHistory = await fetchApyHistory()
-  const allocation = await fetchAllocation()
-  const collateral = await fetchCollateral()
 
   return {
     props: {
