@@ -71,10 +71,11 @@ const Animation = ({ navLinks, active }) => {
           </div>
           <div className="container self-end lg:self-start flex-1 relative mt-20 lg:mt-14 xl:mt-0 md:pb-10">
             <div className="hidden lg:block">
-              <div className="relative ousd m-auto pb-4">
+              <div className="relative w-[382px] h-[382px] m-auto pb-4">
                 <Image
                   src={assetRootPath('/images/ousd.svg')}
-                  layout='fill'
+                  fill
+                  sizes='382px'
                   alt="ousd"
                 />
               </div>
@@ -109,7 +110,7 @@ const Animation = ({ navLinks, active }) => {
                     <div className="relative ousd ml-3 w-40 md:w-64">
                       <Image
                         src={assetRootPath('/images/ousd.svg')}
-                        layout='fill'
+                        fill
                         alt="ousd"
                       />
                     </div>

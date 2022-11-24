@@ -105,8 +105,9 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
                                 .replace(/ /g, '-')
                                 .toLowerCase()}.svg`
                             )}
-                            layout='fill'
+                            fill
                             sizes='(max-width: 768px) 56px, (max-width: 1024px) 80px, (max-width: 1536px) 56px, 80px'
+                            alt={audit.name}
                           />
                         </div>
                       </div>
@@ -170,7 +171,7 @@ export async function getStaticProps() {
       articles: articlesRes.data,
       seo: formatSeo(seoRes?.data),
       navLinks,
-      apy: apy.apy / 100,
+      apy,
       apyHistory: apyHistory || [],
       allocation,
       collateral,

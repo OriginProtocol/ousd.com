@@ -87,7 +87,7 @@ const News = ({ articles, meta, categories }) => {
                           assetRootPath('/images/logos/origin-press.svg')
                         }
                         alt={a.cover?.alternativeText}
-                        layout="fill"
+                        fill
                         objectFit="cover"
                       />
                     }

@@ -52,6 +52,7 @@ const Faq = ({ locale, onLocale, faq, seo, navLinks }) => {
                         className={`w-4 md:w-6 ml-[16px] md:ml-8 mb-2 inline ${
                           open[i] ? 'rotate-180' : ''
                         }`}
+                        alt='caret'
                       />
                     </div>
                     <div className={`${open[i] ? '' : 'hidden'}`}>

@@ -18,10 +18,12 @@ export default function Footer({ locale }) {
       <footer>
         <div className="max-w-screen-2xl mx-auto relative overflow-hidden px-8 lg:px-[134px] py-10 lg:pt-32 lg:pb-10 divide-[#ffffff33] divide-y-2 text-white">
           <div className="flex flex-col lg:flex-row justify-between pb-10 lg:pb-[88px] text-left">
-            <div className="relative w-28 lg:w-32 mb-10 lg:mb-0">
+            <div className="relative w-28 h-20 lg:w-32 mb-10 lg:mb-0">
               <Image
                 src={assetRootPath(`/images/origin-white.svg`)}
-                layout='fill'
+                fill
+                sizes='(max-width: 768px) 112px, 56px'
+                alt='origin'
               />
             </div>
             <div className="flex flex-col lg:flex-row justify-between">

@@ -516,6 +516,7 @@ const Ogv = () => {
                     src={assetRootPath(`/images/ogv.svg`)}
                     width='186'
                     height='186'
+                    alt='ogv'
                   />
                 </div>
                 <div className="flex flex-col justify-between w-full my-16 lg:w-4/5 text-left font-weight-bold">
@@ -591,6 +592,7 @@ const Ogv = () => {
                     width='397'
                     height='397'
                     className='hidden lg:block'
+                    alt='ogv'
                   />
                 </div>
                 <Typography.Body3 className="mt-8 text-center text-white opacity-75">
@@ -669,6 +671,7 @@ const Ogv = () => {
           width='1073'
           height='1058'
           className="absolute w-3/5 left-0 bottom-0 -z-10"
+          alt='splines'
         />
       </section>
     </>

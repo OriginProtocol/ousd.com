@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
+import { Chart as ChartJS } from 'chart.js/auto'
+import { Chart } from 'react-chartjs-2'
 import LineChart from '../components/Chart'
 import { Typography } from '@originprotocol/origin-storybook'
 //import { useStoreState } from 'pullstate'
@@ -39,13 +41,11 @@ const Apy = ({ apy, apyData }) => {
   )
 
   const apyHistoryQuery = useApyHistoryQuery(apyData)
-  console.log({apyData: apyData})
 
   const apyHistory = useMemo(
     () => apyHistoryQuery.data,
     [apyHistoryQuery.isSuccess, apyHistoryQuery.data]
   )
-  console.log({apyHistory: apyHistory})
 
   const [chartData, setChartData] = useState()
   const dataReversed =

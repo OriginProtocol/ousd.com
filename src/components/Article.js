@@ -40,7 +40,7 @@ const Article = ({ locale, article, navLinks }) => {
                   <Image
                     src={imageUrl}
                     alt={article.cover?.alternativeText}
-                    layout="fill"
+                    fill
                     objectFit="cover"
                     priority
                   />

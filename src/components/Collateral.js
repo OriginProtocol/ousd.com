@@ -71,7 +71,9 @@ const Collateral = ({ collateral, allocation }) => {
                       <div className='relative w-12 md:w-[72px]'>
                         <Image
                           src={assetRootPath(`/images/${token.name}-logo.svg`)}
-                          layout='fill'
+                          fill
+                          sizes='(max-width: 768px) 48px, 24px'
+                          alt={token.name}
                         />
                       </div>
                       <div className="ml-[8px] md:ml-8">
