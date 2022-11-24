@@ -10,6 +10,7 @@ const useApyHistoryQuery = (apyHistory, options) => {
     () => apyHistoryService.fetchApyHistory(),
     {
       initialData: apyHistory,
+      refetchOnWindowFocus: false,
       keepPreviousData: true,
       ...options,
     }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { ethers } from 'ethers'
 import Countdown, { zeroPad } from 'react-countdown'
 import { useStoreState } from 'pullstate'
@@ -216,22 +217,22 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
           </div>
           <Countdown date={'2022-10-10T00:00:00.000Z'} renderer={renderer} />
           <div className="flex-row mt-5 mb-5">
-            <a
+            <Link
               href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
               target="_blank"
               rel="noopener noreferrer"
               className="button gradient2"
             >
               Buy OGV
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://governance.ousd.com/stake"
               target="_blank"
               rel="noopener noreferrer"
               className="button border"
             >
               Stake OGV
-            </a>
+            </Link>
           </div>
           <div className="text-container mt-5">
             {burnOver ? (
@@ -259,7 +260,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
           </h3>
           <div className="links">
             <div className="link">
-              <a
+              <Link
                 href={
                   'https://etherscan.io/address/0x7ae2334f12a449895ad21d4c255d9de194fe986f'
                 }
@@ -274,10 +275,10 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
                   className="external-link"
                   alt="External link"
                 />
-              </a>
+              </Link>
             </div>
             <div className="link">
-              <a
+              <Link
                 href={
                   'https://etherscan.io/address/0xd667091c2d1dcc8620f4eaea254cdfb0a176718d'
                 }
@@ -294,7 +295,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
                   className="external-link"
                   alt="External link"
                 />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -317,7 +318,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
               automated buybacks funded by yield from OUSD.
             </div>
             <div className="link mt-2">
-              <a
+              <Link
                 href={
                   'https://blog.originprotocol.com/tokenomics-retroactive-rewards-and-prelaunch-liquidity-mining-campaign-for-ogv-1b20b8ab41c8'
                 }
@@ -332,7 +333,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
                   className="external-link"
                   alt="External link"
                 />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="stats d-flex flex-column">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Typography } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../utils/image'
 import { LinearProgress } from '@mui/material'
@@ -63,6 +64,7 @@ const Allocation = ({ allocation }) => {
                                     .toLowerCase()}.svg`
                                 )}
                                 layout='fill'
+                                sizes='(max-width: 768px) 64px, 128px'
                               />
                             </div>
                             <div>
@@ -104,16 +106,15 @@ const Allocation = ({ allocation }) => {
                               <>
                                 <div className="flex flex-row justify-between xl:pr-10">
                                   <div className="flex flex-row">
-                                    <div className="relative w-6">
-                                      <Image
-                                        src={assetRootPath(
-                                          `/images/${strategy.name
-                                            .slice(0, 1)
-                                            .toLowerCase()}dai.svg`
-                                        )}
-                                        layout='fill'
-                                      />
-                                    </div>
+                                    <Image
+                                      src={assetRootPath(
+                                        `/images/${strategy.name
+                                          .slice(0, 1)
+                                          .toLowerCase()}dai.svg`
+                                      )}
+                                      width='24'
+                                      height='24'
+                                    />
                                     <Typography.Body3 className="pl-[12px] pr-[16px] font-light">{`${strategy.name
                                       .charAt(0)
                                       .toLowerCase()}DAI`}</Typography.Body3>
@@ -125,16 +126,15 @@ const Allocation = ({ allocation }) => {
                                 </div>
                                 <div className="flex flex-row justify-between xl:pr-10">
                                   <div className="flex flex-row">
-                                    <div className="relative w-6">
-                                      <Image
-                                        src={assetRootPath(
-                                          `/images/${strategy.name
-                                            .slice(0, 1)
-                                            .toLowerCase()}usdc.svg`
-                                        )}
-                                        layout='fill'
-                                      />
-                                    </div>
+                                    <Image
+                                      src={assetRootPath(
+                                        `/images/${strategy.name
+                                          .slice(0, 1)
+                                          .toLowerCase()}usdc.svg`
+                                      )}
+                                      width='24'
+                                      height='24'
+                                    />
                                     <Typography.Body3 className="pl-[12px] pr-[16px] font-light">{`${strategy.name
                                       .charAt(0)
                                       .toLowerCase()}USDC`}</Typography.Body3>
@@ -146,16 +146,15 @@ const Allocation = ({ allocation }) => {
                                 </div>
                                 <div className="flex flex-row justify-between xl:pr-10">
                                   <div className="flex flex-row">
-                                    <div className="relative w-6">
-                                      <Image
-                                        src={assetRootPath(
-                                          `/images/${strategy.name
-                                            .slice(0, 1)
-                                            .toLowerCase()}usdt.svg`
-                                        )}
-                                        layout='fill'
-                                      />
-                                    </div>
+                                    <Image
+                                      src={assetRootPath(
+                                        `/images/${strategy.name
+                                          .slice(0, 1)
+                                          .toLowerCase()}usdt.svg`
+                                      )}
+                                      width='24'
+                                      height='24'
+                                    />
                                     <Typography.Body3 className="pl-[12px] pr-[16px] font-light">{`${strategy.name
                                       .charAt(0)
                                       .toLowerCase()}USDT`}</Typography.Body3>
@@ -169,14 +168,13 @@ const Allocation = ({ allocation }) => {
                             ) : (
                               <div className="flex flex-row justify-between xl:pr-10">
                                 <div className="flex flex-row">
-                                  <div className="relative w-6">
-                                    <Image
-                                      src={assetRootPath(
-                                        `/images/convex-3pool.svg`
-                                      )}
-                                      layout='fill'
-                                    />
-                                  </div>
+                                  <Image
+                                    src={assetRootPath(
+                                      `/images/convex-3pool.svg`
+                                    )}
+                                    width='24'
+                                    height='24'
+                                  />
                                   <Typography.Body3 className="pl-[12px] pr-[16px] font-light">
                                     Convex 3pool
                                   </Typography.Body3>
@@ -204,7 +202,7 @@ const Allocation = ({ allocation }) => {
               </ThemeProvider>
             </div>
           </div>
-          <a
+          <Link
             href="https://docs.ousd.com/core-concepts/yield-generation"
             target="_blank"
             rel="noopener noreferrer"
@@ -213,7 +211,7 @@ const Allocation = ({ allocation }) => {
             <Typography.H7 className="font-normal">
               See how yield is generated
             </Typography.H7>
-          </a>
+          </Link>
         </div>
       </section>
       <style jsx>{`

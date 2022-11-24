@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
-import { Typography } from '@originprotocol/origin-storybook'
 import Image from 'next/image'
+import Link from 'next/link'
+import { Typography } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../utils/image'
 import { useStoreState } from 'pullstate'
 import useCirculatingSupplyQuery from '../queries/useCirculatingSupplyQuery'
@@ -558,7 +559,7 @@ const Ogv = () => {
                   </div>
                 </div>
                 <span className="hidden lg:block w-1/5">
-                  <a
+                  <Link
                     href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -567,20 +568,21 @@ const Ogv = () => {
                     <Typography.H7 className="font-normal">
                       Buy OGV
                     </Typography.H7>
-                  </a>
+                  </Link>
                 </span>
                 {/*<span>
-                <a
+                <Link
                   href="/ogv"
                   target="_blank"
                   rel="noopener noreferrer"
+                  prefetch={false}
                   className="bttn gradient2"
                 >
                   <Typography.H7 className="font-normal">
                     View dashboard
                   </Typography.H7>
-                </a>
-              </span>*/}
+                </Link>
+                </span>*/}
               </div>
               <div>
                 <div className='hidden lg:block'>
@@ -595,33 +597,33 @@ const Ogv = () => {
                   OGV is listed on top exchanges
                 </Typography.Body3>
                 <div className="flex flex-row justify-between items-center mt-[12px] md:mx-32 lg:mx-0">
-                  <a
+                  <Link
                     href="https://www.huobi.com/en-in/exchange/ogv_usdt"
                     target="_blank"
                     rel="nofollow noreferrer"
                     className=""
                   >
                     <Huobi />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
                     target="_blank"
                     rel="nofollow noreferrer"
                     className='ml-[10px]'
                   >
                     <Uniswap />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="https://www.kucoin.com/trade/OGV-USDT"
                     target="_blank"
                     rel="nofollow noreferrer"
                     className="mt-[8px]"
                   >
                     <Kucoin />
-                  </a>
+                  </Link>
                 </div>
-                <a
-                  href='https://"app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"'
+                <Link
+                  href='https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet'
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bttn bg-black block lg:hidden text-center mt-5"
@@ -629,7 +631,7 @@ const Ogv = () => {
                   <Typography.H7 className="font-normal">
                     Buy OGV
                   </Typography.H7>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -648,7 +650,7 @@ const Ogv = () => {
                   <br className="hidden lg:block" />
                   and profit from its growth.
                 </Typography.Body3>
-                <a
+                <Link
                   href="https://governance.ousd.com/stake"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -657,7 +659,7 @@ const Ogv = () => {
                   <Typography.H7 className="font-normal">
                     Earn rewards
                   </Typography.H7>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

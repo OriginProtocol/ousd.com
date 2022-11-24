@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Typography } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../utils/image'
 import { PieChart } from 'react-minimal-pie-chart'
@@ -90,7 +91,7 @@ const Collateral = ({ collateral, allocation }) => {
               </div>
             </div>
           </div>
-          <a
+          <Link
             href="https://docs.ousd.com/how-it-works"
             target="_blank"
             rel="noopener noreferrer"
@@ -99,7 +100,7 @@ const Collateral = ({ collateral, allocation }) => {
             <Typography.H7 className="font-normal">
               See how it works
             </Typography.H7>
-          </a>
+          </Link>
         </div>
       </section>
     </>

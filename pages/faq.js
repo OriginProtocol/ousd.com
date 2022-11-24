@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Typography, Header } from '@originprotocol/origin-storybook'
 import { useRouter } from 'next/router'
 import { fetchAPI } from '../lib/api'
@@ -69,13 +70,13 @@ const Faq = ({ locale, onLocale, faq, seo, navLinks }) => {
               {'Still have questions?'}
               <br />
               {'Reach out to us on our '}
-              <a
+              <Link
                 href="https://discord.gg/jyxpUSe"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {'discord'}
-              </a>
+              </Link>
               <div className="h-1 w-[72px] md:w-[116px] mr-0 ml-auto mt-[4px] bg-gradient-to-r from-[#8c66fc] to-[#0274f1] rounded-full"></div>
             </Typography.H5>
           </div>

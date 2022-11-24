@@ -1,26 +1,14 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import analytics from '../utils/analytics'
 //import { getDocsLink } from '../utils/getDocsLink'
 import { assetRootPath } from '../utils/image'
 import { useRouter } from 'next/router'
 import { Typography } from '@originprotocol/origin-storybook'
 
-const analyticsURL = process.env.ANALYTICS_URL
-const jobsURL = process.env.JOBS_URL
-const termsURL = process.env.TERMS_URL
-const privacyURL = process.env.PRIVACY_URL
-const discordURL = process.env.DISCORD_URL
-const telegramURL = process.env.TELEGRAM_URL
-const wechatURL = process.env.WECHAT_URL
-const githubURL = process.env.GITHUB_URL
-const redditURL = process.env.REDDIT_URL
-const weiboURL = process.env.WEIBO_URL
-const facebookURL = process.env.FACEBOOK_URL
-const twitterURL = process.env.TWITTER_URL
-const mediumURL = process.env.MEDIUM_URL
-const youtubeURL = process.env.YOUTUBE_URL
-const instagramURL = process.env.INSTAGRAM_URL
+const termsURL = `${process.env.NEXT_PUBLIC_WEBSITE_URL}/tos`
+const privacyURL = `${process.env.NEXT_PUBLIC_WEBSITE_URL}/privacy`
 
 export default function Footer({ locale }) {
   const { pathname } = useRouter()
@@ -37,7 +25,7 @@ export default function Footer({ locale }) {
               />
             </div>
             <div className="flex flex-col lg:flex-row justify-between">
-              <a
+              <Link
                 href={'https://governance.ousd.com/'}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -49,9 +37,9 @@ export default function Footer({ locale }) {
                 <Typography.Body3 className="text-[#fafbfb]">
                   Governance
                 </Typography.Body3>
-              </a>
-              <a
-                href={process.env.DOCS_URL}
+              </Link>
+              <Link
+                href={process.env.NEXT_PUBLIC_DOCS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 lg:mr-10 mt-[20px] lg:mt-0"
@@ -62,11 +50,12 @@ export default function Footer({ locale }) {
                 <Typography.Body3 className="text-[#fafbfb]">
                   Docs
                 </Typography.Body3>
-              </a>
-              <a
+              </Link>
+              <Link
                 href={'/blog'}
                 target="_blank"
                 rel="noopener noreferrer"
+                prefetch={false}
                 className="mt-2 lg:mr-10 mt-[20px] lg:mt-0"
                 onClick={() => {
                   analytics.track('Blog Link click')
@@ -75,11 +64,12 @@ export default function Footer({ locale }) {
                 <Typography.Body3 className="text-[#fafbfb]">
                   Blog
                 </Typography.Body3>
-              </a>
-              {/*<a
+              </Link>
+              <Link
                 href={'/faq'}
                 target="_blank"
                 rel="noopener noreferrer"
+                prefetch={false}
                 className="mt-2 lg:mr-10 mt-[20px] lg:mt-0"
                 onClick={() => {
                   analytics.track('FAQ Link click')
@@ -88,8 +78,8 @@ export default function Footer({ locale }) {
                 <Typography.Body3 className="text-[#fafbfb]">
                   FAQ
                 </Typography.Body3>
-              </a>*/}
-              <a
+              </Link>
+              <Link
                 href={
                   'https://www.coingecko.com/en/coins/origin-dollar-governance'
                 }
@@ -103,10 +93,10 @@ export default function Footer({ locale }) {
                 <Typography.Body3 className="text-[#fafbfb]">
                   OGV
                 </Typography.Body3>
-              </a>
+              </Link>
               <br className="block lg:hidden" />
-              <a
-                href="/swap"
+              <Link
+                href={`${process.env.NEXT_PUBLIC_DAPP_URL}/swap`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="gradient2 w-full lg:w-[126px] px-6 py-[6px] mt-[20px] lg:mt-0 rounded-full text-center"
@@ -114,21 +104,21 @@ export default function Footer({ locale }) {
                 <Typography.Body3 className="font-medium text-white">
                   Get OUSD
                 </Typography.Body3>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="flex flex-col lg:flex-row justify-between pt-8 lg:pt-10 text-[#b5beca]">
-            <a
-              href="https://originprotocol.com"
+            <Link
+              href={process.env.NEXT_PUBLIC_WEBSITE_URL}
               target="_blank"
               rel="noopener noreferrer"
             >
               <Typography.Caption2>
                 Originally released by Origin Protocol
               </Typography.Caption2>
-            </a>
+            </Link>
             <div className="flex flex-row lg:justify-between mt-2 lg:mt-0">
-              <a
+              <Link
                 href={termsURL}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -137,12 +127,12 @@ export default function Footer({ locale }) {
                 <Typography.Caption2>
                   Terms of Service
                 </Typography.Caption2>
-              </a>
-              <a href={privacyURL} target="_blank" rel="noopener noreferrer">
+              </Link>
+              <Link href={privacyURL} target="_blank" rel="noopener noreferrer">
                 <Typography.Caption2>
                   Privacy Policy
                 </Typography.Caption2>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

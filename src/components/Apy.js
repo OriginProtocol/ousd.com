@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
-import { Chart as ChartJS } from 'chart.js/auto'
-import { Chart } from 'react-chartjs-2'
 import LineChart from '../components/Chart'
 import { Typography } from '@originprotocol/origin-storybook'
 //import { useStoreState } from 'pullstate'
@@ -41,11 +39,13 @@ const Apy = ({ apy, apyData }) => {
   )
 
   const apyHistoryQuery = useApyHistoryQuery(apyData)
+  console.log({apyData: apyData})
 
   const apyHistory = useMemo(
     () => apyHistoryQuery.data,
     [apyHistoryQuery.isSuccess, apyHistoryQuery.data]
   )
+  console.log({apyHistory: apyHistory})
 
   const [chartData, setChartData] = useState()
   const dataReversed =
@@ -177,7 +177,7 @@ const Apy = ({ apy, apyData }) => {
               )}
             </div>
           )}
-          <Link href={adjustLinkHref('/swap')} target="_blank" className="bttn gradient2">
+          <Link href={`${process.env.NEXT_PUBLIC_DAPP_URL}/swap`} target="_blank" className="bttn gradient2">
             <Typography.H7 className="font-normal">
               Start earning now
             </Typography.H7>

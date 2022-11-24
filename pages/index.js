@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import Animation from '../src/components/Animation'
 import Apy from '../src/components/Apy'
 import Allocation from '../src/components/Allocation'
@@ -89,7 +90,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
               <div className="grid grid-rows-2 grid-cols-2 gap-y-10 lg:flex lg:flex-row lg:justify-between mt-6 md:mt-[56px] mx-auto">
                 {audits.map((audit, i) => {
                   return (
-                    <a
+                    <Link
                       className="mx-auto"
                       href={audit.link}
                       target="_blank"
@@ -105,18 +106,19 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
                                 .toLowerCase()}.svg`
                             )}
                             layout='fill'
+                            sizes='(max-width: 768px) 56px, (max-width: 1024px) 80px, (max-width: 1536px) 56px, 80px'
                           />
                         </div>
                       </div>
                       <Typography.Body className="mt-[8px] md:mt-6 opacity-75" style={{ fontDisplay: 'swap' }}>
                         {audit.name}
                       </Typography.Body>
-                    </a>
+                    </Link>
                   )
                 })}
               </div>
             </div>
-            <a
+            <Link
               href="https://docs.ousd.com/security-and-risks/audits"
               target="_blank"
               rel="noopener noreferrer"
@@ -125,7 +127,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
               <Typography.H7 className="font-normal" style={{ fontDisplay: 'swap' }}>
                 Review audits
               </Typography.H7>
-            </a>
+            </Link>
           </div>
         </section>
         <Ogv />
@@ -168,7 +170,7 @@ export async function getStaticProps() {
       articles: articlesRes.data,
       seo: formatSeo(seoRes?.data),
       navLinks,
-      apy,
+      apy: apy.apy / 100,
       apyHistory: apyHistory || [],
       allocation,
       collateral,
