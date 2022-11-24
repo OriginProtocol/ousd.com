@@ -4,12 +4,12 @@ import { Chart as ChartJS } from 'chart.js/auto'
 import { Chart } from 'react-chartjs-2'
 import LineChart from '../components/Chart'
 import { Typography } from '@originprotocol/origin-storybook'
-import { useStoreState } from 'pullstate'
-import ContractStore from '../stores/ContractStore'
+//import { useStoreState } from 'pullstate'
+//import ContractStore from '../stores/ContractStore'
 import zipObject from 'lodash/zipObject'
 import { formatCurrency } from '../utils/math'
 import { adjustLinkHref } from '../utils/utils'
-import useApyQuery from '../queries/useApyQuery'
+//import useApyQuery from '../queries/useApyQuery'
 import useApyHistoryQuery from '../queries/useApyHistoryQuery'
 import { apyDayOptions } from '../utils/constants'
 
@@ -40,24 +40,22 @@ const Apy = ({ apy, apyData }) => {
       : 30
   )
 
-  /*const apyHistoryQuery = useApyHistoryQuery(apyData)
+  const apyHistoryQuery = useApyHistoryQuery(apyData)
 
   const apyHistory = useMemo(
     () => apyHistoryQuery.data,
     [apyHistoryQuery.isSuccess, apyHistoryQuery.data]
-  )*/
-
-  const apyHistory = apyData
+  )
 
   const [chartData, setChartData] = useState()
   const dataReversed =
     apyHistory && apyHistory[`apy${apyDays}`] ? apyHistory[`apy${apyDays}`] : []
   const data = dataReversed.slice().reverse()
 
-  /*useEffect(() => {
-    apyQuery.refetch()
+  useEffect(() => {
+    //apyQuery.refetch()
     apyHistoryQuery.refetch()
-  }, [])*/
+  }, [])
 
   useEffect(() => {
     localStorage.setItem('last_user_selected_apy', apyDays)

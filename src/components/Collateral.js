@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import { Typography } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../utils/image'

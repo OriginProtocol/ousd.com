@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import analytics from '../utils/analytics'
-import { getDocsLink } from '../utils/getDocsLink'
+//import { getDocsLink } from '../utils/getDocsLink'
 import { assetRootPath } from '../utils/image'
 import { useRouter } from 'next/router'
 import { Typography } from '@originprotocol/origin-storybook'

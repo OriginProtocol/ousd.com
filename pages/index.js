@@ -19,10 +19,10 @@ import { Typography } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../src/utils/image'
 import { audits } from '../src/utils/constants'
 import capitalize from 'lodash/capitalize'
-import { useStoreState } from 'pullstate'
-import ContractStore from '../src/stores/ContractStore'
-import useAllocationQuery from '../src/queries/useAllocationQuery'
-import useCollateralQuery from '../src/queries/useCollateralQuery'
+//import { useStoreState } from 'pullstate'
+//import ContractStore from '../src/stores/ContractStore'
+//import useAllocationQuery from '../src/queries/useAllocationQuery'
+//import useCollateralQuery from '../src/queries/useCollateralQuery'
 
 const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, collateral = {} }) => {
   const { pathname } = useRouter()
