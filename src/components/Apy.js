@@ -53,7 +53,7 @@ const Apy = ({ apy, apyData }) => {
   const data = dataReversed.slice().reverse()
 
   useEffect(() => {
-    apyQuery.refetch()
+    //apyQuery.refetch()
     apyHistoryQuery.refetch()
   }, [])
 

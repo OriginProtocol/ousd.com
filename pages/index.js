@@ -59,6 +59,10 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
     setLoaded(true)
   }, [])*/
 
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
+
   return (
     <>
       {loaded &&
@@ -169,7 +173,6 @@ export async function getStaticProps() {
       apyHistory: apyHistory || [],
       allocation,
       collateral,
-      fallback: true,
     },
     revalidate: 5 * 60, // Cache response for 5m
   }
