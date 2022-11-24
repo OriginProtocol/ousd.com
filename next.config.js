@@ -19,10 +19,10 @@ const moduleExports = {
     loader: "default",
     domains: ["localhost", "0.0.0.0", "cmsmediaproduction.s3.amazonaws.com", "cmsmediastaging.s3.amazonaws.com", "avatars.githubusercontent.com"],
   },
-  i18n: {
+  /*i18n: {
     locales,
     defaultLocale: 'en',
-  },
+  },*/
   /*sentry: {
     // Use `hidden-source-map` rather than `source-map` as the Webpack `devtool`
     // for client-side builds. (This will be the default starting in
