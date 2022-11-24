@@ -40,22 +40,24 @@ const Apy = ({ apy, apyData }) => {
       : 30
   )
 
-  const apyHistoryQuery = useApyHistoryQuery(apyData)
+  /*const apyHistoryQuery = useApyHistoryQuery(apyData)
 
   const apyHistory = useMemo(
     () => apyHistoryQuery.data,
     [apyHistoryQuery.isSuccess, apyHistoryQuery.data]
-  )
+  )*/
+
+  const apyHistory = apyData
 
   const [chartData, setChartData] = useState()
   const dataReversed =
     apyHistory && apyHistory[`apy${apyDays}`] ? apyHistory[`apy${apyDays}`] : []
   const data = dataReversed.slice().reverse()
 
-  useEffect(() => {
-    //apyQuery.refetch()
+  /*useEffect(() => {
+    apyQuery.refetch()
     apyHistoryQuery.refetch()
-  }, [])
+  }, [])*/
 
   useEffect(() => {
     localStorage.setItem('last_user_selected_apy', apyDays)
