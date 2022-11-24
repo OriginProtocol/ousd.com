@@ -139,6 +139,7 @@ export async function getStaticProps() {
       apyHistory: apyHistory || [],
       allocation,
       collateral,
+      fallback: true,
     },
     revalidate: 5 * 60, // Cache response for 5m
   }
