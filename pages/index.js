@@ -114,9 +114,9 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
 
 export async function getStaticProps() {
   const apyHistory = await fetchApyHistory()
-  //const apy = await fetchApy()
-  //const allocation = await fetchAllocation()
-  //const collateral = await fetchCollateral()
+  const apy = await fetchApy()
+  const allocation = await fetchAllocation()
+  const collateral = await fetchCollateral()
 
   const articlesRes = await fetchAPI('/ousd/blog/en')
   const seoRes = await fetchAPI('/ousd/page/en/%2F')
@@ -135,10 +135,10 @@ export async function getStaticProps() {
       articles: articlesRes.data,
       seo: formatSeo(seoRes?.data),
       navLinks,
-      //apy,
+      apy,
       apyHistory: apyHistory || [],
-      //allocation,
-      //collateral,
+      allocation,
+      collateral,
     },
     revalidate: 5 * 60, // Cache response for 5m
   }

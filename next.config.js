@@ -23,7 +23,7 @@ const moduleExports = {
     locales,
     defaultLocale: 'en',
   },
-  //staticPageGenerationTimeout: 90,
+  staticPageGenerationTimeout: 300,
   /*sentry: {
     // Use `hidden-source-map` rather than `source-map` as the Webpack `devtool`
     // for client-side builds. (This will be the default starting in
