@@ -44,7 +44,7 @@ const Allocation = ({ allocation }) => {
                       return
                     return (
                       <div
-                        className="strategy rounded-xl border-2 p-[16px] md:p-8 my-[6px] md:my-[8px] cursor-pointer"
+                        className="strategy rounded-xl border-2 p-[16px] md:p-8 my-[6px] md:my-[8px]"
                         key={strategy.name}
                         onClick={(e) => {
                           e.preventDefault()
@@ -56,7 +56,7 @@ const Allocation = ({ allocation }) => {
                       >
                         <div>
                           <div className="flex flex-row justify-between">
-                            <div className='relative w-32'>
+                            <div className='relative w-1/2 md:w-1/3 lg:w-1/4'>
                               <Image
                                 src={assetRootPath(
                                   `/images/${strategy.name
@@ -65,6 +65,8 @@ const Allocation = ({ allocation }) => {
                                 )}
                                 fill
                                 sizes='(max-width: 768px) 64px, 128px'
+                                objectFit='contain'
+                                objectPosition='0%'
                                 alt={strategy.name}
                               />
                             </div>
@@ -101,7 +103,7 @@ const Allocation = ({ allocation }) => {
                           <div
                             className={`${
                               open[strategy.name] ? '' : ''
-                            } flex flex-col xl:flex-row mt-[22px] whitespace-nowrap`}
+                            } flex flex-col xl:flex-row mt-[22px] space-y-2 xl:space-y-0 whitespace-nowrap`}
                           >
                             {strategy.name !== 'Convex Strategy' ? (
                               <>
