@@ -56,7 +56,6 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
   useEffect(() => {
     allocationQuery.refetch()
     collateralQuery.refetch()
-    setLoaded(true)
   }, [])*/
 
   useEffect(() => {
