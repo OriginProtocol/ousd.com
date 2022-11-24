@@ -48,7 +48,7 @@ const Animation = ({ navLinks, active }) => {
       <section className="intro black">
         <Header mappedLinks={navLinks} webProperty="ousd" active={active} />
         {/*<AccountListener />*/}
-        <div className="mt-[20px] md:mt-16 px-8 md:px-[134px] lg:pb-40 overflow-hidden">
+        <div className="mt-[20px] lg:mt-16 px-8 md:px-[64px] lg:px-[134px] lg:pb-40 overflow-hidden">
           <div className='flex flex-col lg:flex-row justify-between max-w-[1432px] mx-auto'>
             <div className="lg:w-1/2 xl:w-7/12">
               <Typography.H2 as="h1" className="font-normal">

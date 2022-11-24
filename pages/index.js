@@ -73,7 +73,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
         <Allocation allocation={allocation} />
         <Collateral collateral={collateral} allocation={allocation} />
         <section className="home black">
-          <div className="py-[120px] px-[16px] md:px-[134px] lg:px-[200px] text-center">
+          <div className="py-[120px] px-[16px] md:px-[64px] lg:px-[200px] text-center">
             <Typography.H6
               className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"
               style={{ fontWeight: 700, fontDisplay: 'swap' }}
