@@ -113,7 +113,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
 }
 
 export async function getStaticProps() {
-  const apyHistory = await fetchApyHistory()
+  //const apyHistory = await fetchApyHistory()
   const apy = await fetchApy()
   const allocation = await fetchAllocation()
   const collateral = await fetchCollateral()
@@ -136,7 +136,7 @@ export async function getStaticProps() {
       seo: formatSeo(seoRes?.data),
       navLinks,
       apy,
-      apyHistory: apyHistory || [],
+      //apyHistory: apyHistory || [],
       allocation,
       collateral,
       fallback: true,
