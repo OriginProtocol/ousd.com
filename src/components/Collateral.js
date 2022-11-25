@@ -6,6 +6,7 @@ import { assetRootPath } from '../utils/image'
 import { PieChart } from 'react-minimal-pie-chart'
 import { formatCurrency } from '../utils/math'
 import { tokenColors } from '../utils/constants'
+import capitalize from 'lodash/capitalize'
 
 const Collateral = ({ collateral, allocation }) => {
   // temporary calculation, waiting for metastrategy integration into analytics
@@ -31,6 +32,13 @@ const Collateral = ({ collateral, allocation }) => {
     }
   })
 
+  const tokenNames = {
+    'dai': 'Dai',
+    'usdc': 'USD Coin',
+    'usdt': 'Tether',
+    'ousd': 'Origin Dollar',
+  }
+
   return (
     <>
       <section className="dim">
@@ -45,30 +53,24 @@ const Collateral = ({ collateral, allocation }) => {
             OUSD is backed 1:1 by the most trusted collateral in crypto. Reserves are verifiable on-chain. You can redeem OUSD immediately at any time.
           </Typography.Body3>
           <div className="max-w-[1432px] mx-auto flex flex-col md:flex-row justify-between mt-20 mb-16 px-8 xl:px-[132px] py-6 xl:py-20 rounded-xl bg-[#141519]">
-            <Typography.H7 className="font-bold md:hidden">
-              Currently-held collateral
-            </Typography.H7>
-            <div className="relative w-full sm:w-1/2 mt-6 md:mt-0 mx-auto">
+            <div className="relative w-full sm:w-1/2 mx-auto my-auto rounded-full p-4 bg-[#1e1f25]">
               <PieChart data={chartData} lineWidth={6} startAngle={270} />
               <Typography.H6 className="absolute font-bold text-3xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">{`$${formatCurrency(
                 total,
                 0
               )}`}</Typography.H6>
             </div>
-            <div className="md:w-1/2 md:ml-10 xl:ml-32 mt-6 md:mt-0 pl-0 md:py-10 text-left">
-              <Typography.H7 className="mb-3 font-bold hidden md:block">
-                Currently-held collateral
-              </Typography.H7>
-              <div className="flex flex-wrap md:mt-12 md:flex-col justify-between h-4/5">
+            <div className="md:w-1/2 md:ml-10 xl:ml-32 mt-6 md:my-auto pl-0 md:py-10 text-left">
+              <div className="flex flex-col justify-between space-y-2">
                 {collateral.collateral?.map((token) => {
                   if (token.name === 'ousd') return
                   const realTotal = token.total - meta / 3
                   return (
                     <div
-                      className="flex flex-row my-[2px] md:my-0"
+                      className="flex flex-row md:my-0 px-4 py-[13.5px] md:p-6 rounded-[8px] bg-[#1e1f25] w-full md:max-w-[351px] space-x-3 md:space-x-[22px]"
                       key={token.name}
                     >
-                      <div className='relative w-12 md:w-[72px]'>
+                      <div className='relative w-12 md:w-[48px]'>
                         <Image
                           src={assetRootPath(`/images/${token.name}-logo.svg`)}
                           fill
@@ -76,16 +78,26 @@ const Collateral = ({ collateral, allocation }) => {
                           alt={token.name}
                         />
                       </div>
-                      <div className="ml-[8px] md:ml-8">
-                        <Typography.H7 className="text-base md:text-[32px] font-bold">
-                          {`${formatCurrency((realTotal / total) * 100, 2)}%`}
-                        </Typography.H7>
-                        <Typography.H7
-                          className="mt-[0px] md:mt-[8px] text-[12px] md:text-[24px] text-[#b5beca]"
-                          style={{ fontWeight: 400 }}
-                        >
-                          {`$${formatCurrency(realTotal, 0)}`}
-                        </Typography.H7>
+                      <div className="">
+                        <div className='flex flex-row space-x-2'>
+                          <Typography.H7 className="text-[14px] md:text-[20px]" style={{ fontWeight: 700 }}>
+                            {`${tokenNames[token.name]}`}
+                          </Typography.H7>
+                          <Typography.H7 className="text-[14px] md:text-[20px]" style={{ fontWeight: 400 }}>
+                            {`(${token.name.toUpperCase()})`}
+                          </Typography.H7>
+                        </div>
+                        <div className='flex flex-row space-x-2'>
+                          <Typography.Body className="text-[12px] md:text-[16px]" style={{ fontWeight: 700 }}>
+                            {`${formatCurrency((realTotal / total) * 100, 2)}%`}
+                          </Typography.Body>
+                          <Typography.Body
+                            className="text-[12px] md:text-[16px] text-[#b5beca]"
+                            style={{ fontWeight: 400 }}
+                          >
+                            {`$${formatCurrency(realTotal, 0)}`}
+                          </Typography.Body>
+                        </div>
                       </div>
                     </div>
                   )
