@@ -1,8 +1,8 @@
 import React from 'react'
 import { Typography, Header } from '@originprotocol/origin-storybook'
 import News from '../src/components/News'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
+import Footer from '../src/components/Footer'
 import { fetchAPI } from '../lib/api'
 import Seo from '../src/components/strapi/seo'
 import formatSeo from '../src/utils/seo'
@@ -35,6 +35,7 @@ const Blog = ({
             )}
           </div>
         </section>
+        <Footer locale={locale} />
     </>
   )
 }

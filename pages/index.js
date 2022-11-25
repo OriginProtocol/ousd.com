@@ -131,6 +131,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
           </div>
         </section>
         <Ogv stats={ogvStats} />
+        <Footer locale={locale} />
         <style jsx>{`
           .audits {
             background-color: #1e1f25;
@@ -140,7 +141,6 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
             background-color: #141519;
           }
         `}</style>
-      <Footer locale={locale} />
       </>
         }
     </>

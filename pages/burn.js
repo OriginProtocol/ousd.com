@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ethers } from 'ethers'
 import Countdown, { zeroPad } from 'react-countdown'
 import { useStoreState } from 'pullstate'
+import Footer from '../src/components/Footer'
 import ContractStore from '../src/stores/ContractStore'
 import addresses from '../src/constants/contractAddresses'
 import { formatCurrency, getRewardsApy } from '../src/utils/math'
@@ -490,6 +491,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
           </div>
         </div>
       </section>
+      <Footer locale={locale} />
       <style jsx>{`
         header {
           background-color: #141519;

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Typography, Header } from '@originprotocol/origin-storybook'
 import { useRouter } from 'next/router'
+import Footer from '../src/components/Footer'
 import { fetchAPI } from '../lib/api'
 import Seo from '../src/components/strapi/seo'
 import formatSeo from '../src/utils/seo'
@@ -81,6 +82,7 @@ const Faq = ({ locale, onLocale, faq, seo, navLinks }) => {
               <div className="h-1 w-[72px] md:w-[116px] mr-0 ml-auto mt-[4px] bg-gradient-to-r from-[#8c66fc] to-[#0274f1] rounded-full"></div>
             </Typography.H5>
           </div>
+          <Footer locale={locale} />
         </section>
     </>
   )
