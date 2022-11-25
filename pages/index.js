@@ -14,6 +14,7 @@ import { fetchApy } from '../lib/apy'
 import { fetchApyHistory } from '../lib/apyHistory'
 import { fetchAllocation } from '../lib/allocation'
 import { fetchCollateral } from '../lib/collateral'
+import { fetchSupply } from '../lib/supply'
 import formatSeo from '../src/utils/seo'
 import transformLinks from '../src/utils/transformLinks'
 import { Typography } from '@originprotocol/origin-storybook'
@@ -25,7 +26,7 @@ import capitalize from 'lodash/capitalize'
 //import useAllocationQuery from '../src/queries/useAllocationQuery'
 //import useCollateralQuery from '../src/queries/useCollateralQuery'
 
-const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, collateral = {} }) => {
+const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, collateral, supply }) => {
   const { pathname } = useRouter()
   const active = capitalize(pathname.slice(1))
   const [loaded, setLoaded] = useState()
@@ -68,7 +69,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
       {loaded &&
       <>
       <Seo seo={seo} />
-        <Animation navLinks={navLinks} active={active} />
+        <Animation navLinks={navLinks} active={active} supply={supply} />
         <Apy apy={apy} apyData={apyHistory} />
         <Allocation allocation={allocation} />
         <Collateral collateral={collateral} allocation={allocation} />
@@ -150,6 +151,7 @@ export async function getStaticProps() {
   const apy = await fetchApy()
   const allocation = await fetchAllocation()
   const collateral = await fetchCollateral()
+  const supply = await fetchSupply()
 
   const articlesRes = await fetchAPI('/ousd/blog/en')
   const seoRes = await fetchAPI('/ousd/page/en/%2F')
@@ -172,6 +174,7 @@ export async function getStaticProps() {
       apyHistory: apyHistory || [],
       allocation,
       collateral,
+      supply,
     },
     revalidate: 5 * 60, // Cache response for 5m
   }

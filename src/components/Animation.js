@@ -10,7 +10,7 @@ import ContractStore from '../stores/ContractStore'
 import { formatCurrency } from '../utils/math'
 import { adjustLinkHref } from '../utils/utils'
 
-const Animation = ({ navLinks, active }) => {
+const Animation = ({ navLinks, active, supply }) => {
   const [totalOusd, setTotalOusd] = useState()
   const ousdInitialValue = parseFloat(totalOusd - 2000000, 0)
   const [ousdValue, setOusdValue] = useState(ousdInitialValue)
@@ -82,13 +82,13 @@ const Animation = ({ navLinks, active }) => {
               </div>
               <div className="lg:absolute lg:bottom-0 lg:left-0 lg:right-0 text-center">
                 <div className="relative h-32 md:h-64 lg:h-auto flex flex-row lg:block">
-                  {totalOusd && (
+                  {supply && (
                     <div className="absolute right-20 md:right-36 md:top-10 lg:static z-10">
                       <Typography.H2
                         //className="xl:ml-16 2xl:ml-20 text-left"
                         style={{ fontWeight: 700 }}
                       >
-                        {`$${formatCurrency(totalOusd, 0)}`}
+                        {`$${formatCurrency(supply, 0)}`}
                         {/*
                           <CountUp
                             start={0}
