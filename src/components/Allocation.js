@@ -25,17 +25,17 @@ const Allocation = ({ allocation }) => {
           >
             Fully transparent on the Ethereum blockchain
           </Typography.H6>
-          <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto text-[#b5beca]">
+          <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-[#b5beca]">
             Funds are deployed to automated, on-chain, blue-chip stablecoin strategies. There are no gatekeepers or centralized money managers and governance is entirely decentralized.
           </Typography.Body3>
-          <div className="allocation max-w-[1432px] mx-auto mt-20 mb-16 rounded-xl divide-black divide-y-2">
+          <div className="allocation max-w-[1432px] mx-auto mt-20 mb-10 rounded-xl divide-black divide-y-2">
             <Typography.H7 className="font-bold px-4 py-[22px] md:p-10">
               Current yield sources & allocations
             </Typography.H7>
             <div>
-              <Typography.H7 className='flex flex-row justify-between mt-4 md:mt-10 px-8 md:px-[72px] text-[14px] md:text-[16px] text-[#b5beca]' style={{ fontWeight: 400, lineHeight: '20px' }}>
-                <div>Yield source</div>
-                <div>Allocation</div>
+              <Typography.H7 className='flex flex-row justify-between mt-4 md:mt-10 px-8 md:px-[72px] text-[#b5beca]' style={{ fontWeight: 400, lineHeight: '20px' }}>
+                <div className='text-[14px] md:text-[16px]'>Yield source</div>
+                <div className='text-[14px] md:text-[16px]'>Allocation</div>
               </Typography.H7>
               <div className="flex flex-col px-[16px] md:px-10 pt-2 pb-[10px] md:pt-3 md:pb-8">
                 <ThemeProvider theme={theme}>
@@ -60,7 +60,7 @@ const Allocation = ({ allocation }) => {
                         >
                           <div>
                             <div className="flex flex-row justify-between">
-                              <div className='relative w-1/2 md:w-1/3 lg:w-1/4'>
+                              <div className='relative w-1/3 md:w-1/3 lg:w-1/4'>
                                 <Image
                                   src={assetRootPath(
                                     `/images/${strategy.name
@@ -76,14 +76,14 @@ const Allocation = ({ allocation }) => {
                               </div>
                               <div>
                                 <Typography.H7
-                                  className="inline items-center text-[#b5beca]"
+                                  className="inline items-center text-[12px] md:text-[24px] text-[#b5beca]"
                                   style={{ fontWeight: 400 }}
                                 >{`$${formatCurrency(
                                   strategy.total,
                                   0
                                 )}`}</Typography.H7>
                                 <Typography.H7
-                                  className="inline pl-[8px]"
+                                  className="inline pl-[8px] text-[12px] md:text-[24px]"
                                   style={{ fontWeight: 700 }}
                                 >{`(${formatCurrency(
                                   (strategy.total / total) * 100,
@@ -102,7 +102,7 @@ const Allocation = ({ allocation }) => {
                                 borderRadius: 10,
                                 height: 4,
                               }}
-                              className="mt-[16px]"
+                              className="mt-5"
                             ></LinearProgress>
                             <Typography.Caption2 className={`flex flex-row mt-4 md:hidden text-left space-x-1.5 text-[#b5beca] font-medium ${
                                 open[strategy.name] ? 'hidden' : ''

@@ -49,10 +49,10 @@ const Collateral = ({ collateral, allocation }) => {
           >
             Always 100% collateralized
           </Typography.H6>
-          <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto text-[#b5beca]">
+          <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-[#b5beca]">
             OUSD is backed 1:1 by the most trusted collateral in crypto. Reserves are verifiable on-chain. You can redeem OUSD immediately at any time.
           </Typography.Body3>
-          <div className="max-w-[1432px] mx-auto flex flex-col md:flex-row justify-between mt-20 mb-16 px-8 xl:px-[132px] py-6 xl:py-20 rounded-xl bg-[#141519]">
+          <div className="max-w-[1432px] mx-auto flex flex-col md:flex-row justify-between mt-20 mb-10 px-8 xl:px-[132px] py-6 xl:py-20 rounded-xl bg-[#141519]">
             <div className="relative w-full sm:w-1/2 mx-auto my-auto rounded-full p-4 bg-[#1e1f25]">
               <PieChart data={chartData} lineWidth={6} startAngle={270} />
               <Typography.H6 className="absolute font-bold text-3xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">{`$${formatCurrency(

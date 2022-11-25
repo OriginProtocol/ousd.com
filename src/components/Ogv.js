@@ -508,20 +508,21 @@ const Ogv = () => {
                 >
                   Governed by OGV stakers
                 </Typography.H2>
-                <Typography.Body3 className="mt-[16px] lg:text-left">
+                <Typography.Body3 className="mt-[16px] leading-[28px] lg:text-left">
                   {"OUSD's future is shaped by voters who lock their OGV and participate in decentralized governance."}
                 </Typography.Body3>
-                <div className='mt-8 lg:mt-8 mx-auto block lg:hidden'>
+                <div className='mt-8 block lg:hidden'>
                   <Image
                     src={assetRootPath(`/images/ogv.svg`)}
                     width='186'
                     height='186'
+                    className='mx-auto'
                     alt='ogv'
                   />
                 </div>
-                <div className="flex flex-col justify-between w-full my-16 lg:w-4/5 text-left font-weight-bold">
+                <div className="flex flex-col justify-between w-full my-8 lg:w-4/5 text-left font-weight-bold bg-red-500">
                   <div className="flex flex-row justify-between">
-                    <div className="w-96">
+                    <div className="w-36 md:w-96">
                       <Typography.Body3 className="text-xs lg:text-base font-bold">
                         {'OGV PRICE'}
                       </Typography.Body3>
@@ -530,7 +531,7 @@ const Ogv = () => {
                         4
                       )}`}</Typography.H5>
                     </div>
-                    <div className="w-96">
+                    <div className="w-36 md:w-96">
                       <Typography.Body3 className="text-xs lg:text-base font-bold">
                         {'OGV MARKET CAP'}
                       </Typography.Body3>
@@ -541,7 +542,7 @@ const Ogv = () => {
                     </div>
                   </div>
                   <div className="flex flex-row justify-between mt-10">
-                    <div className="w-96">
+                    <div className="w-36 md:w-96">
                       <Typography.Body3 className="text-xs lg:text-base font-bold">
                         {'CIRCULATING SUPPLY'}
                       </Typography.Body3>
@@ -549,7 +550,7 @@ const Ogv = () => {
                         {formatCurrency(circulatingSupply, 0)}
                       </Typography.H5>
                     </div>
-                    <div className="w-96">
+                    <div className="w-36 md:w-96">
                       <Typography.Body3 className="text-xs lg:text-base font-bold">
                         {'TOTAL SUPPLY'}
                       </Typography.Body3>
@@ -598,7 +599,7 @@ const Ogv = () => {
                 <Typography.Body3 className="mt-8 text-center text-white opacity-75">
                   OGV is listed on top exchanges
                 </Typography.Body3>
-                <div className="flex flex-row justify-between items-center mt-[12px] md:mx-32 lg:mx-0">
+                <div className="flex flex-row justify-between items-center mt-0 md:mt-3 mb-8 md:mx-32 lg:mx-0">
                   <Link
                     href="https://www.huobi.com/en-in/exchange/ogv_usdt"
                     target="_blank"
@@ -628,7 +629,7 @@ const Ogv = () => {
                   href='https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet'
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bttn bg-black block lg:hidden text-center mt-5"
+                  className="bttn bg-black block lg:hidden text-center"
                 >
                   <Typography.H7 className="font-normal">
                     Buy OGV

@@ -60,16 +60,16 @@ const Animation = ({ navLinks, active, supply }) => {
                 <br className="hidden lg:block" />
                 stablecoin
               </Typography.H2>
-              <Typography.Body3 className="mt-6 mb-10 text-[#b5beca]">
+              <Typography.Body3 className="mt-6 mb-10 leading-[28px] text-[#b5beca]">
                 Origin Dollar simplifies DeFi by eliminating the need for staking or lock-ups. Hold OUSD in any Ethereum wallet and watch your balance increase every day.
               </Typography.Body3>
-              <Link href={`${process.env.NEXT_PUBLIC_DAPP_URL}/swap`} target="_blank" className="bttn ml-0 gradient2 w-auto">
+              <Link href={`${process.env.NEXT_PUBLIC_DAPP_URL}/swap`} target="_blank" className="bttn ml-0 gradient2 !w-auto">
                 <Typography.H7 className="mx-8 md:mx-0 font-normal">
                   Get OUSD
                 </Typography.H7>
               </Link>
             </div>
-            <div className="container self-end lg:self-start flex-1 relative mt-20 lg:mt-14 xl:mt-0 md:pb-10">
+            <div className="container self-end lg:self-start flex-1 relative mt-16 lg:mt-14 xl:mt-0 md:pb-10">
               <div className="hidden lg:block">
                 <div className="relative w-[382px] h-[382px] m-auto pb-4">
                   <Image
@@ -102,7 +102,7 @@ const Animation = ({ navLinks, active, supply }) => {
                           />
                         */}
                       </Typography.H2>
-                      <Typography.Body3 className="text-sm md:text-base text-[#b5beca] pt-[0px] md:pt-[8px]">
+                      <Typography.Body3 className="text-sm md:text-base text-[#b5beca] pt-[8px] whitespace-nowrap md:pt-[8px]">
                         Total value of OUSD wallet balances
                       </Typography.Body3>
                     </div>

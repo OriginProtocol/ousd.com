@@ -119,20 +119,20 @@ const Apy = ({ apy, apyData }) => {
             </span>
             DeFi strategy
           </Typography.H6>
-          <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto text-[#b5beca]">
+          <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-[#b5beca]">
             Grow your stablecoin portfolio by swapping USDC, USDT, or DAI to OUSD. Yields are generated on-chain, distributed directly to your wallet, and compounded automatically. Your funds are never risked on speculative positions.
           </Typography.Body3>
           {loaded && (
-            <div className="max-w-[1432px] mx-auto flex flex-col mt-20 mb-16 p-[16px] md:p-10 rounded-xl bg-[#141519]">
+            <div className="max-w-[1432px] mx-auto flex flex-col mt-20 mb-10 p-[16px] md:p-10 rounded-xl bg-[#141519]">
               <div className="flex flex-col lg:flex-row justify-between">
                 <div className="mt-[0px] md:mt-[16px]">
                   <Typography.H2 className="font-bold xl:inline lg:text-left">
                     {formatCurrency(daysToApy[apyDays] * 100, 2) + '% '}
                   </Typography.H2>
-                  <Typography.H7 className="text-base font-normal md:text-2xl text-[#b5beca] mt-[4px] xl:mt-0 xl:inline lg:text-left opacity-70">{`Trailing ${apyDays}-day APY`}</Typography.H7>
+                  <Typography.H7 className="text-sm font-normal md:text-2xl text-[#b5beca] mt-[4px] xl:mt-0 xl:inline lg:text-left opacity-70">{`Trailing ${apyDays}-day APY`}</Typography.H7>
                 </div>
                 <div className="flex flex-col w-[286px] sm:w-[425px] mt-6 lg:mt-0 mx-[auto] lg:mx-0">
-                  <Typography.Body3 className="text-[#b5beca]">
+                  <Typography.Body3 className="text-sm md:text-base text-[#b5beca]">
                     Moving average
                   </Typography.Body3>
                   <div className="flex flex-row justify-between mt-[12px]">
