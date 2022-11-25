@@ -520,7 +520,7 @@ const Ogv = () => {
                     alt='ogv'
                   />
                 </div>
-                <div className="flex flex-col justify-between w-full my-8 lg:w-4/5 text-left font-weight-bold bg-red-500">
+                <div className="flex flex-col justify-between w-full my-8 lg:w-4/5 text-left font-weight-bold">
                   <div className="flex flex-row justify-between">
                     <div className="w-36 md:w-96">
                       <Typography.Body3 className="text-xs lg:text-base font-bold">
