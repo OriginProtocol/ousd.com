@@ -20,11 +20,44 @@ import { Typography } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../src/utils/image'
 import { audits } from '../src/utils/constants'
 import capitalize from 'lodash/capitalize'
+//import { useStoreState } from 'pullstate'
+//import ContractStore from '../src/stores/ContractStore'
+//import useAllocationQuery from '../src/queries/useAllocationQuery'
+//import useCollateralQuery from '../src/queries/useCollateralQuery'
 
 const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, collateral = {} }) => {
   const { pathname } = useRouter()
   const active = capitalize(pathname.slice(1))
   const [loaded, setLoaded] = useState()
+
+  /*const allocation = useStoreState(ContractStore, (s) => {
+    return s.allocation || {}
+  })
+
+  const collateral = useStoreState(ContractStore, (s) => {
+    return s.collateral || {}
+  })
+
+  const allocationQuery = useAllocationQuery({
+    onSuccess: (allocation) => {
+      ContractStore.update((s) => {
+        s.allocation = allocation
+      })
+    },
+  })
+
+  const collateralQuery = useCollateralQuery({
+    onSuccess: (collateral) => {
+      ContractStore.update((s) => {
+        s.collateral = collateral
+      })
+    },
+  })
+
+  useEffect(() => {
+    allocationQuery.refetch()
+    collateralQuery.refetch()
+  }, [])*/
 
   useEffect(() => {
     setLoaded(true)
@@ -113,7 +146,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
 }
 
 export async function getStaticProps() {
-  //const apyHistory = await fetchApyHistory()
+  const apyHistory = await fetchApyHistory()
   const apy = await fetchApy()
   const allocation = await fetchAllocation()
   const collateral = await fetchCollateral()
@@ -136,10 +169,9 @@ export async function getStaticProps() {
       seo: formatSeo(seoRes?.data),
       navLinks,
       apy,
-      //apyHistory: apyHistory || [],
+      apyHistory: apyHistory || [],
       allocation,
       collateral,
-      fallback: true,
     },
     revalidate: 5 * 60, // Cache response for 5m
   }
