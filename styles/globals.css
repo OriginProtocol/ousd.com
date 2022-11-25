@@ -96,7 +96,7 @@ section.page {
   background-repeat: no-repeat;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
   section.intro {
     background-position: 100% 100%;
     background-size: 200vw;
