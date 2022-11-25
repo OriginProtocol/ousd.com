@@ -500,7 +500,7 @@ const Ogv = ({ stats }) => {
       <section className="gradient3 relative z-0">
         <div className="relative divide-black divide-y-2">
           <div>
-            <div className="flex flex-col lg:flex-row overflow-hidden max-w-screen-2xl mx-auto px-[32px] py-[56px] md:px-[64px] lg:py-[120px] lg:pl-[134px] lg:pr-[208px] text-center lg:text-left space-x-20 xl:space-x-0">
+            <div className="flex flex-col lg:flex-row overflow-hidden max-w-screen-2xl mx-auto px-[32px] py-[56px] md:px-[64px] lg:py-[120px] lg:pl-[134px] lg:pr-[208px] text-center lg:text-left space-x-0 lg:space-x-20 xl:space-x-0">
               <div className="lg:w-2/3">
                 <Typography.H2
                   className="text-[32px] md:text-[72px] lg:text-left"

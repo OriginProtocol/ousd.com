@@ -52,56 +52,58 @@ const Collateral = ({ collateral, allocation }) => {
           <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-[#b5beca]">
             OUSD is backed 1:1 by the most trusted collateral in crypto. Reserves are verifiable on-chain. You can redeem OUSD immediately at any time.
           </Typography.Body3>
-          <div className="max-w-[1432px] mx-auto flex flex-col md:flex-row justify-between mt-20 mb-10 md:mb-20 px-8 xl:px-[132px] py-6 xl:py-20 rounded-xl bg-[#141519]">
-            <div className="relative w-full sm:w-1/2 mx-auto my-auto rounded-full p-4 bg-[#1e1f25]">
-              <PieChart data={chartData} lineWidth={6} startAngle={270} />
-              <Typography.H6 className="absolute font-bold text-[40px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">{`$${formatCurrency(
-                total,
-                0
-              )}`}</Typography.H6>
-            </div>
-            <div className="md:w-1/2 md:ml-10 xl:ml-32 mt-6 md:my-auto pl-0 md:py-10 text-left">
-              <div className="flex flex-col justify-between space-y-2">
-                {collateral.collateral?.map((token) => {
-                  if (token.name === 'ousd') return
-                  const realTotal = token.total - meta / 3
-                  return (
-                    <div
-                      className="flex flex-row md:my-0 px-4 py-[13.5px] md:p-6 rounded-[8px] bg-[#1e1f25] w-full md:max-w-[351px] space-x-3 md:space-x-[22px]"
-                      key={token.name}
-                    >
-                      <div className='relative w-12 md:w-[48px]'>
-                        <Image
-                          src={assetRootPath(`/images/${token.name}-logo.svg`)}
-                          fill
-                          sizes='(max-width: 768px) 48px, 24px'
-                          alt={token.name}
-                        />
-                      </div>
-                      <div className="">
-                        <div className='flex flex-row space-x-2'>
-                          <Typography.H7 className="text-[14px] md:text-[20px]" style={{ fontWeight: 700 }}>
-                            {`${tokenNames[token.name]}`}
-                          </Typography.H7>
-                          <Typography.H7 className="text-[14px] md:text-[20px]" style={{ fontWeight: 400 }}>
-                            {`(${token.name.toUpperCase()})`}
-                          </Typography.H7>
+          <div className="max-w-[1432px] mx-auto mt-20 mb-10 md:mb-20 px-8 xl:px-[132px] py-6 xl:py-20 rounded-xl bg-[#141519]">
+            <div className='flex flex-col md:flex-row justify-between'>
+              <div className="relative w-full sm:w-1/2 mx-auto my-auto rounded-full p-4 bg-[#1e1f25]">
+                <PieChart data={chartData} lineWidth={6} startAngle={270} />
+                <Typography.H6 className="absolute font-bold text-[40px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">{`$${formatCurrency(
+                  total,
+                  0
+                )}`}</Typography.H6>
+              </div>
+              <div className="md:w-1/2 md:ml-10 xl:ml-32 mt-6 md:my-auto pl-0 md:py-10 text-left">
+                <div className="flex flex-col justify-between space-y-2">
+                  {collateral.collateral?.map((token) => {
+                    if (token.name === 'ousd') return
+                    const realTotal = token.total - meta / 3
+                    return (
+                      <div
+                        className="flex flex-row md:my-0 px-4 py-[13.5px] md:p-6 rounded-[8px] bg-[#1e1f25] w-full md:max-w-[351px] space-x-3 md:space-x-[22px]"
+                        key={token.name}
+                      >
+                        <div className='relative w-12 md:w-[48px]'>
+                          <Image
+                            src={assetRootPath(`/images/${token.name}-logo.svg`)}
+                            fill
+                            sizes='(max-width: 768px) 48px, 24px'
+                            alt={token.name}
+                          />
                         </div>
-                        <div className='flex flex-row space-x-2'>
-                          <Typography.Body className="text-[12px] md:text-[16px]" style={{ fontWeight: 700 }}>
-                            {`${formatCurrency((realTotal / total) * 100, 2)}%`}
-                          </Typography.Body>
-                          <Typography.Body
-                            className="text-[12px] md:text-[16px] text-[#b5beca]"
-                            style={{ fontWeight: 400 }}
-                          >
-                            {`$${formatCurrency(realTotal, 0)}`}
-                          </Typography.Body>
+                        <div className="">
+                          <div className='flex flex-row space-x-2'>
+                            <Typography.H7 className="text-[14px] md:text-[20px]" style={{ fontWeight: 700 }}>
+                              {`${tokenNames[token.name]}`}
+                            </Typography.H7>
+                            <Typography.H7 className="text-[14px] md:text-[20px]" style={{ fontWeight: 400 }}>
+                              {`(${token.name.toUpperCase()})`}
+                            </Typography.H7>
+                          </div>
+                          <div className='flex flex-row space-x-2'>
+                            <Typography.Body className="text-[12px] md:text-[16px]" style={{ fontWeight: 700 }}>
+                              {`${formatCurrency((realTotal / total) * 100, 2)}%`}
+                            </Typography.Body>
+                            <Typography.Body
+                              className="text-[12px] md:text-[16px] text-[#b5beca]"
+                              style={{ fontWeight: 400 }}
+                            >
+                              {`$${formatCurrency(realTotal, 0)}`}
+                            </Typography.Body>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )
-                })}
+                    )
+                  })}
+                </div>
               </div>
             </div>
           </div>
