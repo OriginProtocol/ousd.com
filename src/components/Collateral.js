@@ -55,7 +55,7 @@ const Collateral = ({ collateral, allocation }) => {
           <div className="max-w-[1432px] mx-auto flex flex-col md:flex-row justify-between mt-20 mb-10 md:mb-20 px-8 xl:px-[132px] py-6 xl:py-20 rounded-xl bg-[#141519]">
             <div className="relative w-full sm:w-1/2 mx-auto my-auto rounded-full p-4 bg-[#1e1f25]">
               <PieChart data={chartData} lineWidth={6} startAngle={270} />
-              <Typography.H6 className="absolute font-bold text-3xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">{`$${formatCurrency(
+              <Typography.H6 className="absolute font-bold text-[40px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">{`$${formatCurrency(
                 total,
                 0
               )}`}</Typography.H6>
