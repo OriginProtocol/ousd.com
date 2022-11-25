@@ -100,9 +100,19 @@ const Allocation = ({ allocation }) => {
                             }}
                             className="mt-[16px]"
                           ></LinearProgress>
+                          <div className={`md:hidden`}>
+                            <Typography.Caption2>
+                              Show more
+                              <Image
+                                src={assetRootPath(`/images/arrow-down.svg`)}
+                                width='10'
+                                height='6'
+                              />
+                            </Typography.Caption2>
+                          </div>
                           <div
                             className={`${
-                              open[strategy.name] ? '' : ''
+                              open[strategy.name] ? '' : 'hidden md:block'
                             } flex flex-col xl:flex-row mt-[22px] space-y-2 xl:space-y-0 whitespace-nowrap`}
                           >
                             {strategy.name !== 'Convex Strategy' ? (
