@@ -10,7 +10,7 @@ import useTotalSupplyQuery from '../queries/useTotalSupplyQuery'
 import ContractStore from '../stores/ContractStore'
 import { formatCurrency } from '../utils/math'
 
-const Ogv = () => {
+const Ogv = ({ stats }) => {
   const price = useStoreState(ContractStore, (s) => {
     return s.ogv.price || 0
   })
@@ -23,7 +23,7 @@ const Ogv = () => {
     return s.ogv.total || 0
   })
 
-  const priceQuery = usePriceQuery({
+  const priceQuery = usePriceQuery(stats[0], {
     onSuccess: (price) => {
       ContractStore.update((s) => {
         s.ogv.price = price['origin-dollar-governance'].usd
@@ -31,7 +31,7 @@ const Ogv = () => {
     },
   })
 
-  const circulatingSupplyQuery = useCirculatingSupplyQuery({
+  const circulatingSupplyQuery = useCirculatingSupplyQuery(stats[1], {
     onSuccess: (circulatingSupply) => {
       ContractStore.update((s) => {
         s.ogv.circulating = circulatingSupply
@@ -39,7 +39,7 @@ const Ogv = () => {
     },
   })
 
-  const totalSupplyQuery = useTotalSupplyQuery({
+  const totalSupplyQuery = useTotalSupplyQuery(stats[2], {
     onSuccess: (totalSupply) => {
       ContractStore.update((s) => {
         s.ogv.total = totalSupply

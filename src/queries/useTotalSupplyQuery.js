@@ -4,11 +4,16 @@ import { QUERY_KEYS } from 'constants/queryKeys'
 
 import { totalSupplyService } from '../services/total-supply.service'
 
-const useTotalSupplyQuery = (options) => {
+const useTotalSupplyQuery = (total, options) => {
   return useQuery(
     QUERY_KEYS.TotalSupply(),
     () => totalSupplyService.fetchTotalSupply(),
-    options
+    {
+      initialData: total,
+      refetchOnWindowFocus: false,
+      keepPreviousData: true,
+      ...options,
+    }
   )
 }
 

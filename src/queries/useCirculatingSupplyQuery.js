@@ -4,11 +4,16 @@ import { QUERY_KEYS } from 'constants/queryKeys'
 
 import { circulatingSupplyService } from '../services/circulating-supply.service'
 
-const useCirculatingSupplyQuery = (options) => {
+const useCirculatingSupplyQuery = (circulating, options) => {
   return useQuery(
     QUERY_KEYS.CirculatingSupply(),
     () => circulatingSupplyService.fetchCirculatingSupply(),
-    options
+    {
+      initialData: circulating,
+      refetchOnWindowFocus: false,
+      keepPreviousData: true,
+      ...options,
+    }
   )
 }
 

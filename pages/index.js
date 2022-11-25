@@ -15,6 +15,7 @@ import { fetchApyHistory } from '../lib/apyHistory'
 import { fetchAllocation } from '../lib/allocation'
 import { fetchCollateral } from '../lib/collateral'
 import { fetchSupply } from '../lib/supply'
+import { fetchOgvStats } from '../lib/ogv'
 import formatSeo from '../src/utils/seo'
 import transformLinks from '../src/utils/transformLinks'
 import { Typography } from '@originprotocol/origin-storybook'
@@ -26,7 +27,7 @@ import capitalize from 'lodash/capitalize'
 //import useAllocationQuery from '../src/queries/useAllocationQuery'
 //import useCollateralQuery from '../src/queries/useCollateralQuery'
 
-const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, collateral, supply }) => {
+const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, collateral, supply, ogvStats }) => {
   const { pathname } = useRouter()
   const active = capitalize(pathname.slice(1))
   const [loaded, setLoaded] = useState()
@@ -129,7 +130,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
             </Link>
           </div>
         </section>
-        <Ogv />
+        <Ogv stats={ogvStats} />
         <style jsx>{`
           .audits {
             background-color: #1e1f25;
@@ -152,6 +153,7 @@ export async function getStaticProps() {
   const allocation = await fetchAllocation()
   const collateral = await fetchCollateral()
   const supply = await fetchSupply()
+  const ogvStats = await fetchOgvStats()
 
   const articlesRes = await fetchAPI('/ousd/blog/en')
   const seoRes = await fetchAPI('/ousd/page/en/%2F')
@@ -175,6 +177,7 @@ export async function getStaticProps() {
       allocation,
       collateral,
       supply,
+      ogvStats,
     },
     revalidate: 5 * 60, // Cache response for 5m
   }
