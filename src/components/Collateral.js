@@ -106,6 +106,9 @@ const Collateral = ({ collateral, allocation }) => {
                 </div>
               </div>
             </div>
+            <div className='bttn'>
+              View contracts
+            </div>
           </div>
           <Link
             href="https://docs.ousd.com/how-it-works"

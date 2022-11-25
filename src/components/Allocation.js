@@ -138,11 +138,11 @@ const Allocation = ({ allocation }) => {
                                             alt='dai'
                                           />
                                         </div>
-                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light">
+                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
                                           {`${strategies[strategy.name].token} DAI`}
                                           </Typography.Body3>
                                       </div>
-                                      <Typography.Body3 className="text-[#b5beca] font-light">{`${formatCurrency(
+                                      <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
                                         (strategy.dai / strategy.total) * 100,
                                         2
                                       )}%`}</Typography.Body3>
@@ -159,11 +159,11 @@ const Allocation = ({ allocation }) => {
                                             alt='usdc'
                                           />
                                         </div>
-                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light">
+                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
                                           {`${strategies[strategy.name].token} USDC`}
                                         </Typography.Body3>
                                       </div>
-                                      <Typography.Body3 className="text-[#b5beca] font-light">{`${formatCurrency(
+                                      <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
                                         (strategy.usdc / strategy.total) * 100,
                                         2
                                       )}%`}</Typography.Body3>
@@ -180,11 +180,11 @@ const Allocation = ({ allocation }) => {
                                             alt='usdt'
                                           />
                                         </div>
-                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light">
+                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
                                           {`${strategies[strategy.name].token} USDT`}
                                         </Typography.Body3>
                                       </div>
-                                      <Typography.Body3 className="text-[#b5beca] font-light">{`${formatCurrency(
+                                      <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
                                         (strategy.usdt / strategy.total) * 100,
                                         2
                                       )}%`}</Typography.Body3>
@@ -204,11 +204,11 @@ const Allocation = ({ allocation }) => {
                                             alt='threepool'
                                           />
                                         </div>
-                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-left">
+                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-left text-[12px] md:text-[16px]">
                                           Convex DAI+USDC+USDT
                                         </Typography.Body3>
                                       </div>
-                                      <Typography.Body3 className="text-[#b5beca] font-light">{`${formatCurrency(
+                                      <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
                                         ((strategy.dai +
                                           strategy.usdc +
                                           strategy.usdt) /
@@ -229,11 +229,11 @@ const Allocation = ({ allocation }) => {
                                           alt='meta'
                                         />
                                       </div>
-                                      <Typography.Body3 className="pl-[12px] pr-[16px] font-light">
+                                      <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
                                         Convex OUSD+3Crv
                                       </Typography.Body3>
                                     </div>
-                                    <Typography.Body3 className="text-[#b5beca] font-light">{`${formatCurrency(
+                                    <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
                                       ((allocation.strategies[5].dai +
                                         allocation.strategies[5].usdc +
                                         allocation.strategies[5].usdt +
@@ -246,10 +246,10 @@ const Allocation = ({ allocation }) => {
                                 </>
                                 )}
                               </div>
-                              <Typography.Caption className="mt-4 text-[#b5beca] text-left leading-[23px]">
+                              <Typography.Body3 className="mt-4 text-[#b5beca] text-left text-[12px] md:text-[14px] leading-[23px]">
                                 {strategies[strategy.name].description}
-                              </Typography.Caption>
-                              <Typography.Caption2 className='flex flex-row mt-4 md:hidden text-left space-x-1.5 text-[#b5beca] font-medium'>
+                              </Typography.Body3>
+                              <Typography.Body3 className='flex flex-row mt-4 md:hidden text-left space-x-1.5 text-[#b5beca] text-[12px] font-medium'>
                                 <div>Less info</div>
                                 <Image
                                   src={assetRootPath(`/images/arrow-up.svg`)}
@@ -257,7 +257,7 @@ const Allocation = ({ allocation }) => {
                                   height='6'
                                   alt='arrow'
                                 />
-                              </Typography.Caption2>
+                              </Typography.Body3>
                             </div>
                           </div>
                         </div>
