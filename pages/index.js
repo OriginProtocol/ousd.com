@@ -84,7 +84,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
             <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-[#b5beca]" style={{ fontDisplay: 'swap' }}>
               Securing your funds is OUSD’s top priority. Changes to the protocol are reviewed by internal and external auditors on an ongoing basis.
             </Typography.Body3>
-            <div className="audits max-w-[1134px] mx-auto mt-20 mb-10 rounded-xl px-[16px] xl:px-[86px] py-6 md:py-[56px]">
+            <div className="audits max-w-[1134px] mx-auto mt-20 mb-10 md:mb-20 rounded-xl px-[16px] xl:px-[86px] py-6 md:py-[56px]">
               <div className="grid grid-rows-2 grid-cols-2 gap-y-10 lg:flex lg:flex-row lg:justify-between mx-auto">
                 {audits.map((audit, i) => {
                   return (

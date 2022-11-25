@@ -123,7 +123,7 @@ const Apy = ({ apy, apyData }) => {
             Grow your stablecoin portfolio by swapping USDC, USDT, or DAI to OUSD. Yields are generated on-chain, distributed directly to your wallet, and compounded automatically. Your funds are never risked on speculative positions.
           </Typography.Body3>
           {loaded && (
-            <div className="max-w-[1432px] mx-auto flex flex-col mt-20 mb-10 p-[16px] md:p-10 rounded-xl bg-[#141519]">
+            <div className="max-w-[1432px] mx-auto flex flex-col mt-20 mb-10 md:mb-20 p-[16px] md:p-10 rounded-xl bg-[#141519]">
               <div className="flex flex-col lg:flex-row justify-between">
                 <div className="mt-[0px] md:mt-[16px]">
                   <Typography.H2 className="font-bold xl:inline lg:text-left">

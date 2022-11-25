@@ -15,6 +15,8 @@ const Allocation = ({ allocation }) => {
     return { total: t.total + s.total }
   }).total
 
+  // strategy handling needs some thought
+
   return (
     <>
       <section className="black">
@@ -28,7 +30,7 @@ const Allocation = ({ allocation }) => {
           <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-[#b5beca]">
             Funds are deployed to automated, on-chain, blue-chip stablecoin strategies. There are no gatekeepers or centralized money managers and governance is entirely decentralized.
           </Typography.Body3>
-          <div className="allocation max-w-[1432px] mx-auto mt-20 mb-10 rounded-xl divide-black divide-y-2">
+          <div className="allocation max-w-[1432px] mx-auto mt-20 mb-10 md:mb-20 rounded-xl divide-black divide-y-2">
             <Typography.H7 className="font-bold px-4 py-[22px] md:p-10">
               Current yield sources & allocations
             </Typography.H7>
@@ -46,6 +48,7 @@ const Allocation = ({ allocation }) => {
                         strategy.name === 'OUSD MetaStrategy'
                       )
                         return
+                      const strategyTotal = strategy.name === 'Convex Strategy' ? strategy.total + allocation.strategies[5].total : strategy.total
                       return (
                         <div
                           className="strategy rounded-xl border-2 p-[16px] md:p-8 my-[6px] md:my-[8px]"
@@ -79,21 +82,21 @@ const Allocation = ({ allocation }) => {
                                   className="inline items-center text-[12px] md:text-[24px] text-[#b5beca]"
                                   style={{ fontWeight: 400 }}
                                 >{`$${formatCurrency(
-                                  strategy.total,
+                                  strategyTotal,
                                   0
                                 )}`}</Typography.H7>
                                 <Typography.H7
                                   className="inline pl-[8px] text-[12px] md:text-[24px]"
                                   style={{ fontWeight: 700 }}
                                 >{`(${formatCurrency(
-                                  (strategy.total / total) * 100,
+                                  (strategyTotal / total) * 100,
                                   2
                                 )}%)`}</Typography.H7>
                               </div>
                             </div>
                             <LinearProgress
                               variant="determinate"
-                              value={(strategy.total / total) * 100}
+                              value={(strategyTotal / total) * 100}
                               color={`${strategy.name
                                 .replace(/\s+/g, '-')
                                 .toLowerCase()}`}
@@ -209,7 +212,7 @@ const Allocation = ({ allocation }) => {
                                         ((strategy.dai +
                                           strategy.usdc +
                                           strategy.usdt) /
-                                          (strategy.total + allocation.strategies[5].total)) *
+                                          strategyTotal) *
                                           100,
                                         2
                                       )}%`}</Typography.Body3>
@@ -235,7 +238,7 @@ const Allocation = ({ allocation }) => {
                                         allocation.strategies[5].usdc +
                                         allocation.strategies[5].usdt +
                                         allocation.strategies[5].ousd) /
-                                        (strategy.total + allocation.strategies[5].total)) *
+                                        strategyTotal) *
                                         100,
                                       2
                                     )}%`}</Typography.Body3>
