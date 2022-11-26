@@ -523,7 +523,7 @@ const Ogv = ({ stats }) => {
                 <div className="flex flex-col justify-between w-full my-8 md:my-20 lg:w-4/5 text-left font-weight-bold">
                   <div className="flex flex-row justify-between">
                     <div className="w-36 md:w-96">
-                      <Typography.Body3 className="text-xs lg:text-base font-bold">
+                      <Typography.Body3 className="text-xs lg:text-base font-bold tracking-[0.06em]">
                         {'OGV PRICE'}
                       </Typography.Body3>
                       <Typography.H5 className="mt-[4px] font-bold lg:text-[28px] xl:text-[40px]">{`$${formatCurrency(
@@ -532,7 +532,7 @@ const Ogv = ({ stats }) => {
                       )}`}</Typography.H5>
                     </div>
                     <div className="w-36 md:w-96">
-                      <Typography.Body3 className="text-xs lg:text-base font-bold">
+                      <Typography.Body3 className="text-xs lg:text-base font-bold tracking-[0.06em]">
                         {'OGV MARKET CAP'}
                       </Typography.Body3>
                       <Typography.H5 className="mt-[4px] font-bold lg:text-[28px] xl:text-[40px]">{`$${formatCurrency(
@@ -543,7 +543,7 @@ const Ogv = ({ stats }) => {
                   </div>
                   <div className="flex flex-row justify-between mt-10">
                     <div className="w-36 md:w-96">
-                      <Typography.Body3 className="text-xs lg:text-base font-bold">
+                      <Typography.Body3 className="text-xs lg:text-base font-bold tracking-[0.06em]">
                         {'CIRCULATING SUPPLY'}
                       </Typography.Body3>
                       <Typography.H5 className="mt-[4px] font-bold lg:text-[28px] xl:text-[40px]">
@@ -551,7 +551,7 @@ const Ogv = ({ stats }) => {
                       </Typography.H5>
                     </div>
                     <div className="w-36 md:w-96">
-                      <Typography.Body3 className="text-xs lg:text-base font-bold">
+                      <Typography.Body3 className="text-xs lg:text-base font-bold tracking-[0.06em]">
                         {'TOTAL SUPPLY'}
                       </Typography.Body3>
                       <Typography.H5 className="mt-[4px] font-bold lg:text-[28px] xl:text-[40px]">
