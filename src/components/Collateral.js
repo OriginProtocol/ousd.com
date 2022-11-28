@@ -10,7 +10,6 @@ import capitalize from 'lodash/capitalize'
 
 const Collateral = ({ collateral, allocation }) => {
   // temporary calculation, waiting for metastrategy integration into analytics
-  //const meta = allocation?.strategies && allocation.strategies[4].ousd
   const meta = allocation.strategies?.find((s) => {
     return s.name === 'OUSD MetaStrategy'
   }).ousd
@@ -56,10 +55,13 @@ const Collateral = ({ collateral, allocation }) => {
             <div className='flex flex-col md:flex-row justify-between'>
               <div className="relative w-full sm:w-1/2 mx-auto my-auto rounded-full p-4 bg-[#1e1f25]">
                 <PieChart data={chartData} lineWidth={6} startAngle={270} />
-                <Typography.H6 className="absolute font-bold text-[40px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">{`$${formatCurrency(
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                  <Typography.H6 className='text-[16px] md:text-[24px] leading-[32px]'>Total</Typography.H6>
+                  <Typography.H6 className='md:mt-3 text-[24px] md:text-[40px] leading-[32px] md:leading-[40px]'>{`$${formatCurrency(
                   total,
                   0
                 )}`}</Typography.H6>
+                  </div>
               </div>
               <div className="md:w-1/2 md:ml-10 xl:ml-32 mt-6 md:my-auto pl-0 md:py-10 text-left">
                 <div className="flex flex-col justify-between space-y-2">
