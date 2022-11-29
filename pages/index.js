@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import Animation from '../src/components/Animation'
-import Apy from '../src/components/Apy'
-import Allocation from '../src/components/Allocation'
-import Collateral from '../src/components/Collateral'
-import Ogv from '../src/components/Ogv'
-import Footer from '../src/components/Footer'
+//import Animation from '../src/components/Animation'
+//import Apy from '../src/components/Apy'
+//import Allocation from '../src/components/Allocation'
+//import Collateral from '../src/components/Collateral'
+//import Ogv from '../src/components/Ogv'
+//import Footer from '../src/components/Footer'
 import Seo from '../src/components/strapi/seo'
 import { useRouter } from 'next/router'
 import { fetchAPI } from '../lib/api'
@@ -26,6 +26,32 @@ import capitalize from 'lodash/capitalize'
 //import ContractStore from '../src/stores/ContractStore'
 //import useAllocationQuery from '../src/queries/useAllocationQuery'
 //import useCollateralQuery from '../src/queries/useCollateralQuery'
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+
+const Animation = dynamic(() => import('../src/components/Animation'), {
+  suspense: true,
+})
+
+const Apy = dynamic(() => import('../src/components/Apy'), {
+  suspense: true,
+})
+
+const Allocation = dynamic(() => import('../src/components/Allocation'), {
+  suspense: true,
+})
+
+const Collateral = dynamic(() => import('../src/components/Collateral'), {
+  suspense: true,
+})
+
+const Ogv = dynamic(() => import('../src/components/Ogv'), {
+  suspense: true,
+})
+
+const Footer = dynamic(() => import('../src/components/Footer'), {
+  suspense: true,
+})
 
 const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, collateral, supply, ogvStats }) => {
   const { pathname } = useRouter()

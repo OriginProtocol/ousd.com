@@ -63,7 +63,7 @@ const Animation = ({ navLinks, active, supply }) => {
               <Typography.Body3 className="mt-6 mb-10 leading-[28px] text-[#b5beca]">
                 Origin Dollar simplifies DeFi by eliminating the need for staking or lock-ups. Hold OUSD in any Ethereum wallet and watch your balance increase every day.
               </Typography.Body3>
-              <Link href={`${process.env.NEXT_PUBLIC_DAPP_URL}/swap`} target="_blank" className="bttn ml-0 gradient2 !w-auto">
+              <Link href={`${process.env.NEXT_PUBLIC_DAPP_URL}/swap`} target="_blank" className="bttn !ml-0 gradient2 !w-auto">
                 <Typography.H7 className="mx-8 md:mx-0 font-normal">
                   Get OUSD
                 </Typography.H7>
