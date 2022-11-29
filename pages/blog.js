@@ -42,7 +42,7 @@ const Blog = ({
 
 export async function getStaticProps() {
   // Run API calls in parallel
-  const articlesRes = await fetchAPI('/ousd/blog/en')
+  const articlesRes = await fetchAPI('/website/blog/en')
 
   const categories = {}
   articlesRes?.data?.forEach((article) => {
@@ -51,8 +51,8 @@ export async function getStaticProps() {
     }
   })
 
-  const seoRes = await fetchAPI('/ousd/page/en/%2Fblog')
-  const navRes = await fetchAPI('/ousd-nav-links', {
+  const seoRes = await fetchAPI('/website/page/en/%2Fblog')
+  const navRes = await fetchAPI('/website-nav-links', {
     populate: {
       links: {
         populate: '*',
