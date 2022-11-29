@@ -15,6 +15,7 @@ export async function getStaticPaths() {
       // TODO: Should all locales be pre-generated?
       locale: "en",
     })),
+    fallback: 'blocking',
   }
 }
 

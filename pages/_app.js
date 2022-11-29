@@ -111,7 +111,7 @@ MyApp.getInitialProps = async (ctx) => {
   // Pass the data to our page via props
   return {
     ...appProps,
-    pageProps: { global: globalRes.data },
+    pageProps: { global: globalRes?.data },
     styles: [
       process.env.NODE_ENV === "production" ? (
         <style

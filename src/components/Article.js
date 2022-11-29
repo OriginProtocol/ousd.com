@@ -9,84 +9,85 @@ import formatSeo from '../utils/seo'
 import sanitizeHtml from 'sanitize-html'
 import he from 'he'
 import { sanitizationOptions } from '../utils/constants'
+import Footer from 'components/Footer'
 
 const Article = ({ locale, article, navLinks }) => {
   const imageUrl = article.cover?.url
-
   const seo = formatSeo(article.seo)
 
   return (
     <>
       <Seo seo={seo} />
-        <section className="page black">
-          <Header mappedLinks={navLinks} webProperty="ousd" />
-          <div className="max-w-screen-2xl mx-auto mt-[20px] md:mt-16 px-8 md:px-[134px] md:pb-40">
-            <div className="mb-6 mt-2">
-              <Typography.H6
-                as="h1"
-                className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px] font-bold"
+      <section className="page black">
+        <Header mappedLinks={navLinks} webProperty="ousd" />
+        <div className="max-w-screen-2xl mx-auto mt-[20px] md:mt-16 px-8 md:px-[134px] md:pb-40">
+          <div className="mb-6 mt-2">
+            <Typography.H6
+              as="h1"
+              className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px] font-bold"
+            >
+              {article.title}
+            </Typography.H6>
+          </div>
+          <div className="bg-white rounded-2xl pb-10">
+            {imageUrl && (
+              <div
+                id="banner"
+                className="bg-cover flex justify-center items-center m-0 h-96 w-full rounded-tl-2xl rounded-tr-2xl relative overflow-hidden"
+                data-src={imageUrl}
+                data-srcset={imageUrl}
               >
-                {article.title}
-              </Typography.H6>
-            </div>
-            <div className="bg-white rounded-2xl pb-10">
-              {imageUrl && (
+                <Image
+                  src={imageUrl}
+                  alt={article.cover?.alternativeText}
+                  fill
+                  objectFit="cover"
+                  priority
+                />
+              </div>
+            )}
+            <div className="pt-6 md:pt-12">
+              <div className="py-6 pl-6 pr-6 md:px-28 text-black">
                 <div
-                  id="banner"
-                  className="bg-cover flex justify-center items-center m-0 h-96 w-full rounded-tl-2xl rounded-tr-2xl relative overflow-hidden"
-                  data-src={imageUrl}
-                  data-srcset={imageUrl}
-                >
-                  <Image
-                    src={imageUrl}
-                    alt={article.cover?.alternativeText}
-                    fill
-                    objectFit="cover"
-                    priority
-                  />
-                </div>
-              )}
-              <div className="pt-6 md:pt-12">
-                <div className="py-6 pl-6 pr-6 md:px-28 text-black">
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: sanitizeHtml(
-                        he.decode(article.body),
-                        sanitizationOptions
-                      ),
-                    }}
-                  />
-                  <hr className="my-6" />
-                  <div className="flex items-center">
-                    <div>
-                      {article.author?.avatar && (
-                        <Image
-                          src={article.author.avatar.url}
-                          alt={article.author.avatar.alternativeText}
-                          style={{
-                            position: 'static',
-                            borderRadius: '20%',
-                            height: 60,
-                          }}
-                          width="64"
-                          height="64"
-                        />
-                      )}
-                    </div>
-                    <div className="ml-4 text-black">
-                      {article.author?.name && <p>By {article.author.name}</p>}
-                      <p>
-                        <Moment format="MMM Do YYYY">
-                          {article.published_at}
-                        </Moment>
-                      </p>
-                    </div>
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizeHtml(
+                      he.decode(article.body),
+                      sanitizationOptions
+                    ),
+                  }}
+                />
+                <hr className="my-6" />
+                <div className="flex items-center">
+                  <div>
+                    {article.author?.avatar && (
+                      <Image
+                        src={article.author.avatar.url}
+                        alt={article.author.avatar.alternativeText}
+                        style={{
+                          position: 'static',
+                          borderRadius: '20%',
+                          height: 60,
+                        }}
+                        width="64"
+                        height="64"
+                      />
+                    )}
+                  </div>
+                  <div className="ml-4 text-black">
+                    {article.author?.name && <p>By {article.author.name}</p>}
+                    <p>
+                      <Moment format="MMM Do YYYY">
+                        {article.published_at}
+                      </Moment>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
+      <Footer locale={locale} />
     </>
   )
 }

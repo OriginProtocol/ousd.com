@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { Chart as ChartJS } from 'chart.js/auto'
 import { Chart } from 'react-chartjs-2'
-//import LineChart from '../components/Chart'
+import LineChart from '../components/Chart'
 import { Typography } from '@originprotocol/origin-storybook'
 //import { useStoreState } from 'pullstate'
 //import ContractStore from '../stores/ContractStore'
@@ -12,12 +12,6 @@ import { adjustLinkHref } from '../utils/utils'
 //import useApyQuery from '../queries/useApyQuery'
 import useApyHistoryQuery from '../queries/useApyHistoryQuery'
 import { apyDayOptions } from '../utils/constants'
-import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
-
-const LineChart = dynamic(() => import('../components/Chart'), {
-  suspense: true,
-})
 
 const Apy = ({ apy, apyData }) => {
   const [loaded, setLoaded] = useState()
@@ -178,9 +172,7 @@ const Apy = ({ apy, apyData }) => {
               </div>
               {chartData && (
                 <div className="mt-12 -mr-[16px] -ml-[16px] md:ml-[0px]">
-                  <Suspense fallback={`Loading...`}>
-                    <LineChart chartData={chartData} />
-                  </Suspense>
+                  <LineChart chartData={chartData} />
                 </div>
               )}
             </div>
