@@ -4,11 +4,12 @@ import React, { useEffect, useState } from 'react'
 import { assetRootPath } from '../utils/image'
 import { capitalize } from 'lodash'
 
-const Category = ({ categories, setCategory }) => {
+const Category = ({ categories, category, setCategory }) => {
+  const [open, setOpen] = useState()
   const categoriesFormatted = [
     {
       id: null,
-      name: 'All articles',
+      name: 'All news',
       unavailable: false,
     },
   ].concat(
@@ -22,13 +23,44 @@ const Category = ({ categories, setCategory }) => {
   )
 
   return (
-    <div className="pl-0 w-96 pt-4 text-black">
-      <Select
-        options={categoriesFormatted}
-        onSelect={(value) => {
-          setCategory(value.id)
+    <div
+      className='relative text-black w-[200px]'
+      tabIndex='1'
+      onBlur={() => setOpen(false)}
+    >
+      <div
+        className='w-[200px] px-6 py-3.5 gradient2 rounded-full cursor-pointer'
+        onClick={() => {
+          setOpen(!open)
         }}
-      />
+      >
+        <div className='flex flex-row justify-between'>
+          {category || 'All news'}
+          <Image
+            src={assetRootPath(`/images/caret-white.svg`)}
+            width='20'
+            height='12'
+            alt='arrow'
+          />
+        </div>
+      </div>
+      <div
+        className={`absolute z-10 top-16 left-2 w-[250px] bg-[#fafbfb] rounded-lg cursor-pointer ${open ? '' : 'hidden'}`}
+      >
+        {categoriesFormatted.map((c, i) => {
+          return (
+            <div
+              className={`w-full text-left px-6 py-3.5 hover:text-[#fafbfb] hover:bg-gradient-to-r hover:from-[#8c66fc] hover:to-[#0274f1] ${i === 0 ? 'rounded-t-lg' : ''} ${i === categoriesFormatted.length - 1 ? 'rounded-b-lg' : ''}`}
+              onClick={() => {
+                setCategory(c.name === 'All news' ? '' : c.name)
+                setOpen(false)
+              }}
+            >
+              {c.name}
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
@@ -44,13 +76,15 @@ const News = ({ articles, meta, categories }) => {
   const [page, setPage] = useState(1)
   const [pageNumbers, setPageNumbers] = useState([])
 
+  const categoryArticles = category ? articles.filter((article) => article.category.slug === category) : articles
+
   const articlePages = Math.ceil(
     (category
-      ? articles.filter((article) => article.slug === category.slug).length
+      ? categoryArticles.length
       : meta.pagination.total) / 9
   )
   const currentPageArticles = articles
-    ? articles.slice(9 * (page - 1), 9 * page)
+    ? categoryArticles.slice(9 * (page - 1), 9 * page)
     : []
 
   useEffect(() => {
@@ -63,16 +97,18 @@ const News = ({ articles, meta, categories }) => {
     setPageNumbers(pageNumbers)
   }, [page, articlePages])
 
+  console.log(category)
+
   return (
     <>
       {loaded && currentPageArticles && (
-        <div className="container-fluid max-w-screen-xl mx-auto px-6">
+        <div className="max-w-screen-2xl mx-auto">
           <Category
             categories={categories}
             category={category}
             setCategory={setCategory}
           />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-5 max-w-screen-xl mx-auto px-6 md:px-0">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
             {currentPageArticles.map((a, i) => {
               if (!category || category === a.category.slug) {
                 return (
@@ -100,7 +136,21 @@ const News = ({ articles, meta, categories }) => {
               }
             })}
           </div>
-          <div className="pagination flex justify-center">
+          <div className="flex justify-center mt-20 space-x-2">
+            <div
+              className='flex items-center justify-center w-[33px] h-[33px] cursor-pointer'
+              onClick={() => {
+                setPage(page - 1)
+              }}
+              >
+              <Image
+                src={assetRootPath(`/images/arrow-left.svg`)}
+                width='10'
+                height='5'
+                className={`${page === 1 ? 'hidden' : ''}`}
+                alt='arrow'
+              />
+            </div>
             {pageNumbers.map((pageNumber, index) => {
               const isCurrent = pageNumber === page
               const skippedAPage =
@@ -109,13 +159,13 @@ const News = ({ articles, meta, categories }) => {
               return (
                 <div className="flex" key={pageNumber}>
                   {skippedAPage && (
-                    <div className="page-skip flex items-center justify-center">
+                    <div className="flex items-center justify-center text-[#fafbfb]">
                       ...
                     </div>
                   )}
                   <div
-                    className={`page-number ${
-                      isCurrent ? 'current' : ''
+                    className={`w-[33px] h-[33px] text-[#fafbfb] cursor-pointer ${
+                      isCurrent ? 'rounded-[6px] gradient2' : ''
                     } flex items-center justify-center`}
                     onClick={() => {
                       if (isCurrent) {
@@ -129,46 +179,24 @@ const News = ({ articles, meta, categories }) => {
                 </div>
               )
             })}
+            <div
+              className='flex items-center justify-center w-[33px] h-[33px] cursor-pointer'
+              onClick={() => {
+                setPage(page + 1)
+              }}
+              >
+              <Image
+                src={assetRootPath(`/images/arrow-right.svg`)}
+                width='10'
+                height='5'
+                className={`${page === pageNumbers.length ? 'hidden' : ''}`}
+                alt='arrow'
+              />
+            </div>
           </div>
         </div>
       )}
       <style jsx>{`
-        .pagination {
-          padding: 40px;
-          border-radius: 10px;
-        }
-
-        .page-number {
-          cursor: pointer;
-          color: #8293a4;
-          min-width: 40px;
-          min-height: 40px;
-          border-radius: 5px;
-          border: solid 1px #cdd7e0;
-          margin-right: 10px;
-          font-size: 14px;
-          cursor: pointer;
-          padding-left: 15px;
-          padding-right: 15px;
-        }
-
-        .page-skip {
-          color: #8293a4;
-          margin-right: 10px;
-          min-width: 40px;
-          min-height: 40px;
-        }
-
-        .page-number.current,
-        .page-number.current:hover {
-          background-color: #1a82ff;
-          color: white;
-        }
-
-        .page-number:hover {
-          background-color: #edf2f5;
-        }
-
         @media (max-width: 799px) {
           .container {
             display: grid;

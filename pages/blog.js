@@ -24,12 +24,16 @@ const Blog = ({
   return (
     <>
       <Seo seo={seo} />
-        <section className="page black">
+        <section className='bg-[#141519]'>
           <Header mappedLinks={navLinks} webProperty="ousd" active={active} />
-          <div className="max-w-screen-2xl mt-[20px] md:mt-16 mx-auto px-8 md:px-[134px] pb-12">
+          <div className="max-w-screen-2xl mt-20 px-8 md:px-[134px] pb-[120px]">
             <Typography.H2 as="h1" className="font-normal">
               Latest news
             </Typography.H2>
+          </div>
+        </section>
+        <section className='bg-[#1e1f25]'>
+        <div className="max-w-screen-2xl pt-20 pb-[120px] px-8 md:px-[134px]">
             {!articles?.length ? null : (
               <News articles={articles} meta={meta} categories={categories} />
             )}
