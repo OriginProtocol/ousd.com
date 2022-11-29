@@ -15,13 +15,12 @@ export async function getStaticPaths() {
       // TODO: Should all locales be pre-generated?
       locale: "en",
     })),
-    fallback: 'blocking',
   }
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
   // TODO: Do something for rate-limit
-  const { data } = await fetchAPI(`/ousd/blog/en/${params.slug}`)
+  const { data } = await fetchAPI(`/ousd/blog/${locale}/${params.slug}`)
   const navRes = await fetchAPI('/ousd-nav-links', {
     populate: {
       links: {
