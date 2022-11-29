@@ -55,6 +55,7 @@ const Category = ({ categories, category, setCategory }) => {
                 setCategory(c.name === 'All news' ? '' : c.name)
                 setOpen(false)
               }}
+              key={i}
             >
               {c.name}
             </div>
