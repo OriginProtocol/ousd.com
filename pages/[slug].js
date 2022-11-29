@@ -9,11 +9,11 @@ const FallbackRenderer = ({ article, navLinks }) => {
 
 export async function getStaticPaths() {
   const { data } = await fetchAPI('/ousd/blog/slugs')
-
   return {
     paths: (data || []).map((slug) => ({
       params: { slug },
       // TODO: Should all locales be pre-generated?
+      locale: "en",
     })),
     fallback: 'blocking',
   }
