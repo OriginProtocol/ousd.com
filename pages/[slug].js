@@ -9,7 +9,7 @@ const FallbackRenderer = ({ article, navLinks }) => {
 }
 
 export async function getStaticPaths() {
-  const { data } = await fetchAPI('/website/blog/slugs')
+  const { data } = await fetchAPI('/ousd/blog/slugs')
   return {
     paths: (data || []).map((slug) => ({
       params: { slug },
@@ -22,8 +22,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params, locale }) {
   // TODO: Do something for rate-limit
-  const { data } = await fetchAPI(`/website/blog/${locale}/${params.slug}`)
-  const navRes = await fetchAPI('/website-nav-links', {
+  const { data } = await fetchAPI(`/ousd/blog/${locale}/${params.slug}`)
+  const navRes = await fetchAPI('/ousd-nav-links', {
     populate: {
       links: {
         populate: '*',
