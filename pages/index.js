@@ -96,10 +96,15 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
       {loaded &&
       <>
       <Seo seo={seo} />
-        <Animation navLinks={navLinks} active={active} supply={supply} />
-        <Apy apy={apy} apyData={apyHistory} />
-        <Allocation allocation={allocation} />
-        <Collateral collateral={collateral} allocation={allocation} />
+        <Suspense fallback={`Loading...`}>
+          <Animation navLinks={navLinks} active={active} supply={supply} />
+        </Suspense>
+        <Suspense fallback={`Loading...`}>
+        <Apy apy={apy} apyData={apyHistory} /></Suspense>
+        <Suspense fallback={`Loading...`}>
+        <Allocation allocation={allocation} /></Suspense>
+        <Suspense fallback={`Loading...`}>
+        <Collateral collateral={collateral} allocation={allocation} /></Suspense>
         <section className="home black">
           <div className="py-[120px] px-[16px] md:px-[64px] lg:px-[200px] text-center">
             <Typography.H6
@@ -111,7 +116,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
             <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-[#b5beca]" style={{ fontDisplay: 'swap' }}>
               Securing your funds is OUSD’s top priority. Changes to the protocol are reviewed by internal and external auditors on an ongoing basis.
             </Typography.Body3>
-            <div className="audits max-w-[1134px] mx-auto mt-20 mb-10 md:mb-20 rounded-xl px-[16px] xl:px-[86px] py-6 md:py-[56px]">
+            <div className="max-w-[1134px] mx-auto mt-20 mb-10 md:mb-20 rounded-xl px-[16px] xl:px-[86px] py-6 md:py-[56px] bg-[#1e1f25]">
               <div className="grid grid-rows-2 grid-cols-2 gap-y-10 lg:flex lg:flex-row lg:justify-between mx-auto">
                 {audits.map((audit, i) => {
                   return (
@@ -122,7 +127,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
                       rel="noopener noreferrer"
                       key={audit.name}
                     >
-                      <div className="item relative rounded-full w-[140px] h-[140px] md:w-[200px] md:h-[200px] lg:w-[130px] lg:h-[130px] xl:w-[170px] xl:h-[170px] 2xl:w-[200px] 2xl:h-[200px]">
+                      <div className="relative rounded-full w-[140px] h-[140px] md:w-[200px] md:h-[200px] lg:w-[130px] lg:h-[130px] xl:w-[170px] xl:h-[170px] 2xl:w-[200px] 2xl:h-[200px] bg-[#141519]">
                         <div className="relative h-[56px] md:h-[80px] lg:h-[56px] 2xl:h-[80px] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                           <Image
                             src={assetRootPath(
@@ -156,17 +161,10 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
             </Link>
           </div>
         </section>
-        <Ogv stats={ogvStats} />
-        <Footer locale={locale} />
-        <style jsx>{`
-          .audits {
-            background-color: #1e1f25;
-          }
-
-          .item {
-            background-color: #141519;
-          }
-        `}</style>
+        <Suspense fallback={`Loading...`}>
+        <Ogv stats={ogvStats} /></Suspense>
+        <Suspense fallback={`Loading...`}>
+        <Footer locale={locale} /></Suspense>
       </>
         }
     </>
