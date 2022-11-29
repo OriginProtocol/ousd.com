@@ -29,7 +29,6 @@
     "dotenv": "^16.0.3",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.4",
-    "ethers": "^5.7.2",
     "he": "^1.2.0",
     "lodash": "^4.17.21",
     "next": "^13.0.4",

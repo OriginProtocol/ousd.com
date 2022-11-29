@@ -1,27 +1,9 @@
 import { createTheme } from '@mui/material/styles'
 
-const mintAbsoluteGasLimitBuffer = 20000
-/* All gas limit buffers are expressed in relative percentages. Meaning a 0.2
- * value will set gasLimit to 120% of the original value.
- */
-const mintPercentGasLimitBuffer = 0.1
-const redeemPercentGasLimitBuffer = 0.25
-const uniswapV2GasLimitBuffer = 0.2
-const sushiswapGasLimitBuffer = 0.2
-const uniswapV3GasLimitBuffer = 0.2
-const curveGasLimitBuffer = 0.1
-const approveCoinGasLimits = {
-  ousd: 52000,
-  dai: 46000,
-  usdt: 48900,
-  usdc: 60700,
-}
-const apyDayOptions = [7, 30, 365]
-const DEFAULT_SELECTED_APY = 30
-const transactionHistoryItemsPerPage = 50
-const max_price = 1.2
+export const apyDayOptions = [7, 30, 365]
+export const DEFAULT_SELECTED_APY = 30
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     'compound-strategy': {
       main: '#00d592',
@@ -38,7 +20,7 @@ const theme = createTheme({
   },
 })
 
-const strategies = {
+export const strategies = {
   'Compound Strategy': {
     token: 'Compound',
     tokenPrefix: 'c',
@@ -61,14 +43,14 @@ const strategies = {
   },
 }
 
-const tokenColors = {
+export const tokenColors = {
   usdc: '#2775ca',
   dai: '#f4b731',
   usdt: '#26a17b',
   ousd: '#000000',
 }
 
-const audits = [
+export const audits = [
   {
     name: 'Trail of bits',
     link: 'https://github.com/OriginProtocol/security/blob/master/audits/Trail%20of%20Bits%20-%20Origin%20Dollar%20-%20Dec%202020.pdf',
@@ -87,7 +69,7 @@ const audits = [
   },
 ]
 
-const sanitizationOptions = {
+export const sanitizationOptions = {
   allowedTags: [
     'b',
     'i',
@@ -113,24 +95,4 @@ const sanitizationOptions = {
     ol: ['style'],
   },
   allowedIframeHostnames: ['www.youtube.com'],
-}
-
-module.exports = {
-  mintAbsoluteGasLimitBuffer,
-  mintPercentGasLimitBuffer,
-  redeemPercentGasLimitBuffer,
-  uniswapV2GasLimitBuffer,
-  sushiswapGasLimitBuffer,
-  uniswapV3GasLimitBuffer,
-  curveGasLimitBuffer,
-  approveCoinGasLimits,
-  apyDayOptions,
-  DEFAULT_SELECTED_APY,
-  transactionHistoryItemsPerPage,
-  max_price,
-  theme,
-  strategies,
-  tokenColors,
-  audits,
-  sanitizationOptions,
 }

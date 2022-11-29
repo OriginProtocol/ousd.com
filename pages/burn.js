@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ethers } from 'ethers'
 import Countdown, { zeroPad } from 'react-countdown'
 import { useStoreState } from 'pullstate'
 import Footer from '../src/components/Footer'
@@ -126,7 +125,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
   const [mandatoryLockupBalance, setMandatoryLockupBalance] = useState()
   const [burnedOptionalAmount, setBurnedOptionalAmount] = useState(0)
   const [burnedMandatoryAmount, setBurnedMandatoryAmount] = useState(0)
-  const [currentBlock, setCurrentBlock] = useState()
+  const [currentBlock, setCurrentBlock] = useState(16000000)
 
   const mandatoryDistributorInitialOgv = 398752449
   const optionalDistributorInitialOgv = 747905084
@@ -171,12 +170,12 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
       setMandatoryLockupBalance(mandatory)
       setTotalVeSupply(totalVe)
 
-      const jsonRpcProvider = new ethers.providers.StaticJsonRpcProvider(
-        process.env.ETHEREUM_RPC_PROVIDER,
-        { chainId: parseInt(process.env.ETHEREUM_RPC_CHAIN_ID) }
-      )
-      const block = await jsonRpcProvider.getBlockNumber()
-      setCurrentBlock(block)
+      //const jsonRpcProvider = new ethers.providers.StaticJsonRpcProvider(
+      //  process.env.ETHEREUM_RPC_PROVIDER,
+      //  { chainId: parseInt(process.env.ETHEREUM_RPC_CHAIN_ID) }
+      //)
+      //const block = await jsonRpcProvider.getBlockNumber()
+      //setCurrentBlock(block)
 
       if (burnOver) {
         const burnedOptional = await ogv
