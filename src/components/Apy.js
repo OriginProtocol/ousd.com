@@ -177,7 +177,7 @@ const Apy = ({ apy, apyData }) => {
               )}
             </div>
           )}
-          <Link href={`${process.env.NEXT_PUBLIC_DAPP_URL}/swap`} target="_blank" className="bttn gradient2">
+          <Link href={`${process.env.NEXT_PUBLIC_DAPP_URL}`} target="_blank" className="bttn gradient2">
             <Typography.H7 className="font-normal">
               Start earning now
             </Typography.H7>

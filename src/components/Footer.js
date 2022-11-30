@@ -98,7 +98,7 @@ export default function Footer({ locale }) {
               </Link>
               <br className="block lg:hidden" />
               <Link
-                href={`${process.env.NEXT_PUBLIC_DAPP_URL}/swap`}
+                href={`${process.env.NEXT_PUBLIC_DAPP_URL}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="gradient2 w-full lg:w-[126px] px-6 py-[6px] mt-[20px] lg:mt-0 rounded-full text-center"
