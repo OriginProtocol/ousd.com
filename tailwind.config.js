@@ -5,7 +5,11 @@ module.exports = {
     "./src/**/*.{js,jsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      dropShadow: {
+        'ousd': '0px 4px 56px rgba(20, 21, 25, 0.9)',
+      }
+    }
   },
   plugins: [],
 }

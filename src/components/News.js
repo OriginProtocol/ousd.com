@@ -25,12 +25,12 @@ const Category = ({ categories, category, setCategory }) => {
 
   return (
     <div
-      className='relative text-black w-[200px]'
+      className='relative w-[200px]'
       tabIndex='1'
       onBlur={() => setOpen(false)}
     >
       <div
-        className='w-[200px] px-6 py-3.5 gradient2 rounded-full cursor-pointer'
+        className='relative z-20 w-[200px] px-6 py-3.5 gradient2 rounded-full cursor-pointer'
         onClick={() => {
           setOpen(!open)
         }}
@@ -46,7 +46,7 @@ const Category = ({ categories, category, setCategory }) => {
         </div>
       </div>
       <div
-        className={`absolute z-10 top-16 left-2 w-[250px] bg-[#fafbfb] shadow rounded-lg cursor-pointer ${open ? '' : 'hidden'}`}
+        className={`absolute z-10 top-16 w-[200px] bg-[#1e1f25] drop-shadow-ousd rounded-lg cursor-pointer ${open ? '' : 'hidden'}`}
       >
         {categoriesFormatted.map((c, i) => {
           return (
