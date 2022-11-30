@@ -22,44 +22,11 @@ import { Typography } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../src/utils/image'
 import { audits } from '../src/utils/constants'
 import capitalize from 'lodash/capitalize'
-//import { useStoreState } from 'pullstate'
-//import ContractStore from '../src/stores/ContractStore'
-//import useAllocationQuery from '../src/queries/useAllocationQuery'
-//import useCollateralQuery from '../src/queries/useCollateralQuery'
 
 const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, collateral, supply, ogvStats }) => {
   const { pathname } = useRouter()
   const active = capitalize(pathname.slice(1))
   const [loaded, setLoaded] = useState()
-
-  /*const allocation = useStoreState(ContractStore, (s) => {
-    return s.allocation || {}
-  })
-
-  const collateral = useStoreState(ContractStore, (s) => {
-    return s.collateral || {}
-  })
-
-  const allocationQuery = useAllocationQuery({
-    onSuccess: (allocation) => {
-      ContractStore.update((s) => {
-        s.allocation = allocation
-      })
-    },
-  })
-
-  const collateralQuery = useCollateralQuery({
-    onSuccess: (collateral) => {
-      ContractStore.update((s) => {
-        s.collateral = collateral
-      })
-    },
-  })
-
-  useEffect(() => {
-    allocationQuery.refetch()
-    collateralQuery.refetch()
-  }, [])*/
 
   useEffect(() => {
     setLoaded(true)

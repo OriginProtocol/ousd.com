@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { assetRootPath } from '../utils/image'
 import { capitalize } from 'lodash'
+import withIsMobile from 'hoc/withIsMobile'
 
 const Category = ({ categories, category, setCategory }) => {
   const [open, setOpen] = useState()
@@ -24,12 +25,12 @@ const Category = ({ categories, category, setCategory }) => {
 
   return (
     <div
-      className='relative text-black w-[200px]'
+      className='relative w-[200px]'
       tabIndex='1'
       onBlur={() => setOpen(false)}
     >
       <div
-        className='w-[200px] px-6 py-3.5 gradient2 rounded-full cursor-pointer'
+        className='relative z-20 w-[200px] px-6 py-3.5 gradient2 rounded-full cursor-pointer'
         onClick={() => {
           setOpen(!open)
         }}
@@ -45,7 +46,7 @@ const Category = ({ categories, category, setCategory }) => {
         </div>
       </div>
       <div
-        className={`absolute z-10 top-16 left-2 w-[250px] bg-[#fafbfb] rounded-lg cursor-pointer ${open ? '' : 'hidden'}`}
+        className={`absolute z-10 top-16 w-[200px] bg-[#1e1f25] drop-shadow-ousd rounded-lg cursor-pointer ${open ? '' : 'hidden'}`}
       >
         {categoriesFormatted.map((c, i) => {
           return (
@@ -66,8 +67,9 @@ const Category = ({ categories, category, setCategory }) => {
   )
 }
 
-const News = ({ articles, meta, categories }) => {
+const News = ({ articles, meta, categories, isMobile }) => {
   const [loaded, setLoaded] = useState(false)
+  const perPage = isMobile ? 3 : 9
 
   useEffect(() => {
     setLoaded(true)
@@ -82,10 +84,10 @@ const News = ({ articles, meta, categories }) => {
   const articlePages = Math.ceil(
     (category
       ? categoryArticles.length
-      : meta.pagination.total) / 9
+      : meta.pagination.total) / perPage
   )
   const currentPageArticles = articles
-    ? categoryArticles.slice(9 * (page - 1), 9 * page)
+    ? categoryArticles.slice(perPage * (page - 1), perPage * page)
     : []
 
   useEffect(() => {
@@ -98,18 +100,16 @@ const News = ({ articles, meta, categories }) => {
     setPageNumbers(pageNumbers)
   }, [page, articlePages])
 
-  console.log(category)
-
   return (
     <>
       {loaded && currentPageArticles && (
-        <div className="max-w-screen-[1432px] mx-auto">
+        <div>
           <Category
             categories={categories}
             category={category}
             setCategory={setCategory}
           />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 md:mt-20">
             {currentPageArticles.map((a, i) => {
               if (!category || category === a.category.slug) {
                 return (
@@ -137,7 +137,7 @@ const News = ({ articles, meta, categories }) => {
               }
             })}
           </div>
-          <div className="flex justify-center mt-20 space-x-2">
+          <div className="flex justify-center mt-12 md:mt-20 space-x-2">
             <div
               className='flex items-center justify-center w-[33px] h-[33px] cursor-pointer'
               onClick={() => {
@@ -210,4 +210,4 @@ const News = ({ articles, meta, categories }) => {
   )
 }
 
-export default News
+export default withIsMobile(News)
