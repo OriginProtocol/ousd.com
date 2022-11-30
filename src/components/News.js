@@ -103,7 +103,11 @@ const News = ({ articles, meta, categories, isMobile }) => {
   return (
     <>
       {loaded && currentPageArticles && (
+<<<<<<< HEAD
         <div>
+=======
+        <div className="max-w-screen-[1432px] mx-auto">
+>>>>>>> 7b59fcd78441e13a6ba2c898b897b79a295cd30a
           <Category
             categories={categories}
             category={category}
