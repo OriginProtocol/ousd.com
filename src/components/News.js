@@ -46,7 +46,7 @@ const Category = ({ categories, category, setCategory }) => {
         </div>
       </div>
       <div
-        className={`absolute z-10 top-16 left-2 w-[250px] bg-[#fafbfb] rounded-lg cursor-pointer ${open ? '' : 'hidden'}`}
+        className={`absolute z-10 top-16 left-2 w-[250px] bg-[#fafbfb] shadow rounded-lg cursor-pointer ${open ? '' : 'hidden'}`}
       >
         {categoriesFormatted.map((c, i) => {
           return (
@@ -103,11 +103,7 @@ const News = ({ articles, meta, categories, isMobile }) => {
   return (
     <>
       {loaded && currentPageArticles && (
-<<<<<<< HEAD
         <div>
-=======
-        <div className="max-w-screen-[1432px] mx-auto">
->>>>>>> 7b59fcd78441e13a6ba2c898b897b79a295cd30a
           <Category
             categories={categories}
             category={category}

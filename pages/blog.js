@@ -24,7 +24,6 @@ const Blog = ({
   return (
     <>
       <Seo seo={seo} />
-<<<<<<< HEAD
       <Header mappedLinks={navLinks} webProperty="ousd" active={active} />
         <section className='bg-[#141519] px-8 md:px-16 lg:px-[134px]'>
           <div className="max-w-[1432px] mx-auto mt-5 md:mt-20 pb-[56px] md:pb-[120px]">
@@ -38,25 +37,6 @@ const Blog = ({
             {!articles?.length ? null : (
               <News articles={articles} meta={meta} categories={categories} />
             )}
-=======
-        <section className='bg-[#141519]'>
-          <Header mappedLinks={navLinks} webProperty="ousd" active={active} />
-          <div className='px-8 md:px-[134px] pb-[120px]'>
-            <div className="max-w-[1432px] mx-auto mt-20">
-              <Typography.H2 as="h1" className="font-normal">
-                Latest news
-              </Typography.H2>
-            </div>
-          </div>
-        </section>
-        <section className='bg-[#1e1f25]'>
-          <div className=" px-8 md:px-[134px] pb-[120px]">
-            <div className="max-w-[1432px] mx-auto pt-20 pb-[120px] px-8 md:px-[134px]">
-              {!articles?.length ? null : (
-                <News articles={articles} meta={meta} categories={categories} />
-              )}
-            </div>
->>>>>>> 7b59fcd78441e13a6ba2c898b897b79a295cd30a
           </div>
         </section>
         <Footer locale={locale} />
