@@ -1,7 +1,7 @@
 const locales = require('./locales');
 //const { withSentryConfig } = require('@sentry/nextjs');
 
-const { STRAPI_API_URL } = process.env
+const { STRAPI_API_URL, NEXT_PUBLIC_DAPP_URL } = process.env
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -11,6 +11,22 @@ const nextConfig = {
     optimizeCss: true
   }
 }
+
+const dappPaths = [
+  '/earn',
+  '/wrap',
+  '/signTransfer',
+  '/stake',
+  '/dashboard',
+  '/history',
+  '/pool/:pool_name*',
+]
+
+const dappRedirects = dappPaths.map(path => ({
+  source: path,
+  destination: `${NEXT_PUBLIC_DAPP_URL}${path}`,
+  permanent: true
+}))
 
 const moduleExports = {
   ...nextConfig,
@@ -34,6 +50,36 @@ const moduleExports = {
     hideSourceMaps: true,
   },*/
   experimental: { images: { allowFutureImage: true } },
+  async redirects() {
+    return [
+      ...dappRedirects,
+      {
+        source: '/swap',
+        destination: `${NEXT_PUBLIC_DAPP_URL}`,
+        permanent: true
+      },
+      {
+        source: '/dapp',
+        destination: `${NEXT_PUBLIC_DAPP_URL}`,
+        permanent: true
+      },
+      {
+        source: '/mint',
+        destination: `${NEXT_PUBLIC_DAPP_URL}`,
+        permanent: true
+      },
+      {
+        source: '/earn-info',
+        destination: `/`,
+        permanent: true
+      },
+      {
+        source: '/governance',
+        destination: `/`,
+        permanent: true
+      }
+    ]
+  },
   async rewrites() {
     return {
       beforeFiles: [{
