@@ -103,7 +103,7 @@ const News = ({ articles, meta, categories }) => {
   return (
     <>
       {loaded && currentPageArticles && (
-        <div className="max-w-screen-2xl mx-auto">
+        <div className="max-w-screen-[1432px] mx-auto">
           <Category
             categories={categories}
             category={category}
