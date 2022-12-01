@@ -25,8 +25,8 @@ const Blog = ({
     <>
       <Seo seo={seo} />
       <Header mappedLinks={navLinks} webProperty="ousd" active={active} />
-        <section className='bg-[#141519] px-8 md:px-16 lg:px-[134px]'>
-          <div className="max-w-[1432px] mx-auto mt-5 md:mt-20 pb-[56px] md:pb-[120px]">
+        <section className='bg-[#141519] px-8 md:px-16 lg:px-[8.375rem]'>
+          <div className="max-w-[89.5rem] mx-auto mt-5 md:mt-20 pb-[56px] md:pb-[120px]">
             <Typography.H2 as="h1" className="font-normal">
               Latest news
             </Typography.H2>
