@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import Head from "next/head"
 import Animation from '../src/components/Animation'
 import Apy from '../src/components/Apy'
 import Allocation from '../src/components/Allocation'
