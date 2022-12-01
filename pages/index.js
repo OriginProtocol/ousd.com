@@ -36,7 +36,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
   return (
     <>
       <Head>
-        <title>Origin Protocol</title>
+        <title>Origin Dollar</title>
       </Head>
       <Seo seo={seo} />
       {loaded &&

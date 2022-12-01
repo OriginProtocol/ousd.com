@@ -11,7 +11,7 @@ body {
   line-height: 1.5;
   font-family: Inter;
   font-weight: normal;
-  color: #1e313f;
+  color: #fafbfb;
   overflow-x: hidden;
 }
 
@@ -115,6 +115,10 @@ section.dim {
 .gradient4 {
   color: #fafbfb;
   background-image: -webkit-linear-gradient(left, #8C66FC33 -28.99%, #0274F133 144.97%);
+}
+
+.gradient5 {
+  background-image: -webkit-linear-gradient(top, #141519 50%, #1e1f25 50%);
 }
 
 .bttn {
