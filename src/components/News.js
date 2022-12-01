@@ -124,8 +124,10 @@ const News = ({ articles, meta, categories, isMobile }) => {
                           assetRootPath('/images/logos/origin-press.svg')
                         }
                         alt={a.cover?.alternativeText}
-                        fill
-                        objectFit="cover"
+                        width='0'
+                        height='0'
+                        sizes='100vw'
+                        className='w-full h-auto'
                       />
                     }
                     body={a.description}

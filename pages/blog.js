@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from "next/head"
 import { Typography, Header } from '@originprotocol/origin-storybook'
 import News from '../src/components/News'
 import { useRouter } from 'next/router'
@@ -23,6 +24,9 @@ const Blog = ({
 
   return (
     <>
+      <Head>
+        <title>Blog</title>
+      </Head>
       <Seo seo={seo} />
       <Header mappedLinks={navLinks} webProperty="ousd" active={active} />
         <section className='bg-[#141519] px-8 md:px-16 lg:px-[8.375rem]'>

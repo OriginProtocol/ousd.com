@@ -1,95 +1,115 @@
-import Moment from 'react-moment'
-import Seo from './strapi/seo'
-import { Typography, Header } from '@originprotocol/origin-storybook'
-import Image from 'next/image'
-//import Link from 'next/link'
-//import styles from '../styles/Article.module.css'
-//import { assetRootPath } from '../utils/image'
-import formatSeo from '../utils/seo'
+import React, { useState, useEffect } from 'react'
+import Moment from "react-moment"
+import Seo from "./strapi/seo"
+import { Typography, Header } from "@originprotocol/origin-storybook"
+import Image from "next/image"
+import Link from "next/link"
+import Footer from "components/Footer"
+import styles from "styles/Article.module.css"
+import formatSeo from "../utils/seo"
 import sanitizeHtml from 'sanitize-html'
 import he from 'he'
-import { sanitizationOptions } from '../utils/constants'
-import Footer from 'components/Footer'
+import { sanitizationOptions } from "utils/constants"
 
-const Article = ({ locale, article, navLinks }) => {
+const Article = ({ article, navLinks }) => {
+  const [loaded, setLoaded] = useState()
   const imageUrl = article.cover?.url
   const seo = formatSeo(article.seo)
+
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
 
   return (
     <>
       <Seo seo={seo} />
-      <section className="page black">
-        <Header mappedLinks={navLinks} webProperty="ousd" />
-        <div className="max-w-screen-2xl mx-auto mt-[20px] md:mt-16 px-8 md:px-[134px] md:pb-40">
-          <div className="mb-6 mt-2">
-            <Typography.H6
-              as="h1"
-              className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px] font-bold"
-            >
-              {article.title}
-            </Typography.H6>
-          </div>
-          <div className="bg-white rounded-2xl pb-10">
-            {imageUrl && (
-              <div
-                id="banner"
-                className="bg-cover flex justify-center items-center m-0 h-96 w-full rounded-tl-2xl rounded-tr-2xl relative overflow-hidden"
-                data-src={imageUrl}
-                data-srcset={imageUrl}
-              >
-                <Image
-                  src={imageUrl}
-                  alt={article.cover?.alternativeText}
-                  fill
-                  objectFit="cover"
-                  priority
-                />
-              </div>
-            )}
-            <div className="pt-6 md:pt-12">
-              <div className="py-6 pl-6 pr-6 md:px-28 text-black">
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: sanitizeHtml(
-                      he.decode(article.body),
-                      sanitizationOptions
-                    ),
-                  }}
-                />
-                <hr className="my-6" />
-                <div className="flex items-center">
-                  <div>
-                    {article.author?.avatar && (
-                      <Image
-                        src={article.author.avatar.url}
-                        alt={article.author.avatar.alternativeText}
-                        style={{
-                          position: 'static',
-                          borderRadius: '20%',
-                          height: 60,
-                        }}
-                        width="64"
-                        height="64"
-                      />
-                    )}
-                  </div>
-                  <div className="ml-4 text-black">
-                    {article.author?.name && <p>By {article.author.name}</p>}
-                    <p>
-                      <Moment format="MMM Do YYYY">
-                        {article.published_at}
-                      </Moment>
-                    </p>
+      {loaded && (
+        <>
+          <Header mappedLinks={navLinks} webProperty="ousd" />
+          <div className='bg-[#141519] px-8 md:px-16 lg:px-[134px]'>
+            <div className="max-w-screen-lg mx-auto">
+              <Link href={'/blog'} className="inline-block p-[1px] rounded-full gradient2">
+                <div className='w-full h-full px-4 md:px-6 py-1.5 text-center rounded-full bg-[#141519]'>
+                  <div className='flex flex-row justify-between space-x-3 md:space-x-5'>
+                    <Image
+                      src="/images/arrow-left-gradient.svg"
+                      width="10"
+                      height="6"
+                      className=""
+                      alt="arrow"
+                    />
+                    <Typography.Body3 className='text-[12px] md:text-[16px]' style={{ fontWeight: 500 }}>Back to News</Typography.Body3>
                   </div>
                 </div>
+              </Link>
+            </div>
+            <div className="max-w-screen-lg mx-auto mt-6 md:mt-12">
+              <Typography.H4 as="h1" style={{ fontSize: '2.75rem', lineHeight: '3.75rem' }}>{article.title}</Typography.H4>
+            </div>
+            <div className="max-w-screen-lg mx-auto mt-3 md:mt-6">
+              <Typography.Body3 className='text-[14px] md:text-[16px] text-[#b5beca]'>
+                <Moment format="MMM Do YYYY">{article.published_at}</Moment>
+              </Typography.Body3>
+            </div>
+          </div>
+          <div className='gradient5 px-4 md:px-16 lg:px-[134px]'>
+            <div className="relative max-w-screen-lg mx-auto mt-8 md:mt-16 rounded-2xl">
+              {imageUrl && (
+                <div
+                  id="banner"
+                  className="rounded-t-2xl overflow-hidden"
+                  data-src={imageUrl}
+                  data-srcset={imageUrl}
+                >
+                  <Image
+                    src={imageUrl}
+                    alt={article.cover?.alternativeText}
+                    width='0'
+                    height='0'
+                    sizes='100vw'
+                    className='w-full h-auto'
+                    priority
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+          <div className='bg-[#1e1f25] px-6 md:px-16 lg:px-[134px] pt-8 md:pt-16 pb-10 md:pb-[120px]'>
+            <div className={`max-w-screen-lg mx-auto ${styles.article}`}>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: sanitizeHtml(he.decode(article.body), sanitizationOptions),
+                }}
+              />
+              <div className="flex items-center mt-12 md:mt-20 space-x-6">
+                {article.author?.avatar && (
+                  <Image
+                    src={article.author.avatar.url}
+                    alt={article.author.avatar.alternativeText}
+                    style={{
+                      position: "static",
+                      borderRadius: "50%",
+                      height: 60,
+                    }}
+                    width="57"
+                    height="57"
+                  />
+                )}
+                <Typography.Body3 className='text-[18px]'>
+                  {article.author?.name && (
+                    <p>
+                      {article.author.name}
+                    </p>
+                  )}
+                </Typography.Body3>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      <Footer locale={locale} />
+          <Footer />
+        </>
+      )}
     </>
-  )
-}
+  );
+};
 
-export default Article
+export default Article;

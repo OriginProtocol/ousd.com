@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import Head from "next/head"
 import { Typography, Header } from '@originprotocol/origin-storybook'
 import { useRouter } from 'next/router'
 import Footer from '../src/components/Footer'
@@ -23,9 +24,12 @@ const Faq = ({ locale, onLocale, faq, seo, navLinks }) => {
 
   return (
     <>
+      <Head>
+        <title>FAQ</title>
+      </Head>
+      <Seo seo={seo} />
       {loaded && (
         <>
-          <Seo seo={seo} />
           <section className="page black">
             <Header mappedLinks={navLinks} webProperty="ousd" active={'FAQ'} />
             <div className="max-w-[1432px] mt-[20px] md:mt-16 mx-auto pb-[132px] px-[16px] md:px-[134px] text-left">
