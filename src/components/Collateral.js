@@ -8,7 +8,6 @@ import { formatCurrency } from '../utils/math'
 import { tokenColors } from '../utils/constants'
 
 const Collateral = ({ collateral, allocation }) => {
-  // temporary calculation, waiting for metastrategy integration into analytics
   const meta = allocation.strategies?.find((s) => {
     return s.name === 'OUSD MetaStrategy'
   }).ousd
