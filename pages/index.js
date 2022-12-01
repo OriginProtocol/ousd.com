@@ -34,9 +34,12 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
 
   return (
     <>
+      <Head>
+        <title>Origin Protocol</title>
+      </Head>
+      <Seo seo={seo} />
       {loaded &&
       <>
-      <Seo seo={seo} />
         <Animation navLinks={navLinks} active={active} supply={supply} />
         <Apy apy={apy} apyData={apyHistory} />
         <Allocation allocation={allocation} />
