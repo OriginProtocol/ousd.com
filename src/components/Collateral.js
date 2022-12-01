@@ -6,10 +6,8 @@ import { assetRootPath } from '../utils/image'
 import { PieChart } from 'react-minimal-pie-chart'
 import { formatCurrency } from '../utils/math'
 import { tokenColors } from '../utils/constants'
-import capitalize from 'lodash/capitalize'
 
 const Collateral = ({ collateral, allocation }) => {
-  // temporary calculation, waiting for metastrategy integration into analytics
   const meta = allocation.strategies?.find((s) => {
     return s.name === 'OUSD MetaStrategy'
   }).ousd
@@ -19,7 +17,7 @@ const Collateral = ({ collateral, allocation }) => {
       return {
         total: Number(t.total) + Number(s.name === 'ousd' ? 0 : s.total),
       }
-    }).total - meta
+    }).total
 
   const chartData = collateral.collateral?.map((token) => {
     return {
@@ -67,7 +65,6 @@ const Collateral = ({ collateral, allocation }) => {
                 <div className="flex flex-col justify-between space-y-2">
                   {collateral.collateral?.map((token) => {
                     if (token.name === 'ousd') return
-                    const realTotal = token.total - meta / 3
                     return (
                       <div
                         className="flex flex-row md:my-0 px-4 py-[13.5px] md:p-6 rounded-[8px] bg-[#1e1f25] w-full md:max-w-[351px] space-x-3 md:space-x-[22px]"
@@ -92,13 +89,13 @@ const Collateral = ({ collateral, allocation }) => {
                           </div>
                           <div className='flex flex-row space-x-2'>
                             <Typography.Body className="text-[12px] md:text-[16px]" style={{ fontWeight: 700 }}>
-                              {`${formatCurrency((realTotal / total) * 100, 2)}%`}
+                              {`${formatCurrency((token.total / total) * 100, 2)}%`}
                             </Typography.Body>
                             <Typography.Body
                               className="text-[12px] md:text-[16px] text-[#b5beca]"
                               style={{ fontWeight: 400 }}
                             >
-                              {`$${formatCurrency(realTotal, 0)}`}
+                              {`$${formatCurrency(token.total, 0)}`}
                             </Typography.Body>
                           </div>
                         </div>

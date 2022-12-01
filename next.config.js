@@ -1,7 +1,7 @@
 const locales = require('./locales');
 //const { withSentryConfig } = require('@sentry/nextjs');
 
-const { STRAPI_API_URL, NEXT_PUBLIC_DAPP_URL } = process.env
+const { STRAPI_API_URL, NEXT_PUBLIC_DAPP_URL, APP_ENV } = process.env
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -85,6 +85,9 @@ const moduleExports = {
       beforeFiles: [{
         source: '/sitemap.xml',
         destination: `${STRAPI_API_URL}/api/ousd/sitemap`
+      }, {
+        source: '/robots.txt',
+        destination: APP_ENV === 'prod' ? '/robots.prod.txt' : '/robots.staging.txt',
       }]
     }
   },
