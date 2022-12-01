@@ -26,7 +26,6 @@ const Seo = ({ seo }) => {
         <meta name="description" content={fullSeo.metaDescription} />
       )}
       {fullSeo.shareImage && <meta name="image" content={fullSeo.shareImage} />}
-      {fullSeo.article && <meta name="og:type" content="article" />}
       {fullSeo.metaViewport && (
         <meta name="viewport" content={fullSeo.metaViewport} />
       )}
@@ -40,49 +39,51 @@ const Seo = ({ seo }) => {
         <script type="application/ld+json">{fullSeo.structuredData}</script>
       )}
 
+      <meta name="og:type" content={fullSeo.article ? 'article' : 'website'} />
       {fullSeo.metaSocial?.facebook ? (
         <>
           <meta
-            name="og:title"
+            property="og:title"
             content={fullSeo.metaSocial.facebook.title}
           />
           <meta
-            name="og:description"
+            property="og:description"
             content={fullSeo.metaSocial.facebook.description}
           />
           <meta
-            name="og:image"
+            property="og:image"
             content={fullSeo.metaSocial.facebook.image.url}
           />
         </>
       ) : (
         <>
-          <meta name="og:title" content={fullSeo.metaTitle} />
-          <meta name="og:description" content={fullSeo.metaDescription} />
-          <meta name="og:image" content={fullSeo.shareImage} />
+          <meta property="og:title" content={fullSeo.metaTitle} />
+          <meta property="og:description" content={fullSeo.metaDescription} />
+          <meta property="og:image" content={fullSeo.shareImage} />
         </>
       )}
 
+      <meta property="twitter:card" content="summary_large_image" />
       {fullSeo.metaSocial?.twitter ? (
         <>
           <meta
-            name="twitter:title"
+            property="twitter:title"
             content={fullSeo.metaSocial.twitter.title}
           />
           <meta
-            name="twitter:description"
+            property="twitter:description"
             content={fullSeo.metaSocial.twitter.description}
           />
           <meta
-            name="twitter:image"
+            property="twitter:image"
             content={fullSeo.metaSocial.twitter.image.url}
           />
         </>
       ) : (
         <>
-          <meta name="twitter:title" content={fullSeo.metaTitle} />
-          <meta name="twitter:description" content={fullSeo.metaDescription} />
-          <meta name="twitter:image" content={fullSeo.shareImage} />
+          <meta property="twitter:title" content={fullSeo.metaTitle} />
+          <meta property="twitter:description" content={fullSeo.metaDescription} />
+          <meta property="twitter:image" content={fullSeo.shareImage} />
         </>
       )}
       <meta name="twitter:card" content="summary_large_image" />
