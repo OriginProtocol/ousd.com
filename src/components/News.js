@@ -25,12 +25,12 @@ const Category = ({ categories, category, setCategory }) => {
 
   return (
     <div
-      className='relative w-[200px]'
+      className='relative w-full md:w-[200px]'
       tabIndex='1'
       onBlur={() => setOpen(false)}
     >
       <div
-        className='relative z-20 w-[200px] px-6 py-3.5 gradient2 rounded-full cursor-pointer'
+        className='relative z-20 w-full md:w-[200px] px-6 py-3.5 gradient2 rounded-full cursor-pointer'
         onClick={() => {
           setOpen(!open)
         }}
@@ -46,7 +46,7 @@ const Category = ({ categories, category, setCategory }) => {
         </div>
       </div>
       <div
-        className={`absolute z-10 top-16 w-[200px] bg-[#1e1f25] drop-shadow-ousd rounded-lg cursor-pointer ${open ? '' : 'hidden'}`}
+        className={`absolute z-10 top-16 w-full md:w-[200px] bg-[#1e1f25] drop-shadow-ousd rounded-lg cursor-pointer ${open ? '' : 'hidden'}`}
       >
         {categoriesFormatted.map((c, i) => {
           return (
@@ -121,7 +121,7 @@ const News = ({ articles, meta, categories, isMobile }) => {
                         src={
                           a.cardCover?.url ||
                           a.cover?.url ||
-                          assetRootPath('/images/logos/origin-press.svg')
+                          assetRootPath('/images/card.svg')
                         }
                         alt={a.cover?.alternativeText}
                         width='0'
