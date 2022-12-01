@@ -26,7 +26,7 @@ const Seo = ({ seo }) => {
         <meta name="description" content={fullSeo.metaDescription} />
       )}
       {fullSeo.shareImage && <meta name="image" content={fullSeo.shareImage} />}
-      {fullSeo.article && <meta property="og:type" content="article" />}
+      {fullSeo.article && <meta name="og:type" content="article" />}
       {fullSeo.metaViewport && (
         <meta name="viewport" content={fullSeo.metaViewport} />
       )}
@@ -43,23 +43,23 @@ const Seo = ({ seo }) => {
       {fullSeo.metaSocial?.facebook ? (
         <>
           <meta
-            property="og:title"
+            name="og:title"
             content={fullSeo.metaSocial.facebook.title}
           />
           <meta
-            property="og:description"
+            name="og:description"
             content={fullSeo.metaSocial.facebook.description}
           />
           <meta
-            property="og:image"
+            name="og:image"
             content={fullSeo.metaSocial.facebook.image.url}
           />
         </>
       ) : (
         <>
-          <meta property="og:title" content={fullSeo.metaTitle} />
-          <meta property="og:description" content={fullSeo.metaDescription} />
-          <meta property="og:image" content={fullSeo.shareImage} />
+          <meta name="og:title" content={fullSeo.metaTitle} />
+          <meta name="og:description" content={fullSeo.metaDescription} />
+          <meta name="og:image" content={fullSeo.shareImage} />
         </>
       )}
 
