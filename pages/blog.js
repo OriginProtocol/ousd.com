@@ -36,7 +36,7 @@ const Blog = ({
             </Typography.H2>
           </div>
         </section>
-        <section className='bg-[#1e1f25] px-8 md:px-16 lg:px-[134px]'>
+        <section className='bg-[#1e1f25] px-4 md:px-16 lg:px-[134px]'>
         <div className="max-w-[1432px] mx-auto py-12 md:pt-20 md:pb-[120px]">
             {!articles?.length ? null : (
               <News articles={articles} meta={meta} categories={categories} />
