@@ -30,8 +30,8 @@ const Blog = ({
       <Seo seo={seo} />
       <Header mappedLinks={navLinks} webProperty="ousd" active={active} />
         <section className='bg-[#141519] px-8 md:px-16 lg:px-[8.375rem]'>
-          <div className="max-w-[89.5rem] mx-auto mt-5 md:mt-20 pb-[56px] md:pb-[120px]">
-            <Typography.H2 as="h1" className="font-normal">
+          <div className="max-w-[89.5rem] mx-auto mt-5 md:mt-16 pb-[56px] md:pb-[120px]">
+            <Typography.H2 as="h1" className='text-[40px] leading-[40px] md:text-[64px] md:leading-[72px]' style={{ fontWeight: 500 }}>
               Latest news
             </Typography.H2>
           </div>
