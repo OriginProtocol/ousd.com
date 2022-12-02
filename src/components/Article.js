@@ -48,7 +48,7 @@ const Article = ({ article, navLinks }) => {
             </div>
             <div className="max-w-[943px] mx-auto mt-3 md:mt-6">
               <Typography.Body3 className='text-[14px] md:text-[16px] text-[#b5beca]'>
-                <Moment format="MMM Do YYYY">{article.published_at}</Moment>
+                <Moment format="MMMM D YYYY">{article.publishedAt}</Moment>
               </Typography.Body3>
             </div>
           </div>
@@ -74,7 +74,7 @@ const Article = ({ article, navLinks }) => {
               )}
             </div>
           </div>
-          <div className='bg-[#1e1f25] px-6 md:px-16 lg:px-[134px] pt-8 md:pt-16 pb-10 md:pb-[120px]'>
+          <div className='bg-[#1e1f25] px-8 md:px-16 lg:px-[134px] pt-8 md:pt-16 pb-10 md:pb-[120px]'>
             <div className={`max-w-[943px] mx-auto`}>
               <div
                 className={`font-sansSailec ${styles.article}`}

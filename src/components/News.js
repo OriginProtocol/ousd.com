@@ -1,27 +1,31 @@
-import { Card, Select } from '@originprotocol/origin-storybook'
-import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
+import { Card } from '@originprotocol/origin-storybook'
+import Moment from "react-moment"
 import { assetRootPath } from '../utils/image'
 import { capitalize } from 'lodash'
 import withIsMobile from 'hoc/withIsMobile'
 
-const Category = ({ categories, category, setCategory }) => {
+const Dropdown = ({ options, option, setOption, category }) => {
   const [open, setOpen] = useState()
-  const categoriesFormatted = [
+  const optionsFormatted = category ? [
     {
-      id: null,
       name: 'All news',
       unavailable: false,
     },
   ].concat(
-    categories.map((category) => {
+    options.map((option) => {
       return {
-        id: category.slug,
-        name: capitalize(category.name),
+        name: capitalize(option.name),
         unavailable: false,
       }
     })
-  )
+  ) : [{
+    name: 'Most recent'
+  },
+  {
+    name: 'Least recent'
+  },]
 
   return (
     <div
@@ -36,7 +40,7 @@ const Category = ({ categories, category, setCategory }) => {
         }}
       >
         <div className='flex flex-row justify-between'>
-          {category || 'All news'}
+          {option || 'All news'}
           <Image
             src={assetRootPath(`/images/caret-white.svg`)}
             width='20'
@@ -48,12 +52,12 @@ const Category = ({ categories, category, setCategory }) => {
       <div
         className={`absolute z-10 top-16 w-full md:w-[200px] bg-[#1e1f25] drop-shadow-ousd rounded-lg cursor-pointer ${open ? '' : 'hidden'}`}
       >
-        {categoriesFormatted.map((c, i) => {
+        {optionsFormatted.map((c, i) => {
           return (
             <div
-              className={`w-full text-left px-6 py-3.5 hover:text-[#fafbfb] hover:bg-gradient-to-r hover:from-[#8c66fc] hover:to-[#0274f1] ${i === 0 ? 'rounded-t-lg' : ''} ${i === categoriesFormatted.length - 1 ? 'rounded-b-lg' : ''}`}
+              className={`w-full text-left px-6 py-3.5 hover:text-[#fafbfb] hover:bg-gradient-to-r hover:from-[#8c66fc] hover:to-[#0274f1] ${i === 0 ? 'rounded-t-lg' : ''} ${i === optionsFormatted.length - 1 ? 'rounded-b-lg' : ''}`}
               onClick={() => {
-                setCategory(c.name === 'All news' ? '' : c.name)
+                setOption(c.name === 'All news' ? '' : c.name)
                 setOpen(false)
               }}
               key={i}
@@ -78,15 +82,19 @@ const News = ({ articles, meta, categories, isMobile }) => {
   const [category, setCategory] = useState('')
   const [page, setPage] = useState(1)
   const [pageNumbers, setPageNumbers] = useState([])
+  const [order, setOrder] = useState('Most recent')
 
-  const categoryArticles = category ? articles.filter((article) => article.category.slug === category) : articles
+  const articlesSorted = articles.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+  const articlesOrdered = order === 'Most recent' ? articlesSorted : articlesSorted.reverse()
+
+  const categoryArticles = category ? articlesOrdered.filter((article) => article.category.slug === category) : articlesOrdered
 
   const articlePages = Math.ceil(
     (category
       ? categoryArticles.length
       : meta.pagination.total) / perPage
   )
-  const currentPageArticles = articles
+  const currentPageArticles = articlesOrdered
     ? categoryArticles.slice(perPage * (page - 1), perPage * page)
     : []
 
@@ -104,15 +112,20 @@ const News = ({ articles, meta, categories, isMobile }) => {
     <>
       {loaded && currentPageArticles && (
         <div>
-          <Category
-            categories={categories}
-            category={category}
-            setCategory={setCategory}
-          />
+          <div className='flex flex-col md:flex-row space-y-3 md:space-x-6 md:space-y-0'>
+            <Dropdown
+              options={categories}
+              option={category}
+              setOption={setCategory}
+            />
+            <Dropdown
+              option={order}
+              setOption={setOrder}
+            />
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 md:mt-20">
             {currentPageArticles.map((a, i) => {
               if (!category || category === a.category.slug) {
-                console.log(a)
                 return (
                   <Card
                     webProperty={'ousd'}
@@ -131,7 +144,7 @@ const News = ({ articles, meta, categories, isMobile }) => {
                         className='w-full h-auto'
                       />
                     }
-                    body={a.description}
+                    body={<Moment format="MMMM D, YYYY">{a.publishedAt}</Moment>}
                     linkText={'Read more'}
                     linkHref={`/${a.slug}`}
                     target={'_self'}
