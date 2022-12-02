@@ -26,6 +26,7 @@
 
 .article p, .article li {
   font-size: 1.125rem;
+  font-weight: 300;
   line-height: 2rem;
 }
 
@@ -34,7 +35,7 @@
 }
 
 .article h1 + p, .article h2 + p, .article h3 + p {
-  margin-top: 2.5rem;
+  margin-top: 40px;
 }
 
 .article ul {
