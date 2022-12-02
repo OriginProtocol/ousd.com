@@ -35,7 +35,7 @@
 }
 
 .article h1 + p, .article h2 + p, .article h3 + p {
-  margin-top: 40px;
+  margin-top: 2.5rem;
 }
 
 .article ul {
@@ -92,6 +92,6 @@
   }
 
   .article h1 + p, .article h2 + p, .article h3 + p {
-    margin-top: 2.5rem;
+    margin-top: 1.5rem;
   }
 }
