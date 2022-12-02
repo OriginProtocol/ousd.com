@@ -112,6 +112,7 @@ const News = ({ articles, meta, categories, isMobile }) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 md:mt-20">
             {currentPageArticles.map((a, i) => {
               if (!category || category === a.category.slug) {
+                console.log(a)
                 return (
                   <Card
                     webProperty={'ousd'}
@@ -133,6 +134,7 @@ const News = ({ articles, meta, categories, isMobile }) => {
                     body={a.description}
                     linkText={'Read more'}
                     linkHref={`/${a.slug}`}
+                    target={'_self'}
                     key={a.title}
                   />
                 )

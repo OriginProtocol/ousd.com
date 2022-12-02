@@ -86,6 +86,7 @@ export const sanitizationOptions = {
     'ul',
     'ol',
     'li',
+    'br',
   ],
   allowedAttributes: {
     a: ['href', 'target', 'rel'],
