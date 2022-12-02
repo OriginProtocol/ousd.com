@@ -49,7 +49,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
           <div className="py-[120px] px-[16px] md:px-[64px] lg:px-[200px] text-center">
             <Typography.H6
               className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"
-              style={{ fontWeight: 700, fontDisplay: 'swap' }}
+              style={{ fontWeight: 500 }}
             >
               Audited by leading security experts
             </Typography.H6>

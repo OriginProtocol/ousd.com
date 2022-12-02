@@ -500,10 +500,10 @@ const Ogv = ({ stats }) => {
       <section className="gradient3 relative z-0">
         <div className="relative divide-black divide-y-2">
           <div>
-            <div className="flex flex-col lg:flex-row overflow-hidden max-w-screen-2xl mx-auto px-[32px] py-[56px] md:px-[64px] lg:py-[120px] lg:pl-[134px] lg:pr-[208px] text-center lg:text-left space-x-0 lg:space-x-20 xl:space-x-0">
+            <div className="flex flex-col lg:flex-row overflow-hidden max-w-screen-[1432px] mx-auto px-[32px] py-[56px] md:px-[64px] lg:py-[120px] lg:pl-[134px] lg:pr-[208px] text-center lg:text-left space-x-0 lg:space-x-20 xl:space-x-0">
               <div className="lg:w-2/3">
                 <Typography.H2
-                  className="text-[32px] md:text-[72px] lg:text-left"
+                  className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px] lg:text-left"
                   style={{ fontWeight: 700 }}
                 >
                   Governed by OGV stakers
@@ -560,12 +560,12 @@ const Ogv = ({ stats }) => {
                     </div>
                   </div>
                 </div>
-                <span className="hidden lg:block w-1/5">
+                <span className="hidden lg:block">
                   <Link
                     href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bttn bg-black ml-0"
+                    className="bttn bg-black !ml-0"
                   >
                     <Typography.H7 className="font-normal">
                       Buy OGV
@@ -641,12 +641,11 @@ const Ogv = ({ stats }) => {
           <div>
             <div className="overflow-hidden max-w-screen-2xl mx-auto py-[120px] px-8 md:px-[134px] text-center">
               <div>
-                <Typography.H2 className="font-normal">
+                <Typography.H2 className='text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]' style={{ fontWeight: 500 }}>
                   Stake OGV
-                  <br className="block" />
-                  <span className="text-gradient1 font-bold py-1">
+                </Typography.H2>
+                <Typography.H2 className='mt-3 md:mt-1 text-[48px] leading-[48px] md:text-[56px] md:leading-[64px] text-gradient1' style={{ fontWeight: 700 }}>
                     To Earn OGV
-                  </span>
                 </Typography.H2>
                 <Typography.Body3 className="mt-[16px] mb-10 font-normal text-[#fafbfb]">
                   Fees and voting rights accrue to OGV stakers. Control the future of OUSD{' '}

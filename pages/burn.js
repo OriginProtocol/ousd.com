@@ -19,23 +19,23 @@ const BurnCountdown = ({ days, hours, minutes, seconds }) => {
       <div className="text mt-5">
         Countdown to burn
       </div>
-      <div className="d-flex flex-row text-center">
+      <div className="flex flex-row text-center">
         <div className="d-flex flex-column">
           <div className="number text-gradient1">{zeroPad(days)}</div>
           <div className="label">Days</div>
         </div>
         <div className="colon">:</div>
-        <div className="d-flex flex-column">
+        <div className="flex flex-column">
           <div className="number text-gradient1">{zeroPad(hours)}</div>
           <div className="label">Hours</div>
         </div>
         <div className="colon">:</div>
-        <div className="d-flex flex-column">
+        <div className="flex flex-column">
           <div className="number text-gradient1">{zeroPad(minutes)}</div>
           <div className="label">Minutes</div>
         </div>
         <div className="colon">:</div>
-        <div className="d-flex flex-column">
+        <div className="flex flex-column">
           <div className="number text-gradient1">{zeroPad(seconds)}</div>
           <div className="label">Seconds</div>
         </div>
@@ -201,13 +201,13 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
     <>
       <section className="burn black">
         <Header mappedLinks={navLinks} webProperty="ousd" />
-        <div className="container d-flex flex-column text-align-left ml-lg-5 pl-lg-5">
+        <div className="container flex flex-col text-left lg:ml-5 lg:pl-5">
           <h2 className="mt-4">
             <Image
               src={assetRootPath('/images/ogv-logo.svg')}
               width='100'
               height='100'
-              className="ogv-logo pb-lg-3 inline"
+              className="ogv-logo lg:pb-3 inline"
               alt="OGV logo"
             />
             OGV BURN
@@ -216,7 +216,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
             On October 10th, 2022 at 0:00UTC all unclaimed tokens from the OGV airdrop were burned forever.
           </div>
           <Countdown date={'2022-10-10T00:00:00.000Z'} renderer={renderer} />
-          <div className="flex-row mt-5 mb-5">
+          <div className="flex flex-row mt-5 mb-5">
             <Link
               href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
               target="_blank"
@@ -301,8 +301,8 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
         </div>
       </section>
       <section className="airdrop dim">
-        <div className="container ml-lg-5 pl-lg-5">
-          <div className="d-flex flex-column align-items-start">
+        <div className="container lg:ml-5 lg:pl-5">
+          <div className="flex flex-col align-start">
             <div className="text-container">
               The OGV airdrop
             </div>
@@ -336,8 +336,8 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
               </Link>
             </div>
           </div>
-          <div className="stats d-flex flex-column">
-            <div className={`d-flex layout`}>
+          <div className="stats flex flex-col">
+            <div className={`flex layout`}>
               <div className="info-box airdrop">
                 <div className="medium mb-3">Airdrop allocation stats</div>
                 <div className="grey">Airdrop total</div>
@@ -347,8 +347,8 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
                   </span>
                   <span className="small">{' OGV'}</span>
                 </div>
-                <div className={`d-flex layout`}>
-                  <div className={`mr-lg-5 mr-md-3 ${isMobile ? 'mb-3' : ''}`}>
+                <div className='flex layout'>
+                  <div className='mb-3 md:mr-3 lg:mr-5'>
                     <div className="text-container">
                       <Image
                         src={assetRootPath('/images/purple-dot-dark.svg')}
@@ -401,8 +401,8 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
                   )}%)`}</span>
                   &#42;
                 </div>
-                <div className={`d-flex layout`}>
-                  <div className={`mr-lg-5 mr-md-3 ${isMobile ? 'mb-3' : ''}`}>
+                <div className='flex layout'>
+                  <div className='mb-3 md:mr-3 lg:mr-5'>
                     <div className="text-container grey">OGN holders</div>
                     <span className="medium">
                       {formatCurrency(
@@ -439,21 +439,21 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
               </div>
             </div>
             <div
-              className={`info-box stake d-flex layout ${
+              className={`info-box stake flex layout ${
                 isMobile ? 'text-center' : ''
               }`}
             >
               <div>
                 <div className="medium mb-4">Staking stats</div>
-                <div className="d-flex layout">
-                  <div className={`mr-lg-5 mr-md-4 ${isMobile ? 'mb-3' : ''}`}>
+                <div className="flex layout">
+                  <div className={`mb-3 md:mr-4 lg:mr-5`}>
                     <div className="text-container grey">Total staked</div>
                     <span className="large">
                       {formatCurrency(totalStaked, 0)}
                     </span>
                     <span className="small">{' OGV'}</span>
                   </div>
-                  <div className={`ml-lg-3 ${isMobile ? 'mb-3' : ''}`}>
+                  <div className={`mb-3 lg:ml-3`}>
                     <div className="text-container grey">Percentage staked</div>
                     <span className="large">{`${formatCurrency(
                       (totalStaked / totalSupply) * 100,
@@ -462,7 +462,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
                   </div>
                 </div>
               </div>
-              <div className="apy d-flex flex-column text-center">
+              <div className="apy flex flex-col text-center">
                 <div>
                   <span className="large">{`${formatCurrency(
                     stakingApy,

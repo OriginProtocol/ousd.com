@@ -42,7 +42,7 @@ const Collateral = ({ collateral, allocation }) => {
         <div className="py-[120px] px-[16px] md:px-[64px] lg:px-[134px] text-center">
           <Typography.H6
             className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"
-            style={{ fontWeight: 700 }}
+            style={{ fontWeight: 500 }}
           >
             Always 100% collateralized
           </Typography.H6>

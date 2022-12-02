@@ -117,6 +117,7 @@ const News = ({ articles, meta, categories, isMobile }) => {
               options={categories}
               option={category}
               setOption={setCategory}
+              category
             />
             <Dropdown
               option={order}
