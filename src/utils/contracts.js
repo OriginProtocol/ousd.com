@@ -17,7 +17,7 @@ export async function setupContracts(account, library, chainId, fetchId) {
    */
   const jsonRpcProvider = new ethers.providers.StaticJsonRpcProvider(
     process.env.ETHEREUM_RPC_PROVIDER,
-    { chainId: parseInt(process.env.NEXT_PUBLIC_ETHEREUM_RPC_CHAIN_ID) }
+    { chainId: parseInt(process.env.ETHEREUM_RPC_CHAIN_ID) }
   )
 
   let provider = jsonRpcProvider

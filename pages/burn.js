@@ -14,6 +14,7 @@ import transformLinks from '../src/utils/transformLinks'
 import { setupContracts } from 'utils/contracts'
 
 const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
+  const [contracts, setContracts] = useState()
   const ogv = useStoreState(ContractStore, (s) => s.ogv || 0)
   const veogv = useStoreState(ContractStore, (s) => s.veogv || 0)
   const [totalStaked, setTotalStaked] = useState()
@@ -83,13 +84,14 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
 
     }
     fetchStakedOgv()
-  }, [ogv, veogv])
+  }, [ogv, veogv, contracts])
 
   useEffect(() => {
     // some values fetched from chain will show as 0 on local
     if (process.env.NODE_ENV !== 'production') return
     const loadContracts = async () => {
-      await setupContracts()
+      const response = await setupContracts()
+      setContracts(response)
     }
     loadContracts()
   }, [])
@@ -426,7 +428,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
                 </div>
               </div>
             </div>
-            <div className='mt-6 lg:mt-10'>
+            <div className='max-w-[1188px] mt-6 lg:mt-10'>
               <Typography.Body3 className='text-[14px] lg:text-[16px] leading-[23px] lg:leading-[28px]' style={{ fontWeight: 400 }}>
                 * 306,217,404 OGV were sent to exchanges whose customers were
                 eligible for the airdrop. These exchanges are expected to burn any
