@@ -107,7 +107,7 @@ const Apy = ({ apy, apyData }) => {
 
   return (
     <>
-      <section className="home dim">
+      <section className='home bg-[#1e1f25]'>
         <div className="py-[120px] px-[16px] md:px-[64px] lg:px-[134px] text-center">
           <Typography.H6
             className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"

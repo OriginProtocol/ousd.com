@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import Countdown, { zeroPad } from 'react-countdown'
+import { Typography, Header } from '@originprotocol/origin-storybook'
 import { useStoreState } from 'pullstate'
 import Footer from '../src/components/Footer'
 import ContractStore from '../src/stores/ContractStore'
@@ -9,111 +9,9 @@ import addresses from '../src/constants/contractAddresses'
 import { formatCurrency, getRewardsApy } from '../src/utils/math'
 import { assetRootPath } from '../src/utils/image'
 import withIsMobile from '../src/hoc/withIsMobile'
-import { Header } from '@originprotocol/origin-storybook'
 import { fetchAPI } from '../lib/api'
 import transformLinks from '../src/utils/transformLinks'
-
-const BurnCountdown = ({ days, hours, minutes, seconds }) => {
-  return (
-    <>
-      <div className="text mt-5">
-        Countdown to burn
-      </div>
-      <div className="flex flex-row text-center">
-        <div className="d-flex flex-column">
-          <div className="number text-gradient1">{zeroPad(days)}</div>
-          <div className="label">Days</div>
-        </div>
-        <div className="colon">:</div>
-        <div className="flex flex-column">
-          <div className="number text-gradient1">{zeroPad(hours)}</div>
-          <div className="label">Hours</div>
-        </div>
-        <div className="colon">:</div>
-        <div className="flex flex-column">
-          <div className="number text-gradient1">{zeroPad(minutes)}</div>
-          <div className="label">Minutes</div>
-        </div>
-        <div className="colon">:</div>
-        <div className="flex flex-column">
-          <div className="number text-gradient1">{zeroPad(seconds)}</div>
-          <div className="label">Seconds</div>
-        </div>
-      </div>
-      <style jsx>{`
-        .text {
-          color: fafbfb;
-          max-width: 550px;
-          font-size: 1.25rem;
-          font-weight: 500;
-          line-height: 1.25;
-        }
-
-        .number {
-          font-size: 7rem;
-          font-weight: 900;
-        }
-
-        .colon {
-          font-size: 7rem;
-          font-weight: 400;
-          padding: 0 20px;
-        }
-
-        .label {
-          font-size: 1.25rem;
-          font-weight: 700;
-        }
-
-        @media (max-width: 799px) {
-          .number {
-            font-size: 3rem;
-          }
-
-          .colon {
-            font-size: 3rem;
-            padding: 0 10px;
-          }
-
-          .label {
-            font-size: 0.625rem;
-          }
-        }
-      `}</style>
-    </>
-  )
-}
-
-const renderer = ({ days, hours, minutes, seconds, completed }) => {
-  if (completed) {
-    return (
-      <>
-        <div className="text text-gradient1">Burn complete!</div>
-        <style jsx>{`
-          .text {
-            font-size: 7rem;
-            font-weight: 900;
-          }
-
-          @media (max-width: 799px) {
-            .text {
-              font-size: 3rem;
-            }
-          }
-        `}</style>
-      </>
-    )
-  } else {
-    return (
-      <BurnCountdown
-        days={days}
-        hours={hours}
-        minutes={minutes}
-        seconds={seconds}
-      />
-    )
-  }
-}
+import { setupContracts } from 'utils/contracts'
 
 const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
   const ogv = useStoreState(ContractStore, (s) => s.ogv || 0)
@@ -123,9 +21,6 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
   const [totalVeSupply, setTotalVeSupply] = useState()
   const [optionalLockupBalance, setOptionalLockupBalance] = useState()
   const [mandatoryLockupBalance, setMandatoryLockupBalance] = useState()
-  const [burnedOptionalAmount, setBurnedOptionalAmount] = useState(0)
-  const [burnedMandatoryAmount, setBurnedMandatoryAmount] = useState(0)
-  const [currentBlock, setCurrentBlock] = useState(16000000)
 
   const mandatoryDistributorInitialOgv = 398752449
   const optionalDistributorInitialOgv = 747905084
@@ -137,11 +32,7 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
   const airdropAllocationOusd = 450000000
   const airdropAllocation = airdropAllocationOgn + airdropAllocationOusd
   const burnBlock = 15724869
-  const burnOver = burnBlock < currentBlock
-  const burnedAmount = burnedOptionalAmount + burnedMandatoryAmount
-  const burnAmount = burnOver
-    ? burnedAmount
-    : optionalLockupBalance + mandatoryLockupBalance
+  const burnedAmount = 369658070
 
   const stakingApy =
     getRewardsApy(100 * 1.8 ** (48 / 12), 100, totalVeSupply) || 0
@@ -177,122 +68,124 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
       //const block = await jsonRpcProvider.getBlockNumber()
       //setCurrentBlock(block)
 
-      if (burnOver) {
-        const burnedOptional = await ogv
-          .balanceOf(addresses.mainnet.optionalLockupDistributor, {
-            blockTag: burnBlock,
-          })
-          .then((r) => Number(r) / 10 ** 18)
-        const burnedMandatory = await ogv
-          .balanceOf(addresses.mainnet.mandatoryLockupDistributor, {
-            blockTag: burnBlock,
-          })
-          .then((r) => Number(r) / 10 ** 18)
-        setBurnedOptionalAmount(burnedOptional)
-        setBurnedMandatoryAmount(burnedMandatory)
-        setOptionalLockupBalance(burnedOptional)
-        setMandatoryLockupBalance(burnedMandatory)
-      }
+      const burnedOptional = await ogv
+        .balanceOf(addresses.mainnet.optionalLockupDistributor, {
+          blockTag: burnBlock,
+        })
+        .then((r) => Number(r) / 10 ** 18)
+      const burnedMandatory = await ogv
+        .balanceOf(addresses.mainnet.mandatoryLockupDistributor, {
+          blockTag: burnBlock,
+        })
+        .then((r) => Number(r) / 10 ** 18)
+      setOptionalLockupBalance(burnedOptional)
+      setMandatoryLockupBalance(burnedMandatory)
+
     }
     fetchStakedOgv()
-  }, [ogv, veogv, currentBlock])
+  }, [ogv, veogv])
+
+  useEffect(() => {
+    // some values fetched from chain will show as 0 on local
+    if (process.env.NODE_ENV !== 'production') return
+    const loadContracts = async () => {
+      await setupContracts()
+    }
+    loadContracts()
+  }, [])
 
   return (
     <>
-      <section className="burn black">
+      <section className='burn black'>
         <Header mappedLinks={navLinks} webProperty="ousd" />
-        <div className="container flex flex-col text-left lg:ml-5 lg:pl-5">
-          <h2 className="mt-4">
-            <Image
-              src={assetRootPath('/images/ogv-logo.svg')}
-              width='100'
-              height='100'
-              className="ogv-logo lg:pb-3 inline"
-              alt="OGV logo"
-            />
-            OGV BURN
-          </h2>
-          <div className="text-container mb-5">
-            On October 10th, 2022 at 0:00UTC all unclaimed tokens from the OGV airdrop were burned forever.
-          </div>
-          <Countdown date={'2022-10-10T00:00:00.000Z'} renderer={renderer} />
-          <div className="flex flex-row mt-5 mb-5">
-            <Link
-              href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="button gradient2"
-            >
-              Buy OGV
-            </Link>
-            <Link
-              href="https://governance.ousd.com/stake"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="button border"
-            >
-              Stake OGV
-            </Link>
-          </div>
-          <div className="text-container mt-5">
-            {burnOver ? (
-              <>
-                OGV burned
-              </>
-            ) : (
-              <>
-                Estimated burn amount{' '}
-                <span className="subtext">
-                  (currently unclaimed OGV)
-                </span>
-              </>
-            )}
-          </div>
-
-          <h1>{formatCurrency(burnOver ? burnedAmount : burnAmount, 0)}</h1>
-
-          <h3>
-            <span className="percent text-gradient1">{`${formatCurrency(
-              (burnAmount / initialSupply) * 100,
-              2
-            )}% `}</span>
-            of initial supply
-          </h3>
-          <div className="links">
-            <div className="link">
+        <div className='px-8 md:px-16 lg:px-[134px] pb-14 md:pb-[120px] text-left'>
+          <div className='max-w-[1432px] mx-auto flex flex-col'>
+            <Typography.H2 className='flex flex-row items-center space-x-4 mt-[20px] lg:mt-16 text-[40px] md:text-[64px] leading-[40px] md:leading-[72px]' style={{ fontWeight: 700 }}>
+              <Image
+                src={assetRootPath('/images/ogv-logo.svg')}
+                width='96'
+                height='96'
+                className='w-10 md:w-24'
+                alt="OGV logo"
+              />
+              <div>
+                OGV BURN
+              </div>
+            </Typography.H2>
+            <Typography.H3 className='mt-4 max-w-[734px] text-[16px] md:text-[24px] leading-[28px] md:leading-[32px]'>
+              On October 10th, 2022 at 0:00UTC all unclaimed tokens from the OGV airdrop were burned forever.
+            </Typography.H3>
+            <Typography.H2 className="mt-14 md:mt-[120px] text-gradient1 text-[48px] md:text-[128px] leading-[48px] md:leading-[150px]" style={{ fontWeight: 700 }}>
+              Burn complete!
+            </Typography.H2>
+            <div className="flex flex-col md:flex-row space-y-4 md:space-x-6 md:space-y-0 mt-10">
+              <Link
+                href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full md:w-[267px] !ml-0 px-20 py-3.5 md:py-5 rounded-full text-center gradient2 hover:opacity-90"
+              >
+                <Typography.Body>Buy OGV</Typography.Body>
+              </Link>
+              <Link
+                href="https://governance.ousd.com/stake"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full md:w-[267px] px-20 py-3.5 md:py-5 rounded-full text-center border-[1px] hover:opacity-90"
+              >
+                <Typography.Body>Stake OGV</Typography.Body>
+              </Link>
+            </div>
+            <Typography.H3 className='mt-14 md:mt-[120px] max-w-[734px] text-[16px] md:text-[24px] leading-[28px] md:leading-[32px]'>
+              OGV burned
+            </Typography.H3>
+            <Typography.H2 className='mt-4 md:mt-2 text-[56px] md:text-[128px] leading-[64px] md:leading-[150px]' style={{ fontWeight: 700 }}>
+              {formatCurrency(burnedAmount, 0)}
+            </Typography.H2>
+            <Typography.H3 className='mt-1 md:mt-2 text-[24px] md:text-[40px] leading-[32px] md:leading-[40px]' style={{ fontWeight: 400 }}>
+              <span className="text-gradient1 font-bold inline-block">
+                {`${formatCurrency(
+                (burnedAmount / initialSupply) * 100,
+                2
+                )}%`}
+                <div className='mt-1 md:mt-2 h-1 gradient1 rounded-full'></div>
+              </span>
+              {' of initial supply'}
+            </Typography.H3>
+            <div className='flex flex-col md:flex-row mt-8 md:mt-10 space-y-2 md:space-x-10 md:space-y-0'>
               <Link
                 href={
                   'https://etherscan.io/address/0x7ae2334f12a449895ad21d4c255d9de194fe986f'
                 }
                 target="_blank"
                 rel="noopener noreferrer"
+                className='flex flex-row space-x-2'
               >
-                <span className="text-2">Liquid OGV airdrop contract</span>
+                <div className='text-[16px] leading-[28px] text-gradient2' style={{ fontWeight: 700 }}>
+                  Liquid OGV airdrop contract
+                </div>
                 <Image
                   src={assetRootPath('/images/external-link.svg')}
-                  width='100'
-                  height='100'
-                  className="external-link"
+                  width='16'
+                  height='16'
                   alt="External link"
                 />
               </Link>
-            </div>
-            <div className="link">
               <Link
                 href={
                   'https://etherscan.io/address/0xd667091c2d1dcc8620f4eaea254cdfb0a176718d'
                 }
                 target="_blank"
                 rel="noopener noreferrer"
+                className='flex flex-row space-x-2'
               >
-                <span className="text-gradient2">
+                <div className='text-[16px] leading-[28px] text-gradient2' style={{ fontWeight: 700 }}>
                   Locked OGV airdrop contract
-                </span>
+                </div>
                 <Image
                   src={assetRootPath('/images/external-link.svg')}
-                  width='100'
-                  height='100'
-                  className="external-link"
+                  width='16'
+                  height='16'
                   alt="External link"
                 />
               </Link>
@@ -300,13 +193,13 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
           </div>
         </div>
       </section>
-      <section className="airdrop dim">
-        <div className="container lg:ml-5 lg:pl-5">
-          <div className="flex flex-col align-start">
-            <div className="text-container">
+      <section className='bg-[#1e1f25]'>
+        <div className='px-8 md:px-16 lg:px-[134px] pt-14 md:pt-[120px] pb-20 md:pb-[132px]'>
+          <div className='max-w-[1432px] mx-auto'>
+            <Typography.H3 className='text-[16px] md:text-[24px] leading-[28px] md:leading-[32px]'>
               The OGV airdrop
-            </div>
-            <div className="subtext-container">
+            </Typography.H3>
+            <Typography.Body3 className='max-w-[943px] mt-3 md:mt-4 text-[14px] md:text-[20px] leading-[23px] md:leading-[36px] text-[#b5beca]' style={{ fontWeight: 400 }}>
               As of July 12th, over 40,000 OGN holders and all OUSD holders
               became eligible to claim OGV, the new governance token for Origin
               Dollar. OGV accrues staking rewards, fees, and voting power when
@@ -316,427 +209,245 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
               instructed to burn additional unclaimed tokens held in their
               accounts. Additional supply reductions occur through periodic
               automated buybacks funded by yield from OUSD.
-            </div>
-            <div className="link mt-2">
-              <Link
-                href={
-                  'https://blog.originprotocol.com/tokenomics-retroactive-rewards-and-prelaunch-liquidity-mining-campaign-for-ogv-1b20b8ab41c8'
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="text-gradient2">Learn more</span>
-                <Image
-                  src={assetRootPath('/images/external-link.svg')}
-                  width='100'
-                  height='100'
-                  className="external-link"
-                  alt="External link"
-                />
-              </Link>
-            </div>
-          </div>
-          <div className="stats flex flex-col">
-            <div className={`flex layout`}>
-              <div className="info-box airdrop">
-                <div className="medium mb-3">Airdrop allocation stats</div>
-                <div className="grey">Airdrop total</div>
-                <div className="mb-4">
-                  <span className="large">
-                    {formatCurrency(airdropAllocation, 0)}
-                  </span>
-                  <span className="small">{' OGV'}</span>
-                </div>
-                <div className='flex layout'>
-                  <div className='mb-3 md:mr-3 lg:mr-5'>
-                    <div className="text-container">
-                      <Image
-                        src={assetRootPath('/images/purple-dot-dark.svg')}
-                        width='100'
-                        height='100'
-                        className="purple-dot mr-2"
-                        alt="Purple dot"
-                      />
-                      <span className="grey">OGN holders</span>
-                    </div>
-                    <span className="medium">
-                      {formatCurrency(airdropAllocationOgn, 0)}
-                    </span>
-                    <span className="small">{' OGV'}</span>
-                    <div className="grey">(68.97%)</div>
-                  </div>
-                  <div>
-                    <div className="text-container">
-                      <Image
-                        src={assetRootPath('/images/purple-dot-light.svg')}
-                        width='100'
-                        height='100'
-                        className="purple-dot mr-2"
-                        alt="Purple dot"
-                      />
-                      <span className="grey">OUSD holders</span>
-                    </div>
-                    <span className="medium">
-                      {formatCurrency(airdropAllocationOusd, 0)}
-                    </span>
-                    <span className="small">{' OGV'}</span>
-                    <div className="grey">(31.03%)</div>
-                  </div>
-                </div>
-              </div>
-              <div
-                className={`info-box claim ${isMobile ? 'text-center' : ''}`}
-              >
-                <div className="medium mb-3">Claim stats</div>
-                <div className="grey">Tokens claimed</div>
-                <div className="mb-4">
-                  <span className="large">
-                    {formatCurrency(distributorInitialOgv - burnAmount, 0)}
-                  </span>
-                  <span className="small">{' OGV'}</span>
-                  <span className="grey">{` (${formatCurrency(
-                    ((distributorInitialOgv - burnAmount) * 100) /
-                      distributorInitialOgv,
-                    2
-                  )}%)`}</span>
-                  &#42;
-                </div>
-                <div className='flex layout'>
-                  <div className='mb-3 md:mr-3 lg:mr-5'>
-                    <div className="text-container grey">OGN holders</div>
-                    <span className="medium">
-                      {formatCurrency(
-                        optionalDistributorInitialOgv - optionalLockupBalance,
-                        0
-                      )}
-                    </span>
-                    <span className="small">{' OGV'}</span>
-                    <div className="grey">{`(${formatCurrency(
-                      ((optionalDistributorInitialOgv - optionalLockupBalance) /
-                        optionalDistributorInitialOgv) *
-                        100,
-                      2
-                    )}%)`}</div>
-                  </div>
-                  <div>
-                    <div className="text-container grey">OUSD holders</div>
-                    <span className="medium">
-                      {formatCurrency(
-                        mandatoryDistributorInitialOgv - mandatoryLockupBalance,
-                        0
-                      )}
-                    </span>
-                    <span className="small">{' OGV'}</span>
-                    <div className="grey">{`(${formatCurrency(
-                      ((mandatoryDistributorInitialOgv -
-                        mandatoryLockupBalance) /
-                        mandatoryDistributorInitialOgv) *
-                        100,
-                      2
-                    )}%)`}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              className={`info-box stake flex layout ${
-                isMobile ? 'text-center' : ''
-              }`}
+            </Typography.Body3>
+            <Link
+              href={
+                'https://blog.originprotocol.com/tokenomics-retroactive-rewards-and-prelaunch-liquidity-mining-campaign-for-ogv-1b20b8ab41c8'
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className='flex flex-row mt-3 md:mt-4 space-x-2'
             >
-              <div>
-                <div className="medium mb-4">Staking stats</div>
-                <div className="flex layout">
-                  <div className={`mb-3 md:mr-4 lg:mr-5`}>
-                    <div className="text-container grey">Total staked</div>
-                    <span className="large">
-                      {formatCurrency(totalStaked, 0)}
-                    </span>
-                    <span className="small">{' OGV'}</span>
+              <div className='text-[16px] leading-[28px] text-gradient2' style={{ fontWeight: 700 }}>
+                Learn more
+              </div>
+              <Image
+                src={assetRootPath('/images/external-link.svg')}
+                width='16'
+                height='16'
+                alt="External link"
+              />
+            </Link>
+            <div className="flex flex-col max-w-[1188px] mt-14 lg:mt-20 space-y-4">
+              <div className='flex flex-col lg:flex-row justify-between space-y-4 lg:space-x-4 lg:space-y-0'>
+                <div className='airdrop lg:w-1/2 px-6 py-8 lg:p-10 bg-[#141519] rounded-[16px]'>
+                  <Typography.H4 className='text-[20px] lg:text-[24px] leading-[36px] lg:leading-[32px]'>
+                    Airdrop allocation stats
+                  </Typography.H4>
+                  <Typography.Body3 className='mt-4 lg:mt-8 text-[20px] leading-[36px] text-[#b5beca]'>
+                    Airdrop total
+                  </Typography.Body3>
+                  <div className='lg:mt-1 space-x-1.5'>
+                    <Typography.H4 className='inline-block text-[32px] leading-[36px]' style={{ fontWeight: 700 }}>
+                      {formatCurrency(airdropAllocation, 0)}
+                    </Typography.H4>
+                    <Typography.Body className='inline-block text-[16px] leading-[28px]' style={{ fontWeight: 700 }}>
+                      {'OGV'}
+                    </Typography.Body>
                   </div>
-                  <div className={`mb-3 lg:ml-3`}>
-                    <div className="text-container grey">Percentage staked</div>
-                    <span className="large">{`${formatCurrency(
-                      (totalStaked / totalSupply) * 100,
+                  <div className='flex flex-col lg:flex-row mt-6 lg:mt-8 space-y-6 lg:space-x-3.5 lg:space-y-0'>
+                    <div>
+                      <div className='flex flex-row space-x-2'>
+                        <Image
+                          src={assetRootPath('/images/purple-dot-dark.svg')}
+                          width='16'
+                          height='16'
+                          alt="Purple dot"
+                        />
+                        <Typography.Body3 className='text-[20px] leading-[36px] text-[#b5beca]'>
+                          OGN holders
+                        </Typography.Body3>
+                      </div>
+                      <div className='space-x-1.5'>
+                        <Typography.H4 className='inline-block text-[20px] lg:text-[24px] leading-[36px] lg:leading-[32px]'>
+                          {formatCurrency(airdropAllocationOgn, 0)}
+                        </Typography.H4>
+                        <Typography.Body className='inline-block text-[16px] leading-[28px]' style={{ fontWeight: 700 }}>
+                          {'OGV'}
+                        </Typography.Body>
+                      </div>
+                      <Typography.Body3 className='text-[16px] leading-[28px] text-[#b5beca]'>
+                        (68.97%)
+                      </Typography.Body3>
+                    </div>
+                    <div>
+                      <div className='flex flex-row space-x-2'>
+                        <Image
+                          src={assetRootPath('/images/purple-dot-light.svg')}
+                          width='16'
+                          height='16'
+                          alt="Purple dot"
+                        />
+                        <Typography.Body3 className='text-[20px] leading-[36px] text-[#b5beca]'>
+                          OUSD holders
+                        </Typography.Body3>
+                      </div>
+                      <div className='space-x-1.5'>
+                        <Typography.H4 className='inline-block text-[20px] lg:text-[24px] leading-[36px] lg:leading-[32px]'>
+                          {formatCurrency(airdropAllocationOusd, 0)}
+                        </Typography.H4>
+                        <Typography.Body className='inline-block text-[16px] leading-[28px]' style={{ fontWeight: 700 }}>
+                          {'OGV'}
+                        </Typography.Body>
+                      </div>
+                      <Typography.Body3 className='text-[16px] leading-[28px] text-[#b5beca]'>
+                        (31.03%)
+                      </Typography.Body3>
+                    </div>
+                  </div>
+                </div>
+                <div className='lg:w-1/2 px-6 py-8 lg:p-10 bg-[#141519] rounded-[16px] text-center lg:text-left'>
+                  <Typography.H4 className='text-[20px] lg:text-[24px] leading-[36px] lg:leading-[32px]'>
+                    Claim stats
+                  </Typography.H4>
+                  <Typography.Body3 className='mt-4 lg:mt-8 text-[20px] leading-[36px] text-[#b5beca]'>
+                    Tokens claimed
+                  </Typography.Body3>
+                  <div className='mt-1 space-x-1.5'>
+                    <Typography.H4 className='inline-block text-[32px] leading-[36px]' style={{ fontWeight: 700 }}>
+                      {formatCurrency(distributorInitialOgv - burnedAmount, 0)}
+                    </Typography.H4>
+                    <Typography.Body className='inline-block text-[16px] leading-[28px]' style={{ fontWeight: 700 }}>
+                      {'OGV'}
+                    </Typography.Body>
+                  </div>
+                  <Typography.Body3 className='text-[16px] leading-[28px] text-[#b5beca]'>
+                      {`(${formatCurrency(
+                      ((distributorInitialOgv - burnedAmount) * 100) /
+                        distributorInitialOgv,
                       2
-                    )}%`}</span>
+                      )}%)*`}
+                  </Typography.Body3>
+                  <div className='flex flex-col lg:flex-row mt-6 lg:mt-8 space-y-6 lg:space-x-10 lg:space-y-0'>
+                    <div>
+                      <Typography.Body3 className='text-[20px] leading-[36px] text-[#b5beca]'>
+                        OGN holders
+                      </Typography.Body3>
+                      <div className='space-x-1.5'>
+                        <Typography.H4 className='inline-block text-[20px] lg:text-[24px] leading-[36px] lg:leading-[32px]'>
+                          {formatCurrency(
+                            optionalDistributorInitialOgv - optionalLockupBalance,
+                            0
+                          )}
+                        </Typography.H4>
+                        <Typography.Body className='inline-block text-[16px] leading-[28px]' style={{ fontWeight: 700 }}>
+                          {'OGV'}
+                        </Typography.Body>
+                      </div>
+                      <Typography.Body3 className='text-[16px] leading-[28px] text-[#b5beca]'>
+                        {`(${formatCurrency(
+                          ((optionalDistributorInitialOgv - optionalLockupBalance) /
+                            optionalDistributorInitialOgv) *
+                            100,
+                          2
+                        )}% claimed)`}
+                      </Typography.Body3>
+                    </div>
+                    <div>
+                      <Typography.Body3 className='text-[20px] leading-[36px] text-[#b5beca]'>
+                        OUSD holders
+                      </Typography.Body3>
+                      <div className='space-x-1.5'>
+                        <Typography.H4 className='inline-block text-[20px] lg:text-[24px] leading-[36px] lg:leading-[32px]'>
+                          {formatCurrency(
+                            mandatoryDistributorInitialOgv - mandatoryLockupBalance,
+                            0
+                          )}
+                        </Typography.H4>
+                        <Typography.Body className='inline-block text-[16px] leading-[28px]' style={{ fontWeight: 700 }}>
+                          {'OGV'}
+                        </Typography.Body>
+                      </div>
+                      <Typography.Body3 className='text-[16px] leading-[28px] text-[#b5beca]'>
+                        {`(${formatCurrency(
+                        ((mandatoryDistributorInitialOgv -
+                          mandatoryLockupBalance) /
+                          mandatoryDistributorInitialOgv) *
+                          100,
+                        2
+                      )}% claimed)`}
+                      </Typography.Body3>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="apy flex flex-col text-center">
-                <div>
-                  <span className="large">{`${formatCurrency(
-                    stakingApy,
-                    2
-                  )}% `}</span>
-                  <span className="small">{' APY'}</span>
+              <div className='flex flex-col lg:flex-row justify-between px-6 py-8 lg:p-10 bg-[#141519] rounded-[16px]'>
+                <div className='lg:w-1/2 text-center lg:text-left'>
+                  <Typography.H4 className='text-[20px] lg:text-[24px] leading-[36px] lg:leading-[32px]'>
+                    Staking stats
+                  </Typography.H4>
+                  <div className='flex flex-col lg:flex-row justify-between mt-4 lg:mt-8 space-y-6 lg:space-y-0'>
+                    <div>
+                      <Typography.Body3 className='text-[20px] leading-[36px] text-[#b5beca]'>
+                        Total staked
+                      </Typography.Body3>
+                      <div className='mt-1 space-x-1.5'>
+                        <Typography.H4 className='inline-block text-[32px] leading-[36px]' style={{ fontWeight: 700 }}>
+                          {formatCurrency(totalStaked, 0)}
+                        </Typography.H4>
+                        <Typography.Body className='inline-block text-[16px] leading-[28px]' style={{ fontWeight: 700 }}>
+                          {'OGV'}
+                        </Typography.Body>
+                      </div>
+                    </div>
+                    <div className='lg:pr-10'>
+                      <Typography.Body3 className='text-[20px] leading-[36px] text-[#b5beca]'>
+                        Percentage staked
+                      </Typography.Body3>
+                      <Typography.H4 className='mt-1 text-[32px] leading-[36px]' style={{ fontWeight: 700 }}>
+                        {`${formatCurrency(
+                        (totalStaked / totalSupply) * 100,
+                        2
+                        )}%`}
+                      </Typography.H4>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <a
+                <div className='lg:w-1/4 mt-10 lg:mt-0 text-center'>
+                  <div className='space-x-1.5'>
+                    <Typography.H4 className='inline-block text-[32px] leading-[36px]' style={{ fontWeight: 700 }}>
+                      {`${formatCurrency(
+                        stakingApy,
+                        2
+                      )}%`}
+                    </Typography.H4>
+                    <Typography.Body className='inline-block text-[16px] leading-[28px]' style={{ fontWeight: 700 }}>
+                      {'APY'}
+                    </Typography.Body>
+                  </div>
+                  <Link
                     href="https://governance.ousd.com/stake"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="button gradient1"
+                    className="inline-block w-full lg:max-w-[248px] mt-6 lg:mt-7 px-[60px] py-3.5 lg:py-5 rounded-full text-center gradient2 hover:opacity-90"
                   >
-                    Stake OGV
-                  </a>
+                    <Typography.Body>Stake OGV</Typography.Body>
+                  </Link>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="footnote">
-            &#42; 306,217,404 OGV were sent to exchanges whose customers were
-            eligible for the airdrop. These exchanges are expected to burn any
-            unclaimed tokens at the end of the claim period.
+            <div className='mt-6 lg:mt-10'>
+              <Typography.Body3 className='text-[14px] lg:text-[16px] leading-[23px] lg:leading-[28px]' style={{ fontWeight: 400 }}>
+                * 306,217,404 OGV were sent to exchanges whose customers were
+                eligible for the airdrop. These exchanges are expected to burn any
+                unclaimed tokens at the end of the claim period.
+              </Typography.Body3>
+            </div>
           </div>
         </div>
       </section>
       <Footer locale={locale} />
       <style jsx>{`
-        header {
-          background-color: #141519;
-        }
-
-        section.burn {
-          background-image: url(/images/flame.svg);
-          background-repeat: no-repeat;
-          background-position: 100% -5%;
-          background-size: 70vw;
-          padding-top: 0px;
-        }
-
-        h1 {
-          color: fafbfb;
-          font-family: Poppins;
-          font-size: 6rem;
-          font-weight: 500;
-          margin-top: 10px;
-        }
-
-        h2 {
-          color: fafbfb;
-          font-family: Poppins;
-          font-size: 4.5rem;
-          font-weight: 500;
-          margin: 80px 0 20px 0;
-        }
-
-        h3 {
-          color: #fafbfb;
-          font-family: Poppins;
-          font-size: 2rem;
-          font-weight: 500;
-          line-height: 1.32;
-          padding: 1rem 0;
-        }
-
-        .text-container {
-          color: fafbfb;
-          max-width: 550px;
-          font-size: 1.25rem;
-          font-weight: 500;
-          line-height: 1.25;
-        }
-
-        .button {
-          display: inline-block;
-          border: 0;
-          border-radius: 50px;
-          white-space: nowrap;
-          margin: 0px 10px 10px 10px;
-          padding: 15px 0;
-          text-align: center;
-          width: 30%;
-        }
-
-        .subtext {
-          opacity: 0.7;
-        }
-
-        .external-link {
-          width: 16px;
-          margin-left: 10px;
-          margin-right: 50px;
-          padding-bottom: 2px;
-          line-height: 20px;
-        }
-
-        .ogv-logo {
-          width: 10%;
-          margin-right: 1vw;
-        }
-
-        .info-box {
-          margin: 7px;
-          padding: 30px;
-          background-color: #141519;
-          border-radius: 10px;
-        }
-
-        .info-box.claim {
-          width: 100%;
-        }
-
-        .info-box.airdrop {
-          width: 100%;
+        .airdrop {
           background-image: url(/images/pie-chart.svg);
           background-repeat: no-repeat;
           background-position: 100% 50%;
-          background-size: 12.5vw;
-        }
-
-        .info-box.stake {
-          flex: 1;
-        }
-
-        .subtext-container {
-          color: fafbfb;
-          margin-top: 20px;
-          font-size: 1rem;
-          line-height: 2;
-          opacity: 0.6;
-        }
-
-        .stats {
-          width: 70vw;
-          margin-top: 50px;
-        }
-
-        .apy {
-          align-self: flex-start;
-          margin-right: 20px;
-          margin-left: auto;
-        }
-
-        .apy .button {
-          display: inline-block;
-          border: 0;
-          border-radius: 50px;
-          white-space: nowrap;
-          margin: 10px auto 0 auto;
-          padding: 15px 0px;
-          text-align: center;
-          width: 100%;
-        }
-
-        .layout {
-          flex-direction: row;
-        }
-
-        .grey {
-          font-weight: 300;
-          opacity: 0.5;
-        }
-
-        .large {
-          font-size: 2rem;
-        }
-
-        .medium {
-          font-size: 1.25rem;
-        }
-
-        .small {
-          font-size: 0.875rem;
-        }
-
-        .link {
-          display: inline;
-        }
-
-        .footnote {
-          font-size: 0.75rem;
-          margin-top: 2vw;
-          margin-left: 2vw;
-        }
-
-        @media (max-width: 1199px) {
-          .stats {
-            width: 80vw;
-            margin-top: 100px;
-          }
-
-          section.burn {
-            background-position: 100% 0%;
-            background-size: 80vw;
-          }
-
-          h1 {
-            margin-top: 15px;
-          }
-
-          .large {
-            font-size: 1.5rem;
-          }
-
-          .medium {
-            font-size: 1rem;
-          }
-
-          .grey {
-            font-size: 1rem;
-          }
-
-          .ogv-logo {
-            width: 12.5%;
-            margin-bottom: 1vw;
-          }
+          background-size: 236px;
         }
 
         @media (max-width: 799px) {
-          .info-box {
-            width: 100% !important;
-            margin-left: 0;
-            margin-right: 0;
-          }
-
-          .stats {
-            margin: 50px auto 0 auto;
-            width: 100%;
-          }
-
-          .info-box.airdrop {
-            background-size: 40vw;
-          }
-
-          .apy {
-            align-self: normal;
-            margin: 0;
-          }
-
-          section.burn {
-            background-position: 100% 0%;
-            background-size: 90vw;
-          }
-
-          .container {
-            padding-left: 30px;
-            padding-right: 30px;
-          }
-
-          .layout {
-            flex-direction: column;
-          }
-
-          h1 {
-            font-size: 2.5rem;
-            margin-top: 20px;
-          }
-
-          h2 {
-            font-size: 3rem;
-          }
-
-          h3 {
-            font-size: 1.5rem;
-          }
-
-          .button {
-            width: 40%;
-          }
-
-          .ogv-logo {
-            width: 15%;
-            margin-bottom: 2vw;
+          .airdrop {
+            background-position: 100% 50%;
           }
         }
       `}</style>
