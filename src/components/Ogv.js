@@ -12,21 +12,21 @@ import { formatCurrency } from '../utils/math'
 
 const Ogv = ({ stats }) => {
   const price = useStoreState(ContractStore, (s) => {
-    return s.ogv.price || 0
+    return s.ogvStats.price || 0
   })
 
   const circulatingSupply = useStoreState(ContractStore, (s) => {
-    return s.ogv.circulating || 0
+    return s.ogvStats.circulating || 0
   })
 
   const totalSupply = useStoreState(ContractStore, (s) => {
-    return s.ogv.total || 0
+    return s.ogvStats.total || 0
   })
 
   const priceQuery = usePriceQuery(stats[0], {
     onSuccess: (price) => {
       ContractStore.update((s) => {
-        s.ogv.price = price['origin-dollar-governance'].usd
+        s.ogvStats.price = price['origin-dollar-governance'].usd
       })
     },
   })
@@ -34,7 +34,7 @@ const Ogv = ({ stats }) => {
   const circulatingSupplyQuery = useCirculatingSupplyQuery(stats[1], {
     onSuccess: (circulatingSupply) => {
       ContractStore.update((s) => {
-        s.ogv.circulating = circulatingSupply
+        s.ogvStats.circulating = circulatingSupply
       })
     },
   })
@@ -42,7 +42,7 @@ const Ogv = ({ stats }) => {
   const totalSupplyQuery = useTotalSupplyQuery(stats[2], {
     onSuccess: (totalSupply) => {
       ContractStore.update((s) => {
-        s.ogv.total = totalSupply
+        s.ogvStats.total = totalSupply
       })
     },
   })

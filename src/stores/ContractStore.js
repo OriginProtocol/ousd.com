@@ -3,7 +3,7 @@ import { Store } from 'pullstate'
 const ContractStore = new Store({
   contracts: {},
   apy: {},
-  ogv: {
+  ogvStats: {
     price: 0,
     circulating: 0,
     total: 0,

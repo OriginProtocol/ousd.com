@@ -81,7 +81,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
                           />
                         </div>
                       </div>
-                      <Typography.Body className="mt-[8px] md:mt-6 opacity-75" style={{ fontDisplay: 'swap' }}>
+                      <Typography.Body className="mt-[8px] md:mt-6 opacity-75">
                         {audit.name}
                       </Typography.Body>
                     </Link>
