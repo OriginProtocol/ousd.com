@@ -20,6 +20,8 @@ const Article = ({ article, navLinks }) => {
     setLoaded(true)
   }, [])
 
+  console.log(article.body)
+
   return (
     <>
       <Seo seo={seo} />

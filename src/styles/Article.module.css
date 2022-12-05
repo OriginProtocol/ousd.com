@@ -33,10 +33,6 @@
   margin-top: 1.5rem;
 }
 
-.article figure, .article img {
-  margin-top: 1.5rem;
-}
-
 .article h1 + p, .article h2 + p, .article h3 + p {
   margin-top: 2.5rem;
 }
@@ -64,6 +60,11 @@
 
 .article figure img {
   display: inline !important;
+  margin-top: 0;
+}
+
+.article figure, .article img {
+  margin-top: 1.5rem;
 }
 
 .article a {
