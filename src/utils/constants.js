@@ -87,6 +87,7 @@ export const sanitizationOptions = {
     'ol',
     'li',
     'br',
+    'figure',
   ],
   allowedAttributes: {
     a: ['href', 'target', 'rel'],
