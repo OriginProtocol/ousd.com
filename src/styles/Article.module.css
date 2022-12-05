@@ -29,7 +29,11 @@
   line-height: 2rem;
 }
 
-.article * + p, .article * + img {
+.article * + p {
+  margin-top: 1.5rem;
+}
+
+.article figure, .article img {
   margin-top: 1.5rem;
 }
 
