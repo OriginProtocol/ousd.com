@@ -34,7 +34,7 @@ const Dropdown = ({ options, option, setOption, category }) => {
       onBlur={() => setOpen(false)}
     >
       <div
-        className='relative z-20 w-full md:w-[200px] px-6 py-3.5 gradient2 rounded-full cursor-pointer'
+        className={`relative w-full md:w-[200px] px-6 py-3.5 gradient2 rounded-full cursor-pointer ${category ? 'z-40' : 'z-20'}`}
         onClick={() => {
           setOpen(!open)
         }}
@@ -50,7 +50,7 @@ const Dropdown = ({ options, option, setOption, category }) => {
         </div>
       </div>
       <div
-        className={`absolute z-10 top-16 w-full md:w-[200px] bg-[#1e1f25] drop-shadow-ousd rounded-lg cursor-pointer ${open ? '' : 'hidden'}`}
+        className={`absolute top-16 w-full md:w-[200px] bg-[#1e1f25] drop-shadow-ousd rounded-lg cursor-pointer ${open ? '' : 'hidden'} ${category ? 'z-30' : 'z-10'}`}
       >
         {optionsFormatted.map((c, i) => {
           return (
@@ -71,7 +71,7 @@ const Dropdown = ({ options, option, setOption, category }) => {
   )
 }
 
-const News = ({ articles, meta, categories, isMobile }) => {
+const News = ({ articles, meta, categories, isMobile, pageRef }) => {
   const [loaded, setLoaded] = useState(false)
   const perPage = isMobile ? 3 : 9
 
@@ -160,6 +160,7 @@ const News = ({ articles, meta, categories, isMobile }) => {
               className='flex items-center justify-center w-[33px] h-[33px] cursor-pointer'
               onClick={() => {
                 setPage(page - 1)
+                pageRef.current.scrollIntoView()
               }}
               >
               <Image
@@ -191,6 +192,7 @@ const News = ({ articles, meta, categories, isMobile }) => {
                         return
                       }
                       setPage(pageNumber)
+                      pageRef.current.scrollIntoView()
                     }}
                   >
                     {pageNumber}
@@ -202,6 +204,7 @@ const News = ({ articles, meta, categories, isMobile }) => {
               className='flex items-center justify-center w-[33px] h-[33px] cursor-pointer'
               onClick={() => {
                 setPage(page + 1)
+                pageRef.current.scrollIntoView()
               }}
               >
               <Image

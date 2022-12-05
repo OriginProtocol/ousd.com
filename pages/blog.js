@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Head from "next/head"
 import { Typography, Header } from '@originprotocol/origin-storybook'
 import News from '../src/components/News'
@@ -21,9 +21,10 @@ const Blog = ({
 }) => {
   const { pathname } = useRouter()
   const active = capitalize(pathname.slice(1))
+  const pageRef = useRef(null)
 
   return (
-    <>
+    <div ref={pageRef}>
       <Head>
         <title>Blog</title>
       </Head>
@@ -39,12 +40,12 @@ const Blog = ({
         <section className='bg-[#1e1f25] px-4 md:px-16 lg:px-[134px]'>
         <div className="max-w-[1432px] mx-auto py-12 md:pt-20 md:pb-[120px]">
             {!articles?.length ? null : (
-              <News articles={articles} meta={meta} categories={categories} />
+              <News articles={articles} meta={meta} categories={categories} pageRef={pageRef} />
             )}
           </div>
         </section>
         <Footer locale={locale} />
-    </>
+    </div>
   )
 }
 
