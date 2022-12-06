@@ -6,14 +6,21 @@ import { assetRootPath } from '../utils/image'
 import LinearProgress from '@mui/material/LinearProgress'
 import { ThemeProvider } from '@mui/material/styles'
 import { formatCurrency } from '../utils/math'
-import { theme, strategies } from '../utils/constants'
+import { theme, strategyMapping } from '../utils/constants'
 
-const Allocation = ({ allocation }) => {
+const Allocation = ({ strategies }) => {
   const [open, setOpen] = useState({})
 
-  const total = allocation.strategies?.reduce((t, s) => {
+  const total = strategies?.reduce((t, s) => {
     return { total: t.total + s.total }
   }).total
+
+  const meta = strategies.find((s) => s.name === 'OUSD MetaStrategy')
+
+  const strategiesSorted = strategies.map((s) => {
+    if (s.name === 'Convex Strategy') return {...s, total: s.total + meta.total}
+    return {...s}
+  }).sort((a, b) => a.total - b.total).reverse()
 
   // strategy handling needs some thought
 
@@ -42,13 +49,13 @@ const Allocation = ({ allocation }) => {
               <div className="flex flex-col px-[16px] md:px-10 pt-2 pb-[10px] md:pt-3 md:pb-8">
                 <ThemeProvider theme={theme}>
                   <div className="flex flex-col justify-between">
-                    {allocation.strategies?.map((strategy) => {
+                    {strategiesSorted?.map((strategy) => {
                       if (
                         strategy.name === 'Vault' ||
                         strategy.name === 'OUSD MetaStrategy'
                       )
                         return
-                      const strategyTotal = strategy.name === 'Convex Strategy' ? strategy.total + allocation.strategies[5].total : strategy.total
+
                       return (
                         <div
                           className="strategy rounded-xl border-2 p-[16px] md:p-8 my-[6px] md:my-[8px]"
@@ -82,21 +89,21 @@ const Allocation = ({ allocation }) => {
                                   className="inline items-center text-[12px] md:text-[24px] text-[#b5beca]"
                                   style={{ fontWeight: 400 }}
                                 >{`$${formatCurrency(
-                                  strategyTotal,
+                                  strategy.total,
                                   0
                                 )}`}</Typography.H7>
                                 <Typography.H7
                                   className="inline pl-[8px] text-[12px] md:text-[24px]"
                                   style={{ fontWeight: 700 }}
                                 >{`(${formatCurrency(
-                                  (strategyTotal / total) * 100,
+                                  (strategy.total / total) * 100,
                                   2
                                 )}%)`}</Typography.H7>
                               </div>
                             </div>
                             <LinearProgress
                               variant="determinate"
-                              value={(strategyTotal / total) * 100}
+                              value={(strategy.total / total) * 100}
                               color={`${strategy.name
                                 .replace(/\s+/g, '-')
                                 .toLowerCase()}`}
@@ -131,7 +138,7 @@ const Allocation = ({ allocation }) => {
                                         <div className="relative w-6">
                                           <Image
                                             src={assetRootPath(
-                                              `/images/${strategies[strategy.name].tokenPrefix}dai.svg`
+                                              `/images/${strategyMapping[strategy.name].tokenPrefix}dai.svg`
                                             )}
                                             fill
                                             sizes='(max-width: 768px) 20px, 24px'
@@ -139,7 +146,7 @@ const Allocation = ({ allocation }) => {
                                           />
                                         </div>
                                         <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                          {`${strategies[strategy.name].token} DAI`}
+                                          {`${strategyMapping[strategy.name].token} DAI`}
                                           </Typography.Body3>
                                       </div>
                                       <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
@@ -152,7 +159,7 @@ const Allocation = ({ allocation }) => {
                                         <div className="relative w-6">
                                           <Image
                                             src={assetRootPath(
-                                              `/images/${strategies[strategy.name].tokenPrefix}usdc.svg`
+                                              `/images/${strategyMapping[strategy.name].tokenPrefix}usdc.svg`
                                             )}
                                             fill
                                             sizes='(max-width: 768px) 20px, 24px'
@@ -160,7 +167,7 @@ const Allocation = ({ allocation }) => {
                                           />
                                         </div>
                                         <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                          {`${strategies[strategy.name].token} USDC`}
+                                          {`${strategyMapping[strategy.name].token} USDC`}
                                         </Typography.Body3>
                                       </div>
                                       <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
@@ -173,7 +180,7 @@ const Allocation = ({ allocation }) => {
                                         <div className="relative w-6">
                                           <Image
                                             src={assetRootPath(
-                                              `/images/${strategies[strategy.name].tokenPrefix}usdt.svg`
+                                              `/images/${strategyMapping[strategy.name].tokenPrefix}usdt.svg`
                                             )}
                                             fill
                                             sizes='(max-width: 768px) 20px, 24px'
@@ -181,7 +188,7 @@ const Allocation = ({ allocation }) => {
                                           />
                                         </div>
                                         <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                          {`${strategies[strategy.name].token} USDT`}
+                                          {`${strategyMapping[strategy.name].token} USDT`}
                                         </Typography.Body3>
                                       </div>
                                       <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
@@ -212,7 +219,7 @@ const Allocation = ({ allocation }) => {
                                         ((strategy.dai +
                                           strategy.usdc +
                                           strategy.usdt) /
-                                          strategyTotal) *
+                                          strategy.total) *
                                           100,
                                         2
                                       )}%`}</Typography.Body3>
@@ -234,11 +241,11 @@ const Allocation = ({ allocation }) => {
                                       </Typography.Body3>
                                     </div>
                                     <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                      ((allocation.strategies[5].dai +
-                                        allocation.strategies[5].usdc +
-                                        allocation.strategies[5].usdt +
-                                        allocation.strategies[5].ousd) /
-                                        strategyTotal) *
+                                      ((meta.dai +
+                                        meta.usdc +
+                                        meta.usdt +
+                                        meta.ousd) /
+                                        strategy.total) *
                                         100,
                                       2
                                     )}%`}</Typography.Body3>
@@ -247,7 +254,7 @@ const Allocation = ({ allocation }) => {
                                 )}
                               </div>
                               <Typography.Body3 className="mt-4 text-[#b5beca] text-left text-[12px] md:text-[14px] leading-[23px]">
-                                {strategies[strategy.name].description}
+                                {strategyMapping[strategy.name].description}
                               </Typography.Body3>
                               <Typography.Body3 className='flex flex-row mt-4 md:hidden text-left space-x-1.5 text-[#b5beca] text-[12px] font-medium'>
                                 <div>Less info</div>

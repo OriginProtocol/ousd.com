@@ -24,7 +24,7 @@ import { assetRootPath } from '../src/utils/image'
 import { audits } from '../src/utils/constants'
 import capitalize from 'lodash/capitalize'
 
-const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, collateral, supply, ogvStats }) => {
+const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, collateral, supply, ogvStats }) => {
   const { pathname } = useRouter()
   const active = capitalize(pathname.slice(1))
   const [loaded, setLoaded] = useState()
@@ -43,8 +43,8 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, allocation, co
       <>
         <Animation navLinks={navLinks} active={active} supply={supply} />
         <Apy apy={apy} apyData={apyHistory} />
-        <Allocation allocation={allocation} />
-        <Collateral collateral={collateral} allocation={allocation} />
+        <Allocation strategies={strategies} />
+        <Collateral collateral={collateral} allocation={strategies} />
         <section className="home black">
           <div className="py-[120px] px-[16px] md:px-[64px] lg:px-[200px] text-center">
             <Typography.H6
@@ -136,7 +136,7 @@ export async function getStaticProps() {
       navLinks,
       apy,
       apyHistory: apyHistory || [],
-      allocation,
+      strategies: allocation.strategies,
       collateral,
       supply,
       ogvStats,
