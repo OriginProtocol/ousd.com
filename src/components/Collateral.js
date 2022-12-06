@@ -138,10 +138,13 @@ const Collateral = ({ collateral, strategies }) => {
                       Collateral
                     </Typography.Body3>
                     <div className='grid grid-cols-2 gap-x-12 gap-y-1 md:gap-y-3 mt-2'>
-                      {tokens.map((token) => {
+                      {tokens.map((token, i) => {
                         if (token === 'ousd' && rounded(strategy.ousd) === '0') return
                         return (
-                          <div className='flex flex-row space-x-2'>
+                          <div
+                            className='flex flex-row space-x-2'
+                            key={i}
+                          >
                             <Image
                               src={assetRootPath(`/images/${token}-logo.svg`)}
                               width='28'
