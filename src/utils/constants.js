@@ -39,7 +39,7 @@ export const strategyMapping = {
     usdt: '0xf650c3d88d12db855b8bf7d11be6c55a4e07dcc9',
   },
   'Convex Strategy': {
-    name: 'Convex 3pool',
+    name: 'Convex DAI+USDC+USDT',
     address: '0xEA2Ef2e2E5A749D4A66b41Db9aD85a38Aa264cb3',
     token: 'Convex',
     tokenPrefix: '',
@@ -58,12 +58,12 @@ export const strategyMapping = {
   'Morpho Strategy': {
     name: 'Morpho Strategy',
     address: '0x5A4eEe58744D1430876d5cA93cAB5CcB763C037D',
-    token: 'Compound',
+    token: 'Morpho Compound',
     tokenPrefix: 'c',
     description: 'Morpho adds a peer-to-peer layer on top of Compound and Aave allowing lenders and borrowers to be matched more efficiently with better interest rates. When no matching opportunity exists, funds flow directly through to the underlying protocol. OUSD supplies stablecoins to three of Morpho’s Compound markets to earn interest. Additional yield is generated from protocol token incentives, including both COMP (regularly sold for USDT) and MORPHO (currently locked).',
   },
   'OUSD MetaStrategy': {
-    name: 'Origin MetaStrategy',
+    name: 'Convex OUSD+3Crv',
     address: '0x89Eb88fEdc50FC77ae8a18aAD1cA0ac27f777a90',
   },
 }
