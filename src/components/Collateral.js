@@ -53,7 +53,7 @@ const Collateral = ({ collateral, strategies }) => {
             OUSD is backed 1:1 by the most trusted collateral in crypto. Reserves are verifiable on-chain. You can redeem OUSD immediately at any time.
           </Typography.Body3>
           <div className="max-w-[1432px] mx-auto mt-20 mb-10 md:mb-20 py-6 xl:py-20 rounded-xl bg-[#141519]">
-            <div className='flex flex-col md:flex-row justify-between px-8 xl:px-[132px]'>
+            <div className='flex flex-col md:flex-row justify-between px-6 xl:px-[132px]'>
               <div className="relative w-full sm:w-1/2 mx-auto my-auto rounded-full p-4 bg-[#1e1f25]">
                 <PieChart data={chartData} lineWidth={6} startAngle={270} />
                 <div className="absolute left-1/2 bottom-1/2 -translate-x-1/2 translate-y-[16px] md:translate-y-[20px]">
@@ -183,7 +183,7 @@ const Collateral = ({ collateral, strategies }) => {
               })}
             </div>
             <div
-              className='flex flex-row justify-between w-full md:w-min mt-6 md:mt-20 mx-auto px-6 py-1.5 rounded-full text-left whitespace-nowrap gradient2 space-x-2 cursor-pointer hover:opacity-90'
+              className='flex flex-row justify-between w-min mt-6 md:mt-20 mx-auto px-6 py-1.5 rounded-full text-left whitespace-nowrap gradient2 space-x-2 cursor-pointer hover:opacity-90'
               onClick={(e) => {
                 e.preventDefault()
                 setOpen(!open)
