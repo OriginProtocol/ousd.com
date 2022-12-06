@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Typography } from '@originprotocol/origin-storybook'
@@ -8,22 +8,23 @@ import { formatCurrency } from '../utils/math'
 import { tokenColors } from '../utils/constants'
 
 const Collateral = ({ collateral, strategies }) => {
+  const [open, setOpen] = useState()
   const meta = strategies?.find((s) => {
     return s.name === 'OUSD MetaStrategy'
   }).ousd
 
   const total =
-    collateral.collateral?.reduce((t, s) => {
+    collateral?.reduce((t, s) => {
       return {
         total: Number(t.total) + Number(s.name === 'ousd' ? 0 : s.total),
       }
     }).total
 
-  const chartData = collateral.collateral?.map((token) => {
+  const chartData = collateral?.map((token) => {
     return {
       title: token.name.toUpperCase(),
       value: total
-        ? (token.name === 'ousd' ? 0 : (token.total - meta / 3) / total) * 100
+        ? (token.name === 'ousd' ? 0 : (Number(token.total) - meta / 3) / total) * 100
         : 0,
       color: tokenColors[token.name] || '#ff0000',
     }
@@ -63,12 +64,12 @@ const Collateral = ({ collateral, strategies }) => {
               </div>
               <div className="md:w-1/2 md:ml-10 xl:ml-32 mt-6 md:my-auto pl-0 md:py-10 text-left">
                 <div className="flex flex-col justify-between space-y-2">
-                  {collateral.collateral?.map((token) => {
+                  {collateral?.map((token, i) => {
                     if (token.name === 'ousd') return
                     return (
                       <div
                         className="flex flex-row md:my-0 px-4 py-[13.5px] md:p-6 rounded-[8px] bg-[#1e1f25] w-full md:max-w-[351px] space-x-3 md:space-x-[22px]"
-                        key={token.name}
+                        key={i}
                       >
                         <div className='relative w-12 md:w-[48px]'>
                           <Image
@@ -105,7 +106,26 @@ const Collateral = ({ collateral, strategies }) => {
                 </div>
               </div>
             </div>
-            
+            {/*<div className={`flex-wrap ${open ? '' : 'hidden'}`}>
+              {strategies?.map((s, i) => {
+                return (
+                  <div
+                    key={i}
+                  >
+                    {s.name}
+                  </div>
+                )
+              })}
+            </div>
+            <div
+              className='bttn'
+              onClick={(e) => {
+                e.preventDefault()
+                setOpen(!open)
+              }}
+            >
+              Show more
+            </div>*/}
           </div>
           <Link
             href="https://docs.ousd.com/how-it-works"

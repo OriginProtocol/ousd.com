@@ -44,7 +44,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, co
         <Animation navLinks={navLinks} active={active} supply={supply} />
         <Apy apy={apy} apyData={apyHistory} />
         <Allocation strategies={strategies} />
-        <Collateral collateral={collateral} allocation={strategies} />
+        <Collateral collateral={collateral} strategies={strategies} />
         <section className="home black">
           <div className="py-[120px] px-[16px] md:px-[64px] lg:px-[200px] text-center">
             <Typography.H6
@@ -137,7 +137,7 @@ export async function getStaticProps() {
       apy,
       apyHistory: apyHistory || [],
       strategies: allocation.strategies,
-      collateral,
+      collateral: collateral.collateral,
       supply,
       ogvStats,
     },
