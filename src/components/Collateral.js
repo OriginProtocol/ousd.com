@@ -20,6 +20,8 @@ const Collateral = ({ collateral, strategies }) => {
       }
     }).total
 
+  strategies.sort((a, b) => a.total - b.total).reverse()
+
   const chartData = collateral?.map((token) => {
     return {
       title: token.name.toUpperCase(),
