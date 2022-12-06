@@ -183,7 +183,7 @@ const Collateral = ({ collateral, strategies }) => {
               })}
             </div>
             <div
-              className='flex flex-row justify-between w-min mt-6 md:mt-20 mx-auto px-6 py-1.5 rounded-full text-left whitespace-nowrap gradient2 space-x-2 cursor-pointer hover:opacity-90'
+              className='flex flex-row justify-between items-center w-min mt-6 md:mt-20 mx-auto px-6 py-1.5 rounded-full whitespace-nowrap gradient2 space-x-2 cursor-pointer hover:opacity-90'
               onClick={(e) => {
                 e.preventDefault()
                 setOpen(!open)
@@ -192,13 +192,15 @@ const Collateral = ({ collateral, strategies }) => {
               <Typography.Body3 className='text-[16px] leading-[28px]' style={{ fontWeight: 500 }}>
                 {open ? 'Hide' : 'View contracts'}
               </Typography.Body3>
-              <Image
-                src={assetRootPath(`/images/caret-white.svg`)}
-                width='20'
-                height='12'
-                className={`${open ? 'rotate-180' : ''}`}
-                alt='arrow'
-              />
+              <div className='w-3.5'>
+                <Image
+                  src={assetRootPath(`/images/caret-white.svg`)}
+                  width='14'
+                  height='8'
+                  className={`${open ? 'rotate-180' : ''}`}
+                  alt='arrow'
+                />
+              </div>
             </div>
           </div>
           <Link
