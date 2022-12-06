@@ -55,6 +55,13 @@ export function formatCurrency(value, decimals, truncate = true) {
   })
 }
 
+export function rounded(value, decimals, truncate = true) {
+  if (value > 1000000) return formatCurrency(value / 1000000, decimals, truncate) + 'm'
+  if (value > 1000) return formatCurrency(value / 1000, decimals, truncate) + 'k'
+  if (value < 0.01) return formatCurrency(value / 1000, 0, truncate)
+  return formatCurrency(value / 1000, decimals, truncate)
+}
+
 export function aprToApy(apr, aprDays) {
   const periodsPerYear = 365.25 / aprDays
   return Math.pow(1 + apr / 100 / periodsPerYear, periodsPerYear) - 1
