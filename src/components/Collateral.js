@@ -7,8 +7,8 @@ import { PieChart } from 'react-minimal-pie-chart'
 import { formatCurrency } from '../utils/math'
 import { tokenColors } from '../utils/constants'
 
-const Collateral = ({ collateral, allocation }) => {
-  const meta = allocation.strategies?.find((s) => {
+const Collateral = ({ collateral, strategies }) => {
+  const meta = strategies?.find((s) => {
     return s.name === 'OUSD MetaStrategy'
   }).ousd
 

@@ -138,18 +138,18 @@ const News = ({ articles, meta, categories, isMobile, pageRef }) => {
                           a.cover?.url ||
                           assetRootPath('/images/card.svg')
                         }
-                        alt={a.cover?.alternativeText}
                         width='0'
                         height='0'
                         sizes='100vw'
                         className='w-full h-auto'
+                        alt={a.cover?.alternativeText || 'cover'}
                       />
                     }
                     body={<Moment format="MMMM D, YYYY">{a.publishedAt}</Moment>}
                     linkText={'Read more'}
                     linkHref={`/${a.slug}`}
                     target={'_self'}
-                    key={a.title}
+                    key={i}
                   />
                 )
               }

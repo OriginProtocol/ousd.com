@@ -20,7 +20,7 @@ export const theme = createTheme({
   },
 })
 
-export const strategies = {
+export const strategyMapping = {
   'Compound Strategy': {
     token: 'Compound',
     tokenPrefix: 'c',
