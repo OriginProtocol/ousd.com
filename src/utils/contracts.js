@@ -3,24 +3,14 @@ import ContractStore from 'stores/ContractStore'
 import addresses from 'constants/contractAddresses'
 import ogvAbi from 'constants/mainnetAbi/ogv.json'
 import veogvAbi from 'constants/mainnetAbi/veogv.json'
+import ousdAbi from 'constants/mainnetAbi/ousd.json'
 
-/* fetchId - used to prevent race conditions.
- * Sometimes "setupContracts" is called twice with very little time in between and it can happen
- * that the call issued first (for example with not yet signed in account) finishes after the second
- * call. We must make sure that previous calls to setupContracts don't override later calls Stores
- */
-export async function setupContracts(account, library, chainId, fetchId) {
-  /* Using StaticJsonRpcProvider instead of JsonRpcProvider so it doesn't constantly query
-   * the network for the current chainId. In case chainId changes, we rerun setupContracts
-   * anyway. And StaticJsonRpcProvider also prevents "detected network changed" errors when
-   * running node in forked mode.
-   */
-  const jsonRpcProvider = new ethers.providers.StaticJsonRpcProvider(
-    process.env.ETHEREUM_RPC_PROVIDER,
-    { chainId: parseInt(process.env.ETHEREUM_RPC_CHAIN_ID) }
+export async function setupContracts() {
+
+  const provider = new ethers.providers.StaticJsonRpcProvider(
+    process.env.NEXT_PUBLIC_ETHEREUM_RPC_PROVIDER,
+    { chainId: parseInt(process.env.NEXT_PUBLIC_ETHEREUM_RPC_CHAIN_ID) }
   )
-
-  let provider = jsonRpcProvider
 
   const getContract = (address, abi, overrideProvider) => {
     try {
@@ -39,7 +29,7 @@ export async function setupContracts(account, library, chainId, fetchId) {
     }
   }
 
-  //const ousd = getContract(ousdProxy.address, network.contracts['OUSD'].abi)
+  const ousd = getContract(addresses.mainnet.OUSDProxy, ousdAbi)
   const ogv = getContract(addresses.mainnet.OGV, ogvAbi)
   const veogv = getContract(addresses.mainnet.veOGV, veogvAbi)
 
@@ -69,7 +59,7 @@ export async function setupContracts(account, library, chainId, fetchId) {
   callWithDelay()
 
   const contractsToExport = {
-    //ousd,
+    ousd,
     ogv,
     veogv,
   }
@@ -78,7 +68,7 @@ export async function setupContracts(account, library, chainId, fetchId) {
     s.contracts = contractsToExport
     s.ogv = ogv
     s.veogv = veogv
-    //s.ousd = ousd
+    s.ousd = ousd
   })
 
   return contractsToExport

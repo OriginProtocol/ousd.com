@@ -15,8 +15,8 @@ import { setupContracts } from 'utils/contracts'
 
 const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
   const [contracts, setContracts] = useState()
-  const ogv = useStoreState(ContractStore, (s) => s.ogv || 0)
-  const veogv = useStoreState(ContractStore, (s) => s.veogv || 0)
+  const ogv = contracts?.ogv
+  const veogv = contracts?.veogv
   const [totalStaked, setTotalStaked] = useState()
   const [totalSupply, setTotalSupply] = useState()
   const [totalVeSupply, setTotalVeSupply] = useState()
@@ -61,13 +61,6 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
       setOptionalLockupBalance(optional)
       setMandatoryLockupBalance(mandatory)
       setTotalVeSupply(totalVe)
-
-      //const jsonRpcProvider = new ethers.providers.StaticJsonRpcProvider(
-      //  process.env.ETHEREUM_RPC_PROVIDER,
-      //  { chainId: parseInt(process.env.ETHEREUM_RPC_CHAIN_ID) }
-      //)
-      //const block = await jsonRpcProvider.getBlockNumber()
-      //setCurrentBlock(block)
 
       const burnedOptional = await ogv
         .balanceOf(addresses.mainnet.optionalLockupDistributor, {

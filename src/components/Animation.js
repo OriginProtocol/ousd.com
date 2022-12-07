@@ -2,35 +2,14 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Typography, Header } from '@originprotocol/origin-storybook'
-//import CountUp from 'react-countup'
-//import AccountListener from 'components/AccountListener'
 import { assetRootPath } from '../utils/image'
-import { useStoreState } from 'pullstate'
-import ContractStore from '../stores/ContractStore'
 import { formatCurrency } from '../utils/math'
-import { adjustLinkHref } from '../utils/utils'
+import { setupContracts } from 'utils/contracts'
 
 const Animation = ({ navLinks, active, supply }) => {
   const [totalOusd, setTotalOusd] = useState()
-  const ousdInitialValue = parseFloat(totalOusd - 2000000, 0)
-  const [ousdValue, setOusdValue] = useState(ousdInitialValue)
-  const ousd = useStoreState(ContractStore, (s) => s.ousd || 0)
-
-  const goodTempo = 10000
-
-  /*useEffect(() => {
-    if (!totalOusd) return
-    return animateValue({
-      from: ousdInitialValue,
-      to:
-        parseFloat(totalOusd),
-      callbackValue: (value) => {
-        setOusdValue(formatCurrency(value, 0))
-      },
-      duration: 10 * 1000, // animate for 1 hour
-      id: 'hero-index-ousd-animation',
-    })
-  }, [])*/
+  const [contracts, setContracts] = useState()
+  const ousd = contracts?.ousd
 
   useEffect(() => {
     if (!ousd) {
@@ -42,6 +21,15 @@ const Animation = ({ navLinks, active, supply }) => {
     }
     fetchTotalSupply()
   }, [ousd])
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'production') return
+    const loadContracts = async () => {
+      const response = await setupContracts()
+      setContracts(response)
+    }
+    loadContracts()
+  }, [])
 
   return (
     <>
@@ -87,7 +75,7 @@ const Animation = ({ navLinks, active, supply }) => {
                         //className="xl:ml-16 2xl:ml-20 text-left"
                         style={{ fontWeight: 700 }}
                       >
-                        {`$${formatCurrency(supply, 0)}`}
+                        {`$${formatCurrency(totalOusd ? totalOusd : supply, 0)}`}
                         {/*
                           <CountUp
                             start={0}
