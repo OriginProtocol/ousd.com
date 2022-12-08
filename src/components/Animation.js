@@ -51,10 +51,10 @@ const Animation = ({ navLinks, active, supply }) => {
           <div className='flex flex-col lg:flex-row justify-between max-w-[1432px] mx-auto space-x-20 xl:space-x-0'>
             <div className="lg:w-1/2 xl:w-7/12">
               <Typography.H2 as="h1" className='text-[40px] md:text-[64px] leading-[40px] md:leading-[72px]' style={{ fontWeight: 500 }}>
-                The self-custodial{' '}
+                The self-custodial,{' '}
                 <br className="hidden md:block" />
                 <span className="text-gradient2 font-black py-1">
-                  yield-generating,{' '}
+                  yield-generating{' '}
                 </span>
                 <br className="hidden lg:block" />
                 stablecoin

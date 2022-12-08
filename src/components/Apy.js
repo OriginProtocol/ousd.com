@@ -113,9 +113,9 @@ const Apy = ({ apy, apyData }) => {
             className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"
             style={{ fontWeight: 500 }}
           >
-            The simplest{' '}
+            A high-yield,{' '}
             <span className="text-gradient2 py-1">
-              market-neutral{' '}
+              low-risk{' '}
             </span>
             DeFi strategy
           </Typography.H6>
