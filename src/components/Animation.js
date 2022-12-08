@@ -11,11 +11,16 @@ const Animation = ({ navLinks, active, supply }) => {
   const [totalOusd, setTotalOusd] = useState()
   const { ousd } = useStoreState(ContractStore, (s) => s.contracts || {})
 
-  const fetchTotalSupply = async () => {
-    const total = await ousd.totalSupply().then((r) => Number(r) / 10 ** 18)
-    setTotalOusd(total)
-  }
-  ousd && fetchTotalSupply()
+  useEffect(() => {
+    if (!ousd) {
+      return
+    }
+    const fetchTotalSupply = async () => {
+      const total = await ousd.totalSupply().then((r) => Number(r) / 10 ** 18)
+      setTotalOusd(total)
+    }
+    fetchTotalSupply()
+  }, [ousd])
 
   return (
     <>
