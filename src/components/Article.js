@@ -84,17 +84,17 @@ const Article = ({ article, navLinks }) => {
               />
               <div className="flex items-center mt-12 md:mt-20 space-x-6">
                 {article.author?.avatar && (
-                  <Image
-                    src={article.author.avatar.url}
-                    alt={article.author.avatar.alternativeText}
-                    style={{
-                      position: "static",
-                      borderRadius: "50%",
-                      height: 60,
-                    }}
-                    width="57"
-                    height="57"
-                  />
+                  <div className='w-[57px] h-[57px]'>
+                    <Image
+                      src={article.author.avatar.url}
+                      alt={article.author.avatar.alternativeText}
+                      width='0'
+                      height='0'
+                      sizes='100vw'
+                      className='w-full h-full rounded-full'
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
                 )}
                 <Typography.Body3 className='text-[18px]'>
                   {article.author?.name && (
