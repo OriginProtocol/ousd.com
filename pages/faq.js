@@ -92,13 +92,13 @@ const Faq = ({ locale, onLocale, faq, seo, navLinks }) => {
                   >
                     {'Still have questions?'}
                     <br />
-                    {'Reach out to us on our '}
+                    {'Reach out to us on '}
                     <Link
-                      href="https://discord.gg/jyxpUSe"
+                      href="https://originprotocol.com/discord"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {'discord'}
+                      {'Discord'}
                     </Link>
                     <div className="h-1 w-[72px] md:w-[116px] mr-0 ml-auto mt-[4px] bg-gradient-to-r from-[#8c66fc] to-[#0274f1] rounded-full"></div>
                   </Typography.H5>
