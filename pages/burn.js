@@ -11,12 +11,10 @@ import { assetRootPath } from '../src/utils/image'
 import withIsMobile from '../src/hoc/withIsMobile'
 import { fetchAPI } from '../lib/api'
 import transformLinks from '../src/utils/transformLinks'
-import { setupContracts } from 'utils/contracts'
 
-const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
+const Burn = ({ locale, onLocale, navLinks }) => {
   const [contracts, setContracts] = useState()
-  const ogv = contracts?.ogv
-  const veogv = contracts?.veogv
+  const { ogv, veogv } = useStoreState(ContractStore, (s) => s.contracts || {})
   const [totalStaked, setTotalStaked] = useState()
   const [totalSupply, setTotalSupply] = useState()
   const [totalVeSupply, setTotalVeSupply] = useState()
@@ -78,16 +76,6 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
     }
     fetchStakedOgv()
   }, [ogv, veogv, contracts])
-
-  useEffect(() => {
-    // some values fetched from chain will show as 0 on local
-    if (process.env.NODE_ENV !== 'production') return
-    const loadContracts = async () => {
-      const response = await setupContracts()
-      setContracts(response)
-    }
-    loadContracts()
-  }, [])
 
   return (
     <>

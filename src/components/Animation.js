@@ -4,12 +4,12 @@ import Link from 'next/link'
 import { Typography, Header } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../utils/image'
 import { formatCurrency } from '../utils/math'
-import { setupContracts } from 'utils/contracts'
+import { useStoreState } from 'pullstate'
+import ContractStore from '../stores/ContractStore'
 
 const Animation = ({ navLinks, active, supply }) => {
   const [totalOusd, setTotalOusd] = useState()
-  const [contracts, setContracts] = useState()
-  const ousd = contracts?.ousd
+  const { ousd } = useStoreState(ContractStore, (s) => s.contracts || {})
 
   useEffect(() => {
     if (!ousd) {
@@ -21,15 +21,6 @@ const Animation = ({ navLinks, active, supply }) => {
     }
     fetchTotalSupply()
   }, [ousd])
-
-  useEffect(() => {
-    if (process.env.NODE_ENV !== 'production') return
-    const loadContracts = async () => {
-      const response = await setupContracts()
-      setContracts(response)
-    }
-    loadContracts()
-  }, [])
 
   return (
     <>
