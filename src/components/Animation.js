@@ -8,19 +8,19 @@ import { useStoreState } from 'pullstate'
 import ContractStore from '../stores/ContractStore'
 
 const Animation = ({ navLinks, active, supply }) => {
-  const [totalOusd, setTotalOusd] = useState()
-  const { ousd } = useStoreState(ContractStore, (s) => s.contracts || {})
+  const { ousdTvl } = useStoreState(ContractStore, (s) => s.ousdTvl || 0)
 
   useEffect(() => {
-    if (!ousd) {
-      return
+    ContractStore.update((s) => {
+      s.refreshTvl = true
+    })
+
+    return () => {
+      ContractStore.update((s) => {
+        s.refreshTvl = false
+      })
     }
-    const fetchTotalSupply = async () => {
-      const total = await ousd.totalSupply().then((r) => Number(r) / 10 ** 18)
-      setTotalOusd(total)
-    }
-    fetchTotalSupply()
-  }, [ousd])
+  }, [])
 
   return (
     <>
@@ -66,11 +66,11 @@ const Animation = ({ navLinks, active, supply }) => {
                         //className="xl:ml-16 2xl:ml-20 text-left"
                         style={{ fontWeight: 700 }}
                       >
-                        {`$${formatCurrency(totalOusd ? totalOusd : supply, 0)}`}
+                        {`$${formatCurrency(ousdTvl ? ousdTvl : supply, 0)}`}
                         {/*
                           <CountUp
                             start={0}
-                            end={totalOusd}
+                            end={ousdTvl}
                             duration={5}
                             useEasing
                             includeComma

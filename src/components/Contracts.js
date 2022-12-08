@@ -5,8 +5,10 @@ import addresses from 'constants/contractAddresses'
 import ogvAbi from 'constants/mainnetAbi/ogv.json'
 import veogvAbi from 'constants/mainnetAbi/veogv.json'
 import ousdAbi from 'constants/mainnetAbi/ousd.json'
+import { useStoreState } from 'pullstate'
 
 const Contracts = () => {
+  const refreshTvl = useStoreState(ContractStore, (s) => s.refreshTvl)
 
   useEffect(() => {
     const provider = new ethers.providers.StaticJsonRpcProvider(
@@ -44,7 +46,26 @@ const Contracts = () => {
     ContractStore.update((s) => {
       s.contracts = contractsToExport
     })
-  }, [])
+
+    if (!refreshTvl) {
+      return
+    }
+
+    const fetchTotalSupply = async () => {
+      const ousdTvl = await ousd?.totalSupply().then((r) => Number(r) / 10 ** 18)
+      ContractStore.update((s) => {
+        s.ousdTvl = ousdTvl
+      })
+    }
+    
+    const tvlInterval = setInterval(() => {
+      fetchTotalSupply()
+    }, 20000)
+
+    return () => {
+      clearInterval(tvlInterval)
+    }
+  }, [refreshTvl])
 
   return ''
 }
