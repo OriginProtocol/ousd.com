@@ -10,13 +10,14 @@
 
 .article h2 {
   font-family: 'Sailec';
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 2rem;
+  line-height: 2.5rem;
 }
 
 .article h3 {
   font-family: 'Sailec';
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .article * + h1, .article * + h2, .article * + h3 {
@@ -73,23 +74,22 @@
 
 @media (max-width: 768px) {
   .article h1 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     line-height: 2rem;
   }
   
   .article h2 {
-    font-size: 1.125rem;
+    font-size: 1.5rem;
   }
   
   .article h3 {
-    font-size: 1.25;
+    font-size: 1.125;
   }
 
   .article p, .article li {
     font-size: 1rem;
     line-height: 1.75rem;
   }
-
 
   .article * + h1, .article * + h2, .article * + h3 {
     margin-top: 3rem;
