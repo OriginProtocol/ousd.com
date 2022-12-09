@@ -6,9 +6,17 @@ import { assetRootPath } from '../utils/image'
 import { formatCurrency } from '../utils/math'
 import { useStoreState } from 'pullstate'
 import ContractStore from '../stores/ContractStore'
+import AnimatedNumber from 'animated-number-react'
 
-const Animation = ({ navLinks, active, supply }) => {
-  const { ousdTvl } = useStoreState(ContractStore, (s) => s.ousdTvl || 0)
+const Animation = ({ navLinks, active, collateral }) => {
+  const initialTvl =
+    collateral?.reduce((t, s) => {
+      return {
+        total: Number(t.total) + Number(s.name === 'ousd' ? 0 : s.total),
+      }
+    }).total
+    
+  const ousdTvl = useStoreState(ContractStore, (s) => s.ousdTvl || 0)
 
   useEffect(() => {
     ContractStore.update((s) => {
@@ -60,25 +68,19 @@ const Animation = ({ navLinks, active, supply }) => {
               </div>
               <div className="lg:absolute lg:bottom-0 lg:left-0 lg:right-0 text-center">
                 <div className="relative h-32 md:h-64 lg:h-auto flex flex-row lg:block">
-                  {supply && (
+                  {initialTvl && (
                     <div className="absolute right-20 md:right-36 md:top-10 lg:static z-10">
                       <Typography.H2
-                        //className="xl:ml-16 2xl:ml-20 text-left"
+                        className='tabular-nums tracking-tight'
                         style={{ fontWeight: 700 }}
                       >
-                        {`$${formatCurrency(ousdTvl ? ousdTvl : supply, 0)}`}
-                        {/*
-                          <CountUp
-                            start={0}
-                            end={ousdTvl}
-                            duration={5}
-                            useEasing
-                            includeComma
-                            formattingFn={(num) => {
-                              return `$${formatCurrency(num, 0)}`
-                            }}
-                          />
-                        */}
+                        <AnimatedNumber
+                          value={ousdTvl ? ousdTvl : initialTvl}
+                          duration={2500}
+                          formatValue={(num) => {
+                            return `$${formatCurrency(num, 0)}`
+                          }}
+                        />
                       </Typography.H2>
                       <Typography.Body3 className="text-sm md:text-base text-[#b5beca] pt-[8px] whitespace-nowrap md:pt-[8px]">
                         Total value of OUSD wallet balances
