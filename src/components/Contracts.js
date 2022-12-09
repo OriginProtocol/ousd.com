@@ -63,7 +63,7 @@ const Contracts = () => {
 
     const tvlInterval = setInterval(() => {
       fetchTotalSupply()
-    }, 10000)
+    }, 12000)
 
     return () => {
       clearInterval(tvlInterval)
