@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
-import { ethers } from 'ethers'
 import ContractStore from 'stores/ContractStore'
 import { useStoreState } from 'pullstate'
-import { setupContracts } from 'utils/contracts'
+import { setupContracts, fetchTvl } from 'utils/contracts'
 
 const Contracts = () => {
   const refreshTvl = useStoreState(ContractStore, (s) => s.refreshTvl)
@@ -18,16 +17,8 @@ const Contracts = () => {
       return
     }
 
-    const fetchTvl = async () => {
-      const tvl = await contractsToExport.vault?.totalValue().then((r) => Number(r) / 10 ** 18)
-      const rewards = await contractsToExport.dripper?.availableFunds().then((r) => Number(r) / 10 ** 6)
-      ContractStore.update((s) => {
-        s.ousdTvl = tvl + rewards
-      })
-    }
-
     const tvlInterval = setInterval(() => {
-      fetchTvl()
+      fetchTvl(contractsToExport.vault, contractsToExport.dripper)
     }, 12000)
 
     return () => {

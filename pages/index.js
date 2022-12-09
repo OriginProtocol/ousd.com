@@ -16,13 +16,13 @@ import { fetchApyHistory } from '../lib/apyHistory'
 import { fetchAllocation } from '../lib/allocation'
 import { fetchCollateral } from '../lib/collateral'
 import { fetchOgvStats } from '../lib/ogv'
-import { fetchInitialTvl } from '../lib/tvl'
 import formatSeo from '../src/utils/seo'
 import transformLinks from '../src/utils/transformLinks'
 import { Typography } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../src/utils/image'
 import { audits } from '../src/utils/constants'
 import capitalize from 'lodash/capitalize'
+import { setupContracts, fetchTvl } from 'utils/contracts'
 
 const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, collateral, initialTvl, ogvStats }) => {
   const { pathname } = useRouter()
@@ -110,7 +110,8 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, co
 }
 
 export async function getStaticProps() {
-  const initialTvl = await fetchInitialTvl()
+  const { vault, dripper } = setupContracts()
+  const initialTvl = await fetchTvl(vault, dripper)
   const apyHistory = await fetchApyHistory()
   const apy = await fetchApy()
   const allocation = await fetchAllocation()

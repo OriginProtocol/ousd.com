@@ -5,6 +5,7 @@ import veogvAbi from 'constants/mainnetAbi/veogv.json'
 import ousdAbi from 'constants/mainnetAbi/ousd.json'
 import vaultAbi from 'constants/mainnetAbi/vault.json'
 import dripperAbi from 'constants/mainnetAbi/dripper.json'
+import ContractStore from 'stores/ContractStore'
 
 export const getContract = (address, abi, provider) => {
   try {
@@ -21,6 +22,15 @@ export const getContract = (address, abi, provider) => {
     )
     throw e
   }
+}
+
+export const fetchTvl = async (vault, dripper) => {
+  const tvl = await vault?.totalValue().then((r) => Number(r) / 10 ** 18)
+  const rewards = await dripper?.availableFunds().then((r) => Number(r) / 10 ** 6)
+  ContractStore.update((s) => {
+    s.ousdTvl = tvl + rewards
+  })
+  return tvl + rewards
 }
 
 export const setupContracts = () => {
