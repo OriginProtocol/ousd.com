@@ -34,7 +34,11 @@ const Partners = ({ locale, onLocale, seo, navLinks, partners }) => {
               Partners
             </Typography.H2>
             <Typography.Body3 className='max-w-[943px] mt-2 md:mt-6 text-[16px] md:text-[20px] leading-[28px] md:leading-[36px] text-[#b5beca]'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              OUSD is a constantly evolving ecosystem offering the best-risk adjusted yields in DeFi.<br />
+              <br />
+              At Origin, we’re proudly cultivating partnerships with premiere protocols across the space.<br />
+              <br />
+              Have a look through the incredible projects helping us to build out the next wave of cutting-edge stablecoin innovation.
             </Typography.Body3>
             <div className='flex flex-row mt-10 md:mt-20 space-x-4 md:space-x-10'>
               <div
