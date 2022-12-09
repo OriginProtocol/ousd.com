@@ -71,7 +71,7 @@ const Animation = ({ navLinks, active, initialTvl }) => {
                           value={ousdTvl ? ousdTvl : initialTvl}
                           duration={2000}
                           formatValue={(num) => {
-                            return `$${formatCurrency(num, 0)}`
+                            return `$${formatCurrency(num, 2)}`
                           }}
                         />
                       </Typography.H2>
