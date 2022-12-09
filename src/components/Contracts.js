@@ -7,6 +7,23 @@ import veogvAbi from 'constants/mainnetAbi/veogv.json'
 import ousdAbi from 'constants/mainnetAbi/ousd.json'
 import { useStoreState } from 'pullstate'
 
+const getContract = (address, abi, provider) => {
+  try {
+    return new ethers.Contract(
+      address,
+      abi,
+      provider
+    )
+  } catch (e) {
+    console.error(
+      `Error creating contract in [getContract] with address:${address} abi:${JSON.stringify(
+        abi
+      )}`
+    )
+    throw e
+  }
+}
+
 const Contracts = () => {
   const refreshTvl = useStoreState(ContractStore, (s) => s.refreshTvl)
 
@@ -16,26 +33,9 @@ const Contracts = () => {
       { chainId: parseInt(process.env.NEXT_PUBLIC_ETHEREUM_RPC_CHAIN_ID) }
     )
   
-    const getContract = (address, abi, overrideProvider) => {
-      try {
-        return new ethers.Contract(
-          address,
-          abi,
-          overrideProvider ? overrideProvider : provider
-        )
-      } catch (e) {
-        console.error(
-          `Error creating contract in [getContract] with address:${address} abi:${JSON.stringify(
-            abi
-          )}`
-        )
-        throw e
-      }
-    }
-  
-    const ousd = getContract(addresses.mainnet.OUSDProxy, ousdAbi)
-    const ogv = getContract(addresses.mainnet.OGV, ogvAbi)
-    const veogv = getContract(addresses.mainnet.veOGV, veogvAbi)
+    const ousd = getContract(addresses.mainnet.OUSDProxy, ousdAbi, provider)
+    const ogv = getContract(addresses.mainnet.OGV, ogvAbi, provider)
+    const veogv = getContract(addresses.mainnet.veOGV, veogvAbi, provider)
   
     const contractsToExport = {
       ousd,
@@ -57,7 +57,7 @@ const Contracts = () => {
         s.ousdTvl = ousdTvl
       })
     }
-    
+
     const tvlInterval = setInterval(() => {
       fetchTotalSupply()
     }, 20000)
