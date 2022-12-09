@@ -8,14 +8,7 @@ import { useStoreState } from 'pullstate'
 import ContractStore from '../stores/ContractStore'
 import AnimatedNumber from 'animated-number-react'
 
-const Animation = ({ navLinks, active, collateral }) => {
-  const initialTvl =
-    collateral?.reduce((t, s) => {
-      return {
-        total: Number(t.total) + Number(s.name === 'ousd' ? 0 : s.total),
-      }
-    }).total
-    
+const Animation = ({ navLinks, active, initialTvl }) => {
   const ousdTvl = useStoreState(ContractStore, (s) => s.ousdTvl || 0)
 
   useEffect(() => {
@@ -76,7 +69,7 @@ const Animation = ({ navLinks, active, collateral }) => {
                       >
                         <AnimatedNumber
                           value={ousdTvl ? ousdTvl : initialTvl}
-                          duration={2500}
+                          duration={2000}
                           formatValue={(num) => {
                             return `$${formatCurrency(num, 0)}`
                           }}

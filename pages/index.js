@@ -16,6 +16,7 @@ import { fetchApyHistory } from '../lib/apyHistory'
 import { fetchAllocation } from '../lib/allocation'
 import { fetchCollateral } from '../lib/collateral'
 import { fetchOgvStats } from '../lib/ogv'
+import { fetchInitialTvl } from '../lib/tvl'
 import formatSeo from '../src/utils/seo'
 import transformLinks from '../src/utils/transformLinks'
 import { Typography } from '@originprotocol/origin-storybook'
@@ -23,7 +24,7 @@ import { assetRootPath } from '../src/utils/image'
 import { audits } from '../src/utils/constants'
 import capitalize from 'lodash/capitalize'
 
-const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, collateral, ogvStats }) => {
+const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, collateral, initialTvl, ogvStats }) => {
   const { pathname } = useRouter()
   const active = capitalize(pathname.slice(1))
   const [loaded, setLoaded] = useState()
@@ -40,7 +41,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, co
       <Seo seo={seo} />
       {loaded &&
       <>
-        <Animation navLinks={navLinks} active={active} collateral={collateral} />
+        <Animation navLinks={navLinks} active={active} initialTvl={initialTvl} />
         <Apy apy={apy} apyData={apyHistory} />
         <Allocation strategies={strategies} />
         <Collateral collateral={collateral} strategies={strategies} />
@@ -109,6 +110,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, co
 }
 
 export async function getStaticProps() {
+  const initialTvl = await fetchInitialTvl()
   const apyHistory = await fetchApyHistory()
   const apy = await fetchApy()
   const allocation = await fetchAllocation()
@@ -132,6 +134,7 @@ export async function getStaticProps() {
       articles: articlesRes.data,
       seo: formatSeo(seoRes?.data),
       navLinks,
+      initialTvl,
       apy,
       apyHistory: apyHistory || [],
       strategies: allocation.strategies,
