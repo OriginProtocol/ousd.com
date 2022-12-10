@@ -4,30 +4,13 @@ import { Chart as ChartJS } from 'chart.js/auto'
 import { Chart } from 'react-chartjs-2'
 import LineChart from '../components/Chart'
 import { Typography } from '@originprotocol/origin-storybook'
-//import { useStoreState } from 'pullstate'
-//import ContractStore from '../stores/ContractStore'
 import zipObject from 'lodash/zipObject'
 import { formatCurrency } from '../utils/math'
-import { adjustLinkHref } from '../utils/utils'
-//import useApyQuery from '../queries/useApyQuery'
 import useApyHistoryQuery from '../queries/useApyHistoryQuery'
 import { apyDayOptions } from '../utils/constants'
 
 const Apy = ({ apy, apyData }) => {
   const [loaded, setLoaded] = useState()
-
-  /*const apyQuery = useApyQuery({
-    onSuccess: (apy) => {
-      ContractStore.update((s) => {
-        s.apy = apy
-      })
-    },
-  })
-  const apyOptions = useStoreState(ContractStore, (s) =>
-    apyDayOptions.map((d) => {
-      return s.apy[`apy${d}`] || 0
-    })
-  )*/
   const apyOptions = apy
   const daysToApy = zipObject(apyDayOptions, apyOptions)
   const [apyDays, setApyDays] = useState(
@@ -53,7 +36,6 @@ const Apy = ({ apy, apyData }) => {
   const data = dataReversed.slice().reverse()
 
   useEffect(() => {
-    //apyQuery.refetch()
     apyHistoryQuery.refetch()
   }, [])
 
@@ -108,7 +90,7 @@ const Apy = ({ apy, apyData }) => {
   return (
     <>
       <section className='home bg-[#1e1f25]'>
-        <div className="py-[120px] px-[16px] md:px-[64px] lg:px-[134px] text-center">
+        <div className="px-[16px] md:px-[64px] lg:px-[134px] py-14 md:py-[120px] text-center">
           <Typography.H6
             className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"
             style={{ fontWeight: 500 }}
