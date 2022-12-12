@@ -2,46 +2,26 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Typography, Header } from '@originprotocol/origin-storybook'
-//import CountUp from 'react-countup'
-//import AccountListener from 'components/AccountListener'
 import { assetRootPath } from '../utils/image'
+import { formatCurrency } from '../utils/math'
 import { useStoreState } from 'pullstate'
 import ContractStore from '../stores/ContractStore'
-import { formatCurrency } from '../utils/math'
-import { adjustLinkHref } from '../utils/utils'
+import AnimatedNumber from 'animated-number-react'
 
-const Animation = ({ navLinks, active, supply }) => {
-  const [totalOusd, setTotalOusd] = useState()
-  const ousdInitialValue = parseFloat(totalOusd - 2000000, 0)
-  const [ousdValue, setOusdValue] = useState(ousdInitialValue)
-  const ousd = useStoreState(ContractStore, (s) => s.ousd || 0)
-
-  const goodTempo = 10000
-
-  /*useEffect(() => {
-    if (!totalOusd) return
-    return animateValue({
-      from: ousdInitialValue,
-      to:
-        parseFloat(totalOusd),
-      callbackValue: (value) => {
-        setOusdValue(formatCurrency(value, 0))
-      },
-      duration: 10 * 1000, // animate for 1 hour
-      id: 'hero-index-ousd-animation',
-    })
-  }, [])*/
+const Animation = ({ navLinks, active, initialTvl }) => {
+  const ousdTvl = useStoreState(ContractStore, (s) => s.ousdTvl || 0)
 
   useEffect(() => {
-    if (!ousd) {
-      return
+    ContractStore.update((s) => {
+      s.refreshTvl = true
+    })
+
+    return () => {
+      ContractStore.update((s) => {
+        s.refreshTvl = false
+      })
     }
-    const fetchTotalSupply = async () => {
-      const total = await ousd.totalSupply().then((r) => Number(r) / 10 ** 18)
-      setTotalOusd(total)
-    }
-    fetchTotalSupply()
-  }, [ousd])
+  }, [])
 
   return (
     <>
@@ -81,25 +61,19 @@ const Animation = ({ navLinks, active, supply }) => {
               </div>
               <div className="lg:absolute lg:bottom-0 lg:left-0 lg:right-0 text-center">
                 <div className="relative h-32 md:h-64 lg:h-auto flex flex-row lg:block">
-                  {supply && (
+                  {initialTvl && (
                     <div className="absolute right-20 md:right-36 md:top-10 lg:static z-10">
                       <Typography.H2
-                        //className="xl:ml-16 2xl:ml-20 text-left"
+                        className='tabular-nums tracking-tight'
                         style={{ fontWeight: 700 }}
                       >
-                        {`$${formatCurrency(supply, 0)}`}
-                        {/*
-                          <CountUp
-                            start={0}
-                            end={totalOusd}
-                            duration={5}
-                            useEasing
-                            includeComma
-                            formattingFn={(num) => {
-                              return `$${formatCurrency(num, 0)}`
-                            }}
-                          />
-                        */}
+                        <AnimatedNumber
+                          value={ousdTvl ? ousdTvl : initialTvl}
+                          duration={2000}
+                          formatValue={(num) => {
+                            return `$${formatCurrency(num, 2)}`
+                          }}
+                        />
                       </Typography.H2>
                       <Typography.Body3 className="text-sm md:text-base text-[#b5beca] pt-[8px] whitespace-nowrap md:pt-[8px]">
                         Total value of OUSD wallet balances
