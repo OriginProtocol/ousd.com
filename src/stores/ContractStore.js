@@ -8,6 +8,7 @@ const ContractStore = new Store({
     circulating: 0,
     total: 0,
   },
+  refreshTvl: false,
 })
 
 export default ContractStore
