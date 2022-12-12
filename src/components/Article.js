@@ -42,18 +42,18 @@ const Article = ({ article, navLinks }) => {
                   </div>
                 </div>
               </Link>
-            </div>
-            <div className="max-w-[763px] mx-auto mt-6 md:mt-12">
-              <Typography.H4 as="h1" className='text-[24px] md:text-[44px] leading-[32px] md:leading-[60px]' style={{ fontWeight: 400 }}>{article.title}</Typography.H4>
-            </div>
-            <div className="max-w-[763px] mx-auto mt-3 md:mt-6">
-              <Typography.Body3 className='text-[14px] md:text-[16px] text-[#b5beca]'>
-                <Moment format="MMMM D YYYY">{article.publishedAt}</Moment>
-              </Typography.Body3>
+              <div className="mt-6 md:mt-12">
+                <Typography.H4 as="h1" className='text-[24px] md:text-[44px] leading-[32px] md:leading-[60px]' style={{ fontWeight: 400 }}>{article.title}</Typography.H4>
+              </div>
+              <div className="mt-3 md:mt-6">
+                <Typography.Body3 className='text-[14px] md:text-[16px] text-[#b5beca]'>
+                  <Moment format="MMMM D YYYY">{article.publishedAt}</Moment>
+                </Typography.Body3>
+              </div>
             </div>
           </div>
           <div className='gradient5 px-4 md:px-16 lg:px-[134px]'>
-            <div className="relative max-w-[763px] mx-auto mt-8 md:mt-12 rounded-2xl">
+            <div className="relative max-w-[763px] mx-auto mt-8 md:mt-12  rounded-2xl">
               {imageUrl && (
                 <div
                   id="banner"
