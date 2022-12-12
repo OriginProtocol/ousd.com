@@ -15,7 +15,6 @@ import { fetchApy } from '../lib/apy'
 import { fetchApyHistory } from '../lib/apyHistory'
 import { fetchAllocation } from '../lib/allocation'
 import { fetchCollateral } from '../lib/collateral'
-import { fetchSupply } from '../lib/supply'
 import { fetchOgvStats } from '../lib/ogv'
 import formatSeo from '../src/utils/seo'
 import transformLinks from '../src/utils/transformLinks'
@@ -23,8 +22,9 @@ import { Typography } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../src/utils/image'
 import { audits } from '../src/utils/constants'
 import capitalize from 'lodash/capitalize'
+import { setupContracts, fetchTvl } from 'utils/contracts'
 
-const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, collateral, supply, ogvStats }) => {
+const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, collateral, initialTvl, ogvStats }) => {
   const { pathname } = useRouter()
   const active = capitalize(pathname.slice(1))
   const [loaded, setLoaded] = useState()
@@ -41,7 +41,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, co
       <Seo seo={seo} />
       {loaded &&
       <>
-        <Animation navLinks={navLinks} active={active} supply={supply} />
+        <Animation navLinks={navLinks} active={active} initialTvl={initialTvl} />
         <Apy apy={apy} apyData={apyHistory} />
         <Allocation strategies={strategies} />
         <Collateral collateral={collateral} strategies={strategies} />
@@ -110,11 +110,12 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, co
 }
 
 export async function getStaticProps() {
+  const { vault, dripper } = setupContracts()
+  const initialTvl = await fetchTvl(vault, dripper)
   const apyHistory = await fetchApyHistory()
   const apy = await fetchApy()
   const allocation = await fetchAllocation()
   const collateral = await fetchCollateral()
-  const supply = await fetchSupply()
   const ogvStats = await fetchOgvStats()
 
   const articlesRes = await fetchAPI('/ousd/blog/en')
@@ -134,11 +135,11 @@ export async function getStaticProps() {
       articles: articlesRes.data,
       seo: formatSeo(seoRes?.data),
       navLinks,
+      initialTvl,
       apy,
       apyHistory: apyHistory || [],
       strategies: allocation.strategies,
       collateral: collateral.collateral,
-      supply,
       ogvStats,
     },
     revalidate: 5 * 60, // Cache response for 5m

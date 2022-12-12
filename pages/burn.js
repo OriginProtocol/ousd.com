@@ -11,12 +11,10 @@ import { assetRootPath } from '../src/utils/image'
 import withIsMobile from '../src/hoc/withIsMobile'
 import { fetchAPI } from '../lib/api'
 import transformLinks from '../src/utils/transformLinks'
-import { setupContracts } from 'utils/contracts'
 
-const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
+const Burn = ({ locale, onLocale, navLinks }) => {
   const [contracts, setContracts] = useState()
-  const ogv = useStoreState(ContractStore, (s) => s.ogv || 0)
-  const veogv = useStoreState(ContractStore, (s) => s.veogv || 0)
+  const { ogv, veogv } = useStoreState(ContractStore, (s) => s.contracts || {})
   const [totalStaked, setTotalStaked] = useState()
   const [totalSupply, setTotalSupply] = useState()
   const [totalVeSupply, setTotalVeSupply] = useState()
@@ -62,13 +60,6 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
       setMandatoryLockupBalance(mandatory)
       setTotalVeSupply(totalVe)
 
-      //const jsonRpcProvider = new ethers.providers.StaticJsonRpcProvider(
-      //  process.env.ETHEREUM_RPC_PROVIDER,
-      //  { chainId: parseInt(process.env.ETHEREUM_RPC_CHAIN_ID) }
-      //)
-      //const block = await jsonRpcProvider.getBlockNumber()
-      //setCurrentBlock(block)
-
       const burnedOptional = await ogv
         .balanceOf(addresses.mainnet.optionalLockupDistributor, {
           blockTag: burnBlock,
@@ -85,16 +76,6 @@ const Burn = ({ locale, onLocale, isMobile, navLinks }) => {
     }
     fetchStakedOgv()
   }, [ogv, veogv, contracts])
-
-  useEffect(() => {
-    // some values fetched from chain will show as 0 on local
-    if (process.env.NODE_ENV !== 'production') return
-    const loadContracts = async () => {
-      const response = await setupContracts()
-      setContracts(response)
-    }
-    loadContracts()
-  }, [])
 
   return (
     <>

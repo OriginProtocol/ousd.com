@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from "react-query"
 import analytics from "../src/utils/analytics"
 import { AnalyticsProvider } from "use-analytics"
 import { setUserSource } from "../src/utils/user"
+import Contracts from 'components/Contracts'
 
 const queryClient = new QueryClient()
 export const GlobalContext = createContext({})
@@ -82,6 +83,7 @@ const MyApp = ({ Component, pageProps }) => {
       <GlobalContext.Provider value={global?.attributes}>
         <QueryClientProvider client={queryClient}>
           <AnalyticsProvider instance={analytics}>
+            <Contracts />
             <Component {...pageProps} />
           </AnalyticsProvider>
         </QueryClientProvider>
