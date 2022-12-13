@@ -41,6 +41,12 @@ section.page {
   background-repeat: no-repeat;
 }
 
+section.partners {
+  background-image: url(/images/splines-partners.png);
+  background-position: right 0% bottom -400px;
+  background-repeat: no-repeat;
+}
+
 section.burn {
   background-image: url(/images/flame.svg);
   background-repeat: no-repeat;
@@ -71,6 +77,11 @@ section.burn {
     background-image: url(/images/splines37.png);
     background-position: 100% 0;
     background-repeat: no-repeat;
+  }
+
+  section.partners {
+    background-position: right bottom;
+    background-size: 100vw;
   }
 
   section.burn {

@@ -111,7 +111,6 @@ const Collateral = ({ collateral, strategies }) => {
             <div className={`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-6 md:mt-20 px-6 md:px-20 text-left ${open ? '' : 'hidden'}`}>
               {strategies?.map((strategy, i) => {
                 const tokens = ['dai', 'usdc', 'usdt', 'ousd']
-
                 return (
                   <div
                     className='p-4 md:p-6 rounded-[7px] bg-[#1e1f25]'
