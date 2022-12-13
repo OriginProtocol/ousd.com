@@ -16,7 +16,7 @@ export default function Footer({ locale }) {
   return (
     <>
       <footer>
-        <div className="max-w-screen-2xl mx-auto relative overflow-hidden px-8 md:px-[64px] lg:px-[134px] py-10 lg:pt-32 lg:pb-10 divide-[#ffffff33] divide-y-2 text-white">
+        <div className="max-w-screen-[1432px] mx-auto relative overflow-hidden px-8 md:px-[64px] lg:px-[134px] py-10 lg:pt-32 lg:pb-10 divide-[#ffffff33] divide-y-2 text-white">
           <div className="flex flex-col lg:flex-row justify-between pb-10 lg:pb-[88px] text-left">
             <div className="relative w-28 h-8 lg:w-32 mb-10 lg:mb-0">
               <Image
