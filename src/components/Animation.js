@@ -62,9 +62,9 @@ const Animation = ({ navLinks, active, initialTvl }) => {
               <div className="lg:absolute lg:bottom-0 lg:left-0 lg:right-0 text-center">
                 <div className="relative h-32 md:h-64 lg:h-auto flex flex-row lg:block">
                   {initialTvl && (
-                    <div className="absolute right-20 md:right-36 md:top-10 lg:static z-10">
+                    <div className="absolute right-16 md:right-36 md:top-10 lg:static z-10">
                       <Typography.H2
-                        className='tabular-nums tracking-tight'
+                        className='text-[36px] leading-[40px] md:text-[64px] md:leading-[68px] tabular-nums tracking-tighter md:tracking-tight'
                         style={{ fontWeight: 700 }}
                       >
                         <AnimatedNumber
@@ -80,7 +80,7 @@ const Animation = ({ navLinks, active, initialTvl }) => {
                       </Typography.Body3>
                     </div>
                   )}
-                  <div className="absolute -top-12 -right-12 z-0 block lg:hidden">
+                  <div className="absolute -top-12 -right-16 z-0 block lg:hidden">
                     <div className="relative ousd ml-3 w-40 h-40 md:w-64 md:h-64">
                       <Image
                         src={assetRootPath('/images/ousd.svg')}
