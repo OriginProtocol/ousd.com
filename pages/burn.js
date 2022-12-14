@@ -82,7 +82,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
   return (
     <>
       <Head>
-        <title>FAQ</title>
+        <title>Burn</title>
       </Head>
       <Seo seo={seo} />
       <section className='burn black'>
