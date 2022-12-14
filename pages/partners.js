@@ -71,22 +71,22 @@ const Partners = ({ locale, onLocale, seo, navLinks, partners }) => {
               {categoryPartners?.map((partner, i) => {
                 return (
                   <Link
-                    href={partner.partnerUrl}
+                    href={partner.attributes.partnerUrl}
                     target='_blank'
                     className="p-8 rounded-[8px] bg-[#1e1f25] cursor-pointer"
                     key={i}
                   >
                     <Image
-                      src={partner.logo}
+                      src={partner.attributes.logo.data.attributes.url}
                       width='85'
                       height='85'
                       alt="Logo"
                     />
                     <Typography.H4 className='mt-6 text-[24px] leading-[32px]' style={{ fontWeight: 400 }}>
-                      {partner.name}
+                      {partner.attributes.name}
                     </Typography.H4>
                     <Typography.Body3 className='mt-6 text-[16px leading-[28px] text-[#b5beca]'>
-                      {partner.description}
+                      {partner.attributes.description}
                     </Typography.Body3>
                   </Link>
                 )
@@ -101,7 +101,13 @@ const Partners = ({ locale, onLocale, seo, navLinks, partners }) => {
 }
 
 export async function getStaticProps() {
-  const partnerRes = await fetchAPI('/ousd-partners')
+  const partnerRes = await fetchAPI('/ousd-partners', {
+    populate: {
+      logo: {
+        populate: '*',
+      },
+    },
+  })
   const seoRes = await fetchAPI('/ousd/page/en/%2Fpartners')
   const navRes = await fetchAPI('/ousd-nav-links', {
     populate: {
