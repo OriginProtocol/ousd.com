@@ -8,16 +8,17 @@ import { fetchAPI } from '../lib/api'
 import Seo from '../src/components/strapi/seo'
 import formatSeo from '../src/utils/seo'
 import transformLinks from '../src/utils/transformLinks'
+import capitalize from 'lodash/capitalize'
 
 const Partners = ({ locale, onLocale, seo, navLinks, partners }) => {
   const [category, setCategory] = useState()
   
   const categoryPartners = partners?.filter((partner) => {
-    return partner.category === category || !category
+    return partner.attributes.category === category || !category
   })
 
   const categories = [...new Set(partners?.map((partner) => {
-    return partner.category
+    return partner.attributes.category
   }))]
 
   return (
@@ -60,7 +61,7 @@ const Partners = ({ locale, onLocale, seo, navLinks, partners }) => {
                     }}
                     key={i}>
                     <Typography.Body className={`text-[16px md:text-[24px] leading-[28px] md:leading-[32px] ${category === c ? 'text-[#0074f0]' : ''}`} style={{ fontWeight: 700 }}>
-                      {c}
+                      {capitalize(c)}
                     </Typography.Body>
                     <div className={`h-1 mt-1 md:mt-1.5 rounded-full bg-[#0074f0] ${category === c ? '' : 'hidden'}`}></div>
                   </div>
