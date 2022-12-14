@@ -3,18 +3,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Head from "next/head"
 import { Typography, Header } from '@originprotocol/origin-storybook'
-import { useRouter } from 'next/router'
 import Footer from '../src/components/Footer'
 import { fetchAPI } from '../lib/api'
 import Seo from '../src/components/strapi/seo'
 import formatSeo from '../src/utils/seo'
 import transformLinks from '../src/utils/transformLinks'
 import { assetRootPath } from 'utils/image'
-import { capitalize } from 'lodash'
 
 const Faq = ({ locale, onLocale, faq, seo, navLinks }) => {
-  const { pathname } = useRouter()
-  const active = capitalize(pathname.slice(1))
   const [open, setOpen] = useState({})
   const [loaded, setLoaded] = useState()
 
