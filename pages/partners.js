@@ -57,7 +57,6 @@ const Partners = ({ locale, onLocale, seo, navLinks, partners }) => {
                   <div
                     className='cursor-pointer'
                     onClick={() => {
-                      console.log(c)
                       setCategory(c)
                     }}
                     key={i}>
