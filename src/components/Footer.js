@@ -67,7 +67,7 @@ export default function Footer({ locale }) {
                   Blog
                 </Typography.Body3>
               </Link>
-              <Link
+              {/*<Link
                 href={'/faq'}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -80,7 +80,7 @@ export default function Footer({ locale }) {
                 <Typography.Body3 className="text-[#fafbfb]">
                   FAQ
                 </Typography.Body3>
-              </Link>
+              </Link>*/}
               <Link
                 href={
                   'https://www.coingecko.com/en/coins/origin-dollar-governance'
