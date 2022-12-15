@@ -54,6 +54,12 @@ section.burn {
   background-size: 70vw;
 }
 
+section.error {
+  background-image: url(/images/splines-404.svg);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+
 @media (max-width: 1280px) {
   section.intro {
     background-position: 100% 100%;
@@ -62,6 +68,10 @@ section.burn {
 
   section.burn {
     background-position: 100% 0%;
+    background-size: 80vw;
+  }
+
+  section.error {
     background-size: 80vw;
   }
 }

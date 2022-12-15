@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import Head from "next/head"
 import { Typography, Header } from '@originprotocol/origin-storybook'
 import { useStoreState } from 'pullstate'
+import Seo from '../src/components/strapi/seo'
+import formatSeo from '../src/utils/seo'
 import Footer from '../src/components/Footer'
 import ContractStore from '../src/stores/ContractStore'
 import addresses from '../src/constants/contractAddresses'
@@ -12,8 +15,7 @@ import withIsMobile from '../src/hoc/withIsMobile'
 import { fetchAPI } from '../lib/api'
 import transformLinks from '../src/utils/transformLinks'
 
-const Burn = ({ locale, onLocale, navLinks }) => {
-  const [contracts, setContracts] = useState()
+const Burn = ({ locale, onLocale, seo, navLinks }) => {
   const { ogv, veogv } = useStoreState(ContractStore, (s) => s.contracts || {})
   const [totalStaked, setTotalStaked] = useState()
   const [totalSupply, setTotalSupply] = useState()
@@ -75,10 +77,14 @@ const Burn = ({ locale, onLocale, navLinks }) => {
 
     }
     fetchStakedOgv()
-  }, [ogv, veogv, contracts])
+  }, [ogv, veogv])
 
   return (
     <>
+      <Head>
+        <title>Burn</title>
+      </Head>
+      <Seo seo={seo} />
       <section className='burn black'>
         <Header mappedLinks={navLinks} webProperty="ousd" />
         <div className='px-8 md:px-16 lg:px-[134px] pb-14 md:pb-[120px] text-left'>
@@ -439,6 +445,7 @@ const Burn = ({ locale, onLocale, navLinks }) => {
 }
 
 export async function getStaticProps() {
+  const seoRes = await fetchAPI('/ousd/page/en/%2Fburn')
   const navRes = await fetchAPI('/ousd-nav-links', {
     populate: {
       links: {
@@ -451,6 +458,7 @@ export async function getStaticProps() {
 
   return {
     props: {
+      seo: formatSeo(seoRes?.data),
       navLinks,
     },
     revalidate: 5 * 60, // Cache response for 5m
