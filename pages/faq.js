@@ -28,7 +28,7 @@ const Faq = ({ locale, onLocale, faq, seo, navLinks }) => {
         <>
           <section className="page black">
             <Header mappedLinks={navLinks} webProperty="ousd" active={'FAQ'} />
-            <div className='pb-[132px] text-left'>
+            <div className='pb-[58px] md:pb-[124px] text-left'>
               <div className="px-8 md:px-16 lg:px-[134px]">
                 <div className='max-w-[1432px] mx-auto mt-5 md:mt-16'>
                   <Typography.H2 as="h1" className='text-[40px] leading-[40px] md:text-[64px] md:leading-[72px]' style={{ fontWeight: 500 }}>
