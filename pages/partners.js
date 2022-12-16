@@ -77,12 +77,13 @@ const Partners = ({ locale, onLocale, seo, navLinks, partners }) => {
                     className="p-8 rounded-[8px] bg-[#1e1f25] cursor-pointer"
                     key={i}
                   >
-                    <Image
-                      src={partner.attributes.logo.data.attributes.url}
-                      width='85'
-                      height='85'
-                      alt="Logo"
-                    />
+                    <div className='relative w-[85px] h-[85px]'>
+                      <Image
+                        src={partner.attributes.logo.data.attributes.url}
+                        fill
+                        alt="Logo"
+                      />
+                    </div>
                     <Typography.H4 className='mt-6 text-[24px] leading-[32px]' style={{ fontWeight: 400 }}>
                       {partner.attributes.name}
                     </Typography.H4>
