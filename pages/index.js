@@ -45,7 +45,7 @@ const Home = ({ locale, onLocale, audits, seo, navLinks, apy, apyHistory, strate
         <Allocation strategies={strategies} />
         <Collateral collateral={collateral} strategies={strategies} />
         <section className="home black">
-          <div className="py-[120px] px-[16px] md:px-[64px] lg:px-[200px] text-center">
+          <div className="px-[16px] md:px-[64px] lg:px-[200px] py-14 md:py-[120px] text-center">
             <Typography.H6
               className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"
               style={{ fontWeight: 500 }}
