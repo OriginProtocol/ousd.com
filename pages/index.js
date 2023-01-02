@@ -20,11 +20,10 @@ import formatSeo from '../src/utils/seo'
 import transformLinks from '../src/utils/transformLinks'
 import { Typography } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../src/utils/image'
-import { audits } from '../src/utils/constants'
 import capitalize from 'lodash/capitalize'
 import { setupContracts, fetchTvl } from 'utils/contracts'
 
-const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, collateral, initialTvl, ogvStats }) => {
+const Home = ({ locale, onLocale, audits, seo, navLinks, apy, apyHistory, strategies, collateral, initialTvl, ogvStats }) => {
   const { pathname } = useRouter()
   const active = capitalize(pathname.slice(1))
   const [loaded, setLoaded] = useState()
@@ -46,7 +45,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, co
         <Allocation strategies={strategies} />
         <Collateral collateral={collateral} strategies={strategies} />
         <section className="home black">
-          <div className="py-[120px] px-[16px] md:px-[64px] lg:px-[200px] text-center">
+          <div className="px-[16px] md:px-[64px] lg:px-[200px] py-14 md:py-[120px] text-center">
             <Typography.H6
               className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"
               style={{ fontWeight: 500 }}
@@ -62,16 +61,16 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, co
                   return (
                     <Link
                       className="mx-auto"
-                      href={audit.link}
+                      href={audit.attributes.auditUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      key={audit.name}
+                      key={i}
                     >
                       <div className="relative rounded-full w-[140px] h-[140px] md:w-[200px] md:h-[200px] lg:w-[130px] lg:h-[130px] xl:w-[170px] xl:h-[170px] 2xl:w-[200px] 2xl:h-[200px] bg-[#141519]">
                         <div className="relative h-[56px] md:h-[80px] lg:h-[56px] 2xl:h-[80px] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                           <Image
                             src={assetRootPath(
-                              `/images/${audit.name
+                              `/images/${audit.attributes.name
                                 .replace(/ /g, '-')
                                 .toLowerCase()}.svg`
                             )}
@@ -82,7 +81,7 @@ const Home = ({ locale, onLocale, seo, navLinks, apy, apyHistory, strategies, co
                         </div>
                       </div>
                       <Typography.Body className="mt-[8px] md:mt-6 opacity-75">
-                        {audit.name}
+                        {audit.attributes.name}
                       </Typography.Body>
                     </Link>
                   )
@@ -118,7 +117,7 @@ export async function getStaticProps() {
   const collateral = await fetchCollateral()
   const ogvStats = await fetchOgvStats()
 
-  const articlesRes = await fetchAPI('/ousd/blog/en')
+  const auditsRes = await fetchAPI('/ousd-audits')
   const seoRes = await fetchAPI('/ousd/page/en/%2F')
   const navRes = await fetchAPI('/ousd-nav-links', {
     populate: {
@@ -132,7 +131,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      articles: articlesRes.data,
+      audits: auditsRes.data,
       seo: formatSeo(seoRes?.data),
       navLinks,
       initialTvl,
