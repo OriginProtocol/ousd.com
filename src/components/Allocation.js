@@ -52,7 +52,7 @@ const Allocation = ({ strategies }) => {
                     {strategiesSorted?.map((strategy) => {
                       if (
                         strategy.name === 'Vault' ||
-                        strategy.name === 'OUSD MetaStrategy'
+                        strategy.name === 'Convex OUSD'
                       )
                         return
 
