@@ -28,7 +28,7 @@ export const strategyMapping = {
     usdc: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
     usdt: '0xdac17f958d2ee523a2206206994597c13d831ec7',
   },
-  'Compound': {
+  'Compound Strategy': {
     name: 'Compound',
     address: '0x9c459eeb3FA179a40329b81C1635525e9A0Ef094',
     token: 'Compound',
@@ -38,14 +38,14 @@ export const strategyMapping = {
     usdc: '0x39aa39c021dfbae8fac545936693ac917d5e7563',
     usdt: '0xf650c3d88d12db855b8bf7d11be6c55a4e07dcc9',
   },
-  'Convex 3pool': {
+  'Convex Strategy': {
     name: 'Convex DAI+USDC+USDT',
     address: '0xEA2Ef2e2E5A749D4A66b41Db9aD85a38Aa264cb3',
     token: 'Convex',
     tokenPrefix: '',
     description: 'Convex allows liquidity providers and stakers to earn greater rewards from Curve, a stablecoin-centric automated market maker (AMM). OUSD earns trading fees and protocol token incentives (both CRV and CVX). This strategy employs base pools and metapools, including the Origin Dollar factory pool, which enables OUSD to safely leverage its own deposits to multiply returns and maintain the pool’s balance.',
   },
-  'Aave': {
+  'Aave Strategy': {
     name: 'Aave',
     address: '0x5e3646A1Db86993f73E6b74A57D8640B69F7e259',
     token: 'Aave',
@@ -55,14 +55,14 @@ export const strategyMapping = {
     usdc: '0xe87ba1bd11ee6e0d3c7dd6932e6a038e38627f65',
     usdt: '0x71fc860F7D3A592A4a98740e39dB31d25db65ae8',
   },
-  'Morpho Compound': {
-    name: 'Morpho Compound',
+  'Morpho Strategy': {
+    name: 'Morpho Strategy',
     address: '0x5A4eEe58744D1430876d5cA93cAB5CcB763C037D',
     token: 'Morpho Compound',
     tokenPrefix: 'c',
     description: 'Morpho adds a peer-to-peer layer on top of Compound and Aave allowing lenders and borrowers to be matched more efficiently with better interest rates. When no matching opportunity exists, funds flow directly through to the underlying protocol. OUSD supplies stablecoins to three of Morpho’s Compound markets to earn interest. Additional yield is generated from protocol token incentives, including both COMP (regularly sold for USDT) and MORPHO (currently locked).',
   },
-  'Convex OUSD': {
+  'OUSD MetaStrategy': {
     name: 'Convex OUSD+3Crv',
     address: '0x89Eb88fEdc50FC77ae8a18aAD1cA0ac27f777a90',
   },
