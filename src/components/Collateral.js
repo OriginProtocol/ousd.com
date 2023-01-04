@@ -9,9 +9,6 @@ import { tokenColors, strategyMapping } from '../utils/constants'
 
 const Collateral = ({ collateral, strategies }) => {
   const [open, setOpen] = useState()
-  const meta = strategies?.find((s) => {
-    return s.name === 'OUSD MetaStrategy'
-  }).ousd
 
   const total =
     collateral?.reduce((t, s) => {
