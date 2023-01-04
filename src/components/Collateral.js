@@ -9,9 +9,6 @@ import { tokenColors, strategyMapping } from '../utils/constants'
 
 const Collateral = ({ collateral, strategies }) => {
   const [open, setOpen] = useState()
-  const meta = strategies?.find((s) => {
-    return s.name === 'OUSD MetaStrategy'
-  }).ousd
 
   const total =
     collateral?.reduce((t, s) => {
@@ -26,7 +23,7 @@ const Collateral = ({ collateral, strategies }) => {
     return {
       title: token.name.toUpperCase(),
       value: total
-        ? (token.name === 'ousd' ? 0 : (Number(token.total) - meta / 3) / total) * 100
+        ? (token.name === 'ousd' ? 0 : (Number(token.total) / 3) / total) * 100
         : 0,
       color: tokenColors[token.name] || '#ff0000',
     }
