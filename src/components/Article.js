@@ -47,7 +47,7 @@ const Article = ({ article, navLinks }) => {
               </div>
               <div className="mt-3 md:mt-6">
                 <Typography.Body3 className='text-[14px] md:text-[16px] text-[#b5beca]'>
-                  <Moment format="MMMM D YYYY">{article.publishedAt}</Moment>
+                  <Moment format="MMMM D YYYY">{article.publishBackdate || article.publishedAt}</Moment>
                 </Typography.Body3>
               </div>
             </div>
