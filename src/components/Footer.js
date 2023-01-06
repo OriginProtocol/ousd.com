@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import analytics from '../utils/analytics'
 //import { getDocsLink } from '../utils/getDocsLink'
 import { assetRootPath } from '../utils/image'
 import { useRouter } from 'next/router'
@@ -32,9 +31,6 @@ export default function Footer({ locale }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 lg:mr-10"
-                onClick={() => {
-                  analytics.track('Governance Link click')
-                }}
               >
                 <Typography.Body3 className="text-[#fafbfb]">
                   Governance
@@ -45,9 +41,6 @@ export default function Footer({ locale }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="lg:mr-10 mt-[20px] lg:mt-2"
-                onClick={() => {
-                  analytics.track('Docs Link click')
-                }}
               >
                 <Typography.Body3 className="text-[#fafbfb]">
                   Docs
@@ -59,9 +52,6 @@ export default function Footer({ locale }) {
                 rel="noopener noreferrer"
                 prefetch={false}
                 className="lg:mr-10 mt-[20px] lg:mt-2"
-                onClick={() => {
-                  analytics.track('Blog Link click')
-                }}
               >
                 <Typography.Body3 className="text-[#fafbfb]">
                   Blog
@@ -73,9 +63,6 @@ export default function Footer({ locale }) {
                 rel="noopener noreferrer"
                 prefetch={false}
                 className="lg:mr-10 mt-[20px] lg:mt-2"
-                onClick={() => {
-                  analytics.track('FAQ Link click')
-                }}
               >
                 <Typography.Body3 className="text-[#fafbfb]">
                   FAQ
@@ -88,9 +75,6 @@ export default function Footer({ locale }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mr-10 mt-[20px] lg:mt-2"
-                onClick={() => {
-                  analytics.track('OGV Link click')
-                }}
               >
                 <Typography.Body3 className="text-[#fafbfb]">
                   OGV
