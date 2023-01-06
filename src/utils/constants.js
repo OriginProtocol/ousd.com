@@ -55,15 +55,15 @@ export const strategyMapping = {
     usdc: '0xe87ba1bd11ee6e0d3c7dd6932e6a038e38627f65',
     usdt: '0x71fc860F7D3A592A4a98740e39dB31d25db65ae8',
   },
-  'Morpho Strategy': {
-    name: 'Morpho Strategy',
+  'Morpho Compound': {
+    name: 'Morpho Compound',
     address: '0x5A4eEe58744D1430876d5cA93cAB5CcB763C037D',
     token: 'Morpho Compound',
     tokenPrefix: 'c',
     description: 'Morpho adds a peer-to-peer layer on top of Compound and Aave allowing lenders and borrowers to be matched more efficiently with better interest rates. When no matching opportunity exists, funds flow directly through to the underlying protocol. OUSD supplies stablecoins to three of Morpho’s Compound markets to earn interest. Additional yield is generated from protocol token incentives, including both COMP (regularly sold for USDT) and MORPHO (currently locked).',
   },
-  'Morpho Aave Strategy': {
-    name: 'Morpho Aave Strategy',
+  'Morpho Aave': {
+    name: 'Morpho Aave',
     address: '0x79f2188ef9350a1dc11a062cca0abe90684b0197',
     token: 'Morpho Aave',
     tokenPrefix: 'a',
