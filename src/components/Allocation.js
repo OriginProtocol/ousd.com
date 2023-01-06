@@ -53,7 +53,7 @@ const Allocation = ({ strategies }) => {
                       if (
                         strategy.name === 'Vault' ||
                         strategy.name === 'OUSD MetaStrategy' ||
-                        strategy.name === 'Morpho Aave Strategy' ||
+                        strategy.name === 'Morpho Aave' ||
                         strategy.name === 'Convex LUSD+3Crv'
                       )
                         return
