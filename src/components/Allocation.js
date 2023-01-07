@@ -228,32 +228,57 @@ const Allocation = ({ strategies }) => {
                                       )}%`}</Typography.Body3>
                                     </div>
                                     <div className="flex flex-row justify-between">
-                                    <div className="flex flex-row">
-                                      <div className="relative w-6 md:w-10">
-                                        <Image
-                                          src={assetRootPath(
-                                            `/images/convex-meta.svg`
-                                          )}
-                                          fill
-                                          sizes='(max-width: 768px) 20px, 24px'
-                                          alt='meta'
-                                        />
+                                      <div className="flex flex-row">
+                                        <div className="relative w-6 md:w-10">
+                                          <Image
+                                            src={assetRootPath(
+                                              `/images/convex-meta.svg`
+                                            )}
+                                            fill
+                                            sizes='(max-width: 768px) 20px, 24px'
+                                            alt='meta'
+                                          />
+                                        </div>
+                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
+                                          Convex LUSD+3Crv
+                                        </Typography.Body3>
                                       </div>
-                                      <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                        Convex OUSD+3Crv
-                                      </Typography.Body3>
+                                      <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
+                                        ((lusd.dai +
+                                          lusd.usdc +
+                                          lusd.usdt) /
+                                          strategy.total) *
+                                          100,
+                                        2
+                                      )}%`}</Typography.Body3>
                                     </div>
-                                    <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                      ((meta.dai +
-                                        meta.usdc +
-                                        meta.usdt +
-                                        meta.ousd) /
-                                        strategy.total) *
-                                        100,
-                                      2
-                                    )}%`}</Typography.Body3>
-                                  </div>
-                                </>
+                                    <div className="flex flex-row justify-between">
+                                      <div className="flex flex-row">
+                                        <div className="relative w-6 md:w-10">
+                                          <Image
+                                            src={assetRootPath(
+                                              `/images/convex-meta.svg`
+                                            )}
+                                            fill
+                                            sizes='(max-width: 768px) 20px, 24px'
+                                            alt='meta'
+                                          />
+                                        </div>
+                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
+                                          Convex OUSD+3Crv
+                                        </Typography.Body3>
+                                      </div>
+                                      <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
+                                        ((meta.dai +
+                                          meta.usdc +
+                                          meta.usdt +
+                                          meta.ousd) /
+                                          strategy.total) *
+                                          100,
+                                        2
+                                      )}%`}</Typography.Body3>
+                                    </div>
+                                  </>
                                 )}
                               </div>
                               <Typography.Body3 className="mt-4 text-[#b5beca] text-left text-[12px] md:text-[14px] leading-[23px]">
