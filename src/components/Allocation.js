@@ -232,11 +232,11 @@ const Allocation = ({ strategies }) => {
                                         <div className="relative w-6 md:w-10">
                                           <Image
                                             src={assetRootPath(
-                                              `/images/convex-meta.svg`
+                                              `/images/convex-lusd.svg`
                                             )}
                                             fill
                                             sizes='(max-width: 768px) 20px, 24px'
-                                            alt='meta'
+                                            alt='LUSD+3Crv icon'
                                           />
                                         </div>
                                         <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
@@ -261,7 +261,7 @@ const Allocation = ({ strategies }) => {
                                             )}
                                             fill
                                             sizes='(max-width: 768px) 20px, 24px'
-                                            alt='meta'
+                                            alt='OUSD+3Crv icon'
                                           />
                                         </div>
                                         <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
