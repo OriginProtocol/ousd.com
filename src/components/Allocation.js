@@ -16,9 +16,10 @@ const Allocation = ({ strategies }) => {
   }).total
 
   const meta = strategies.find((s) => s.name === 'OUSD MetaStrategy')
+  const lusd = strategies.find((s) => s.name === 'Convex LUSD+3Crv')
 
   const strategiesSorted = strategies.map((s) => {
-    if (s.name === 'Convex Strategy') return {...s, total: s.total + meta.total}
+    if (s.name === 'Convex Strategy') return {...s, total: s.total + meta.total + lusd.total}
     return {...s}
   }).sort((a, b) => a.total - b.total).reverse()
 
