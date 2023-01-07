@@ -14,7 +14,7 @@ export const theme = createTheme({
     'convex-strategy': {
       main: '#ff5a5a',
     },
-    'morpho-strategy': {
+    'morpho-compound': {
       main: '#9bc3e9',
     },
   },
