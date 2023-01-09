@@ -114,13 +114,13 @@ const Collateral = ({ collateral, strategies }) => {
                     key={i}
                   >
                     <Link
-                      href={`https://etherscan.io/address/${strategyMapping[strategy.name].address}`}
+                      href={`https://etherscan.io/address/${strategyMapping[strategy.name]?.address}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className='flex flex-row space-x-1'
                     >
                       <Typography.Body className='text-[16px] leading-[28px]' style={{ fontWeight: 500 }}>
-                        {strategyMapping[strategy.name].name}
+                        {strategyMapping[strategy.name]?.name || strategy.name}
                       </Typography.Body>
                       <Image
                         src={assetRootPath('/images/link.svg')}
@@ -153,9 +153,9 @@ const Collateral = ({ collateral, strategies }) => {
                               </Typography.Body3>
                               <Link
                                 href={
-                                  strategyMapping[strategy.name][token] ? 
+                                  strategyMapping[strategy.name] ? (strategyMapping[strategy.name][token] ? 
                                   `https://etherscan.io/token/${strategyMapping[strategy.name][token]}?a=${strategyMapping[strategy.name].address}` :
-                                  `https://etherscan.io/address/${strategyMapping[strategy.name].address}#tokentxns`
+                                  `https://etherscan.io/address/${strategyMapping[strategy.name]?.address}#tokentxns`) : ''
                                 }
                                 target="_blank"
                                 rel="noopener noreferrer"

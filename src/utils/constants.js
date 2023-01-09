@@ -5,20 +5,38 @@ export const DEFAULT_SELECTED_APY = 30
 
 export const theme = createTheme({
   palette: {
-    'compound-strategy': {
+    'comp': {
       main: '#00d592',
     },
-    'aave-strategy': {
+    'aave': {
       main: '#7a26f3',
     },
-    'convex-strategy': {
+    'convex': {
       main: '#ff5a5a',
     },
-    'morpho-compound': {
+    'morpho': {
       main: '#9bc3e9',
+    },
+    'default': {
+      main: '#ffffff',
     },
   },
 })
+
+export const protocolDescription = {
+  'Compound': {
+    description: 'Compound is an interest rate protocol allowing lenders to earn yield on digital assets by supplying them to borrowers. Each loan is over-collateralized to ensure repayment. OUSD deploys stablecoins to three of the Compound V2 markets and earns interest approximately every 12 seconds. Additional yield is generated from protocol token incentives (COMP), which are regularly sold for USDT on Uniswap and compounded.',
+  },
+  'Convex': {
+    description: 'Convex allows liquidity providers and stakers to earn greater rewards from Curve, a stablecoin-centric automated market maker (AMM). OUSD earns trading fees and protocol token incentives (both CRV and CVX). This strategy employs base pools and metapools, including the Origin Dollar factory pool, which enables OUSD to safely leverage its own deposits to multiply returns and maintain the pool’s balance.',
+  },
+  'Aave': {
+    description: 'Aave is a liquidity protocol where users can participate as suppliers or borrowers. Each loan is over-collateralized to ensure repayment. OUSD deploys stablecoins to three of the Aave V2 markets and earns interest approximately every 12 seconds. Additional yield is generated from protocol token incentives (AAVE), which are regularly sold for USDT on Uniswap and compounded.',
+  },
+  'Morpho': {
+    description: 'Morpho adds a peer-to-peer layer on top of Compound and Aave allowing lenders and borrowers to be matched more efficiently with better interest rates. When no matching opportunity exists, funds flow directly through to the underlying protocol. OUSD supplies stablecoins to three of Morpho’s Compound markets to earn interest. Additional yield is generated from protocol token incentives, including both COMP (regularly sold for USDT) and MORPHO (currently locked).',
+  },
+}
 
 export const strategyMapping = {
   'Vault': {
@@ -31,9 +49,6 @@ export const strategyMapping = {
   'Compound Strategy': {
     name: 'Compound',
     address: '0x9c459eeb3FA179a40329b81C1635525e9A0Ef094',
-    token: 'Compound',
-    tokenPrefix: 'c',
-    description: 'Compound is an interest rate protocol allowing lenders to earn yield on digital assets by supplying them to borrowers. Each loan is over-collateralized to ensure repayment. OUSD deploys stablecoins to three of the Compound V2 markets and earns interest approximately every 12 seconds. Additional yield is generated from protocol token incentives (COMP), which are regularly sold for USDT on Uniswap and compounded.',
     dai: '0x5d3a536e4d6dbd6114cc1ead35777bab948e3643',
     usdc: '0x39aa39c021dfbae8fac545936693ac917d5e7563',
     usdt: '0xf650c3d88d12db855b8bf7d11be6c55a4e07dcc9',
@@ -41,16 +56,10 @@ export const strategyMapping = {
   'Convex Strategy': {
     name: 'Convex DAI+USDC+USDT',
     address: '0xEA2Ef2e2E5A749D4A66b41Db9aD85a38Aa264cb3',
-    token: 'Convex',
-    tokenPrefix: '',
-    description: 'Convex allows liquidity providers and stakers to earn greater rewards from Curve, a stablecoin-centric automated market maker (AMM). OUSD earns trading fees and protocol token incentives (both CRV and CVX). This strategy employs base pools and metapools, including the Origin Dollar factory pool, which enables OUSD to safely leverage its own deposits to multiply returns and maintain the pool’s balance.',
   },
   'Aave Strategy': {
     name: 'Aave',
     address: '0x5e3646A1Db86993f73E6b74A57D8640B69F7e259',
-    token: 'Aave',
-    tokenPrefix: 'a',
-    description: 'Aave is a liquidity protocol where users can participate as suppliers or borrowers. Each loan is over-collateralized to ensure repayment. OUSD deploys stablecoins to three of the Aave V2 markets and earns interest approximately every 12 seconds. Additional yield is generated from protocol token incentives (AAVE), which are regularly sold for USDT on Uniswap and compounded.',
     dai: '0xfC1E690f61EFd961294b3e1Ce3313fBD8aa4f85d',
     usdc: '0xe87ba1bd11ee6e0d3c7dd6932e6a038e38627f65',
     usdt: '0x71fc860F7D3A592A4a98740e39dB31d25db65ae8',
@@ -58,16 +67,10 @@ export const strategyMapping = {
   'Morpho Compound': {
     name: 'Morpho Compound',
     address: '0x5A4eEe58744D1430876d5cA93cAB5CcB763C037D',
-    token: 'Morpho Compound',
-    tokenPrefix: 'c',
-    description: 'Morpho adds a peer-to-peer layer on top of Compound and Aave allowing lenders and borrowers to be matched more efficiently with better interest rates. When no matching opportunity exists, funds flow directly through to the underlying protocol. OUSD supplies stablecoins to three of Morpho’s Compound markets to earn interest. Additional yield is generated from protocol token incentives, including both COMP (regularly sold for USDT) and MORPHO (currently locked).',
   },
   'Morpho Aave': {
     name: 'Morpho Aave',
     address: '0x79f2188ef9350a1dc11a062cca0abe90684b0197',
-    token: 'Morpho Aave',
-    tokenPrefix: 'a',
-    description: 'Morpho adds a peer-to-peer layer on top of Compound and Aave allowing lenders and borrowers to be matched more efficiently with better interest rates. When no matching opportunity exists, funds flow directly through to the underlying protocol. OUSD supplies stablecoins to three of Morpho’s Compound markets to earn interest. Additional yield is generated from protocol token incentives, including both COMP (regularly sold for USDT) and MORPHO (currently locked).',
   },
   'Convex LUSD+3Crv': {
     name: 'Convex LUSD+3Crv',
