@@ -6,36 +6,31 @@ import { assetRootPath } from '../utils/image'
 import LinearProgress from '@mui/material/LinearProgress'
 import { ThemeProvider } from '@mui/material/styles'
 import { formatCurrency } from '../utils/math'
-import { theme, strategyMapping } from '../utils/constants'
+import { theme, protocolDescription } from '../utils/constants'
 
 const Allocation = ({ strategies }) => {
   const [open, setOpen] = useState({})
+  const tokens = ['dai', 'usdc', 'usdt']
 
   const total = strategies?.reduce((t, s) => {
     return { total: t.total + s.total }
   }).total
 
-  const meta = strategies.find((s) => s.name === 'OUSD MetaStrategy')
-  const lusd = strategies.find((s) => s.name === 'Convex LUSD+3Crv')
-  const mAave = strategies.find((s) => s.name === 'Morpho Aave')
+  let groupByProtocol = function(data) {
+    return data.reduce((storage, item) => {
+      let group = item.name.replace(/ .*/,'')
+      storage[group] = storage[group] || []
+      storage[group].push(item)
+      return storage
+    }, {})
+  }
 
-  const strategiesSorted = strategies.map((s) => {
-    if (s.name === 'Convex Strategy') return {...s, total: s.total + meta.total + lusd.total}
-    if (s.name === 'Morpho Compound') return {
-      // represents combined Morpho strategies despite being " Compound"
-      name: s.name,
-      total: s.total + mAave.total,
-      aDai: mAave.dai,
-      aUsdc: mAave.usdc,
-      aUsdt: mAave.usdt,
-      cDai: s.dai,
-      cUsdc: s.usdc,
-      cUsdt: s.usdt,
-    }
-    return {...s}
+  const protocols = Object.keys(groupByProtocol(strategies)).map((key) => {
+    const total = groupByProtocol(strategies)[key].reduce((t, s) => {
+      return { total: t.total + s.total }
+    }).total
+    return {name: key, strats: groupByProtocol(strategies)[key], total: total}
   }).sort((a, b) => a.total - b.total).reverse()
-
-  // strategy handling needs some thought
 
   return (
     <>
@@ -62,24 +57,17 @@ const Allocation = ({ strategies }) => {
               <div className="flex flex-col px-[16px] md:px-10 pt-2 pb-[10px] md:pt-3 md:pb-8">
                 <ThemeProvider theme={theme}>
                   <div className="flex flex-col justify-between">
-                    {strategiesSorted?.map((strategy) => {
-                      if (
-                        strategy.name === 'Vault' ||
-                        strategy.name === 'OUSD MetaStrategy' ||
-                        strategy.name === 'Morpho Aave' ||
-                        strategy.name === 'Convex LUSD+3Crv'
-                      )
-                        return
-strategy.name === 'Morpho Compound' && console.log(strategy)
+                    {protocols?.map((protocol) => {
+                      if (protocol.name === 'Vault') return
                       return (
                         <div
                           className="strategy rounded-xl border-2 p-[16px] md:p-8 my-[6px] md:my-[8px]"
-                          key={strategy.name}
+                          key={protocol.name}
                           onClick={(e) => {
                             e.preventDefault()
                             setOpen({
                               ...open,
-                              [strategy.name]: !open[strategy.name],
+                              [protocol.name]: !open[protocol.name],
                             })
                           }}
                         >
@@ -88,15 +76,14 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                               <div className='relative w-1/3 md:w-1/3 lg:w-1/4'>
                                 <Image
                                   src={assetRootPath(
-                                    `/images/${strategy.name
-                                      .replace(/\s+/g, '-')
+                                    `/images/${protocol.name
                                       .toLowerCase()}.svg`
                                   )}
                                   fill
                                   sizes='(max-width: 768px) 64px, 128px'
                                   objectFit='contain'
                                   objectPosition='0%'
-                                  alt={strategy.name}
+                                  alt={protocol.name}
                                 />
                               </div>
                               <div>
@@ -104,24 +91,23 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                                   className="inline items-center text-[12px] md:text-[24px] text-[#b5beca]"
                                   style={{ fontWeight: 400 }}
                                 >{`$${formatCurrency(
-                                  strategy.total,
+                                  protocol.total,
                                   0
                                 )}`}</Typography.H7>
                                 <Typography.H7
                                   className="inline pl-[8px] text-[12px] md:text-[24px]"
                                   style={{ fontWeight: 700 }}
                                 >{`(${formatCurrency(
-                                  (strategy.total / total) * 100,
+                                  total ? (protocol.total / total) * 100 : 0,
                                   2
                                 )}%)`}</Typography.H7>
                               </div>
                             </div>
                             <LinearProgress
                               variant="determinate"
-                              value={(strategy.total / total) * 100}
-                              color={`${strategy.name
-                                .replace(/\s+/g, '-')
-                                .toLowerCase()}`}
+                              value={(protocol.total / total) * 100}
+                              color={theme.palette[protocol.name.toLowerCase()] ? `${protocol.name
+                                .toLowerCase()}` : 'default'}
                               sx={{
                                 bgcolor: '#141519',
                                 borderRadius: 10,
@@ -130,7 +116,7 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                               className="mt-5"
                             ></LinearProgress>
                             <Typography.Caption2 className={`flex flex-row mt-4 md:hidden text-left space-x-1.5 text-[#b5beca] font-medium ${
-                                open[strategy.name] ? 'hidden' : ''
+                                open[protocol.name] ? 'hidden' : ''
                               }`}>
                               <div>More info</div>
                               <Image
@@ -142,290 +128,119 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                             </Typography.Caption2>
                             <div
                               className={`${
-                                open[strategy.name] ? '' : 'hidden md:block'
+                                open[protocol.name] ? '' : 'hidden md:block'
                               }`}
                             >
-                              {strategy.name === 'Convex Strategy' ? (
+                              {protocol.name === 'Convex' ? (
                                 <div className='flex flex-col xl:flex-row xl:flex-wrap mt-[22px] xl:space-x-10 space-y-2 xl:space-y-0'>
-                                  <div className="flex flex-row justify-between">
-                                    <div className="flex flex-row">
-                                      <div className="relative w-[26px]">
-                                        <Image
-                                          src={assetRootPath(
-                                            `/images/convex-3pool.svg`
-                                          )}
-                                          fill
-                                          sizes='(max-width: 768px) 20px, 24px'
-                                          alt='threepool'
-                                        />
+                                  {protocol.strats.map((strategy, i) => {
+                                    return (
+                                      <div className="flex flex-row justify-between" key={i}>
+                                        <div className="flex flex-row">
+                                          <div className="relative w-6 md:w-8">
+                                            <Image
+                                              src={assetRootPath(
+                                                `/images/${strategy.name.replace(/\s+/g, '-').toLowerCase()}.svg`
+                                              )}
+                                              fill
+                                              sizes='(max-width: 768px) 20px, 24px'
+                                              alt={`${strategy.name}.svg`}
+                                            />
+                                          </div>
+                                          <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-left text-[12px] md:text-[16px]">
+                                            {strategy.name}
+                                          </Typography.Body3>
+                                        </div>
+                                        <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
+                                          ((strategy.dai +
+                                            strategy.usdc +
+                                            strategy.usdt +
+                                            strategy.ousd) /
+                                            protocol.total) *
+                                            100,
+                                          2
+                                        )}%`}</Typography.Body3>
                                       </div>
-                                      <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-left text-[12px] md:text-[16px]">
-                                        Convex DAI+USDC+USDT
-                                      </Typography.Body3>
-                                    </div>
-                                    <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                      ((strategy.dai +
-                                        strategy.usdc +
-                                        strategy.usdt) /
-                                        strategy.total) *
-                                        100,
-                                      2
-                                    )}%`}</Typography.Body3>
-                                  </div>
-                                  <div className="flex flex-row justify-between">
-                                    <div className="flex flex-row">
-                                      <div className="relative w-6 md:w-10">
-                                        <Image
-                                          src={assetRootPath(
-                                            `/images/convex-lusd.svg`
-                                          )}
-                                          fill
-                                          sizes='(max-width: 768px) 20px, 24px'
-                                          alt='LUSD+3Crv icon'
-                                        />
-                                      </div>
-                                      <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                        Convex LUSD+3Crv
-                                      </Typography.Body3>
-                                    </div>
-                                    <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                      ((lusd.dai +
-                                        lusd.usdc +
-                                        lusd.usdt) /
-                                        strategy.total) *
-                                        100,
-                                      2
-                                    )}%`}</Typography.Body3>
-                                  </div>
-                                  <div className="flex flex-row justify-between">
-                                    <div className="flex flex-row">
-                                      <div className="relative w-6 md:w-10">
-                                        <Image
-                                          src={assetRootPath(
-                                            `/images/convex-meta.svg`
-                                          )}
-                                          fill
-                                          sizes='(max-width: 768px) 20px, 24px'
-                                          alt='OUSD+3Crv icon'
-                                        />
-                                      </div>
-                                      <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                        Convex OUSD+3Crv
-                                      </Typography.Body3>
-                                    </div>
-                                    <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                      ((meta.dai +
-                                        meta.usdc +
-                                        meta.usdt +
-                                        meta.ousd) /
-                                        strategy.total) *
-                                        100,
-                                      2
-                                    )}%`}</Typography.Body3>
-                                  </div>
+                                    )
+                                  })}
                                 </div>
-                              ) : strategy.name === 'Morpho Compound' ? (
+                              ) : protocol.name === 'Morpho' ? (
                                 <>
-                                  <div className='flex flex-col xl:flex-row xl:flex-wrap mt-[22px] xl:space-x-10 space-y-2 xl:space-y-0'>
-                                    <div className="flex flex-row justify-between whitespace-nowrap">
-                                      <div className="flex flex-row">
-                                        <div className="relative w-6">
-                                          <Image
-                                            src={assetRootPath(
-                                              `/images/adai.svg`
-                                            )}
-                                            fill
-                                            sizes='(max-width: 768px) 20px, 24px'
-                                            alt='dai'
-                                          />
-                                        </div>
-                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                          {`Morpho Aave DAI`}
-                                          </Typography.Body3>
+                                <div className='mt-[22px] space-y-2 xl:space-y-3'>
+                                  {protocol.strats.map((strategy, i) => {
+                                    return (
+                                      <div className='flex flex-col xl:flex-row xl:flex-wrap xl:space-x-10 space-y-2 xl:space-y-0' key={i}>
+                                        {tokens.map((token, i) => {
+                                          return (
+                                            <div className="flex flex-row justify-between whitespace-nowrap" key={i}>
+                                              <div className="flex flex-row">
+                                                <div className="relative w-6">
+                                                  <Image
+                                                    src={assetRootPath(
+                                                      `/images/${strategy.name.toLowerCase().split(' ')[1]}-${token}.svg`
+                                                    )}
+                                                    fill
+                                                    sizes='(max-width: 768px) 20px, 24px'
+                                                    alt={`${strategy.name.toLowerCase().split(' ')[1]}-${token}`}
+                                                  />
+                                                </div>
+                                                <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
+                                                  {`${strategy.name} ${token.toUpperCase()}`}
+                                                </Typography.Body3>
+                                              </div>
+                                              <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
+                                                protocol.total ? (strategy[token] / protocol.total) * 100 : 0,
+                                                2
+                                              )}%`}
+                                              </Typography.Body3>
+                                            </div>
+                                          )
+                                        })}
                                       </div>
-                                      <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                        (strategy.aDai / strategy.total) * 100,
-                                        2
-                                      )}%`}</Typography.Body3>
-                                    </div>
-                                    <div className="flex flex-row justify-between whitespace-nowrap">
-                                      <div className="flex flex-row">
-                                        <div className="relative w-6">
-                                          <Image
-                                            src={assetRootPath(
-                                              `/images/ausdc.svg`
-                                            )}
-                                            fill
-                                            sizes='(max-width: 768px) 20px, 24px'
-                                            alt='usdc'
-                                          />
-                                        </div>
-                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                          {`Morpho Aave USDC`}
-                                        </Typography.Body3>
+                                      
+                                    )
+                                  })}
+                                    
                                       </div>
-                                      <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                        (strategy.aUsdc / strategy.total) * 100,
-                                        2
-                                      )}%`}</Typography.Body3>
-                                    </div>
-                                    <div className="flex flex-row justify-between whitespace-nowrap">
-                                      <div className="flex flex-row">
-                                        <div className="relative w-6">
-                                          <Image
-                                            src={assetRootPath(
-                                              `/images/ausdt.svg`
-                                            )}
-                                            fill
-                                            sizes='(max-width: 768px) 20px, 24px'
-                                            alt='usdt'
-                                          />
-                                        </div>
-                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                          {`Morpho Aave USDT`}
-                                        </Typography.Body3>
-                                      </div>
-                                      <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                        (strategy.aUsdt / strategy.total) * 100,
-                                        2
-                                      )}%`}</Typography.Body3>
-                                    </div>
-                                  </div>
-                                  <div className='flex flex-col xl:flex-row xl:flex-wrap mt-[22px] xl:space-x-10 space-y-2 xl:space-y-0'>
-                                    <div className="flex flex-row justify-between whitespace-nowrap">
-                                      <div className="flex flex-row">
-                                        <div className="relative w-6">
-                                          <Image
-                                            src={assetRootPath(
-                                              `/images/cdai.svg`
-                                            )}
-                                            fill
-                                            sizes='(max-width: 768px) 20px, 24px'
-                                            alt='dai'
-                                          />
-                                        </div>
-                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                          {`Morpho Compound DAI`}
-                                          </Typography.Body3>
-                                      </div>
-                                      <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                        (strategy.cDai / strategy.total) * 100,
-                                        2
-                                      )}%`}</Typography.Body3>
-                                    </div>
-                                    <div className="flex flex-row justify-between whitespace-nowrap">
-                                      <div className="flex flex-row">
-                                        <div className="relative w-6">
-                                          <Image
-                                            src={assetRootPath(
-                                              `/images/cusdc.svg`
-                                            )}
-                                            fill
-                                            sizes='(max-width: 768px) 20px, 24px'
-                                            alt='usdc'
-                                          />
-                                        </div>
-                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                          {`Morpho Compound USDC`}
-                                        </Typography.Body3>
-                                      </div>
-                                      <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                        (strategy.cUsdc / strategy.total) * 100,
-                                        2
-                                      )}%`}</Typography.Body3>
-                                    </div>
-                                    <div className="flex flex-row justify-between whitespace-nowrap">
-                                      <div className="flex flex-row">
-                                        <div className="relative w-6">
-                                          <Image
-                                            src={assetRootPath(
-                                              `/images/cusdt.svg`
-                                            )}
-                                            fill
-                                            sizes='(max-width: 768px) 20px, 24px'
-                                            alt='usdt'
-                                          />
-                                        </div>
-                                        <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                          {`Morpho Compound USDT`}
-                                        </Typography.Body3>
-                                      </div>
-                                      <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                        (strategy.cUsdt / strategy.total) * 100,
-                                        2
-                                      )}%`}</Typography.Body3>
-                                    </div>
-                                  </div>
                                 </>
                               ) : (
-                                <div className='flex flex-col xl:flex-row xl:flex-wrap mt-[22px] xl:space-x-10 space-y-2 xl:space-y-0'>
-                                  <div className="flex flex-row justify-between">
-                                    <div className="flex flex-row">
-                                      <div className="relative w-6">
-                                        <Image
-                                          src={assetRootPath(
-                                            `/images/${strategyMapping[strategy.name].tokenPrefix}dai.svg`
-                                          )}
-                                          fill
-                                          sizes='(max-width: 768px) 20px, 24px'
-                                          alt='dai'
-                                        />
+                                <>
+                                  {protocol.strats.map((strategy, i) => {
+                                    return (
+                                      <div className='flex flex-col xl:flex-row xl:flex-wrap mt-[22px] xl:space-x-10 space-y-2 xl:space-y-0' key={i}>
+                                        {tokens.map((token, i) => {
+                                          return (
+                                            <div className="flex flex-row justify-between" key={i}>
+                                              <div className="flex flex-row">
+                                                <div className="relative w-6">
+                                                  <Image
+                                                    src={assetRootPath(
+                                                      `/images/${protocol.name}-${token}.svg`
+                                                    )}
+                                                    fill
+                                                    sizes='(max-width: 768px) 20px, 24px'
+                                                    alt='dai'
+                                                  />
+                                                </div>
+                                                <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
+                                                  {`${protocol.name} ${token.toUpperCase()}`}
+                                                  </Typography.Body3>
+                                              </div>
+                                              <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
+                                                protocol.total ? (strategy[token] / protocol.total) * 100 : 0,
+                                                2
+                                              )}%`}
+                                              </Typography.Body3>
+                                            </div>
+                                          )
+                                        })}
                                       </div>
-                                      <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                        {`${strategyMapping[strategy.name].token} DAI`}
-                                        </Typography.Body3>
-                                    </div>
-                                    <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                      (strategy.dai / strategy.total) * 100,
-                                      2
-                                    )}%`}</Typography.Body3>
-                                  </div>
-                                  <div className="flex flex-row justify-between">
-                                    <div className="flex flex-row">
-                                      <div className="relative w-6">
-                                        <Image
-                                          src={assetRootPath(
-                                            `/images/${strategyMapping[strategy.name].tokenPrefix}usdc.svg`
-                                          )}
-                                          fill
-                                          sizes='(max-width: 768px) 20px, 24px'
-                                          alt='usdc'
-                                        />
-                                      </div>
-                                      <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                        {`${strategyMapping[strategy.name].token} USDC`}
-                                      </Typography.Body3>
-                                    </div>
-                                    <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                      (strategy.usdc / strategy.total) * 100,
-                                      2
-                                    )}%`}</Typography.Body3>
-                                  </div>
-                                  <div className="flex flex-row justify-between">
-                                    <div className="flex flex-row">
-                                      <div className="relative w-6">
-                                        <Image
-                                          src={assetRootPath(
-                                            `/images/${strategyMapping[strategy.name].tokenPrefix}usdt.svg`
-                                          )}
-                                          fill
-                                          sizes='(max-width: 768px) 20px, 24px'
-                                          alt='usdt'
-                                        />
-                                      </div>
-                                      <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                        {`${strategyMapping[strategy.name].token} USDT`}
-                                      </Typography.Body3>
-                                    </div>
-                                    <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                      (strategy.usdt / strategy.total) * 100,
-                                      2
-                                    )}%`}</Typography.Body3>
-                                  </div>
-                                </div>
+                                    )
+                                  })}
+                                </>
                               )}
                               <Typography.Body3 className="mt-4 text-[#b5beca] text-left text-[12px] md:text-[14px] leading-[23px]">
-                                {strategyMapping[strategy.name].description}
+                                {protocolDescription[protocol.name]?.description}
                               </Typography.Body3>
                               <Typography.Body3 className='flex flex-row mt-4 md:hidden text-left space-x-1.5 text-[#b5beca] text-[12px] font-medium'>
                                 <div>Less info</div>
