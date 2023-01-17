@@ -69,9 +69,7 @@ export default function Footer({ locale }) {
                 </Typography.Body3>
               </Link>*/}
               <Link
-                href={
-                  'https://www.coingecko.com/en/coins/origin-dollar-governance'
-                }
+                href={'/dash'}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mr-10 mt-[20px] lg:mt-2"
