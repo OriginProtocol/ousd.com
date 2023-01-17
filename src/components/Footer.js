@@ -27,6 +27,26 @@ export default function Footer({ locale }) {
             </div>
             <div className="flex flex-col lg:flex-row justify-between">
               <Link
+                href={process.env.DISCORD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mr-10 mt-[20px] lg:mt-2"
+              >
+                <Typography.Body3 className="text-[#fafbfb]">
+                  Discord
+                </Typography.Body3>
+              </Link>
+              <Link
+                href={process.env.GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mr-10 mt-[20px] lg:mt-2"
+              >
+                <Typography.Body3 className="text-[#fafbfb]">
+                  GitHub
+                </Typography.Body3>
+              </Link>
+              <Link
                 href={'https://governance.ousd.com/'}
                 target="_blank"
                 rel="noopener noreferrer"
