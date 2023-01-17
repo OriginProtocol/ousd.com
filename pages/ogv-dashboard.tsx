@@ -350,7 +350,7 @@ const gradientEnd = "#0274F1";
 // the 24H data
 const data_cache = {};
 
-const Dash = ({
+const OgvDashboard = ({
   navLinks,
   priceData24H,
   marketCapData24H,
@@ -1029,4 +1029,4 @@ const fetchOGVPriceData = async (
   ).json();
 };
 
-export default Dash;
+export default OgvDashboard;

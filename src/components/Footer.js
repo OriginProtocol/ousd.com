@@ -69,9 +69,7 @@ export default function Footer({ locale }) {
                 </Typography.Body3>
               </Link>*/}
               <Link
-                href={'/dash'}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={'/ogv-dashboard'}
                 className="mr-10 mt-[20px] lg:mt-2"
               >
                 <Typography.Body3 className="text-[#fafbfb]">
