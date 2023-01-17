@@ -27,7 +27,7 @@ export default function Footer({ locale }) {
             </div>
             <div className="flex flex-col lg:flex-row justify-between">
               <Link
-                href={process.env.DISCORD_URL}
+                href={process.env.NEXT_PUBLIC_DISCORD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mr-10 mt-[20px] lg:mt-2"
@@ -37,7 +37,7 @@ export default function Footer({ locale }) {
                 </Typography.Body3>
               </Link>
               <Link
-                href={process.env.GITHUB_URL}
+                href={process.env.NEXT_PUBLIC_GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mr-10 mt-[20px] lg:mt-2"
