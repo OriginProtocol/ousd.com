@@ -30,7 +30,7 @@ export default function Footer({ locale }) {
                 href={process.env.NEXT_PUBLIC_DISCORD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mr-10 mt-[20px] lg:mt-2"
+                className="mt-2 lg:mr-10"
               >
                 <Typography.Body3 className="text-[#fafbfb]">
                   Discord
@@ -50,7 +50,7 @@ export default function Footer({ locale }) {
                 href={'https://governance.ousd.com/'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 lg:mr-10"
+                className="g:mr-10 mt-[20px] lg:mt-2"
               >
                 <Typography.Body3 className="text-[#fafbfb]">
                   Governance
