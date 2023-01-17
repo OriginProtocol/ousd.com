@@ -468,14 +468,20 @@ const Dash = ({
             </li>
           </ul>
 
-          <Button className="sm:mr-6 mb-3 block sm:inline text-center">
+          <Button
+            target="_blank"
+            href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
+            className="sm:mr-6 mb-3 block sm:inline text-center"
+          >
             Buy OGV
           </Button>
-          <button className="rounded-full w-full sm:w-fit border-gradient1 text-base p-[1px] cursor-pointer text-center">
-            <span className="block px-12 py-3 bg-[#141519] rounded-full">
-              Stake OGV
-            </span>
-          </button>
+          <a target="_blank" href="https://governance.ousd.com/stake">
+            <button className="rounded-full w-full sm:w-fit border-gradient1 text-base p-[1px] cursor-pointer text-center">
+              <span className="block px-12 py-3 bg-[#141519] rounded-full">
+                Stake OGV
+              </span>
+            </button>
+          </a>
 
           <div className="border-2 border-gray-700 w-full mt-20 rounded-lg grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
             <div className="sm:border-r-2 border-b-2 xl:border-b-0 flex justify-center items-center border-gray-700 h-fit">
