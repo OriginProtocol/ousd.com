@@ -957,6 +957,38 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
 
   currentPriceData = await currentPriceData.json();
 
+  const { priceData24H, marketCapData24H } = get24HData(rawData24H);
+
+  const navLinks: Link[] = transformLinks(navRes.data) as Link[];
+
+  const totalSupply = ((await OGV.totalSupply()) as BigNumber).toString();
+
+  const {
+    usd: currentPrice,
+    usd_market_cap: currentMarketCap,
+    usd_24h_change: change24H,
+  } = currentPriceData["origin-dollar-governance"];
+
+  return {
+    props: {
+      navLinks,
+      priceData24H,
+      marketCapData24H,
+      currentPrice,
+      currentMarketCap,
+      change24H,
+      totalSupply,
+      doughnutData,
+      nonCirculatingSupply,
+    },
+  };
+};
+
+const get24HData = (rawData24H: {
+  prices: number[];
+  market_caps: number[];
+  total_volumes: number[];
+}) => {
   const labels = rawData24H.prices.map((price: any) => price[0]);
 
   const prices = rawData24H.prices.map((price: any) => price[1]);
@@ -993,29 +1025,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
     ],
   };
 
-  const navLinks: Link[] = transformLinks(navRes.data) as Link[];
-
-  const totalSupply = ((await OGV.totalSupply()) as BigNumber).toString();
-
-  const {
-    usd: currentPrice,
-    usd_market_cap: currentMarketCap,
-    usd_24h_change: change24H,
-  } = currentPriceData["origin-dollar-governance"];
-
-  return {
-    props: {
-      navLinks,
-      priceData24H,
-      marketCapData24H,
-      currentPrice,
-      currentMarketCap,
-      change24H,
-      totalSupply,
-      doughnutData,
-      nonCirculatingSupply,
-    },
-  };
+  return { priceData24H, marketCapData24H };
 };
 
 const getOGVData = async (days: number) => {
