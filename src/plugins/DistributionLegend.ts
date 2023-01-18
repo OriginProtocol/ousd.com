@@ -6,11 +6,14 @@ const getOrCreateLegendList = (chart, id) => {
   let listContainer = legendContainer.querySelector("ul");
 
   if (!listContainer) {
-    listContainer = document.createElement("ul");
-    listContainer.style.display = "flex";
-    listContainer.style.flexDirection = "column";
-    listContainer.style.margin = "0";
-    listContainer.style.padding = "2rem 0 0 0";
+    listContainer = createElement("ul", [], {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        margin: "0",
+        padding: "2rem 0 0 0",
+      },
+    }) as HTMLUListElement;
 
     legendContainer.appendChild(listContainer);
   }
@@ -30,42 +33,36 @@ export const distributionLegendPlugin: Plugin = {
 
     // Reuse the built-in legendItems generator
     const { labels, datasets } = data;
+    const items: HTMLElement[] = [];
 
     (labels as string[]).forEach((item, i) => {
-      const li = document.createElement("li");
-      li.style.display = "flex";
-      li.style.alignItems = "center";
-      li.style.width = "100%";
-      li.style.paddingBottom = "2rem";
-
       // Color box
-      const boxSpan = document.createElement("span");
-      boxSpan.style.background = datasets[0].backgroundColor[i];
-      boxSpan.style.borderWidth = datasets[0].borderWidth + "px";
-      boxSpan.style.display = "inline-block";
-      boxSpan.style.height = "20px";
-      boxSpan.style.maxHeight = "20px";
-      boxSpan.style.width = "20px";
-      boxSpan.style.minWidth = "20px";
-      boxSpan.style.borderRadius = "100%";
+      const boxSpan = createElement("span", [], {
+        style: {
+          background: datasets[0].backgroundColor[i],
+          borderWidth: datasets[0].borderWidth + "px",
+          display: "inline-block",
+          height: "20px",
+          maxHeight: "20px",
+          width: "20px",
+          minWidth: "20px",
+          borderRadius: "100%",
+        },
+      });
 
       // Shareholder
-      const textContainer = document.createElement("p");
-      textContainer.style.display = "inline";
-      textContainer.style.color = "#FFF";
-      textContainer.style.margin = "0";
-      textContainer.style.padding = "0 1.5rem";
-
       const text = document.createTextNode(item);
-      textContainer.appendChild(text);
+
+      const textContainer = createElement("p", [text], {
+        style: {
+          display: "inline",
+          color: "#FFF",
+          margin: "0",
+          padding: "0 1.5rem",
+        },
+      });
 
       // Percentage
-      const percentContainer = document.createElement("p");
-      percentContainer.style.display = "inline";
-      percentContainer.style.color = "#FFF";
-      percentContainer.style.marginLeft = "auto";
-      percentContainer.style.fontWeight = "800";
-
       const dataLabel = datasets[0].label;
       const totalSupply = BigNumber.from(dataLabel);
       // Maintains precesion until 2 decimal places
@@ -77,14 +74,55 @@ export const distributionLegendPlugin: Plugin = {
       ).toString();
 
       const percentageNode = document.createTextNode(percentage + "%");
-      percentContainer.appendChild(percentageNode);
 
-      li.appendChild(boxSpan);
-      li.appendChild(textContainer);
-      li.appendChild(percentContainer);
+      const percentContainer = createElement("p", [percentageNode], {
+        style: {
+          display: "inline",
+          color: "#FFF",
+          marginLeft: "auto",
+          fontWeight: "800",
+        },
+      });
+
+      const li = createElement(
+        "li",
+        [boxSpan, textContainer, percentContainer],
+        {
+          style: {
+            display: "flex",
+            alignItems: "center",
+            width: "100%",
+            paddingBottom: "2rem",
+          },
+        }
+      );
+
       ul.appendChild(li);
     });
   },
+};
+
+const createElement = (
+  tagName: string,
+  children: (HTMLElement | Text)[],
+  props: { style: Object }
+) => {
+  const element = document.createElement(tagName);
+
+  const styleKeys = Object.keys(props.style);
+  if (styleKeys.length > 0) {
+    styleKeys.forEach((key) => {
+      element.style[key] = props.style[key];
+    });
+  }
+
+  if (children.length > 0) {
+    children.forEach((child) => {
+      element.appendChild(child);
+    });
+  }
+
+  return element;
 };
 
 export default distributionLegendPlugin;
