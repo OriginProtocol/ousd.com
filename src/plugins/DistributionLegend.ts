@@ -21,8 +21,10 @@ const getOrCreateLegendList = (chart, id) => {
   return listContainer;
 };
 
-export const distributionLegendPlugin: Plugin = {
-  id: "distributionLegend",
+export const distributionLegendPlugin: (id: string) => Plugin = (
+  id: string
+) => ({
+  id,
   afterUpdate(chart, args, options) {
     if (chart.config.type !== "doughnut") return;
     const ul = getOrCreateLegendList(chart, options.containerId);
@@ -33,7 +35,6 @@ export const distributionLegendPlugin: Plugin = {
 
     // Reuse the built-in legendItems generator
     const { labels, datasets } = data;
-    const items: HTMLElement[] = [];
 
     (labels as string[]).forEach((item, i) => {
       // Color box
@@ -100,7 +101,7 @@ export const distributionLegendPlugin: Plugin = {
       ul.appendChild(li);
     });
   },
-};
+});
 
 const createElement = (
   tagName: string,

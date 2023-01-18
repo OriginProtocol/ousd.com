@@ -45,7 +45,7 @@ ChartJS.register(
   Tooltip,
   ArcElement,
   ChartLine,
-  DistributionLegend,
+  DistributionLegend("distributionLegend"),
   RadialLinearScale
 );
 
