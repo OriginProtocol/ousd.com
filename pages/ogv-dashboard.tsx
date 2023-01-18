@@ -33,6 +33,7 @@ import { ChartLine, DistributionLegend } from "../src/plugins";
 import { BigNumber, ethers, providers, utils } from "ethers";
 const { formatEther, commify } = utils;
 import Link from "next/link";
+import { shortenAddress } from "../src/utils/shortenAddress";
 
 ChartJS.register(
   CategoryScale,
@@ -67,6 +68,12 @@ interface DashProps {
   change24H: number;
   totalSupply: string;
   doughnutData: ChartData<"doughnut">;
+  nonCirculatingSupply: {
+    address: string;
+    internalLabel: string;
+    publicLabel: string;
+    balance: string;
+  }[];
 }
 
 const buttonCSS = "w-16 md:w-24 lg:w-26 text-sm py-4 mr-2 lg:mr-4 rounded-full";
@@ -274,7 +281,7 @@ enum ChartTime {
   ONE_YEAR = 365,
 }
 
-const nonCirculatingSupply = [
+const nonCirculating = [
   {
     address: "0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899",
     internalLabel: "5 of 8",
@@ -343,6 +350,37 @@ const nonCirculatingSupply = [
   },
 ];
 
+const doughnutData: ChartData<"doughnut"> = {
+  labels: [
+    "Airdrop to OGN holders",
+    "Future liquidity mining",
+    "DAO reserve",
+    "Airdrop to OUSD holders",
+    "Early contributors",
+    "Future contributors",
+    "Prelaunch liquidity mining campaign",
+  ],
+  datasets: [
+    {
+      label: "4000000000",
+      data: [
+        1000000000, 1000000000, 750000000, 400000000, 400000000, 400000000,
+        50000000,
+      ],
+      backgroundColor: [
+        "#6222FD",
+        "#5BC0EB",
+        "#EF767A",
+        "#66FE90",
+        "#FFDC86",
+        "#54414E",
+        "#FF57F2",
+      ],
+      borderWidth: 0,
+    },
+  ],
+};
+
 const gradientStart = "#8C66FC";
 const gradientEnd = "#0274F1";
 
@@ -359,6 +397,7 @@ const OgvDashboard = ({
   change24H,
   totalSupply,
   doughnutData,
+  nonCirculatingSupply,
 }: DashProps) => {
   const { chartRef, chartData: chartPriceData24H } = useChartGradient(
     priceData24H,
@@ -565,9 +604,7 @@ const OgvDashboard = ({
                                     {e.publicLabel}
                                   </div>
                                   <div className="mt-1 text-gradient2">
-                                    {e.address.substring(0, 6) +
-                                      "..." +
-                                      e.address.substring(e.address.length - 4)}
+                                    {shortenAddress(e.address)}
                                   </div>
                                 </div>
                                 <div>
@@ -882,7 +919,7 @@ const TimeButtons = ({ chartTime, alterChartTime }: TimeButtonsProps) => {
 export const getServerSideProps: GetServerSideProps = async (): Promise<{
   props: DashProps;
 }> => {
-  const navRes = await fetchAPI("/ousd-nav-links", {
+  const navResPromise = fetchAPI("/ousd-nav-links", {
     populate: {
       links: {
         populate: "*",
@@ -890,7 +927,36 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
     },
   });
 
-  const rawData24H = await fetchOGVPriceData(1);
+  const rawData24HPromise = fetchOGVPriceData(1);
+
+  const currentPriceDataPromise = fetch(
+    "https://api.coingecko.com/api/v3/simple/price?ids=origin-dollar-governance&vs_currencies=usd&include_market_cap=true&include_24hr_change=true&precision=full"
+  );
+
+  const provider = new providers.JsonRpcProvider(
+    process.env.ETHEREUM_RPC_PROVIDER
+  );
+  const OGV = new ethers.Contract(
+    "0x9c354503c38481a7a7a51629142963f98ecc12d0",
+    ogvAbi,
+    provider
+  );
+
+  let [navRes, rawData24H, currentPriceData, ...nonCirculatingBalances] =
+    await Promise.all([
+      navResPromise,
+      rawData24HPromise,
+      currentPriceDataPromise,
+      ...nonCirculating.map((e) => OGV.balanceOf(e.address)),
+    ]);
+
+  const nonCirculatingSupply = nonCirculating.map((e, i) => ({
+    ...e,
+    balance: nonCirculatingBalances[i].toString(),
+  }));
+
+  currentPriceData = await currentPriceData.json();
+
   const labels = rawData24H.prices.map((price: any) => price[0]);
 
   const prices = rawData24H.prices.map((price: any) => price[1]);
@@ -929,21 +995,6 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
 
   const navLinks: Link[] = transformLinks(navRes.data) as Link[];
 
-  const currentPriceData = await (
-    await fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=origin-dollar-governance&vs_currencies=usd&include_market_cap=true&include_24hr_change=true&precision=full"
-    )
-  ).json();
-
-  const provider = new providers.JsonRpcProvider(
-    process.env.ETHEREUM_RPC_PROVIDER
-  );
-  const OGV = new ethers.Contract(
-    "0x9c354503c38481a7a7a51629142963f98ecc12d0",
-    ogvAbi,
-    provider
-  );
-
   const totalSupply = ((await OGV.totalSupply()) as BigNumber).toString();
 
   const {
@@ -951,37 +1002,6 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
     usd_market_cap: currentMarketCap,
     usd_24h_change: change24H,
   } = currentPriceData["origin-dollar-governance"];
-
-  const doughnutData: ChartData<"doughnut"> = {
-    labels: [
-      "Airdrop to OGN holders",
-      "Future liquidity mining",
-      "DAO reserve",
-      "Airdrop to OUSD holders",
-      "Early contributors",
-      "Future contributors",
-      "Prelaunch liquidity mining campaign",
-    ],
-    datasets: [
-      {
-        label: "4000000000",
-        data: [
-          1000000000, 1000000000, 750000000, 400000000, 400000000, 400000000,
-          50000000,
-        ],
-        backgroundColor: [
-          "#6222FD",
-          "#5BC0EB",
-          "#EF767A",
-          "#66FE90",
-          "#FFDC86",
-          "#54414E",
-          "#FF57F2",
-        ],
-        borderWidth: 0,
-      },
-    ],
-  };
 
   return {
     props: {
@@ -993,6 +1013,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
       change24H,
       totalSupply,
       doughnutData,
+      nonCirculatingSupply,
     },
   };
 };
