@@ -53,10 +53,10 @@ interface Link {
   href: string;
   label: string;
   isButton: boolean;
-  highlightText: null; //don't know type? seems to always be null
+  highlightText: null;
   order: number;
-  target: "_blank" | "_parent"; //only two types I've seen
-  links: any[]; //Not sure what type of array
+  target: "_blank" | "_self" | "_parent" | "_top";
+  links: any[];
 }
 
 interface DashProps {
@@ -100,12 +100,12 @@ const lineOptions: ChartOptions<"line"> = {
         if ("ontouchstart" in window) return;
 
         // Tooltip Element
-        let tooltipEl = document.getElementById("chartjs-tooltip");
+        let tooltipEl = document.getElementById("ogv-price-tooltip");
 
         // Create element on first render
         if (!tooltipEl) {
           tooltipEl = document.createElement("div");
-          tooltipEl.id = "chartjs-tooltip";
+          tooltipEl.id = "ogv-price-tooltip";
           tooltipEl.innerHTML = "<table></table>";
           document.body.appendChild(tooltipEl);
         }
@@ -286,67 +286,56 @@ const nonCirculating = [
     address: "0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899",
     internalLabel: "5 of 8",
     publicLabel: "Foundation Reserves",
-    balance: "134722498699649480421838136",
   },
   {
     address: "0xcaa5eF7AbC36D5E5a3E4d7930DCfF3226617A167",
     internalLabel: "Old T3 Team Hot Wallet",
     publicLabel: "Team Distribution",
-    balance: "0",
   },
   {
     address: "0x2EaE0CaE2323167ABF78462e0C0686865c67a655",
     internalLabel: "New T3 Team Hot Wallet",
     publicLabel: "Team Distribution",
-    balance: "11574046000000000000000000",
   },
   {
     address: "0x3Da5045699802Ea1fCc60130dEDEa67139C5b8C0",
     internalLabel: "Old T3 Investor Hot Wallet",
     publicLabel: "Investor Distribution",
-    balance: "0",
   },
   {
     address: "0xFE730B3cf80cA7B31905f70241F7C786BAF443E3",
     internalLabel: "New T3 Investor Hot Wallet",
     publicLabel: "Investor Distribution",
-    balance: "17231732000000000000000000",
   },
   {
     address: "0x12D7EF3C933D091210cD931224Ead45D9cFdDdE0",
     internalLabel: "Lukewarm",
     publicLabel: "Distribution Staging",
-    balance: "42928292937811834686798801",
   },
   {
     address: "0x0C4576Ca1c365868E162554AF8e385dc3e7C66D9",
     internalLabel: "Staked OGV",
     publicLabel: "Staked OGV",
-    balance: "3181414885965682533447342615",
   },
   {
     address: "0x7aE2334f12a449895AD21d4c255D9DE194fe986f",
     internalLabel: "OGV Claims",
     publicLabel: "OGV Claims",
-    balance: "0",
   },
   {
     address: "0xD667091c2d1DCc8620f4eaEA254CdFB0a176718D",
     internalLabel: "veOGV Claims",
     publicLabel: "veOGV Claims",
-    balance: "0",
   },
   {
     address: "0x8ac3b96d118288427055ae7f62e407fC7c482F57",
     internalLabel: "Custodian for Brave Endeavors",
     publicLabel: "Custodian",
-    balance: "9106996190152868000088279",
   },
   {
     address: "0xA2Cc2eAE69cBf04a3D5660bc3E689B035324Fc3F",
     internalLabel: "Custodian for Limitless Alpha",
     publicLabel: "Custodian",
-    balance: "10486706285718218644339915",
   },
 ];
 
@@ -658,7 +647,11 @@ const OgvDashboard = ({
                         <div className="relative left-[-85%] xl:left-[-0.5rem] bg-[#272727] w-60 h-16 rounded-sm text-xs text-center p-2">
                           {`Total supply changes over time due to inflation and
                         tokens being burned. `}
-                          <a className="text-blue-700 cursor-pointer">
+                          <a
+                            target="_blank"
+                            href="https://docs.ousd.com/governance/ogv-staking#staking-rewards"
+                            className="text-blue-700 cursor-pointer"
+                          >
                             Learn more
                           </a>
                         </div>
