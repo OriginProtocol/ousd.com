@@ -12,7 +12,7 @@ export const useViewWidth = () => {
     const handleResize = () => setWidth(hasWindow ? window.innerWidth : 0);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [hasWindow]);
+  }, []);
 
   return width;
 };
