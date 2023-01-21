@@ -479,14 +479,14 @@ const OgvDashboard = ({
               src={assetRootPath("/images/ogv.svg")}
               width="100"
               height="100"
-              className="ogv-logo mr-4"
+              className="ogv-logo"
               alt="OGV logo"
             />
-            <Typography.H3 className="w-1/2 ml-12">
+            <h1 className="font-sansSailec font-bold text-3xl md:text-6xl w-1/2 ml-6 sm:ml-12">
               Origin Dollar Governance (OGV)
-            </Typography.H3>
+            </h1>
           </div>
-          <ul className="list-disc text-white py-8">
+          <ul className="list-disc text-white py-8 text-base md:text-2xl ml-6">
             <li className=" text-white py-1.5">
               OGV is the
               <span className="text-gradient2 font-bold px-1">governance</span>
@@ -769,7 +769,7 @@ const OgvDashboard = ({
           <Typography.Body3 className="text-[#b5beca] mt-4">
             Initial allocation at launch
           </Typography.Body3>
-          <div className="flex flex-col xl:flex-row items-center mt-30 mb-30 relative">
+          <div className="flex flex-col xl:flex-row items-center my-28 relative">
             <div className="h-80 w-80 sm:h-120 sm:w-120 mb-4 xl:mr-28">
               <Doughnut options={doughnutOptions} data={doughnutData} />
             </div>
@@ -789,7 +789,7 @@ const OgvDashboard = ({
       {/* Listed on top exchanges */}
       <section className="bg-[#1e1f25] px-8 md:px-16 lg:px-[8.375rem]">
         <div className="w-full max-w-[89.5rem] flex flex-col items-center mx-auto">
-          <Typography.H3 className="mt-30">
+          <Typography.H3 className="mt-28">
             Listed on top exchanges
           </Typography.H3>
           <div className="my-12 grid grid-cols-2 md:grid-cols-3 gap-3 w-full">
@@ -884,7 +884,7 @@ const OgvDashboard = ({
               </div>
             </a>
           </div>
-          <div className="mb-30">
+          <div className="mb-28">
             <Button
               className="mb-4 md:mr-6 block md:inline"
               target="_blank"
@@ -932,12 +932,12 @@ interface TimeButtonsProps {
 
 const StakeBannerButtons = () => {
   return (
-    <div className="flex flex-col items-center justify-center w-fit z-10 sm:ml-12">
+    <div className="flex flex-col items-center justify-center w-full md:w-fit z-10 sm:ml-12">
       <a
         target="_blank"
         rel="noopener noreferrer"
         href="https://governance.ousd.com/stake"
-        className="w-full"
+        className="w-full flex justify-center"
       >
         <button className="rounded-full w-full sm:w-fit border-gradient1 text-sm sm:text-base p-[1px] cursor-pointer text-center mb-2">
           <span className="block px-12 md:px-16 py-4 bg-transparent rounded-full whitespace-nowrap">
@@ -949,7 +949,7 @@ const StakeBannerButtons = () => {
         target="_blank"
         rel="noopener noreferrer"
         href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
-        className="block sm:inline text-center text-sm sm:text-base w-full md:w-[13rem]"
+        className="block sm:inline text-center text-sm sm:text-base w-full sm:w-[11rem] md:w-[13rem]"
       >
         Buy OGV
       </Button>
