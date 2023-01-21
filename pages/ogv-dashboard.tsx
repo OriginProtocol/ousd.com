@@ -470,6 +470,8 @@ const OgvDashboard = ({
         <title>Dashboard</title>
       </Head>
       <Header mappedLinks={navLinks} webProperty="ousd" />
+
+      {/* General OGV Price Stats */}
       <section className="bg-[#141519] px-8 md:px-16 lg:px-[8.375rem]">
         <div className="max-w-[89.5rem] mx-auto">
           <div className="flex">
@@ -498,14 +500,19 @@ const OgvDashboard = ({
 
           <Button
             target="_blank"
+            rel="noopener noreferrer"
             href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
             className="sm:mr-6 mb-3 block sm:inline text-center"
           >
             Buy OGV
           </Button>
-          <a target="_blank" href="https://governance.ousd.com/stake">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://governance.ousd.com/stake"
+          >
             <button className="rounded-full w-full sm:w-fit border-gradient1 text-base p-[1px] cursor-pointer text-center">
-              <span className="block px-12 py-3 bg-[#141519] rounded-full">
+              <span className="block px-12 py-4 bg-[#141519] rounded-full">
                 Stake OGV
               </span>
             </button>
@@ -649,6 +656,7 @@ const OgvDashboard = ({
                         tokens being burned. `}
                           <a
                             target="_blank"
+                            rel="noopener noreferrer"
                             href="https://docs.ousd.com/governance/ogv-staking#staking-rewards"
                             className="text-blue-700 cursor-pointer"
                           >
@@ -724,6 +732,37 @@ const OgvDashboard = ({
         </div>
       </section>
 
+      {/* OGV Staking */}
+      <section className="bg-[#141519] px-8 md:px-16 lg:px-[8.375rem]">
+        <div className="relative max-w-[89.5rem] h-fit mx-auto gradient3 rounded-lg overflow-hidden">
+          <Image
+            src={assetRootPath("/images/splines2.png")}
+            width="500"
+            height="500"
+            className="absolute bottom-0 right-0 translate-x-1/3 sm:translate-x-0"
+            alt="Splines"
+          />
+          <div className="flex justify-between items-center p-14 h-full">
+            <div className="z-10 w-full">
+              <h4 className="font-sansSailec font-bold text-3xl md:text-4xl lg:text-5xl">
+                Stake OGV
+              </h4>
+              <h4 className="font-sansSailec font-bold text-3xl md:text-4xl lg:text-5xl text-gradient1">
+                Earn 105% APY
+              </h4>
+              <p className="font-sansInter font-normal text-base md:text-lg mt-4 mb-8">
+                Fees and voting rights accrue to OGV stakers. <br /> Control the
+                future of OUSD and profit from its growth.
+              </p>
+
+              {width < smSize && <StakeBannerButtons />}
+            </div>
+            {width >= smSize && <StakeBannerButtons />}
+          </div>
+        </div>
+      </section>
+
+      {/* OGV Allocation Distribution */}
       <section className="bg-[#141519] px-8 md:px-16 lg:px-[8.375rem]">
         <div className="max-w-[89.5rem] mx-auto">
           <Typography.H3 className="mt-20">OGV Allocation</Typography.H3>
@@ -747,13 +786,18 @@ const OgvDashboard = ({
         </div>
       </section>
 
+      {/* Listed on top exchanges */}
       <section className="bg-[#1e1f25] px-8 md:px-16 lg:px-[8.375rem]">
         <div className="w-full max-w-[89.5rem] flex flex-col items-center mx-auto">
           <Typography.H3 className="mt-30">
             Listed on top exchanges
           </Typography.H3>
           <div className="my-12 grid grid-cols-2 md:grid-cols-3 gap-3 w-full">
-            <a target="_blank" href="https://www.kucoin.com/trade/OGV-USDT">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.kucoin.com/trade/OGV-USDT"
+            >
               <div className="bg-[#141519] relative cursor-pointer flex justify-center items-center h-52 rounded-tl-3xl">
                 <Image
                   src={assetRootPath("/images/kucoin.svg")}
@@ -766,6 +810,7 @@ const OgvDashboard = ({
             </a>
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href="https://www.huobi.com/en-in/exchange/ogv_usdt"
             >
               <div className="bg-[#141519] cursor-pointer flex justify-center items-center h-52 rounded-tr-3xl md:rounded-none">
@@ -778,7 +823,11 @@ const OgvDashboard = ({
                 />
               </div>
             </a>
-            <a target="_blank" href="https://www.mexc.com/exchange/OGV_USDT">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.mexc.com/exchange/OGV_USDT"
+            >
               <div className="bg-[#141519] cursor-pointer flex justify-center items-center h-52 rounded-none md:rounded-tr-3xl">
                 <Image
                   src={assetRootPath("/images/mexc-global.svg")}
@@ -789,7 +838,11 @@ const OgvDashboard = ({
                 />
               </div>
             </a>
-            <a target="_blank" href="https://www.gate.io/trade/OGV_USDT">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.gate.io/trade/OGV_USDT"
+            >
               <div className="bg-[#141519] cursor-pointer flex justify-center items-center h-52 rounded-none md:rounded-bl-3xl">
                 <Image
                   src={assetRootPath("/images/gate.io.svg")}
@@ -802,6 +855,7 @@ const OgvDashboard = ({
             </a>
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
             >
               <div className="bg-[#141519] cursor-pointer flex justify-center items-center h-52 rounded-bl-3xl md:rounded-none">
@@ -814,7 +868,11 @@ const OgvDashboard = ({
                 />
               </div>
             </a>
-            <a target="_blank" href="https://www.bitget.com/spot/OGVUSDT_SPBL">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.bitget.com/spot/OGVUSDT_SPBL"
+            >
               <div className="bg-[#141519] cursor-pointer flex justify-center items-center h-52 rounded-br-3xl">
                 <Image
                   src={assetRootPath("/images/bitget.svg")}
@@ -830,6 +888,7 @@ const OgvDashboard = ({
             <Button
               className="mb-4 md:mr-6 block md:inline"
               target="_blank"
+              rel="noopener noreferrer"
               href="https://www.coingecko.com/coins/origin-dollar-governance#markets"
             >
               View all on CoinGecko{" "}
@@ -844,6 +903,7 @@ const OgvDashboard = ({
             <Button
               className="block md:inline"
               target="_blank"
+              rel="noopener noreferrer"
               href="https://coinmarketcap.com/currencies/origin-dollar-governance/markets "
             >
               View all on CoinMarketCap
@@ -870,9 +930,36 @@ interface TimeButtonsProps {
   alterChartTime: (chartTime: ChartTime) => void;
 }
 
+const StakeBannerButtons = () => {
+  return (
+    <div className="flex flex-col items-center justify-center w-fit z-10 sm:ml-12">
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://governance.ousd.com/stake"
+        className="w-full"
+      >
+        <button className="rounded-full w-full sm:w-fit border-gradient1 text-sm sm:text-base p-[1px] cursor-pointer text-center mb-2">
+          <span className="block px-12 md:px-16 py-4 bg-transparent rounded-full whitespace-nowrap">
+            Stake OGV
+          </span>
+        </button>
+      </a>
+      <Button
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
+        className="block sm:inline text-center text-sm sm:text-base w-full md:w-[13rem]"
+      >
+        Buy OGV
+      </Button>
+    </div>
+  );
+};
+
 const TimeButtons = ({ chartTime, alterChartTime }: TimeButtonsProps) => {
   return (
-    <div>
+    <div className="mb-24 sm:mb-0">
       <button
         onClick={() => alterChartTime(ChartTime.ONE_DAY)}
         className={`${buttonCSS} ${
