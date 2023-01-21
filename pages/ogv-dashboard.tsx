@@ -46,7 +46,13 @@ ChartJS.register(
   ArcElement,
   ChartLine,
   DistributionLegend("distributionLegend"),
-  RadialLinearScale
+  RadialLinearScale,
+  {
+    id: "eventCatcher",
+    beforeEvent: (chart, args, pluginOoptions) => {
+      console.log(args.event.type);
+    },
+  }
 );
 
 interface Link {
@@ -81,8 +87,6 @@ const smSize = 640;
 const buttonCSS = "w-16 md:w-24 lg:w-26 text-sm py-4 mr-2 lg:mr-4 rounded-full";
 
 const lineOptions: ChartOptions<"line"> = {
-  responsive: true,
-  maintainAspectRatio: true,
   plugins: {
     legend: {
       display: false,
@@ -162,6 +166,7 @@ const lineOptions: ChartOptions<"line"> = {
           tooltipEl.innerHTML = innerHtml;
         }
 
+        const position = context.chart.canvas.getBoundingClientRect();
         const width = tooltipModel.chart.width;
 
         // Display, position, and set styles for font
@@ -214,9 +219,12 @@ const lineOptions: ChartOptions<"line"> = {
         align: "start",
         maxRotation: 0,
         font: () => {
-          if (screen.width < smSize) return { size: 10 };
+          if (window.innerWidth < smSize)
+            return {
+              size: 8,
+            };
           return {
-            size: 12,
+            size: 10,
           };
         },
       },
@@ -233,7 +241,10 @@ const lineOptions: ChartOptions<"line"> = {
         padding: 10,
         count: 2,
         font: () => {
-          if (screen.width < smSize) return { size: 10 };
+          if (window.innerWidth < smSize)
+            return {
+              size: 10,
+            };
           return {
             size: 18,
           };
@@ -733,9 +744,9 @@ const OgvDashboard = ({
             </div>
           </div>
 
-          <div id="ogv-price-chart" className="relative w-full h-[25vw]I">
+          <div id="ogv-price-chart" className="relative">
             <Line
-              className="mt-10 mb-10 border-2 border-gray-700 rounded-lg w-fullI h-[25vw]I"
+              className="mt-10 mb-10 border-2 border-gray-700 rounded-lg w-fullI h-[40vw]I"
               ref={chartRef}
               data={chartPriceData24H}
               options={lineOptions}
