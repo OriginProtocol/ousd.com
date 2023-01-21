@@ -81,6 +81,8 @@ const smSize = 640;
 const buttonCSS = "w-16 md:w-24 lg:w-26 text-sm py-4 mr-2 lg:mr-4 rounded-full";
 
 const lineOptions: ChartOptions<"line"> = {
+  responsive: true,
+  maintainAspectRatio: true,
   plugins: {
     legend: {
       display: false,
@@ -731,9 +733,9 @@ const OgvDashboard = ({
             </div>
           </div>
 
-          <div id="ogv-price-chart" className="relative">
+          <div id="ogv-price-chart" className="relative w-full h-[25vw]I">
             <Line
-              className="mt-10 mb-10 border-2 border-gray-700 rounded-lg"
+              className="mt-10 mb-10 border-2 border-gray-700 rounded-lg w-fullI h-[25vw]I"
               ref={chartRef}
               data={chartPriceData24H}
               options={lineOptions}
@@ -751,7 +753,7 @@ const OgvDashboard = ({
 
       {/* OGV Staking */}
       <section className="bg-[#141519] px-8 md:px-16 lg:px-[8.375rem]">
-        <div className="relative max-w-[89.5rem] h-fit mx-auto gradient3 rounded-lg overflow-hidden">
+        <div className="relative max-w-[89.5rem] h-fit mx-auto gradient3 rounded-lg overflow-hidden mt-28">
           <Image
             src={assetRootPath("/images/splines2.png")}
             width="500"
@@ -976,7 +978,7 @@ const StakeBannerButtons = () => {
 
 const TimeButtons = ({ chartTime, alterChartTime }: TimeButtonsProps) => {
   return (
-    <div className="mb-24 sm:mb-0">
+    <div className="mt-8 sm:mt-0">
       <button
         onClick={() => alterChartTime(ChartTime.ONE_DAY)}
         className={`${buttonCSS} ${

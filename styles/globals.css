@@ -275,6 +275,14 @@ section.black {
   border-top: 0.5rem solid #272727;
 }
 
+.w-fullI {
+  width: 100% !important;
+}
+
+.h-\[25vw\]I {
+  height: 40vw !important;
+}
+
 @media (min-width: 640px) {
   .sm\:h-120 {
     height: 30rem /* 480px */;
