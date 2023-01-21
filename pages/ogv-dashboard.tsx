@@ -192,6 +192,8 @@ const lineOptions: ChartOptions<"line"> = {
       time: {
         displayFormats: {
           hour: "HH:mm",
+          day: "HH:mm",
+          month: "MM/yy",
         },
       },
       adapters: {
