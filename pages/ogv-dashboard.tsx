@@ -76,6 +76,8 @@ interface DashProps {
   }[];
 }
 
+const smSize = 640;
+
 const buttonCSS = "w-16 md:w-24 lg:w-26 text-sm py-4 mr-2 lg:mr-4 rounded-full";
 
 const lineOptions: ChartOptions<"line"> = {
@@ -97,8 +99,7 @@ const lineOptions: ChartOptions<"line"> = {
         },
       },
       external: (context) => {
-        if ("ontouchstart" in window) return;
-
+        const chart = document.getElementById("ogv-price-chart");
         // Tooltip Element
         let tooltipEl = document.getElementById("ogv-price-tooltip");
 
@@ -107,7 +108,7 @@ const lineOptions: ChartOptions<"line"> = {
           tooltipEl = document.createElement("div");
           tooltipEl.id = "ogv-price-tooltip";
           tooltipEl.innerHTML = "<table></table>";
-          document.body.appendChild(tooltipEl);
+          chart.appendChild(tooltipEl);
         }
 
         // Hide if no tooltip
@@ -159,17 +160,21 @@ const lineOptions: ChartOptions<"line"> = {
           tooltipEl.innerHTML = innerHtml;
         }
 
-        const position = context.chart.canvas.getBoundingClientRect();
+        const width = tooltipModel.chart.width;
 
         // Display, position, and set styles for font
         tooltipEl.style.opacity = "1";
         tooltipEl.style.position = "absolute";
-        tooltipEl.style.left =
-          position.left + window.pageXOffset + tooltipModel.caretX + "px";
-        tooltipEl.style.top =
-          position.top + window.pageYOffset + tooltipModel.caretY + "px";
+        if (tooltipModel.caretX <= width / 2)
+          tooltipEl.style.left = tooltipModel.caretX + "px";
+        else {
+          tooltipEl.style.left = "auto";
+          tooltipEl.style.right = width - tooltipModel.caretX + "px";
+        }
+        tooltipEl.style.top = tooltipModel.caretY + "px";
 
         tooltipEl.style.marginLeft = "0.5rem";
+        tooltipEl.style.marginRight = "0.5rem";
         tooltipEl.style.pointerEvents = "none";
       },
     },
@@ -206,6 +211,12 @@ const lineOptions: ChartOptions<"line"> = {
         maxTicksLimit: 6,
         align: "start",
         maxRotation: 0,
+        font: () => {
+          if (screen.width < smSize) return { size: 10 };
+          return {
+            size: 12,
+          };
+        },
       },
       grid: {
         display: false,
@@ -219,8 +230,11 @@ const lineOptions: ChartOptions<"line"> = {
       ticks: {
         padding: 10,
         count: 2,
-        font: {
-          size: 18,
+        font: () => {
+          if (screen.width < smSize) return { size: 10 };
+          return {
+            size: 18,
+          };
         },
       },
       grid: {
@@ -397,7 +411,6 @@ const OgvDashboard = ({
   );
 
   const width = useViewWidth();
-  const smSize = 640;
 
   const [chartType, setChartType] = useState<ChartType>(ChartType.Price);
   const [chartTime, setChartTime] = useState<ChartTime>(ChartTime.ONE_DAY);
@@ -718,12 +731,14 @@ const OgvDashboard = ({
             </div>
           </div>
 
-          <Line
-            className="mt-10 mb-10 border-2 border-gray-700 rounded-lg"
-            ref={chartRef}
-            data={chartPriceData24H}
-            options={lineOptions}
-          />
+          <div id="ogv-price-chart" className="relative">
+            <Line
+              className="mt-10 mb-10 border-2 border-gray-700 rounded-lg"
+              ref={chartRef}
+              data={chartPriceData24H}
+              options={lineOptions}
+            />
+          </div>
 
           {width < smSize && (
             <TimeButtons
