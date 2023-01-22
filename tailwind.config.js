@@ -8,6 +8,12 @@ module.exports = {
     extend: {
       dropShadow: {
         'ousd': '0px 4px 56px rgba(20, 21, 25, 0.9)',
+      },
+      colors: {
+        "origin-bg-black": "#141519",
+        "origin-bg-grey": "#1e1f25",
+        "subheading": "#b5beca",
+        tooltip: "#272727"
       }
     }
   },

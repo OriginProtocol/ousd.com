@@ -500,7 +500,7 @@ const OgvDashboard = ({
       <Header mappedLinks={navLinks} webProperty="ousd" />
 
       {/* General OGV Price Stats */}
-      <section className="bg-[#141519] px-8 md:px-16 lg:px-[8.375rem]">
+      <section className="bg-origin-bg-black px-8 md:px-16 lg:px-[8.375rem]">
         <div className="max-w-[89.5rem] mx-auto">
           <div className="flex">
             <Image
@@ -540,7 +540,7 @@ const OgvDashboard = ({
             href="https://governance.ousd.com/stake"
           >
             <button className="rounded-full w-full sm:w-fit border-gradient1 text-base p-[1px] cursor-pointer text-center">
-              <span className="block px-12 py-4 bg-[#141519] rounded-full">
+              <span className="block px-12 py-4 bg-origin-bg-black rounded-full">
                 Stake OGV
               </span>
             </button>
@@ -549,7 +549,7 @@ const OgvDashboard = ({
           <div className="border-2 border-gray-700 w-full mt-20 rounded-lg grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
             <div className="sm:border-r-2 border-b-2 xl:border-b-0 flex justify-center items-center border-gray-700 h-fit">
               <div className="py-8">
-                <div className="text-lg text-[#b5beca] text-center sm:text-left">
+                <div className="text-lg text-subheading text-center sm:text-left">
                   Current Price
                 </div>
                 <div className="flex items-center">
@@ -580,7 +580,7 @@ const OgvDashboard = ({
             </div>
             <div className="xl:border-r-2 border-b-2 xl:border-b-0 flex justify-center items-center border-gray-700">
               <div className="py-8">
-                <div className="text-lg text-[#b5beca] text-center sm:text-left">
+                <div className="text-lg text-subheading text-center sm:text-left">
                   Market Cap
                 </div>
                 <div className="text-2xl font-bold text-center sm:text-left">
@@ -593,7 +593,7 @@ const OgvDashboard = ({
             </div>
             <div className="sm:border-r-2 border-b-2 sm:border-b-0 flex justify-center items-center border-gray-700">
               <div className="py-8">
-                <div className="text-lg text-[#b5beca] text-center sm:text-left">
+                <div className="text-lg text-subheading text-center sm:text-left">
                   Circulating Supply
                   <div
                     className="relative hidden sm:inline"
@@ -606,7 +606,7 @@ const OgvDashboard = ({
                           circSupplyHover ? "visible" : "invisible"
                         } right-0 pl-2 top-0 translate-x-full translate-y-[-25%] absolute h-fit z-10`}
                       >
-                        <div className="relative bg-[#272727] w-fit h-fit text-xs py-4 rounded-sm">
+                        <div className="relative bg-tooltip w-fit h-fit text-xs py-4 rounded-sm">
                           <span className="text-base text-white font-bold whitespace-nowrap mx-5 xl:mx-8 overflow-hidden">
                             Wallets excluded from circulating supply
                           </span>
@@ -666,7 +666,7 @@ const OgvDashboard = ({
             </div>
             <div className="flex justify-center items-center">
               <div className="py-8">
-                <div className="text-lg text-[#b5beca] text-center sm:text-left">
+                <div className="text-lg text-subheading text-center sm:text-left">
                   Total Supply
                   <div
                     className="relative hidden sm:inline"
@@ -679,7 +679,7 @@ const OgvDashboard = ({
                           totalSupplyHover ? "visible" : "invisible"
                         } absolute h-fit left-0 top-0 translate-y-[-100%]`}
                       >
-                        <div className="relative left-[-85%] xl:left-[-0.5rem] bg-[#272727] w-60 h-16 rounded-sm text-xs text-center p-2">
+                        <div className="relative left-[-85%] xl:left-[-0.5rem] bg-tooltip w-60 h-16 rounded-sm text-xs text-center p-2">
                           {`Total supply changes over time due to inflation and
                         tokens being burned. `}
                           <a
@@ -763,7 +763,7 @@ const OgvDashboard = ({
       </section>
 
       {/* OGV Staking */}
-      <section className="bg-[#141519] px-8 md:px-16 lg:px-[8.375rem]">
+      <section className="bg-origin-bg-black px-8 md:px-16 lg:px-[8.375rem]">
         <div className="relative max-w-[89.5rem] h-fit mx-auto gradient3 rounded-lg overflow-hidden mt-28">
           <Image
             src={assetRootPath("/images/splines2.png")}
@@ -793,10 +793,10 @@ const OgvDashboard = ({
       </section>
 
       {/* OGV Allocation Distribution */}
-      <section className="bg-[#141519] px-8 md:px-16 lg:px-[8.375rem]">
+      <section className="bg-origin-bg-black px-8 md:px-16 lg:px-[8.375rem]">
         <div className="max-w-[89.5rem] mx-auto">
           <Typography.H3 className="mt-20">OGV Allocation</Typography.H3>
-          <Typography.Body3 className="text-[#b5beca] mt-4">
+          <Typography.Body3 className="text-subheading mt-4">
             Initial allocation at launch
           </Typography.Body3>
           <div className="flex flex-col xl:flex-row items-center my-28 relative">
@@ -817,7 +817,7 @@ const OgvDashboard = ({
       </section>
 
       {/* Listed on top exchanges */}
-      <section className="bg-[#1e1f25] px-8 md:px-16 lg:px-[8.375rem]">
+      <section className="bg-origin-bg-grey px-8 md:px-16 lg:px-[8.375rem]">
         <div className="w-full max-w-[89.5rem] flex flex-col items-center mx-auto">
           <Typography.H3 className="mt-28">
             Listed on top exchanges
@@ -828,7 +828,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.kucoin.com/trade/OGV-USDT"
             >
-              <div className="bg-[#141519] relative cursor-pointer flex justify-center items-center h-52 rounded-tl-3xl">
+              <div className="bg-origin-bg-black relative cursor-pointer flex justify-center items-center h-52 rounded-tl-3xl">
                 <Image
                   src={assetRootPath("/images/kucoin.svg")}
                   width="200"
@@ -843,7 +843,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.huobi.com/en-in/exchange/ogv_usdt"
             >
-              <div className="bg-[#141519] cursor-pointer flex justify-center items-center h-52 rounded-tr-3xl md:rounded-none">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-tr-3xl md:rounded-none">
                 <Image
                   src={assetRootPath("/images/huobi.svg")}
                   width="200"
@@ -858,7 +858,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.mexc.com/exchange/OGV_USDT"
             >
-              <div className="bg-[#141519] cursor-pointer flex justify-center items-center h-52 rounded-none md:rounded-tr-3xl">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-none md:rounded-tr-3xl">
                 <Image
                   src={assetRootPath("/images/mexc-global.svg")}
                   width="200"
@@ -873,7 +873,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.gate.io/trade/OGV_USDT"
             >
-              <div className="bg-[#141519] cursor-pointer flex justify-center items-center h-52 rounded-none md:rounded-bl-3xl">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-none md:rounded-bl-3xl">
                 <Image
                   src={assetRootPath("/images/gate.io.svg")}
                   width="200"
@@ -888,7 +888,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
             >
-              <div className="bg-[#141519] cursor-pointer flex justify-center items-center h-52 rounded-bl-3xl md:rounded-none">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-bl-3xl md:rounded-none">
                 <Image
                   src={assetRootPath("/images/uniswap.svg")}
                   width="200"
@@ -903,7 +903,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.bitget.com/spot/OGVUSDT_SPBL"
             >
-              <div className="bg-[#141519] cursor-pointer flex justify-center items-center h-52 rounded-br-3xl">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-br-3xl">
                 <Image
                   src={assetRootPath("/images/bitget.svg")}
                   width="200"
