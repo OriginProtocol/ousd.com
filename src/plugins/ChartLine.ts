@@ -7,8 +7,7 @@ export const ChartLine: Plugin = {
       chart.tooltip._active &&
       chart.tooltip._active.length &&
       chart.scales.x &&
-      chart.scales.y &&
-      !("ontouchstart" in window)
+      chart.scales.y
     ) {
       const activePoint = chart.tooltip._active[0];
       const ctx = chart.ctx;
