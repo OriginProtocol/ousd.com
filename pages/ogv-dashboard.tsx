@@ -27,13 +27,14 @@ import {
   RadialLinearScale,
 } from "chart.js";
 import { Line, Doughnut } from "react-chartjs-2";
-import { useChartGradient, useViewWidth } from "../src/hooks";
+import { useChartGradient, useViewWidth, useOgv } from "../src/hooks";
 import ogvAbi from "../src/constants/mainnetAbi/ogv.json";
 import { ChartLine, DistributionLegend } from "../src/plugins";
 import { BigNumber, ethers, providers, utils } from "ethers";
 const { formatEther, commify } = utils;
 import Link from "next/link";
 import { shortenAddress } from "../src/utils/shortenAddress";
+import { getRewardsApy } from "../src/utils/math";
 
 ChartJS.register(
   CategoryScale,
@@ -425,6 +426,10 @@ const OgvDashboard = ({
   const [totalSupplyHover, setTotalSupplyHover] = useState<boolean>(false);
   const [circSupplyHover, setCircSupplyHover] = useState<boolean>(false);
 
+  const { totalVeSupply } = useOgv();
+  const stakingApy =
+    getRewardsApy(100 * 1.8 ** (48 / 12), 100, totalVeSupply) || 0;
+
   const alterChartType = (type: ChartType) => {
     const { current: chart } = chartRef;
 
@@ -516,7 +521,9 @@ const OgvDashboard = ({
             </li>
             <li>
               Stake to earn
-              <span className="text-gradient2 font-bold px-1">115% APY</span>
+              <span className="text-gradient2 font-bold px-1">
+                {stakingApy.toFixed(2)}% APY
+              </span>
             </li>
           </ul>
 
@@ -772,7 +779,7 @@ const OgvDashboard = ({
                 Stake OGV
               </h4>
               <h4 className="font-sansSailec font-bold text-3xl md:text-4xl lg:text-5xl text-gradient1">
-                Earn 105% APY
+                Earn {stakingApy.toFixed(2)}% APY
               </h4>
               <p className="font-sansInter font-normal text-base md:text-lg mt-4 mb-8">
                 Fees and voting rights accrue to OGV stakers. <br /> Control the
