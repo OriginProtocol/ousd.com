@@ -68,7 +68,7 @@ export default function Footer({ locale }) {
               </Link>
               <Link
                 href={'/blog'}
-                target="_blank"
+                target="_parent"
                 rel="noopener noreferrer"
                 prefetch={false}
                 className="lg:mr-10 mt-[20px] lg:mt-2"
@@ -90,6 +90,9 @@ export default function Footer({ locale }) {
               </Link>*/}
               <Link
                 href={'/ogv-dashboard'}
+                target="_parent"
+                rel="noopener noreferrer"
+                prefetch={false}
                 className="mr-10 mt-[20px] lg:mt-2"
               >
                 <Typography.Body3 className="text-[#fafbfb]">

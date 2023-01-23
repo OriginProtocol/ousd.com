@@ -46,13 +46,7 @@ ChartJS.register(
   ArcElement,
   ChartLine,
   DistributionLegend("distributionLegend"),
-  RadialLinearScale,
-  {
-    id: "eventCatcher",
-    beforeEvent: (chart, args, pluginOoptions) => {
-      console.log(args.event.type);
-    },
-  }
+  RadialLinearScale
 );
 
 interface Link {
@@ -927,7 +921,7 @@ const OgvDashboard = ({
                 width="25"
                 height="25"
                 className="inline ml-2 mr-2"
-                alt="Kucoin logo"
+                alt="CoinGecko logo"
               />
             </Button>
             <Button
@@ -942,7 +936,7 @@ const OgvDashboard = ({
                 width="25"
                 height="25"
                 className="inline ml-2 mr-2"
-                alt="Kucoin logo"
+                alt="CoinMarketCap logo"
               />
             </Button>
           </div>
