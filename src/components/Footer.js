@@ -50,7 +50,7 @@ export default function Footer({ locale }) {
                 href={'https://governance.ousd.com/'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="g:mr-10 mt-[20px] lg:mt-2"
+                className="lg:mr-10 mt-[20px] lg:mt-2"
               >
                 <Typography.Body3 className="text-[#fafbfb]">
                   Governance
