@@ -292,3 +292,9 @@ section.black {
     width: 30rem /* 480px */;
   }
 }
+
+@media (min-width: 768px) {
+  .md\:text-\[24px\]I {
+    font-size: 24px !important;
+  }
+}

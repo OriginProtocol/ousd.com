@@ -101,7 +101,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                 OGV BURN
               </div>
             </Typography.H2>
-            <Typography.H3 className='mt-4 max-w-[734px] text-[16px] md:text-[24px] leading-[28px] md:leading-[32px]'>
+            <Typography.H3 className='mt-4 max-w-[734px] text-[16px] md:text-[24px]I leading-[28px] md:leading-[32px]'>
               On October 10th, 2022 at 0:00UTC all unclaimed tokens from the OGV airdrop were burned forever.
             </Typography.H3>
             <Typography.H2 className="mt-14 md:mt-[120px] text-gradient1 text-[48px] md:text-[128px] leading-[48px] md:leading-[150px]" style={{ fontWeight: 700 }}>
@@ -134,8 +134,8 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
             <Typography.H3 className='mt-1 md:mt-2 text-[24px] md:text-[40px] leading-[32px] md:leading-[40px]' style={{ fontWeight: 400 }}>
               <span className="text-gradient1 font-bold inline-block">
                 {`${formatCurrency(
-                (burnedAmount / initialSupply) * 100,
-                2
+                  (burnedAmount / initialSupply) * 100,
+                  2
                 )}%`}
                 <div className='mt-1 md:mt-2 h-1 gradient1 rounded-full'></div>
               </span>
@@ -301,11 +301,11 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                     </Typography.Body>
                   </div>
                   <Typography.Body3 className='text-[16px] leading-[28px] text-[#b5beca]'>
-                      {`(${formatCurrency(
+                    {`(${formatCurrency(
                       ((distributorInitialOgv - burnedAmount) * 100) /
-                        distributorInitialOgv,
+                      distributorInitialOgv,
                       2
-                      )}%)*`}
+                    )}%)*`}
                   </Typography.Body3>
                   <div className='flex flex-col lg:flex-row mt-6 lg:mt-8 space-y-6 lg:space-x-10 lg:space-y-0'>
                     <div>
@@ -327,7 +327,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                         {`(${formatCurrency(
                           ((optionalDistributorInitialOgv - optionalLockupBalance) /
                             optionalDistributorInitialOgv) *
-                            100,
+                          100,
                           2
                         )}% claimed)`}
                       </Typography.Body3>
@@ -349,12 +349,12 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                       </div>
                       <Typography.Body3 className='text-[16px] leading-[28px] text-[#b5beca]'>
                         {`(${formatCurrency(
-                        ((mandatoryDistributorInitialOgv -
-                          mandatoryLockupBalance) /
-                          mandatoryDistributorInitialOgv) *
+                          ((mandatoryDistributorInitialOgv -
+                            mandatoryLockupBalance) /
+                            mandatoryDistributorInitialOgv) *
                           100,
-                        2
-                      )}% claimed)`}
+                          2
+                        )}% claimed)`}
                       </Typography.Body3>
                     </div>
                   </div>
@@ -385,8 +385,8 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                       </Typography.Body3>
                       <Typography.H4 className='mt-1 text-[32px] leading-[36px]' style={{ fontWeight: 700 }}>
                         {`${formatCurrency(
-                        (totalStaked / totalSupply) * 100,
-                        2
+                          (totalStaked / totalSupply) * 100,
+                          2
                         )}%`}
                       </Typography.H4>
                     </div>
