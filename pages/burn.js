@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Head from "next/head"
 import { Typography, Header } from '@originprotocol/origin-storybook'
-import { useStoreState } from 'pullstate'
 import Seo from '../src/components/strapi/seo'
 import formatSeo from '../src/utils/seo'
 import Footer from '../src/components/Footer'
-import ContractStore from '../src/stores/ContractStore'
-import addresses from '../src/constants/contractAddresses'
 import { formatCurrency, getRewardsApy } from '../src/utils/math'
 import { assetRootPath } from '../src/utils/image'
 import withIsMobile from '../src/hoc/withIsMobile'
 import { fetchAPI } from '../lib/api'
 import transformLinks from '../src/utils/transformLinks'
+import { useOgv } from "../src/hooks"
 
 const Burn = ({ locale, onLocale, seo, navLinks }) => {
-  const { ogv, veogv } = useStoreState(ContractStore, (s) => s.contracts || {})
-  const [totalStaked, setTotalStaked] = useState()
-  const [totalSupply, setTotalSupply] = useState()
-  const [totalVeSupply, setTotalVeSupply] = useState()
-  const [optionalLockupBalance, setOptionalLockupBalance] = useState()
-  const [mandatoryLockupBalance, setMandatoryLockupBalance] = useState()
+
+  const {
+    totalStaked,
+    totalSupply,
+    totalVeSupply,
+    optionalLockupBalance,
+    mandatoryLockupBalance,
+  } = useOgv()
 
   const mandatoryDistributorInitialOgv = 398752449
   const optionalDistributorInitialOgv = 747905084
@@ -32,52 +32,10 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
   const airdropAllocationOgn = 1000000000
   const airdropAllocationOusd = 450000000
   const airdropAllocation = airdropAllocationOgn + airdropAllocationOusd
-  const burnBlock = 15724869
   const burnedAmount = 369658070
 
   const stakingApy =
     getRewardsApy(100 * 1.8 ** (48 / 12), 100, totalVeSupply) || 0
-
-  useEffect(() => {
-    if (!(ogv && veogv)) {
-      return
-    }
-    const fetchStakedOgv = async () => {
-      const staked = await ogv
-        .balanceOf(addresses.mainnet.veOGV)
-        .then((r) => Number(r) / 10 ** 18)
-      const supply = await ogv.totalSupply().then((r) => Number(r) / 10 ** 18)
-      const optional = await ogv
-        .balanceOf(addresses.mainnet.optionalLockupDistributor)
-        .then((r) => Number(r) / 10 ** 18)
-      const mandatory = await ogv
-        .balanceOf(addresses.mainnet.mandatoryLockupDistributor)
-        .then((r) => Number(r) / 10 ** 18)
-      const totalVe = await veogv
-        .totalSupply()
-        .then((r) => Number(r) / 10 ** 18)
-      setTotalStaked(staked)
-      setTotalSupply(supply)
-      setOptionalLockupBalance(optional)
-      setMandatoryLockupBalance(mandatory)
-      setTotalVeSupply(totalVe)
-
-      const burnedOptional = await ogv
-        .balanceOf(addresses.mainnet.optionalLockupDistributor, {
-          blockTag: burnBlock,
-        })
-        .then((r) => Number(r) / 10 ** 18)
-      const burnedMandatory = await ogv
-        .balanceOf(addresses.mainnet.mandatoryLockupDistributor, {
-          blockTag: burnBlock,
-        })
-        .then((r) => Number(r) / 10 ** 18)
-      setOptionalLockupBalance(burnedOptional)
-      setMandatoryLockupBalance(burnedMandatory)
-
-    }
-    fetchStakedOgv()
-  }, [ogv, veogv])
 
   return (
     <>
