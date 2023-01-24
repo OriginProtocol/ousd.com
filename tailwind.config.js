@@ -13,7 +13,10 @@ module.exports = {
         "origin-bg-black": "#141519",
         "origin-bg-grey": "#1e1f25",
         "subheading": "#b5beca",
-        tooltip: "#272727"
+        tooltip: "#1e1f25",
+        "origin-border": "#272727",
+        "origin-blue": "#0074f0",
+        "hover": "#020203",
       }
     }
   },

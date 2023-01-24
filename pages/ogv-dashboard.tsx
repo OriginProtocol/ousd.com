@@ -79,9 +79,13 @@ interface DashProps {
 
 const smSize = 640;
 
-const buttonCSS = "w-16 md:w-24 lg:w-26 text-sm py-4 mr-2 lg:mr-4 rounded-full";
+const buttonCSS =
+  "w-20 md:w-24 h-10 sm:h-14 lg:w-26 text-sm py-4 mr-2 rounded-full flex items-center justify-center";
+const sectionCSS = "px-4 sm:px-8 md:px-16 lg:px-[8.375rem]";
 
 const lineOptions: ChartOptions<"line"> = {
+  responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       display: false,
@@ -151,6 +155,7 @@ const lineOptions: ChartOptions<"line"> = {
           innerHtml += "</div>";
 
           bodyLines.forEach((body) => {
+            if (body[0].charAt(0) !== "$") body[0] = "$" + body[0];
             innerHtml +=
               '<div style="background: #141519; border-radius: 0 0 0.5rem 0.5rem; padding: .5rem; color: white; font-weight: 600;">' +
               body +
@@ -210,16 +215,18 @@ const lineOptions: ChartOptions<"line"> = {
       },
       ticks: {
         autoSkip: true,
-        maxTicksLimit: 6,
+        maxTicksLimit: 5,
         align: "start",
         maxRotation: 0,
+        padding: 8,
+        color: "#b5beca",
         font: () => {
           if (window.innerWidth < smSize)
             return {
-              size: 8,
+              size: 12,
             };
           return {
-            size: 10,
+            size: 16,
           };
         },
       },
@@ -234,11 +241,16 @@ const lineOptions: ChartOptions<"line"> = {
       position: "right",
       ticks: {
         padding: 10,
-        count: 2,
+        count: 4,
+        callback: function (val) {
+          if (typeof val === "string") val = parseFloat(val);
+          return "$" + commify(parseFloat(val.toPrecision(3)));
+        },
+        color: "#b5beca",
         font: () => {
           if (window.innerWidth < smSize)
             return {
-              size: 10,
+              size: 12,
             };
           return {
             size: 18,
@@ -499,21 +511,23 @@ const OgvDashboard = ({
       <Header mappedLinks={navLinks} webProperty="ousd" />
 
       {/* General OGV Price Stats */}
-      <section className="bg-origin-bg-black px-8 md:px-16 lg:px-[8.375rem]">
+      <section className={`${sectionCSS} bg-origin-bg-black`}>
         <div className="max-w-[89.5rem] mx-auto">
-          <div className="flex">
-            <Image
-              src={assetRootPath("/images/ogv.svg")}
-              width="100"
-              height="100"
-              className="ogv-logo"
-              alt="OGV logo"
-            />
-            <h1 className="font-sansSailec font-bold text-3xl md:text-6xl w-1/2 ml-6 sm:ml-12">
-              Origin Dollar Governance (OGV)
+          <div className="flex flex-col md:flex-row relative">
+            <div className="relative w-[80px] h-[80px] lg:w-[120px] lg:h-[120px] xl:w-[160px] xl:h-[160px]">
+              <Image
+                src={assetRootPath("/images/ogv.svg")}
+                width="160"
+                height="160"
+                className="ogv-logo"
+                alt="OGV logo"
+              />
+            </div>
+            <h1 className="flex items-center font-sansSailec font-bold text-3xl md:text-5xl lg:text-6xl xl:text-7xl whitespace-nowrap mt-6 md:mt-0 md:ml-6 lg:ml-12">
+              Origin Dollar <br /> Governance (OGV)
             </h1>
           </div>
-          <ul className="list-disc text-white py-8 text-base md:text-2xl ml-6">
+          <ul className="list-disc text-white py-8 text-base md:text-xl lg:text-2xl ml-4 md:ml-6">
             <li className=" text-white py-1.5">
               OGV is the
               <span className="text-gradient2 font-bold px-1">governance</span>
@@ -539,11 +553,12 @@ const OgvDashboard = ({
             target="_blank"
             rel="noopener noreferrer"
             href="https://governance.ousd.com/stake"
+            className="box-border"
           >
-            <button className="rounded-full w-full sm:w-fit border-gradient1 text-base p-[1px] cursor-pointer text-center">
-              <span className="block px-12 py-4 bg-origin-bg-black rounded-full">
+            <button className="rounded-full w-full sm:w-fit box-border bg-gradient1 text-base p-[1px] cursor-pointer text-center">
+              <div className="w-full sm:w-auto sm:px-12 py-[0.85rem] bg-origin-bg-black rounded-full box-border">
                 Stake OGV
-              </span>
+              </div>
             </button>
           </a>
 
@@ -554,12 +569,12 @@ const OgvDashboard = ({
                   Current Price
                 </div>
                 <div className="flex items-center">
-                  <div className="text-2xl font-bold mr-1 text-center sm:text-left">
+                  <div className="text-3xl font-bold mr-1 text-center sm:text-left">
                     {`${currentPrice.toPrecision(4)}`}
                   </div>
                   <div
                     className={`${
-                      change24H < 0 ? "bg-red-500" : "bg-green-500"
+                      change24H < 0 ? "bg-red-500" : "bg-[#66fe90]"
                     } px-1 py-1 rounded text-black font-bold text-xs h-fit`}
                   >
                     <Image
@@ -584,7 +599,7 @@ const OgvDashboard = ({
                 <div className="text-lg text-subheading text-center sm:text-left">
                   Market Cap
                 </div>
-                <div className="text-2xl font-bold text-center sm:text-left">
+                <div className="text-3xl font-bold text-center sm:text-left">
                   $
                   {`${currentMarketCap.toLocaleString(undefined, {
                     maximumFractionDigits: 0,
@@ -662,7 +677,7 @@ const OgvDashboard = ({
                     />
                   </div>
                 </div>
-                <div className="text-2xl font-bold text-center sm:text-left">
+                <div className="text-3xl font-bold text-center sm:text-left">
                   {
                     commify(formatEther(calcualteCirculatingSupply())).split(
                       "."
@@ -710,7 +725,7 @@ const OgvDashboard = ({
                     />
                   </div>
                 </div>
-                <div className="text-2xl font-bold text-center sm:text-left">
+                <div className="text-3xl font-bold text-center sm:text-left">
                   {commify(formatEther(totalSupply)).split(".")[0]}
                 </div>
               </div>
@@ -719,26 +734,26 @@ const OgvDashboard = ({
 
           <div className="mt-20">
             <div className="flex justify-between">
-              <div>
+              <div className="flex">
                 <button
                   onClick={() => alterChartType(ChartType.Price)}
                   className={`${buttonCSS} ${
                     chartType === ChartType.Price
-                      ? "bg-blue-700"
-                      : "bg-zinc-800"
+                      ? "bg-origin-blue/50 border border-origin-blue font-bold"
+                      : "bg-origin-bg-grey border-2 border-origin-border"
                   }`}
                 >
                   Price
                 </button>
                 <button
                   onClick={() => alterChartType(ChartType.Market_Cap)}
-                  className={`w-20 ${buttonCSS} ${
+                  className={`w-28 md:w-32 ${buttonCSS} ${
                     chartType === ChartType.Market_Cap
-                      ? "bg-blue-700"
-                      : "bg-zinc-800"
+                      ? "bg-origin-blue/50 border border-origin-blue font-bold"
+                      : "bg-origin-bg-grey border-2 border-origin-border"
                   }`}
                 >
-                  Mkt Cap
+                  Market Cap
                 </button>
               </div>
 
@@ -753,7 +768,7 @@ const OgvDashboard = ({
 
           <div id="ogv-price-chart" className="relative">
             <Line
-              className="mt-10 mb-10 border-2 border-gray-700 rounded-lg w-fullI h-[40vw]I"
+              className="my-6 border-2 border-origin-border rounded-lg !w-full !h-[120vw] !sm:h-[40vw] max-h-[30rem]"
               ref={chartRef}
               data={chartPriceData24H}
               options={lineOptions}
@@ -770,8 +785,8 @@ const OgvDashboard = ({
       </section>
 
       {/* OGV Staking */}
-      <section className="bg-origin-bg-black px-8 md:px-16 lg:px-[8.375rem]">
-        <div className="relative max-w-[89.5rem] h-fit mx-auto gradient3 rounded-lg overflow-hidden mt-28">
+      <section className={`${sectionCSS} bg-origin-bg-black`}>
+        <div className="relative max-w-[89.5rem] h-fit mx-auto gradient3 rounded-2xl sm:rounded-lg overflow-hidden mt-28">
           <Image
             src={assetRootPath("/images/splines2.png")}
             width="500"
@@ -779,7 +794,7 @@ const OgvDashboard = ({
             className="absolute bottom-0 right-0 translate-x-1/3 sm:translate-x-0"
             alt="Splines"
           />
-          <div className="flex justify-between items-center p-14 h-full">
+          <div className="flex justify-between items-center p-10 sm:p-14 h-full">
             <div className="z-10 w-full">
               <h4 className="font-sansSailec font-bold text-3xl md:text-4xl lg:text-5xl">
                 Stake OGV
@@ -787,9 +802,11 @@ const OgvDashboard = ({
               <h4 className="font-sansSailec font-bold text-3xl md:text-4xl lg:text-5xl text-gradient1">
                 Earn {stakingApy.toFixed(2)}% APY
               </h4>
-              <p className="font-sansInter font-normal text-base md:text-lg mt-4 mb-8">
-                Fees and voting rights accrue to OGV stakers. <br /> Control the
-                future of OUSD and profit from its growth.
+              <p className="font-sansInter font-normal text-base md:text-lg mt-4 mb-1">
+                Fees and voting rights accrue to OGV stakers.{" "}
+              </p>
+              <p className="font-sansInter font-normal text-base md:text-lg mb-8">
+                Control the future of OUSD and profit from its growth.
               </p>
 
               {width < smSize && <StakeBannerButtons />}
@@ -800,12 +817,12 @@ const OgvDashboard = ({
       </section>
 
       {/* OGV Allocation Distribution */}
-      <section className="bg-origin-bg-black px-8 md:px-16 lg:px-[8.375rem]">
+      <section className={`${sectionCSS} bg-origin-bg-black`}>
         <div className="max-w-[89.5rem] mx-auto">
-          <Typography.H3 className="mt-20">OGV Allocation</Typography.H3>
-          <Typography.Body3 className="text-subheading mt-4">
+          <Typography.H1 className="mt-20">OGV Allocation</Typography.H1>
+          <Typography.Body className="text-subheading mt-4">
             Initial allocation at launch
-          </Typography.Body3>
+          </Typography.Body>
           <div className="flex flex-col xl:flex-row items-center my-28 relative">
             <div className="h-80 w-80 sm:h-120 sm:w-120 mb-4 xl:mr-28">
               <Doughnut options={doughnutOptions} data={doughnutData} />
@@ -824,9 +841,9 @@ const OgvDashboard = ({
       </section>
 
       {/* Listed on top exchanges */}
-      <section className="bg-origin-bg-grey px-8 md:px-16 lg:px-[8.375rem]">
+      <section className={`${sectionCSS} bg-origin-bg-grey`}>
         <div className="w-full max-w-[89.5rem] flex flex-col items-center mx-auto">
-          <Typography.H3 className="mt-28">
+          <Typography.H3 className="md:!text-6xl mt-28">
             Listed on top exchanges
           </Typography.H3>
           <div className="my-12 grid grid-cols-2 md:grid-cols-3 gap-3 w-full">
@@ -835,7 +852,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.kucoin.com/trade/OGV-USDT"
             >
-              <div className="bg-origin-bg-black relative cursor-pointer flex justify-center items-center h-52 rounded-tl-3xl">
+              <div className="bg-origin-bg-black relative cursor-pointer flex justify-center items-center h-52 rounded-tl-3xl hover:bg-hover">
                 <Image
                   src={assetRootPath("/images/kucoin.svg")}
                   width="200"
@@ -850,7 +867,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.huobi.com/en-in/exchange/ogv_usdt"
             >
-              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-tr-3xl md:rounded-none">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-tr-3xl md:rounded-none hover:bg-hover">
                 <Image
                   src={assetRootPath("/images/huobi.svg")}
                   width="200"
@@ -865,7 +882,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.mexc.com/exchange/OGV_USDT"
             >
-              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-none md:rounded-tr-3xl">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-none md:rounded-tr-3xl hover:bg-hover">
                 <Image
                   src={assetRootPath("/images/mexc-global.svg")}
                   width="200"
@@ -880,7 +897,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.gate.io/trade/OGV_USDT"
             >
-              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-none md:rounded-bl-3xl">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-none md:rounded-bl-3xl hover:bg-hover">
                 <Image
                   src={assetRootPath("/images/gate.io.svg")}
                   width="200"
@@ -895,7 +912,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
             >
-              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-bl-3xl md:rounded-none">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-bl-3xl md:rounded-none hover:bg-hover">
                 <Image
                   src={assetRootPath("/images/uniswap.svg")}
                   width="200"
@@ -910,7 +927,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.bitget.com/spot/OGVUSDT_SPBL"
             >
-              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-br-3xl">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-br-3xl hover:bg-hover">
                 <Image
                   src={assetRootPath("/images/bitget.svg")}
                   width="200"
@@ -976,8 +993,8 @@ const StakeBannerButtons = () => {
         href="https://governance.ousd.com/stake"
         className="w-full flex justify-center"
       >
-        <button className="rounded-full w-full sm:w-fit border-gradient1 text-sm sm:text-base p-[1px] cursor-pointer text-center mb-2">
-          <span className="block px-12 md:px-16 py-4 bg-transparent rounded-full whitespace-nowrap">
+        <button className="rounded-full w-full sm:w-fit bg-gradient1 text-sm sm:text-base p-[1px] cursor-pointer text-center mb-2">
+          <span className="block px-12 md:px-16 py-4 bg-[#4c2d87] rounded-full whitespace-nowrap">
             Stake OGV
           </span>
         </button>
@@ -996,11 +1013,13 @@ const StakeBannerButtons = () => {
 
 const TimeButtons = ({ chartTime, alterChartTime }: TimeButtonsProps) => {
   return (
-    <div className="mt-8 sm:mt-0">
+    <div className="mt-8 sm:mt-0 flex">
       <button
         onClick={() => alterChartTime(ChartTime.ONE_DAY)}
         className={`${buttonCSS} ${
-          chartTime === ChartTime.ONE_DAY ? "bg-blue-700" : "bg-zinc-800"
+          chartTime === ChartTime.ONE_DAY
+            ? "bg-origin-blue/50 border border-origin-blue font-bold"
+            : "bg-origin-bg-grey border-2 border-origin-border"
         }`}
       >
         24H
@@ -1008,7 +1027,9 @@ const TimeButtons = ({ chartTime, alterChartTime }: TimeButtonsProps) => {
       <button
         onClick={() => alterChartTime(ChartTime.SEVEN_DAY)}
         className={`${buttonCSS} ${
-          chartTime === ChartTime.SEVEN_DAY ? "bg-blue-700" : "bg-zinc-800"
+          chartTime === ChartTime.SEVEN_DAY
+            ? "bg-origin-blue/50 border border-origin-blue font-bold"
+            : "bg-origin-bg-grey border-2 border-origin-border"
         }`}
       >
         7D
@@ -1016,7 +1037,9 @@ const TimeButtons = ({ chartTime, alterChartTime }: TimeButtonsProps) => {
       <button
         onClick={() => alterChartTime(ChartTime.THIRTY_DAY)}
         className={`${buttonCSS} ${
-          chartTime === ChartTime.THIRTY_DAY ? "bg-blue-700" : "bg-zinc-800"
+          chartTime === ChartTime.THIRTY_DAY
+            ? "bg-origin-blue/50 border border-origin-blue font-bold"
+            : "bg-origin-bg-grey border-2 border-origin-border"
         }`}
       >
         30D
@@ -1024,7 +1047,9 @@ const TimeButtons = ({ chartTime, alterChartTime }: TimeButtonsProps) => {
       <button
         onClick={() => alterChartTime(ChartTime.ONE_YEAR)}
         className={`${buttonCSS} ${
-          chartTime === ChartTime.ONE_YEAR ? "bg-blue-700" : "bg-zinc-800"
+          chartTime === ChartTime.ONE_YEAR
+            ? "bg-origin-blue/50 border border-origin-blue font-bold"
+            : "bg-origin-bg-grey border-2 border-origin-border"
         }`}
       >
         365D
@@ -1118,7 +1143,7 @@ const get24HData = (rawData24H: {
         label: "Price",
         data: prices,
         fill: false,
-        tension: 0.2,
+        tension: 0.4,
         pointRadius: 0,
         pointHitRadius: 7,
         pointHoverRadius: 7,
@@ -1136,7 +1161,7 @@ const get24HData = (rawData24H: {
         label: "Market Cap",
         data: marketCaps,
         fill: false,
-        tension: 0.2,
+        tension: 0.4,
         pointRadius: 0,
       },
     ],
