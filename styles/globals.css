@@ -298,3 +298,7 @@ section.black {
     font-size: 24px !important;
   }
 }
+
+.text-\[16px\] {
+  font-size: 16px !important;
+}

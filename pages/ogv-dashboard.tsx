@@ -628,9 +628,15 @@ const OgvDashboard = ({
                                   <div className="text-[#fafbfb] text-base">
                                     {e.publicLabel}
                                   </div>
-                                  <div className="mt-1 text-gradient2">
-                                    {shortenAddress(e.address)}
-                                  </div>
+                                  <a
+                                    href={`https://etherscan.io/address/${e.address}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    <div className="mt-1 text-gradient2">
+                                      {shortenAddress(e.address)}
+                                    </div>
+                                  </a>
                                 </div>
                                 <div>
                                   <span className="text-base">
