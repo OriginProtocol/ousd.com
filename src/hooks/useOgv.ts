@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import addresses from "../constants/contractAddresses";
 import { useStoreState } from "pullstate";
 import ContractStore from "../stores/ContractStore";
+import { BigNumber, utils } from "ethers";
 
 export const useOgv = () => {
   const { ogv, veogv } = useStoreState(ContractStore, (s) => s.contracts || {});
-  const [totalStaked, setTotalStaked] = useState();
-  const [totalSupply, setTotalSupply] = useState();
-  const [totalVeSupply, setTotalVeSupply] = useState();
-  const [optionalLockupBalance, setOptionalLockupBalance] = useState();
-  const [mandatoryLockupBalance, setMandatoryLockupBalance] = useState();
+  const [totalStaked, setTotalStaked] = useState<string>();
+  const [totalSupply, setTotalSupply] = useState<string>();
+  const [totalVeSupply, setTotalVeSupply] = useState<string>();
+  const [optionalLockupBalance, setOptionalLockupBalance] = useState<string>();
+  const [mandatoryLockupBalance, setMandatoryLockupBalance] =
+    useState<string>();
 
   const burnBlock = 15724869;
 
@@ -18,37 +20,38 @@ export const useOgv = () => {
       return;
     }
     const fetchStakedOgv = async () => {
-      const staked = await ogv
-        .balanceOf(addresses.mainnet.veOGV)
-        .then((r) => Number(r) / 10 ** 18);
-      const supply = await ogv.totalSupply().then((r) => Number(r) / 10 ** 18);
-      const optional = await ogv
-        .balanceOf(addresses.mainnet.optionalLockupDistributor)
-        .then((r) => Number(r) / 10 ** 18);
-      const mandatory = await ogv
-        .balanceOf(addresses.mainnet.mandatoryLockupDistributor)
-        .then((r) => Number(r) / 10 ** 18);
-      const totalVe = await veogv
-        .totalSupply()
-        .then((r) => Number(r) / 10 ** 18);
-      setTotalStaked(staked);
-      setTotalSupply(supply);
-      setOptionalLockupBalance(optional);
-      setMandatoryLockupBalance(mandatory);
-      setTotalVeSupply(totalVe);
+      const staked: BigNumber = await ogv.balanceOf(addresses.mainnet.veOGV);
 
-      const burnedOptional = await ogv
-        .balanceOf(addresses.mainnet.optionalLockupDistributor, {
+      const supply: BigNumber = await ogv.totalSupply();
+      const optional: BigNumber = await ogv.balanceOf(
+        addresses.mainnet.optionalLockupDistributor
+      );
+      const mandatory: BigNumber = await ogv.balanceOf(
+        addresses.mainnet.mandatoryLockupDistributor
+      );
+
+      const totalVe: BigNumber = await veogv.totalSupply();
+
+      setTotalStaked(utils.formatUnits(staked, 18));
+      setTotalSupply(utils.formatUnits(supply, 18));
+      setOptionalLockupBalance(utils.formatUnits(optional, 18));
+      setMandatoryLockupBalance(utils.formatUnits(mandatory, 18));
+      setTotalVeSupply(utils.formatUnits(totalVe, 18));
+
+      const burnedOptional = await ogv.balanceOf(
+        addresses.mainnet.optionalLockupDistributor,
+        {
           blockTag: burnBlock,
-        })
-        .then((r) => Number(r) / 10 ** 18);
-      const burnedMandatory = await ogv
-        .balanceOf(addresses.mainnet.mandatoryLockupDistributor, {
+        }
+      );
+      const burnedMandatory = await ogv.balanceOf(
+        addresses.mainnet.mandatoryLockupDistributor,
+        {
           blockTag: burnBlock,
-        })
-        .then((r) => Number(r) / 10 ** 18);
-      setOptionalLockupBalance(burnedOptional);
-      setMandatoryLockupBalance(burnedMandatory);
+        }
+      );
+      setOptionalLockupBalance(utils.formatUnits(burnedOptional, 18));
+      setMandatoryLockupBalance(utils.formatUnits(burnedMandatory, 18));
     };
     fetchStakedOgv();
   }, [ogv, veogv]);

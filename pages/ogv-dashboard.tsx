@@ -440,7 +440,7 @@ const OgvDashboard = ({
 
   const { totalVeSupply } = useOgv();
   const stakingApy =
-    getRewardsApy(100 * 1.8 ** (48 / 12), 100, totalVeSupply) || 0;
+    getRewardsApy(100 * 1.8 ** (48 / 12), 100, parseFloat(totalVeSupply)) || 0;
 
   const alterChartType = (type: ChartType) => {
     const { current: chart } = chartRef;
