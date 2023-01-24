@@ -1,5 +1,5 @@
 import "chartjs-adapter-date-fns";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Header, Button } from "@originprotocol/origin-storybook";
 import { GetServerSideProps } from "next";
 import { fetchAPI } from "../lib/api";
@@ -435,9 +435,6 @@ const OgvDashboard = ({
   const [chartType, setChartType] = useState<ChartType>(ChartType.Price);
   const [chartTime, setChartTime] = useState<ChartTime>(ChartTime.ONE_DAY);
 
-  const [totalSupplyHover, setTotalSupplyHover] = useState<boolean>(false);
-  const [circSupplyHover, setCircSupplyHover] = useState<boolean>(false);
-
   const { totalVeSupply } = useOgv();
   const stakingApy =
     getRewardsApy(100 * 1.8 ** (48 / 12), 100, parseFloat(totalVeSupply)) || 0;
@@ -565,12 +562,12 @@ const OgvDashboard = ({
           <div className="border-2 border-gray-700 w-full mt-20 rounded-lg grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
             <div className="sm:border-r-2 border-b-2 xl:border-b-0 flex justify-center items-center border-gray-700 h-fit">
               <div className="py-8">
-                <div className="text-lg text-subheading text-center sm:text-left">
+                <div className="text-base sm:text-xl text-subheading text-center sm:text-left">
                   Current Price
                 </div>
                 <div className="flex items-center">
-                  <div className="text-3xl font-bold mr-1 text-center sm:text-left">
-                    {`${currentPrice.toPrecision(4)}`}
+                  <div className="text-lg md:text-3xl font-bold mr-1 text-center sm:text-left">
+                    {`$${currentPrice.toPrecision(4)}`}
                   </div>
                   <div
                     className={`${
@@ -596,10 +593,10 @@ const OgvDashboard = ({
             </div>
             <div className="xl:border-r-2 border-b-2 xl:border-b-0 flex justify-center items-center border-gray-700">
               <div className="py-8">
-                <div className="text-lg text-subheading text-center sm:text-left">
+                <div className="text-base sm:text-xl text-subheading text-center sm:text-left">
                   Market Cap
                 </div>
-                <div className="text-3xl font-bold text-center sm:text-left">
+                <div className="text-lg md:text-3xl font-bold text-center sm:text-left">
                   $
                   {`${currentMarketCap.toLocaleString(undefined, {
                     maximumFractionDigits: 0,
@@ -609,65 +606,60 @@ const OgvDashboard = ({
             </div>
             <div className="sm:border-r-2 border-b-2 sm:border-b-0 flex justify-center items-center border-gray-700">
               <div className="py-8">
-                <div className="text-lg text-subheading text-center sm:text-left">
+                <div className="text-base sm:text-xl relative text-subheading text-center sm:text-left">
                   Circulating Supply
-                  <div
-                    className="relative hidden sm:inline"
-                    onMouseOver={() => setCircSupplyHover(true)}
-                    onMouseOut={() => setCircSupplyHover(false)}
-                  >
-                    {
-                      <div
-                        className={`${
-                          circSupplyHover ? "visible" : "invisible"
-                        } right-0 pl-2 top-0 translate-x-full translate-y-[-25%] absolute h-fit z-10`}
-                      >
-                        <div className="relative bg-tooltip w-fit h-fit text-xs py-4 rounded-sm">
-                          <span className="text-base text-white font-bold whitespace-nowrap mx-5 xl:mx-8 overflow-hidden">
-                            Wallets excluded from circulating supply
-                          </span>
-                          <span className="block mt-2 mb-6 mx-8">
-                            Circulating supply is calculated as the total supply
-                            minus the OGN balances of the following wallets:
-                          </span>
-                          {nonCirculatingSupply
-                            .filter((e) => e.balance !== "0")
-                            .map((e, i) => (
-                              <div
-                                key={e.address}
-                                className={`flex justify-between items-center py-3 px-8 ${
-                                  i === 0 && "border-t-2"
-                                } border-b-2 border-black`}
-                              >
-                                <div className="flex flex-col">
-                                  <div className="text-[#fafbfb] text-base">
-                                    {e.publicLabel}
+                  <div className="sm:relative inline group">
+                    <div
+                      className={`
+                         group-hover:visible invisible
+                         sm:right-0 pl-0 sm:pl-2 left-1/2 sm:left-auto top-0 translate-x-[-50%] sm:translate-x-full translate-y-[-99.5%] sm:translate-y-[-25%] absolute h-fit z-10`}
+                    >
+                      <div className="relative bg-tooltip w-fit h-fit text-xs py-4 rounded-sm">
+                        <span className="text-base text-white font-bold whitespace-nowrap mx-5 xl:mx-8 overflow-hidden">
+                          Wallets excluded from circulating supply
+                        </span>
+                        <span className="block mt-2 mb-6 mx-8">
+                          Circulating supply is calculated as the total supply
+                          minus the OGN balances of the following wallets:
+                        </span>
+                        {nonCirculatingSupply
+                          .filter((e) => e.balance !== "0")
+                          .map((e, i) => (
+                            <div
+                              key={e.address}
+                              className={`flex justify-between items-center py-3 px-8 ${
+                                i === 0 && "border-t-2"
+                              } border-b-2 border-black`}
+                            >
+                              <div className="flex flex-col">
+                                <div className="text-[#fafbfb] text-sm sm:text-base w-fit">
+                                  {e.publicLabel}
+                                </div>
+                                <a
+                                  href={`https://etherscan.io/address/${e.address}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  <div className="mt-1 text-gradient2 w-fit">
+                                    {shortenAddress(e.address)}
                                   </div>
-                                  <a
-                                    href={`https://etherscan.io/address/${e.address}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    <div className="mt-1 text-gradient2">
-                                      {shortenAddress(e.address)}
-                                    </div>
-                                  </a>
-                                </div>
-                                <div>
-                                  <span className="text-base">
-                                    {
-                                      commify(formatEther(e.balance)).split(
-                                        "."
-                                      )[0]
-                                    }
-                                  </span>
-                                  <span className="text-xs">{" OGV"}</span>
-                                </div>
+                                </a>
                               </div>
-                            ))}
-                        </div>
+                              <div>
+                                <span className="text-base">
+                                  {
+                                    commify(formatEther(e.balance)).split(
+                                      "."
+                                    )[0]
+                                  }
+                                </span>
+                                <span className="text-xs">{" OGV"}</span>
+                              </div>
+                            </div>
+                          ))}
                       </div>
-                    }
+                    </div>
+
                     <Image
                       className="ml-2 cursor-pointer inline"
                       src={assetRootPath("/images/info.svg")}
@@ -677,7 +669,7 @@ const OgvDashboard = ({
                     />
                   </div>
                 </div>
-                <div className="text-3xl font-bold text-center sm:text-left">
+                <div className="text-lg md:text-3xl font-bold text-center sm:text-left">
                   {
                     commify(formatEther(calcualteCirculatingSupply())).split(
                       "."
@@ -688,20 +680,14 @@ const OgvDashboard = ({
             </div>
             <div className="flex justify-center items-center">
               <div className="py-8">
-                <div className="text-lg text-subheading text-center sm:text-left">
+                <div className="text-base sm:text-xl relative text-subheading text-center sm:text-left">
                   Total Supply
-                  <div
-                    className="relative hidden sm:inline"
-                    onMouseOver={() => setTotalSupplyHover(true)}
-                    onMouseOut={() => setTotalSupplyHover(false)}
-                  >
+                  <div className="sm:relative inline group">
                     {
                       <div
-                        className={`${
-                          totalSupplyHover ? "visible" : "invisible"
-                        } absolute h-fit left-0 top-0 translate-y-[-100%]`}
+                        className={`invisible group-hover:visible absolute h-fit left-1/2 translate-x-[-50%] sm:left-0 sm:translate-x-0 top-0 translate-y-[-95%]`}
                       >
-                        <div className="relative left-[-85%] xl:left-[-0.5rem] bg-tooltip w-60 h-16 rounded-sm text-xs text-center p-2">
+                        <div className="relative sm:left-[-85%] xl:left-[-0.5rem] bg-tooltip w-60 h-16 rounded-sm text-xs text-center p-2 shadow-tooltip">
                           {`Total supply changes over time due to inflation and
                         tokens being burned. `}
                           <a
@@ -713,7 +699,7 @@ const OgvDashboard = ({
                             Learn more
                           </a>
                         </div>
-                        <div className="relative left-2 triangle-down"></div>
+                        <div className="relative left-[50%] translate-x-[-50%] sm:left-2 sm:translate-x-0 triangle-down"></div>
                       </div>
                     }
                     <Image
@@ -725,7 +711,7 @@ const OgvDashboard = ({
                     />
                   </div>
                 </div>
-                <div className="text-3xl font-bold text-center sm:text-left">
+                <div className="text-lg md:text-3xl font-bold text-center sm:text-left">
                   {commify(formatEther(totalSupply)).split(".")[0]}
                 </div>
               </div>
