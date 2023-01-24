@@ -59,7 +59,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                 OGV BURN
               </div>
             </Typography.H2>
-            <Typography.H3 className='mt-4 max-w-[734px] text-[16px] md:text-[24px]I leading-[28px] md:leading-[32px]'>
+            <Typography.H3 className='mt-4 max-w-[734px] text-[16px] md:!text-[24px] leading-[28px] md:leading-[32px]'>
               On October 10th, 2022 at 0:00UTC all unclaimed tokens from the OGV airdrop were burned forever.
             </Typography.H3>
             <Typography.H2 className="mt-14 md:mt-[120px] text-gradient1 text-[48px] md:text-[128px] leading-[48px] md:leading-[150px]" style={{ fontWeight: 700 }}>
