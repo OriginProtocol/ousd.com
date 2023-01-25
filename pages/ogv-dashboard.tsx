@@ -846,6 +846,12 @@ const OgvDashboard = ({
         </div>
       </section>
 
+      <section className={`${sectionCSS} bg-origin-bg-black`}>
+        <div className="max-w-[89.5rem] mx-auto">
+          <Typography.H1 className="mt-20">OGV staking stats</Typography.H1>
+        </div>
+      </section>
+
       {/* OGV Allocation Distribution */}
       <section className={`${sectionCSS} bg-origin-bg-black`}>
         <div className="max-w-[89.5rem] mx-auto">
