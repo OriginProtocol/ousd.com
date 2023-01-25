@@ -8,7 +8,7 @@ const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
 const env = process.env.APP_ENV === 'staging' ? 'staging' : process.env.NODE_ENV
 
 Sentry.init({
-  dsn: SENTRY_DSN || 'https://eb1f0409a018475fb4e604b7d8f7c277@o225462.ingest.sentry.io/4504532247314432',
+  dsn: SENTRY_DSN,
   // Adjust this value in production, or use tracesSampler for greater control
   tracesSampleRate: 1.0,
   environment: env
