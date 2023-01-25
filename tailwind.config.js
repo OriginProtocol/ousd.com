@@ -17,6 +17,7 @@ module.exports = {
         "origin-border": "#272727",
         "origin-blue": "#0074f0",
         "hover": "#020203",
+        "blurry": "#fafbfb"
       },
       boxShadow: {
         "tooltip": "0px 6px 12px #000000"

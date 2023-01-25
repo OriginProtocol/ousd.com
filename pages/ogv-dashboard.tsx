@@ -409,8 +409,6 @@ const doughnutData: ChartData<"doughnut"> = {
 const gradientStart = "#8C66FC";
 const gradientEnd = "#0274F1";
 
-// Should implement some sort of (background) refreshing mechanism, at least for
-// the 24H data
 const data_cache = {};
 
 const OgvDashboard = ({
@@ -512,13 +510,15 @@ const OgvDashboard = ({
         <div className="max-w-[89.5rem] mx-auto">
           <div className="flex flex-col md:flex-row relative">
             <div className="relative w-[80px] h-[80px] lg:w-[120px] lg:h-[120px] xl:w-[160px] xl:h-[160px]">
-              <Image
-                src={assetRootPath("/images/ogv.svg")}
-                width="160"
-                height="160"
-                className="ogv-logo"
-                alt="OGV logo"
-              />
+              <div className="absolute w-full h-full z-10 rounded-full shadow-[0px_0px_50px_5px_#fafbfb1a]">
+                <Image
+                  src={assetRootPath("/images/ogv.svg")}
+                  width="160"
+                  height="160"
+                  className="ogv-logo absolute z-10"
+                  alt="OGV logo"
+                />
+              </div>
             </div>
             <h1 className="flex items-center font-sansSailec font-bold text-3xl md:text-5xl lg:text-6xl xl:text-7xl whitespace-nowrap mt-6 md:mt-0 md:ml-6 lg:ml-12">
               Origin Dollar <br /> Governance (OGV)
@@ -717,7 +717,12 @@ const OgvDashboard = ({
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
+      {/* OGV Price Chart */}
+      <section className={`${sectionCSS} bg-origin-bg-black`}>
+        <div className="max-w-[89.5rem] mx-auto">
           <div className="mt-20">
             <div className="flex justify-between">
               <div className="flex">
@@ -805,23 +810,19 @@ const OgvDashboard = ({
       {/* OGV Allocation Distribution */}
       <section className={`${sectionCSS} bg-origin-bg-black`}>
         <div className="max-w-[89.5rem] mx-auto">
-          <Typography.H1 className="mt-20">OGV Allocation</Typography.H1>
+          <Typography.H1 className="mt-20">OGV allocation</Typography.H1>
           <Typography.Body className="text-subheading mt-4">
             Initial allocation at launch
           </Typography.Body>
           <div className="flex flex-col xl:flex-row items-center my-28 relative">
-            <div className="h-80 w-80 sm:h-120 sm:w-120 mb-4 xl:mr-28">
+            <div className="relative h-80 w-80 sm:h-120 sm:w-120 mb-4 xl:mr-28">
               <Doughnut options={doughnutOptions} data={doughnutData} />
-            </div>
-            <div className="h-80 w-80 sm:h-120 sm:w-120 xl:mr-10 absolute flex justify-center items-center">
-              <p className="font-bold text-xl sm:text-3xl">
+              <p className="absolute font-bold text-xl sm:text-3xl top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
                 {utils.commify(doughnutData.datasets[0].label)}
               </p>
             </div>
-            <div
-              id="legend-container"
-              className="inline-block w-80 sm:w-120"
-            ></div>
+            <div className="h-80 w-80 sm:h-120 sm:w-120 xl:mr-10 absolute flex justify-center items-center"></div>
+            <div id="legend-container" className="inline-block w-80 sm:w-120" />
           </div>
         </div>
       </section>
