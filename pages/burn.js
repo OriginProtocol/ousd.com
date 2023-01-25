@@ -35,7 +35,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
   const burnedAmount = 369658070
 
   const stakingApy =
-    getRewardsApy(100 * 1.8 ** (48 / 12), 100, totalVeSupply) || 0
+    getRewardsApy(100 * 1.8 ** (48 / 12), 100, parseFloat(totalVeSupply)) || 0
 
   return (
     <>
