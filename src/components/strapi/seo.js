@@ -32,8 +32,8 @@ const Seo = ({ seo }) => {
       {fullSeo.metaRobots && (
         <meta name="robots" content={fullSeo.metaRobots} />
       )}
-      {fullSeo.canonicalUrl && (
-        <link rel="canonical" href={fullSeo.canonicalUrl} />
+      {fullSeo.canonicalURL && (
+        <link rel="canonical" href={fullSeo.canonicalURL} />
       )}
       {fullSeo.structuredData && (
         <script type="application/ld+json">{fullSeo.structuredData}</script>
