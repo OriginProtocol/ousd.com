@@ -1,6 +1,8 @@
 import { Plugin } from "chart.js";
 import { BigNumber } from "ethers";
 
+const smSize = 640;
+
 const getOrCreateLegendList = (chart, id) => {
   const legendContainer = document.getElementById(id);
   let listContainer = legendContainer.querySelector("ul");
@@ -85,6 +87,10 @@ export const distributionLegendPlugin: (id: string) => Plugin = (
         },
       });
 
+      const innerWidth = window.innerWidth;
+      const paddingBottom = innerWidth >= smSize ? "2rem" : "0.75rem";
+      const fontSize = innerWidth >= smSize ? "16px" : "14px";
+
       const li = createElement(
         "li",
         [boxSpan, textContainer, percentContainer],
@@ -93,12 +99,26 @@ export const distributionLegendPlugin: (id: string) => Plugin = (
             display: "flex",
             alignItems: "center",
             width: "100%",
-            paddingBottom: "2rem",
+            paddingBottom,
+            fontSize,
           },
         }
       );
 
+      function checkMq(x: MediaQueryListEvent) {
+        if (x.matches) {
+          li.style.paddingBottom = "0.75rem";
+          li.style.fontSize = "14px";
+        } else {
+          li.style.paddingBottom = "2rem";
+          li.style.fontSize = "16px";
+        }
+      }
+
       ul.appendChild(li);
+
+      const mediaQuery = window.matchMedia(`(min-width: ${smSize}px)`);
+      mediaQuery.addEventListener("change", checkMq);
     });
   },
 });

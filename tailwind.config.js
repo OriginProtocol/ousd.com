@@ -28,12 +28,13 @@ module.exports = {
   },
   variants: {
     extend: {
-      display: ["group-hover"]
+      display: ["group-hover"],
     }
   },
   future: {
     hoverOnlyWhenSupported: true,
   },
 
-  plugins: [],
+  plugins: [
+  ],
 }
