@@ -116,19 +116,11 @@ section.black {
 
 .gradient1 {
   color: #141519;
-  background-image: -webkit-linear-gradient(
-    91.16deg,
-    #fedba8 -3.29%,
-    #cf75d5 106.42%
-  );
+  background-image: -webkit-linear-gradient(0, #fedba8, #cf75d5 35%);
 }
 
 .text-gradient1 {
-  background-image: -webkit-linear-gradient(
-    91.16deg,
-    #fedba8 -3.29%,
-    #cf75d5 106.42%
-  );
+  background-image: -webkit-linear-gradient(0, #fedba8, #cf75d5 35%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
