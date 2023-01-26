@@ -1118,6 +1118,50 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
     provider
   );
 
+  // console.log(
+  //   await provider.getStorageAt(
+  //     "0x9c354503C38481a7A7a51629142963F98eCC12D0",
+  //     BigNumber.from(
+  //       "53374832710725341261650961104440469343146346525711704527343957115373724579195"
+  //     )
+  //   )
+  // );
+
+  const ethBlocksPerDay = 5760;
+  const currentBlock = await provider.getBlockNumber();
+  const ogvContractAddress = "0x9c354503C38481a7A7a51629142963F98eCC12D0";
+  // The slot number of OGVStaking.sol's OGV balance
+  const stakingContractOgvBalanceSlot = BigNumber.from(
+    "53374832710725341261650961104440469343146346525711704527343957115373724579195"
+  );
+
+  const reqs = [];
+  for (let i = 0; i < 90; i++) {
+    reqs.push({
+      method: "eth_getStorageAt",
+      params: [
+        ogvContractAddress,
+        stakingContractOgvBalanceSlot.toHexString(),
+        "0x" + (currentBlock - i * ethBlocksPerDay).toString(16),
+      ],
+      id: i,
+      jsonrpc: "2.0",
+    });
+    reqs.push({
+      method: "eth_getBlockByNumber",
+      params: ["0x" + (currentBlock - i * ethBlocksPerDay).toString(16), true],
+      id: i + 90,
+      jsonrpc: "2.0",
+    });
+  }
+
+  const res = await fetch(process.env.ETHEREUM_RPC_PROVIDER, {
+    method: "POST",
+    body: JSON.stringify(reqs),
+    headers: { "Content-Type": "application/json" },
+  });
+  console.log(await res.json());
+
   let [navRes, rawData24H, currentPriceData, ...nonCirculatingBalances] =
     await Promise.all([
       navResPromise,
