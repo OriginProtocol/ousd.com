@@ -33,7 +33,7 @@ function SecretSauce() {
             to allocate this yield to regular wallets instead of letting it go
             to waste. Any smart contract can opt in to receive yield, but the
             reality is that much of OUSD's supply is held in AMMs where
-            liquidity providers are motived to forego their yield in exchange
+            liquidity providers are motivated to forego their yield in exchange
             for other incentives.
           </p>
         </div>
