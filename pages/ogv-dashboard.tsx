@@ -1,5 +1,5 @@
 import "chartjs-adapter-date-fns";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Typography, Header, Button } from "@originprotocol/origin-storybook";
 import { GetServerSideProps } from "next";
 import { fetchAPI } from "../lib/api";
@@ -27,7 +27,12 @@ import {
   RadialLinearScale,
 } from "chart.js";
 import { Line, Doughnut } from "react-chartjs-2";
-import { useChartGradient, useViewWidth, useOgv } from "../src/hooks";
+import {
+  useChartGradient,
+  useViewWidth,
+  useOgv,
+  useOutOfBoundsClick,
+} from "../src/hooks";
 import ogvAbi from "../src/constants/mainnetAbi/ogv.json";
 import { ChartLine, DistributionLegend } from "../src/plugins";
 import { BigNumber, ethers, providers, utils } from "ethers";
@@ -428,10 +433,21 @@ const OgvDashboard = ({
     gradientEnd
   );
 
+  const circulatingTooltip = useRef<HTMLDivElement>(null);
+  const totalTooltip = useRef<HTMLDivElement>(null);
+
+  useOutOfBoundsClick(circulatingTooltip, () =>
+    setShowCirculatingTooltip(false)
+  );
+  useOutOfBoundsClick(totalTooltip, () => setShowTotalTooltip(false));
+
   const width = useViewWidth();
 
   const [chartType, setChartType] = useState<ChartType>(ChartType.Price);
   const [chartTime, setChartTime] = useState<ChartTime>(ChartTime.ONE_DAY);
+
+  const [showCirculatingTooltip, setShowCirculatingTooltip] = useState(false);
+  const [showTotalTooltip, setShowTotalTooltip] = useState(false);
 
   const { totalVeSupply } = useOgv();
   const stakingApy =
@@ -613,10 +629,20 @@ const OgvDashboard = ({
               <div className="py-8">
                 <div className="text-base sm:text-xl relative text-subheading text-center sm:text-left">
                   Circulating Supply
-                  <div className="sm:relative inline group">
+                  <div
+                    className="sm:relative inline group"
+                    ref={circulatingTooltip}
+                    onMouseEnter={() => setShowCirculatingTooltip(true)}
+                    onMouseLeave={() => setShowCirculatingTooltip(false)}
+                    onClick={() =>
+                      !showCirculatingTooltip && setShowCirculatingTooltip(true)
+                    }
+                  >
+                    {/* We keep group-hover pseudo-selector because despite tooltip visibility being primarily controlled by js, group-hover makes it easier for the user to keep tooltip open  */}
                     <div
                       className={`
-                         group-hover:visible group-active:visible invisible
+                         ${showCirculatingTooltip ? "visible" : "invisible"}
+                         group-hover:visible
                          sm:right-0 pl-0 sm:pl-2 left-1/2 sm:left-auto top-0 translate-x-[-50%] sm:translate-x-full translate-y-[-99.5%] sm:translate-y-[-25%] absolute h-fit z-10`}
                     >
                       <div className="relative bg-tooltip w-fit h-fit text-xs py-4 rounded-sm">
@@ -687,10 +713,19 @@ const OgvDashboard = ({
               <div className="py-8">
                 <div className="text-base sm:text-xl relative text-subheading text-center sm:text-left">
                   Total Supply
-                  <div className="sm:relative inline group">
+                  <div
+                    className="sm:relative inline group"
+                    ref={totalTooltip}
+                    onMouseEnter={() => setShowTotalTooltip(true)}
+                    onMouseLeave={() => setShowTotalTooltip(false)}
+                    onClick={() =>
+                      !showTotalTooltip && setShowTotalTooltip(true)
+                    }
+                  >
                     <div
-                      tabIndex={0}
-                      className={`invisible group-hover:visible group-active:visible absolute h-fit left-1/2 translate-x-[-50%] sm:left-0 sm:translate-x-0 top-0 translate-y-[-95%]`}
+                      className={`${
+                        showTotalTooltip ? "visible" : "invisible"
+                      } group-hover:visible absolute h-fit left-1/2 translate-x-[-50%] sm:left-0 sm:translate-x-0 top-0 translate-y-[-95%]`}
                     >
                       <div className="relative sm:left-[-85%] xl:left-[-0.5rem] bg-tooltip w-60 h-16 rounded-sm text-xs text-center p-2 shadow-tooltip">
                         {`Total supply changes over time due to inflation and

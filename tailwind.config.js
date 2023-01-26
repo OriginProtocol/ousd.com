@@ -1,5 +1,3 @@
-const plugin = require('tailwindcss/plugin')
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -30,7 +28,7 @@ module.exports = {
   },
   variants: {
     extend: {
-      display: ["group-hover", "group-active"],
+      display: ["group-hover"],
     }
   },
   future: {
@@ -38,8 +36,5 @@ module.exports = {
   },
 
   plugins: [
-    plugin(function ({ addVariant }) {
-      addVariant('group-active', ':merge(.group):active &')
-    })
   ],
 }
