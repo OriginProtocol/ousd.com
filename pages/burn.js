@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Head from "next/head"
 import { Typography, Header } from '@originprotocol/origin-storybook'
-import { useStoreState } from 'pullstate'
 import Seo from '../src/components/strapi/seo'
 import formatSeo from '../src/utils/seo'
 import Footer from '../src/components/Footer'
-import ContractStore from '../src/stores/ContractStore'
-import addresses from '../src/constants/contractAddresses'
 import { formatCurrency, getRewardsApy } from '../src/utils/math'
 import { assetRootPath } from '../src/utils/image'
 import withIsMobile from '../src/hoc/withIsMobile'
 import { fetchAPI } from '../lib/api'
 import transformLinks from '../src/utils/transformLinks'
+import { useOgv } from "../src/hooks"
 
 const Burn = ({ locale, onLocale, seo, navLinks }) => {
-  const { ogv, veogv } = useStoreState(ContractStore, (s) => s.contracts || {})
-  const [totalStaked, setTotalStaked] = useState()
-  const [totalSupply, setTotalSupply] = useState()
-  const [totalVeSupply, setTotalVeSupply] = useState()
-  const [optionalLockupBalance, setOptionalLockupBalance] = useState()
-  const [mandatoryLockupBalance, setMandatoryLockupBalance] = useState()
+
+  const {
+    totalStaked,
+    totalSupply,
+    totalVeSupply,
+    optionalLockupBalance,
+    mandatoryLockupBalance,
+  } = useOgv()
 
   const mandatoryDistributorInitialOgv = 398752449
   const optionalDistributorInitialOgv = 747905084
@@ -32,52 +32,10 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
   const airdropAllocationOgn = 1000000000
   const airdropAllocationOusd = 450000000
   const airdropAllocation = airdropAllocationOgn + airdropAllocationOusd
-  const burnBlock = 15724869
   const burnedAmount = 369658070
 
   const stakingApy =
-    getRewardsApy(100 * 1.8 ** (48 / 12), 100, totalVeSupply) || 0
-
-  useEffect(() => {
-    if (!(ogv && veogv)) {
-      return
-    }
-    const fetchStakedOgv = async () => {
-      const staked = await ogv
-        .balanceOf(addresses.mainnet.veOGV)
-        .then((r) => Number(r) / 10 ** 18)
-      const supply = await ogv.totalSupply().then((r) => Number(r) / 10 ** 18)
-      const optional = await ogv
-        .balanceOf(addresses.mainnet.optionalLockupDistributor)
-        .then((r) => Number(r) / 10 ** 18)
-      const mandatory = await ogv
-        .balanceOf(addresses.mainnet.mandatoryLockupDistributor)
-        .then((r) => Number(r) / 10 ** 18)
-      const totalVe = await veogv
-        .totalSupply()
-        .then((r) => Number(r) / 10 ** 18)
-      setTotalStaked(staked)
-      setTotalSupply(supply)
-      setOptionalLockupBalance(optional)
-      setMandatoryLockupBalance(mandatory)
-      setTotalVeSupply(totalVe)
-
-      const burnedOptional = await ogv
-        .balanceOf(addresses.mainnet.optionalLockupDistributor, {
-          blockTag: burnBlock,
-        })
-        .then((r) => Number(r) / 10 ** 18)
-      const burnedMandatory = await ogv
-        .balanceOf(addresses.mainnet.mandatoryLockupDistributor, {
-          blockTag: burnBlock,
-        })
-        .then((r) => Number(r) / 10 ** 18)
-      setOptionalLockupBalance(burnedOptional)
-      setMandatoryLockupBalance(burnedMandatory)
-
-    }
-    fetchStakedOgv()
-  }, [ogv, veogv])
+    getRewardsApy(100 * 1.8 ** (48 / 12), 100, parseFloat(totalVeSupply)) || 0
 
   return (
     <>
@@ -112,7 +70,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                 href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full md:w-[267px] !ml-0 px-20 py-3.5 md:py-5 rounded-full text-center gradient2 hover:opacity-90"
+                className="w-full md:w-[267px] ml-0 px-20 py-3.5 md:py-5 rounded-full text-center gradient2 hover:opacity-90"
               >
                 <Typography.Body>Buy OGV</Typography.Body>
               </Link>
@@ -134,8 +92,8 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
             <Typography.H3 className='mt-1 md:mt-2 text-[24px] md:text-[40px] leading-[32px] md:leading-[40px]' style={{ fontWeight: 400 }}>
               <span className="text-gradient1 font-bold inline-block">
                 {`${formatCurrency(
-                (burnedAmount / initialSupply) * 100,
-                2
+                  (burnedAmount / initialSupply) * 100,
+                  2
                 )}%`}
                 <div className='mt-1 md:mt-2 h-1 gradient1 rounded-full'></div>
               </span>
@@ -301,11 +259,11 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                     </Typography.Body>
                   </div>
                   <Typography.Body3 className='text-[16px] leading-[28px] text-[#b5beca]'>
-                      {`(${formatCurrency(
+                    {`(${formatCurrency(
                       ((distributorInitialOgv - burnedAmount) * 100) /
-                        distributorInitialOgv,
+                      distributorInitialOgv,
                       2
-                      )}%)*`}
+                    )}%)*`}
                   </Typography.Body3>
                   <div className='flex flex-col lg:flex-row mt-6 lg:mt-8 space-y-6 lg:space-x-10 lg:space-y-0'>
                     <div>
@@ -327,7 +285,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                         {`(${formatCurrency(
                           ((optionalDistributorInitialOgv - optionalLockupBalance) /
                             optionalDistributorInitialOgv) *
-                            100,
+                          100,
                           2
                         )}% claimed)`}
                       </Typography.Body3>
@@ -349,12 +307,12 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                       </div>
                       <Typography.Body3 className='text-[16px] leading-[28px] text-[#b5beca]'>
                         {`(${formatCurrency(
-                        ((mandatoryDistributorInitialOgv -
-                          mandatoryLockupBalance) /
-                          mandatoryDistributorInitialOgv) *
+                          ((mandatoryDistributorInitialOgv -
+                            mandatoryLockupBalance) /
+                            mandatoryDistributorInitialOgv) *
                           100,
-                        2
-                      )}% claimed)`}
+                          2
+                        )}% claimed)`}
                       </Typography.Body3>
                     </div>
                   </div>
@@ -385,8 +343,8 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                       </Typography.Body3>
                       <Typography.H4 className='mt-1 text-[32px] leading-[36px]' style={{ fontWeight: 700 }}>
                         {`${formatCurrency(
-                        (totalStaked / totalSupply) * 100,
-                        2
+                          (totalStaked / totalSupply) * 100,
+                          2
                         )}%`}
                       </Typography.H4>
                     </div>

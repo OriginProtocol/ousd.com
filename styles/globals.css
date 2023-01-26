@@ -117,7 +117,7 @@ section.black {
 .gradient1 {
   color: #141519;
   background-image: -webkit-linear-gradient(
-    left,
+    91.16deg,
     #fedba8 -3.29%,
     #cf75d5 106.42%
   );
@@ -125,7 +125,7 @@ section.black {
 
 .text-gradient1 {
   background-image: -webkit-linear-gradient(
-    left,
+    91.16deg,
     #fedba8 -3.29%,
     #cf75d5 106.42%
   );
@@ -154,9 +154,9 @@ section.black {
 
 .gradient3 {
   background-image: -webkit-linear-gradient(
-    left,
-    #b361e6 -28.99%,
-    #6a36fc 144.97%
+    90deg,
+    #b361e680 -28.99%,
+    #6a36fc80 144.97%
   );
 }
 
@@ -251,7 +251,7 @@ section.black {
   }
 }
 
-.border-gradient1 {
+.bg-gradient1 {
   background-image: linear-gradient(to top right, var(--tw-gradient-stops));
   --tw-gradient-from: #fedba8;
   --tw-gradient-to: rgb(254 219 168 / 0);
@@ -272,15 +272,7 @@ section.black {
   height: 0;
   border-left: 0.5rem solid transparent;
   border-right: 0.5rem solid transparent;
-  border-top: 0.5rem solid #272727;
-}
-
-.w-fullI {
-  width: 100% !important;
-}
-
-.h-\[40vw\]I {
-  height: 40vw !important;
+  border-top: 0.5rem solid #1e1f25;
 }
 
 @media (min-width: 640px) {
