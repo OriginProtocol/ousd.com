@@ -144,7 +144,7 @@ const lineOptions: ChartOptions<"line"> = {
             '<div style="background-image: -webkit-linear-gradient(left, #8c66fc -28.99%, #0274f1 144.97%); color: gray; padding: 2px; border-radius: 0.5rem; min-width: 8rem; width: fit-content">';
 
           innerHtml +=
-            '<div style="width: full; background: #141519; border-radius: 0.5rem 0.5rem 0 0; padding: .5rem;" class="flex justify-between"> ';
+            '<div style="width: full; background: #141519; border-radius: 0.5rem 0.5rem 0 0; padding: .5rem .5rem 0 .5rem;" class="flex justify-between"> ';
 
           titleLines.forEach((title) => {
             innerHtml +=
@@ -505,11 +505,11 @@ const OgvDashboard = ({
       </Head>
       <Header mappedLinks={navLinks} webProperty="ousd" />
 
-      {/* General OGV Price Stats */}
-      <section className={`${sectionCSS} bg-origin-bg-black`}>
+      {/* Heading */}
+      <section className={`${sectionCSS} bg-origin-bg-black px-[24px] sm:px-0`}>
         <div className="max-w-[89.5rem] mx-auto">
           <div className="flex flex-col md:flex-row relative">
-            <div className="relative w-[80px] h-[80px] lg:w-[120px] lg:h-[120px] xl:w-[160px] xl:h-[160px]">
+            <div className="relative w-[106px] h-[106px] lg:w-[120px] lg:h-[120px] xl:w-[160px] xl:h-[160px]">
               <div className="absolute w-full h-full z-10 rounded-full shadow-[0px_0px_50px_5px_#fafbfb1a]">
                 <Image
                   src={assetRootPath("/images/ogv.svg")}
@@ -520,23 +520,23 @@ const OgvDashboard = ({
                 />
               </div>
             </div>
-            <h1 className="flex items-center font-sansSailec font-bold text-3xl md:text-5xl lg:text-6xl xl:text-7xl whitespace-nowrap mt-6 md:mt-0 md:ml-6 lg:ml-12">
+            <h1 className="flex items-center font-sansSailec font-bold text-5xl lg:text-6xl xl:text-7xl mt-6 md:mt-0 md:ml-6 lg:ml-12">
               Origin Dollar <br /> Governance (OGV)
             </h1>
           </div>
-          <ul className="list-disc text-white py-8 text-base md:text-xl lg:text-2xl ml-4 md:ml-6">
-            <li className=" text-white py-1.5">
+          <div className="text-white py-8 text-base md:text-xl lg:text-2xl leading-6 lg:leading-8">
+            <div className=" text-white mb-2 sm:mb-0 py-1.5">
               OGV is the
               <span className="text-gradient2 font-bold px-1">governance</span>
               and value accrual token for OUSD.
-            </li>
-            <li>
+            </div>
+            <div>
               Stake to earn
               <span className="text-gradient2 font-bold px-1">
                 {stakingApy.toFixed(2)}% APY
               </span>
-            </li>
-          </ul>
+            </div>
+          </div>
 
           <Button
             target="_blank"
@@ -558,7 +558,12 @@ const OgvDashboard = ({
               </div>
             </button>
           </a>
+        </div>
+      </section>
 
+      {/* General OGV Price Stats */}
+      <section className={`${sectionCSS} bg-origin-bg-black`}>
+        <div className="max-w-[89.5rem] mx-auto">
           <div className="border-2 border-gray-700 w-full mt-20 rounded-lg grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
             <div className="sm:border-r-2 border-b-2 xl:border-b-0 flex justify-center items-center border-gray-700 h-fit">
               <div className="py-8">
@@ -566,7 +571,7 @@ const OgvDashboard = ({
                   Current Price
                 </div>
                 <div className="flex items-center">
-                  <div className="text-lg md:text-3xl font-bold mr-1 text-center sm:text-left">
+                  <div className="text-lg md:text-[26px] 2xl:text-3x; font-bold mr-1 text-center sm:text-left">
                     {`$${currentPrice.toPrecision(4)}`}
                   </div>
                   <div
@@ -596,7 +601,7 @@ const OgvDashboard = ({
                 <div className="text-base sm:text-xl text-subheading text-center sm:text-left">
                   Market Cap
                 </div>
-                <div className="text-lg md:text-3xl font-bold text-center sm:text-left">
+                <div className="text-lg md:text-[26px] 2xl:text-3x; font-bold text-center sm:text-left">
                   $
                   {`${currentMarketCap.toLocaleString(undefined, {
                     maximumFractionDigits: 0,
@@ -611,7 +616,7 @@ const OgvDashboard = ({
                   <div className="sm:relative inline group">
                     <div
                       className={`
-                         group-hover:visible invisible
+                         group-hover:visible group-active:visible invisible
                          sm:right-0 pl-0 sm:pl-2 left-1/2 sm:left-auto top-0 translate-x-[-50%] sm:translate-x-full translate-y-[-99.5%] sm:translate-y-[-25%] absolute h-fit z-10`}
                     >
                       <div className="relative bg-tooltip w-fit h-fit text-xs py-4 rounded-sm">
@@ -669,7 +674,7 @@ const OgvDashboard = ({
                     />
                   </div>
                 </div>
-                <div className="text-lg md:text-3xl font-bold text-center sm:text-left">
+                <div className="text-lg md:text-[26px] 2xl:text-3x; font-bold text-center sm:text-left">
                   {
                     commify(formatEther(calcualteCirculatingSupply())).split(
                       "."
@@ -683,25 +688,24 @@ const OgvDashboard = ({
                 <div className="text-base sm:text-xl relative text-subheading text-center sm:text-left">
                   Total Supply
                   <div className="sm:relative inline group">
-                    {
-                      <div
-                        className={`invisible group-hover:visible absolute h-fit left-1/2 translate-x-[-50%] sm:left-0 sm:translate-x-0 top-0 translate-y-[-95%]`}
-                      >
-                        <div className="relative sm:left-[-85%] xl:left-[-0.5rem] bg-tooltip w-60 h-16 rounded-sm text-xs text-center p-2 shadow-tooltip">
-                          {`Total supply changes over time due to inflation and
+                    <div
+                      tabIndex={0}
+                      className={`invisible group-hover:visible group-active:visible absolute h-fit left-1/2 translate-x-[-50%] sm:left-0 sm:translate-x-0 top-0 translate-y-[-95%]`}
+                    >
+                      <div className="relative sm:left-[-85%] xl:left-[-0.5rem] bg-tooltip w-60 h-16 rounded-sm text-xs text-center p-2 shadow-tooltip">
+                        {`Total supply changes over time due to inflation and
                         tokens being burned. `}
-                          <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href="https://docs.ousd.com/governance/ogv-staking#staking-rewards"
-                            className="text-blue-700 cursor-pointer"
-                          >
-                            Learn more
-                          </a>
-                        </div>
-                        <div className="relative left-[50%] translate-x-[-50%] sm:left-2 sm:translate-x-0 triangle-down"></div>
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href="https://docs.ousd.com/governance/ogv-staking#staking-rewards"
+                          className="text-blue-700 cursor-pointer"
+                        >
+                          Learn more
+                        </a>
                       </div>
-                    }
+                      <div className="relative left-[50%] translate-x-[-50%] sm:left-2 sm:translate-x-0 triangle-down"></div>
+                    </div>
                     <Image
                       className="ml-2 cursor-pointer inline"
                       src={assetRootPath("/images/info.svg")}
@@ -711,7 +715,7 @@ const OgvDashboard = ({
                     />
                   </div>
                 </div>
-                <div className="text-lg md:text-3xl font-bold text-center sm:text-left">
+                <div className="text-lg md:text-[26px] 2xl:text-3x; font-bold text-center sm:text-left">
                   {commify(formatEther(totalSupply)).split(".")[0]}
                 </div>
               </div>
@@ -810,11 +814,13 @@ const OgvDashboard = ({
       {/* OGV Allocation Distribution */}
       <section className={`${sectionCSS} bg-origin-bg-black`}>
         <div className="max-w-[89.5rem] mx-auto">
-          <Typography.H1 className="mt-20">OGV allocation</Typography.H1>
-          <Typography.Body className="text-subheading mt-4">
+          <Typography.H1 className="text-3xl md:text-8xl mt-20 px-[24px] sm:px-0">
+            OGV allocation
+          </Typography.H1>
+          <Typography.Body className="text-subheading mt-4 px-[24px] sm:px-0">
             Initial allocation at launch
           </Typography.Body>
-          <div className="flex flex-col xl:flex-row items-center my-28 relative">
+          <div className="flex flex-col xl:flex-row items-center my-14 sm:my-28 relative">
             <div className="relative h-80 w-80 sm:h-120 sm:w-120 mb-4 xl:mr-28">
               <Doughnut options={doughnutOptions} data={doughnutData} />
               <p className="absolute font-bold text-xl sm:text-3xl top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
@@ -830,16 +836,16 @@ const OgvDashboard = ({
       {/* Listed on top exchanges */}
       <section className={`${sectionCSS} bg-origin-bg-grey`}>
         <div className="w-full max-w-[89.5rem] flex flex-col items-center mx-auto">
-          <Typography.H3 className="md:!text-6xl mt-28">
+          <Typography.H3 className="md:text-6xl mt-28 px-[24px] sm:px-0 text-center">
             Listed on top exchanges
           </Typography.H3>
-          <div className="my-12 grid grid-cols-2 md:grid-cols-3 gap-3 w-full">
+          <div className="my-12 grid grid-cols-2 md:grid-cols-3 gap-0.5 md:gap-3 w-full">
             <a
               target="_blank"
               rel="noopener noreferrer"
               href="https://www.kucoin.com/trade/OGV-USDT"
             >
-              <div className="bg-origin-bg-black relative cursor-pointer flex justify-center items-center h-52 rounded-tl-3xl hover:bg-hover">
+              <div className="bg-origin-bg-black relative cursor-pointer flex justify-center items-center h-[88px] md:h-52 rounded-tl-lg md:rounded-tl-3xl hover:bg-hover">
                 <Image
                   src={assetRootPath("/images/kucoin.svg")}
                   width="200"
@@ -854,7 +860,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.huobi.com/en-in/exchange/ogv_usdt"
             >
-              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-tr-3xl md:rounded-none hover:bg-hover">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-[88px] md:h-52 rounded-tr-lg md:rounded-none hover:bg-hover">
                 <Image
                   src={assetRootPath("/images/huobi.svg")}
                   width="200"
@@ -869,7 +875,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.mexc.com/exchange/OGV_USDT"
             >
-              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-none md:rounded-tr-3xl hover:bg-hover">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-[88px] md:h-52 rounded-none md:rounded-tr-3xl hover:bg-hover">
                 <Image
                   src={assetRootPath("/images/mexc-global.svg")}
                   width="200"
@@ -884,7 +890,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.gate.io/trade/OGV_USDT"
             >
-              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-none md:rounded-bl-3xl hover:bg-hover">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-[88px] md:h-52 rounded-none md:rounded-bl-3xl hover:bg-hover">
                 <Image
                   src={assetRootPath("/images/gate.io.svg")}
                   width="200"
@@ -899,7 +905,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
             >
-              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-bl-3xl md:rounded-none hover:bg-hover">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-[88px] md:h-52 rounded-bl-lg md:rounded-none hover:bg-hover">
                 <Image
                   src={assetRootPath("/images/uniswap.svg")}
                   width="200"
@@ -914,7 +920,7 @@ const OgvDashboard = ({
               rel="noopener noreferrer"
               href="https://www.bitget.com/spot/OGVUSDT_SPBL"
             >
-              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-52 rounded-br-3xl hover:bg-hover">
+              <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-[88px] md:h-52 rounded-br-lg hover:bg-hover">
                 <Image
                   src={assetRootPath("/images/bitget.svg")}
                   width="200"
@@ -925,9 +931,9 @@ const OgvDashboard = ({
               </div>
             </a>
           </div>
-          <div className="mb-28">
+          <div className="mb-28 flex flex-col md:flex-row w-full md:w-auto">
             <Button
-              className="mb-4 md:mr-6 block md:inline"
+              className="mb-4 md:mr-6 flex items-center justify-center"
               target="_blank"
               rel="noopener noreferrer"
               href="https://www.coingecko.com/coins/origin-dollar-governance#markets"
@@ -942,7 +948,7 @@ const OgvDashboard = ({
               />
             </Button>
             <Button
-              className="block md:inline"
+              className="mb-4 flex items-center justify-center"
               target="_blank"
               rel="noopener noreferrer"
               href="https://coinmarketcap.com/currencies/origin-dollar-governance/markets "
