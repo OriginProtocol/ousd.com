@@ -44,14 +44,14 @@ function SecretSauce() {
               : "w-[768px]"
           } h-fit px-4 max-w-[100vw]`}
         >
-          <Image
+          <img
             src={
               (width < xl2Size && width >= lgSize) || width < mdSize
                 ? assetRootPath("/images/secret-sauce-mobile.png")
                 : assetRootPath("/images/secret-sauce.png")
             }
-            width="768"
-            height="616"
+            width="1536"
+            height="1232"
             className="w-full"
             alt="Secret Sauce"
           />
