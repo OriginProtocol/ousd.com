@@ -11,6 +11,7 @@ module.exports = {
       },
       colors: {
         "origin-bg-black": "#141519",
+        "origin-bg-dgrey": "#1e1e1e",
         "origin-bg-grey": "#1e1f25",
         "subheading": "#b5beca",
         tooltip: "#1e1f25",
