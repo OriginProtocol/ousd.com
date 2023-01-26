@@ -905,14 +905,15 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@originprotocol/origin-storybook@^0.26.2":
-  version "0.26.2"
-  resolved "https://registry.yarnpkg.com/@originprotocol/origin-storybook/-/origin-storybook-0.26.2.tgz#e83165378078fbe97ace80aa070c657190cddfaf"
-  integrity sha512-HmCu4bAIAJfRL1U2T8AeRro8KnV+Lik0UINU0+6I9Azj2LwOBi6jAshneGxK9fBpNb1SBE6oVP5rwr0B3SlqWw==
+"@originprotocol/origin-storybook@^0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@originprotocol/origin-storybook/-/origin-storybook-0.27.0.tgz#0159a5666ca8511effba9f0e4155505ffb3352e4"
+  integrity sha512-hME0diJz+oMxuvCGmpXduzRM8bCn04zwv4tj7H5Hr9lIH3nf1apYoA93EMulNLzuGOR+GR4ILW0T598VN0X7/g==
   dependencies:
     "@heroicons/react" "^2.0.11"
     next "^10.2.3 || ^12.3.1"
     rollup-plugin-copy "^3.4.0"
+    tailwind-merge "^1.8.1"
 
 "@pkgr/utils@^2.3.1":
   version "2.3.1"
@@ -4990,6 +4991,11 @@ synckit@^0.8.4:
   dependencies:
     "@pkgr/utils" "^2.3.1"
     tslib "^2.4.0"
+
+tailwind-merge@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.8.1.tgz#0e56c8afbab2491f72e06381043ffec8b720ba04"
+  integrity sha512-+fflfPxvHFr81hTJpQ3MIwtqgvefHZFUHFiIHpVIRXvG/nX9+gu2P7JNlFu2bfDMJ+uHhi/pUgzaYacMoXv+Ww==
 
 tailwind@^4.0.0:
   version "4.0.0"
