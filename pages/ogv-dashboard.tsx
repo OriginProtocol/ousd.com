@@ -1104,7 +1104,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
   );
 
   const provider = new providers.JsonRpcProvider(
-    process.env.ETHEREUM_RPC_PROVIDER
+    process.env.NEXT_PUBLIC_ETHEREUM_RPC_PROVIDER
   );
   const OGV = new ethers.Contract(
     "0x9c354503c38481a7a7a51629142963f98ecc12d0",
