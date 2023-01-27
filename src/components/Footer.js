@@ -50,7 +50,7 @@ export default function Footer({ locale }) {
                 href={'https://governance.ousd.com/'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="g:mr-10 mt-[20px] lg:mt-2"
+                className="lg:mr-10 mt-[20px] lg:mt-2"
               >
                 <Typography.Body3 className="text-[#fafbfb]">
                   Governance
@@ -68,7 +68,7 @@ export default function Footer({ locale }) {
               </Link>
               <Link
                 href={'/blog'}
-                target="_blank"
+                target="_parent"
                 rel="noopener noreferrer"
                 prefetch={false}
                 className="lg:mr-10 mt-[20px] lg:mt-2"
@@ -89,11 +89,10 @@ export default function Footer({ locale }) {
                 </Typography.Body3>
               </Link>*/}
               <Link
-                href={
-                  'https://www.coingecko.com/en/coins/origin-dollar-governance'
-                }
-                target="_blank"
+                href={'/ogv-dashboard'}
+                target="_parent"
                 rel="noopener noreferrer"
+                prefetch={false}
                 className="mr-10 mt-[20px] lg:mt-2"
               >
                 <Typography.Body3 className="text-[#fafbfb]">
@@ -105,7 +104,7 @@ export default function Footer({ locale }) {
                 href={`${process.env.NEXT_PUBLIC_DAPP_URL}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="gradient2 w-full lg:w-[126px] px-6 py-[6px] mt-[20px] lg:mt-0 rounded-full text-center"
+                className="gradient2 w-full lg:w-[126px] px-6 lg:py-[6px] h-[56px] lg:h-auto mt-[20px] lg:mt-0 rounded-full flex lg:static items-center justify-center"
               >
                 <Typography.Body3 className="font-medium text-white">
                   Get OUSD
