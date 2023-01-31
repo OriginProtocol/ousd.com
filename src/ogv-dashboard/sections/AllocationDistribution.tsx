@@ -10,7 +10,7 @@ interface AllocationDistributionProps {
   doughnutData: ChartData<"doughnut", number[], unknown>;
 }
 
-export const AllocationDistribution = ({
+const AllocationDistribution = ({
   doughnutData,
 }: AllocationDistributionProps) => {
   return (

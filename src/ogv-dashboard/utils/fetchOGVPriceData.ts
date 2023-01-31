@@ -1,4 +1,4 @@
-export const fetchOGVPriceData = async (
+const fetchOGVPriceData = async (
   days: number
 ): Promise<{
   prices: number[];

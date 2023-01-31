@@ -6,7 +6,7 @@ import { priceGradientStart, priceGradientEnd } from "../constants";
 import { utils } from "ethers";
 const { commify } = utils;
 
-export const priceLineOptions: ChartOptions<"line"> = {
+const priceLineOptions: ChartOptions<"line"> = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {

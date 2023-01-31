@@ -5,7 +5,7 @@ import { smSize, stakingGradientEnd, stakingGradientStart } from "../constants";
 import { utils } from "ethers";
 const { commify } = utils;
 
-export const stakeLineOptions: ChartOptions<"line"> = {
+const stakeLineOptions: ChartOptions<"line"> = {
   responsive: true,
   maintainAspectRatio: false,
   parsing: {
@@ -180,11 +180,11 @@ export const stakeLineOptions: ChartOptions<"line"> = {
         },
         callback: (value: number) => {
           if (value >= 1000000000) {
-            return value / 1000000000 + "B";
+            return (value / 1000000000).toPrecision(2) + "B";
           } else if (value >= 1000000) {
-            return value / 1000000 + "M";
+            return (value / 1000000).toPrecision(2) + "M";
           } else if (value >= 1000) {
-            return value / 1000 + "K";
+            return (value / 1000).toPrecision(2) + "K";
           } else {
             return value;
           }

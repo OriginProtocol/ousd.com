@@ -1,6 +1,6 @@
 import { ChartData } from "chart.js";
 
-export const get24HData = (rawData24H: {
+const get24HData = (rawData24H: {
   prices: number[];
   market_caps: number[];
   total_volumes: number[];

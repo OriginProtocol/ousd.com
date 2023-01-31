@@ -8,7 +8,7 @@ import { ChartData, TimeScaleOptions } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { priceLineOptions } from "../chart-configs";
 
-export interface OgvPriceChartProps {
+interface OgvPriceChartProps {
   priceData24H: ChartData<"line">;
   marketCapData24H: ChartData<"line">;
   width: number;

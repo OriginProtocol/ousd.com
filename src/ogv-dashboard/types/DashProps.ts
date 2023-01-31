@@ -1,7 +1,7 @@
 import { ChartData } from "chart.js";
-import { Link } from "./Link";
+import Link from "./Link";
 
-export interface DashProps {
+interface DashProps {
   navLinks: Link[];
   priceData24H: ChartData<"line">;
   marketCapData24H: ChartData<"line">;

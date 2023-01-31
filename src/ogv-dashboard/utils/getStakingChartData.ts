@@ -6,7 +6,7 @@ import { GetBlockByNumberResponse, GetStorageAtResponse } from "../types";
  * elements are the total supplies, and final `days` elements are the timestamps
  * of the blocks those metric were measured in... all over the last `days` days.
  */
-export const getStakingChartData = (rawStakingData: any[], days: number) => {
+const getStakingChartData = (rawStakingData: any[], days: number) => {
   const fullData = rawStakingData
     .slice(0, days)
     .map((d: GetStorageAtResponse, i: number) =>

@@ -1,6 +1,6 @@
 import { BigNumber } from "ethers";
 
-export const fetchOGVStakingData = async (
+const fetchOGVStakingData = async (
   days: number,
   ethBlocksPerDay: number,
   currentBlock: number,

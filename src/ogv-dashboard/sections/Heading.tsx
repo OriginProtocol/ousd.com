@@ -8,7 +8,7 @@ interface HeadingProps {
   stakingApy: number;
 }
 
-export const Heading = ({ stakingApy }: HeadingProps) => {
+const Heading = ({ stakingApy }: HeadingProps) => {
   return (
     <Section className="bg-origin-bg-black px-[24px]">
       <div className="flex flex-col md:flex-row relative">

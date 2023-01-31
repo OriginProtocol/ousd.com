@@ -1,6 +1,6 @@
 import { Chart as ChartJS, ChartData, ChartDataset, Point } from "chart.js";
 import { useState, useEffect, useRef } from "react";
-import { createGradient } from "../utils/createGradient";
+import { createGradient } from "../utils";
 
 export const useChartGradient = (
   data: ChartData<"line"> | (() => ChartData<"line">),
