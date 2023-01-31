@@ -5,6 +5,7 @@ export interface DashProps {
   navLinks: Link[];
   priceData24H: ChartData<"line">;
   marketCapData24H: ChartData<"line">;
+  stakingData: ChartData<"line">;
   currentPrice: number;
   currentMarketCap: number;
   change24H: number;

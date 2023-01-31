@@ -22,7 +22,7 @@ export const fetchOGVStakingData = async (
     });
   }
 
-  for (let i = days; i < days * 2; i++) {
+  for (let i = 0; i < days; i++) {
     reqs.push({
       method: "eth_getStorageAt",
       params: [
@@ -30,16 +30,16 @@ export const fetchOGVStakingData = async (
         ogvTotalSupplySlot.toHexString(),
         "0x" + (currentBlock - i * ethBlocksPerDay).toString(16),
       ],
-      id: i,
+      id: i + days,
       jsonrpc: "2.0",
     });
   }
 
-  for (let i = days * 2; i < days * 3; i++) {
+  for (let i = 0; i < days; i++) {
     reqs.push({
       method: "eth_getBlockByNumber",
       params: ["0x" + (currentBlock - i * ethBlocksPerDay).toString(16), true],
-      id: i,
+      id: i + days * 2,
       jsonrpc: "2.0",
     });
   }

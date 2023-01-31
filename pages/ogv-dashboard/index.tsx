@@ -22,14 +22,14 @@ import ogvAbi from "../../src/constants/mainnetAbi/ogv.json";
 import { ChartLine, DistributionLegend } from "../../src/plugins";
 import { BigNumber, ethers, providers } from "ethers";
 import { getRewardsApy } from "../../src/utils/math";
-import {
-  Link,
-  DashProps,
-  GetStorageAtResponse,
-  GetBlockByNumberResponse,
-} from "./types";
+import { Link, DashProps } from "./types";
 import { doughnutData, nonCirculatingSupply as nonCirculating } from "./data";
-import { fetchOGVPriceData, get24HData, fetchOGVStakingData } from "./utils";
+import {
+  fetchOGVPriceData,
+  get24HChartData,
+  fetchOGVStakingData,
+  getStakingChartData,
+} from "./utils";
 import {
   Heading,
   OgvPriceStats,
@@ -56,12 +56,13 @@ ChartJS.register(
 
 const ogvStakingCache = {}; //on server
 
-// Dependency flow: constants -> types, chart-configs, data, utils -> components -> sections -> index.tsx (this file)
+// Dependency flow: constants, types -> chart-configs, data, utils -> components -> sections -> index.tsx (this file)
 
 const OgvDashboard = ({
   navLinks,
   priceData24H,
   marketCapData24H,
+  stakingData,
   currentPrice,
   currentMarketCap,
   change24H,
@@ -69,6 +70,10 @@ const OgvDashboard = ({
   doughnutData,
   nonCirculatingSupply,
 }: DashProps) => {
+  //@ts-ignore
+  if (typeof stakingData.datasets[0].data === "string")
+    stakingData.datasets[0].data = JSON.parse(stakingData.datasets[0].data);
+
   const width = useViewWidth();
 
   const { totalVeSupply } = useOgv();
@@ -103,7 +108,7 @@ const OgvDashboard = ({
       <StakingBanner {...{ stakingApy, width }} />
 
       {/* OGV Staking Stats */}
-      <OgvStakingStats />
+      <OgvStakingStats stakingData={stakingData} />
 
       {/* OGV Allocation Distribution */}
       <AllocationDistribution doughnutData={doughnutData} />
@@ -198,32 +203,9 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
 
   currentPriceData = await currentPriceData.json();
 
-  const { priceData24H, marketCapData24H } = get24HData(rawData24H);
+  const { priceData24H, marketCapData24H } = get24HChartData(rawData24H);
 
   const navLinks: Link[] = transformLinks(navRes.data) as Link[];
-
-  // First 90 element of rawStakingData are the staking balances, next 90 are
-  // the total supplies, and final 90 are the timestamps of the blocks those
-  // metric were measured in... all over the last 90 days
-  const percentStakedData = rawStakingData
-    .slice(0, days)
-    .map((d: GetStorageAtResponse, i: number) =>
-      // Maintains two decimals of precision in the percentage
-      (
-        BigNumber.from(d.result)
-          .mul(10000)
-          .div(
-            BigNumber.from(
-              // Getting total supplies
-              (rawStakingData[i + 90] as GetStorageAtResponse).result
-            )
-          )
-          .toNumber() / 100
-      ).toString()
-    );
-  console.log(percentStakedData);
-
-  // const stakedDataTimes = rawStakingData.slice(days, days * 2).map((d : GetBlockByNumberResponse) => )
 
   const {
     usd: currentPrice,
@@ -231,11 +213,16 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
     usd_24h_change: change24H,
   } = currentPriceData["origin-dollar-governance"];
 
+  const stakingData = getStakingChartData(rawStakingData, days);
+
+  console.log(stakingData.labels, priceData24H.labels);
+
   return {
     props: {
       navLinks,
       priceData24H,
       marketCapData24H,
+      stakingData,
       currentPrice,
       currentMarketCap,
       change24H,

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Section, ChartButton } from "../components";
 import { ChartTime, ChartType } from "../types";
-import { gradientStart, gradientEnd, smSize } from "../constants";
+import { priceGradientStart, priceGradientEnd, smSize } from "../constants";
 import { fetchOGVPriceData } from "../utils";
 import { useChartGradient } from "../../../src/hooks";
 import { ChartData, TimeScaleOptions } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { lineOptions } from "../chart-configs";
+import { priceLineOptions } from "../chart-configs";
 
 export interface OgvPriceChartProps {
   priceData24H: ChartData<"line">;
@@ -23,8 +23,8 @@ const OgvPriceChart = ({
 }: OgvPriceChartProps) => {
   const { chartRef, chartData: chartPriceData24H } = useChartGradient(
     priceData24H,
-    gradientStart,
-    gradientEnd
+    priceGradientStart,
+    priceGradientEnd
   );
   const [chartType, setChartType] = useState<ChartType>(ChartType.Price);
   const [chartTime, setChartTime] = useState<ChartTime>(ChartTime.ONE_DAY);
@@ -110,10 +110,10 @@ const OgvPriceChart = ({
 
       <div id="ogv-price-chart" className="relative">
         <Line
-          className="my-6 border-2 border-origin-border rounded-lg !w-full !h-[120vw] !sm:h-[40vw] max-h-[30rem]"
+          className="my-6 border-2 border-origin-border rounded-lg !w-full !h-[120vw] sm:!h-[40vw] max-h-[30rem]"
           ref={chartRef}
           data={chartPriceData24H}
-          options={lineOptions}
+          options={priceLineOptions}
         />
       </div>
 

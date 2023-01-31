@@ -1,13 +1,17 @@
 import { enUS } from "date-fns/locale";
 import { format } from "date-fns";
 import { ChartOptions, TooltipModel } from "chart.js";
-import { smSize } from "../constants";
+import { smSize, stakingGradientEnd, stakingGradientStart } from "../constants";
 import { utils } from "ethers";
 const { commify } = utils;
 
-export const lineOptions: ChartOptions<"line"> = {
+export const stakeLineOptions: ChartOptions<"line"> = {
   responsive: true,
   maintainAspectRatio: false,
+  parsing: {
+    xAxisKey: "time",
+    yAxisKey: "amount",
+  },
   plugins: {
     legend: {
       display: false,
@@ -15,25 +19,27 @@ export const lineOptions: ChartOptions<"line"> = {
     tooltip: {
       enabled: false,
       callbacks: {
-        title: (context) => [
-          format(context[0].parsed.x, "MM/dd/yyyy"),
-          format(context[0].parsed.x, "HH:mm"),
-        ],
+        //   title: (context) => [
+        //     format(context[0].parsed.x, "MM/dd/yyyy"),
+        //     format(context[0].parsed.x, "HH:mm"),
+        //   ],
         label: (context) => {
+          console.log(context);
+
           return context.dataset.label === "Price"
             ? "$" + (context.raw as number).toPrecision(4)
             : context.formattedValue;
         },
       },
       external: (context) => {
-        const chart = document.getElementById("ogv-price-chart");
+        const chart = document.getElementById("ogv-staking-chart");
         // Tooltip Element
-        let tooltipEl = document.getElementById("ogv-price-tooltip");
+        let tooltipEl = document.getElementById("ogv-staking-tooltip");
 
         // Create element on first render
         if (!tooltipEl) {
           tooltipEl = document.createElement("div");
-          tooltipEl.id = "ogv-price-tooltip";
+          tooltipEl.id = "ogv-staking-tooltip";
           tooltipEl.innerHTML = "<table></table>";
           chart.appendChild(tooltipEl);
         }
@@ -59,28 +65,29 @@ export const lineOptions: ChartOptions<"line"> = {
 
         // Set Text
         if (tooltipModel.body) {
-          const titleLines = tooltipModel.title || [];
           const bodyLines = tooltipModel.body.map(getBody);
 
-          let innerHtml =
-            '<div style="background-image: -webkit-linear-gradient(left, #8c66fc -28.99%, #0274f1 144.97%); color: gray; padding: 2px; border-radius: 0.5rem; min-width: 8rem; width: fit-content">';
+          const stakedPercentage =
+            //@ts-ignore
+            tooltipModel.$context.tooltip.dataPoints[0].raw.percentage;
+
+          let innerHtml = `<div style="background-image: -webkit-linear-gradient(left, ${stakingGradientStart} -28.99%, ${stakingGradientEnd} 144.97%); color: gray; padding: 2px; border-radius: 0.5rem; min-width: 8rem; width: fit-content">`;
 
           innerHtml +=
             '<div style="width: full; background: #141519; border-radius: 0.5rem 0.5rem 0 0; padding: .5rem .5rem 0 .5rem;" class="flex justify-between"> ';
 
-          titleLines.forEach((title) => {
-            innerHtml +=
-              '<div style="font-family: Sailec; font-style: normal; font-weight: 400; font-size: 0.75rem; line-height: 1rem">' +
-              title +
-              "</div>";
-          });
+          innerHtml +=
+            '<div style="font-family: Sailec; font-style: normal; color: white; padding-top: 0.5rem; font-weight: 600; line-height: 1rem">' +
+            stakedPercentage +
+            "%" +
+            "</div>";
           innerHtml += "</div>";
 
           bodyLines.forEach((body) => {
-            if (body[0].charAt(0) !== "$") body[0] = "$" + body[0];
             innerHtml +=
-              '<div style="background: #141519; border-radius: 0 0 0.5rem 0.5rem; padding: .5rem; color: white; font-weight: 600;">' +
+              '<div style="background: #141519; text-color: #8493a6; border-radius: 0 0 0.5rem 0.5rem; padding: .5rem; font-size: 0.75rem; font-weight: 400;">' +
               body +
+              " OGV" +
               "</div>";
           });
 
@@ -125,9 +132,9 @@ export const lineOptions: ChartOptions<"line"> = {
       },
       time: {
         displayFormats: {
-          hour: "HH:mm",
-          day: "HH:mm",
-          month: "MM/yy",
+          hour: "dd MMM yy",
+          day: "dd MMM yy",
+          month: "dd MMM yy",
         },
       },
       adapters: {
@@ -163,11 +170,6 @@ export const lineOptions: ChartOptions<"line"> = {
       position: "right",
       ticks: {
         padding: 10,
-        count: 4,
-        callback: function (val) {
-          if (typeof val === "string") val = parseFloat(val);
-          return "$" + commify(parseFloat(val.toPrecision(3)));
-        },
         color: "#b5beca",
         font: () => {
           if (window.innerWidth < smSize)
@@ -178,6 +180,17 @@ export const lineOptions: ChartOptions<"line"> = {
             size: 18,
           };
         },
+        callback: (value: number) => {
+          if (value >= 1000000000) {
+            return value / 1000000000 + "B";
+          } else if (value >= 1000000) {
+            return value / 1000000 + "M";
+          } else if (value >= 1000) {
+            return value / 1000 + "K";
+          } else {
+            return value;
+          }
+        },
       },
       grid: {
         display: false,
@@ -185,6 +198,18 @@ export const lineOptions: ChartOptions<"line"> = {
     },
     // Hacky but the second (invisible) y-axis allows for adding padding to the left xD
     y1: {
+      title: {
+        display: true,
+        text: "Amount Staked",
+        align: "center",
+        font: {
+          size: 16,
+        },
+        color: "#B5BECA",
+        padding: {
+          top: 12,
+        },
+      },
       type: "time",
       display: true,
       position: "left",
@@ -194,7 +219,7 @@ export const lineOptions: ChartOptions<"line"> = {
       ticks: {
         maxTicksLimit: 1,
         autoSkip: true,
-        callback: () => "  ", // The padding
+        callback: () => "", // The padding
       },
     },
     x1: {
@@ -213,4 +238,4 @@ export const lineOptions: ChartOptions<"line"> = {
   },
 };
 
-export default lineOptions;
+export default stakeLineOptions;
