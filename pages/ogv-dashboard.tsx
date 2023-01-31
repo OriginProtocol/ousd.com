@@ -1,10 +1,10 @@
 import "chartjs-adapter-date-fns";
 import { Header } from "@originprotocol/origin-storybook";
 import { GetServerSideProps } from "next";
-import { fetchAPI } from "../../lib/api";
-import transformLinks from "../../src/utils/transformLinks";
+import { fetchAPI } from "../lib/api";
+import transformLinks from "../src/utils/transformLinks";
 import Head from "next/head";
-import Footer from "../../src/components/Footer";
+import Footer from "../src/components/Footer";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -19,19 +19,22 @@ import {
   ChartData,
   Point,
 } from "chart.js";
-import { useViewWidth, useOgv } from "../../src/hooks";
-import ogvAbi from "../../src/constants/mainnetAbi/ogv.json";
-import { ChartLine, DistributionLegend } from "../../src/plugins";
+import { useViewWidth, useOgv } from "../src/hooks";
+import ogvAbi from "../src/constants/mainnetAbi/ogv.json";
+import { ChartLine, DistributionLegend } from "../src/plugins";
 import { BigNumber, ethers, providers } from "ethers";
-import { getRewardsApy } from "../../src/utils/math";
-import { Link, DashProps } from "./types";
-import { doughnutData, nonCirculatingSupply as nonCirculating } from "./data";
+import { getRewardsApy } from "../src/utils/math";
+import { Link, DashProps } from "../src/ogv-dashboard/types";
+import {
+  doughnutData,
+  nonCirculatingSupply as nonCirculating,
+} from "../src/ogv-dashboard/data";
 import {
   fetchOGVPriceData,
   get24HChartData,
   fetchOGVStakingData,
   getStakingChartData,
-} from "./utils";
+} from "../src/ogv-dashboard/utils";
 import {
   Heading,
   OgvPriceStats,
@@ -40,7 +43,7 @@ import {
   AllocationDistribution,
   TopExchanges,
   OgvStakingStats,
-} from "./sections";
+} from "../src/ogv-dashboard/sections";
 
 ChartJS.register(
   CategoryScale,

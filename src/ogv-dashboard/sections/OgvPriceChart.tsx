@@ -3,7 +3,7 @@ import { Section, ChartButton } from "../components";
 import { ChartTime, ChartType } from "../types";
 import { priceGradientStart, priceGradientEnd, smSize } from "../constants";
 import { fetchOGVPriceData } from "../utils";
-import { useChartGradient } from "../../../src/hooks";
+import { useChartGradient } from "../../hooks";
 import { ChartData, TimeScaleOptions } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { priceLineOptions } from "../chart-configs";
