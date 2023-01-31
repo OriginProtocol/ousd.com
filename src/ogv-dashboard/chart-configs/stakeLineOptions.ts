@@ -23,11 +23,7 @@ const stakeLineOptions: ChartOptions<"line"> = {
         //     format(context[0].parsed.x, "MM/dd/yyyy"),
         //     format(context[0].parsed.x, "HH:mm"),
         //   ],
-        label: (context) => {
-          return context.dataset.label === "Price"
-            ? "$" + (context.raw as number).toPrecision(4)
-            : context.formattedValue;
-        },
+        label: (context) => context.formattedValue,
       },
       external: (context) => {
         const chart = document.getElementById("ogv-staking-chart");
