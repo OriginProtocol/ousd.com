@@ -4997,6 +4997,11 @@ tailwind-merge@^1.8.1:
   resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.8.1.tgz#0e56c8afbab2491f72e06381043ffec8b720ba04"
   integrity sha512-+fflfPxvHFr81hTJpQ3MIwtqgvefHZFUHFiIHpVIRXvG/nX9+gu2P7JNlFu2bfDMJ+uHhi/pUgzaYacMoXv+Ww==
 
+tailwind-merge@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.9.0.tgz#cc0cbd99c51c729d501122b84968a81595a21da6"
+  integrity sha512-coziXxViLHbVtFvD1+jwSu+UmDJSFX4dhj9ZuqHCuhTzu9Wk5wMedAz5AVY3uUYw95TaO7NwgUS/dLGcWvtgqw==
+
 tailwind@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/tailwind/-/tailwind-4.0.0.tgz#070b5e5f1c2c190e4c0d1280a46b36c7369ea46e"
