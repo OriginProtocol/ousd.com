@@ -51,7 +51,11 @@ const Blog = ({
 
 export async function getStaticProps() {
   // Run API calls in parallel
-  const articlesRes = await fetchAPI('/ousd/blog/en')
+  const articlesRes = await fetchAPI('/ousd/blog/en', {
+    pagination: {
+      pageSize: 1000
+    },
+  })
 
   const categories = {}
   articlesRes?.data?.forEach((article) => {
