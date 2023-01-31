@@ -26,9 +26,9 @@ export const OgvStakingStats = ({ stakingData }: OgvStakingStatsProps) => {
         OGV staking stats
       </Typography.H1>
       <Typography.Body className="mt-6 text-subheading px-[24px] sm:px-0">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-        illo inventore veritatis et quasi architecto beatae vitae dicta sun.
+        A significant portion of the OGV supply is locked voluntarily by holders
+        who believe in the long-term growth of OUSD. OGV stakers receive fees
+        and governance power in exchange for their commitment to the protocol.
       </Typography.Body>
 
       <div className="border-2 border-gray-700 w-full my-12 rounded-lg grid grid-cols-1 sm:grid-cols-2">
