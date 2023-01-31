@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Section } from "../components";
 import { Typography } from "@originprotocol/origin-storybook";
-import { assetRootPath } from "../../../src/utils/image";
+import { assetRootPath } from "../../utils/image";
 import { Button } from "@originprotocol/origin-storybook";
 
 const TopExchanges = () => {

@@ -4,7 +4,7 @@ import { Typography } from "@originprotocol/origin-storybook";
 import { ChartData } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { stakeLineOptions } from "../chart-configs";
-import { useChartGradient } from "../../../src/hooks";
+import { useChartGradient } from "../../hooks";
 import { stakingGradientStart, stakingGradientEnd } from "../constants";
 import { utils } from "ethers";
 const { commify } = utils;
