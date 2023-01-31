@@ -24,8 +24,6 @@ export const stakeLineOptions: ChartOptions<"line"> = {
         //     format(context[0].parsed.x, "HH:mm"),
         //   ],
         label: (context) => {
-          console.log(context);
-
           return context.dataset.label === "Price"
             ? "$" + (context.raw as number).toPrecision(4)
             : context.formattedValue;

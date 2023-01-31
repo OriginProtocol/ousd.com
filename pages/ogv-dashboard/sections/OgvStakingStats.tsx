@@ -20,8 +20,6 @@ export const OgvStakingStats = ({ stakingData }: OgvStakingStatsProps) => {
     stakingGradientEnd
   );
 
-  console.log(stakingData);
-
   return (
     <Section className="bg-origin-bg-black">
       <Typography.H1 className="text-3xl md:text-8xl mt-20 px-[24px] sm:px-0">

@@ -16,6 +16,8 @@ import {
   TimeScale,
   ArcElement,
   RadialLinearScale,
+  ChartData,
+  Point,
 } from "chart.js";
 import { useViewWidth, useOgv } from "../../src/hooks";
 import ogvAbi from "../../src/constants/mainnetAbi/ogv.json";
@@ -54,7 +56,13 @@ ChartJS.register(
   RadialLinearScale
 );
 
-const ogvStakingCache = {}; //on server
+const ogvStakingCache: {
+  data?: ChartData<"line", (number | Point)[], unknown>;
+  lastUpdated?: number;
+  ttl: number;
+} = {
+  ttl: 60 * 60 * 24 * 1000,
+}; //on server
 
 // Dependency flow: constants, types -> chart-configs, data, utils -> components -> sections -> index.tsx (this file)
 
@@ -213,9 +221,20 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
     usd_24h_change: change24H,
   } = currentPriceData["origin-dollar-governance"];
 
-  const stakingData = getStakingChartData(rawStakingData, days);
+  const { lastUpdated, data, ttl } = ogvStakingCache;
 
-  console.log(stakingData.labels, priceData24H.labels);
+  // 24HR ttl
+  const cacheHit = lastUpdated ? Date.now() < lastUpdated + ttl : false;
+  let stakingData: ChartData<"line", (number | Point)[], unknown>;
+  if (cacheHit) {
+    console.log("hitting cache");
+    stakingData = data;
+  } else {
+    console.log("missing cache");
+    stakingData = getStakingChartData(rawStakingData, days);
+    ogvStakingCache.lastUpdated = Date.now();
+    ogvStakingCache.data = stakingData;
+  }
 
   return {
     props: {
