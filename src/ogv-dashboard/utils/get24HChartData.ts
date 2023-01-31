@@ -1,4 +1,14 @@
 import { ChartData } from "chart.js";
+import {
+  priceGradientStart,
+  fill,
+  tension,
+  pointRadius,
+  pointHitRadius,
+  pointHoverRadius,
+  pointHoverBorderWidth,
+  pointHoverBorderColor,
+} from "../constants";
 
 const get24HData = (rawData24H: {
   prices: number[];
@@ -16,14 +26,14 @@ const get24HData = (rawData24H: {
       {
         label: "Price",
         data: prices,
-        fill: false,
-        tension: 0.4,
-        pointRadius: 0,
-        pointHitRadius: 7,
-        pointHoverRadius: 7,
-        pointHoverBorderWidth: 2,
-        pointHoverBorderColor: "#000",
-        pointHoverBackgroundColor: "#8C66FC",
+        fill,
+        tension,
+        pointRadius,
+        pointHitRadius,
+        pointHoverRadius,
+        pointHoverBorderWidth,
+        pointHoverBorderColor,
+        pointHoverBackgroundColor: priceGradientStart,
       },
     ],
   };
@@ -35,8 +45,8 @@ const get24HData = (rawData24H: {
         label: "Market Cap",
         data: marketCaps,
         fill: false,
-        tension: 0.4,
-        pointRadius: 0,
+        tension,
+        pointRadius,
       },
     ],
   };

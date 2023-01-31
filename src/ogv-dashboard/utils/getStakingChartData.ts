@@ -1,6 +1,18 @@
 import { ChartData } from "chart.js";
-import { BigNumber } from "ethers";
-import { GetBlockByNumberResponse, GetStorageAtResponse } from "../types";
+import {
+  priceGradientStart,
+  fill,
+  tension,
+  pointRadius,
+  pointHitRadius,
+  pointHoverRadius,
+  pointHoverBorderWidth,
+  pointHoverBorderColor,
+  stakingGradientEnd,
+} from "../constants";
+import { GetStorageAtResponse } from "../types";
+import { BigNumber, utils } from "ethers";
+const { formatUnits } = utils;
 
 /* First `days` elements of rawStakingData are the staking balances, next `days`
  * elements are the total supplies, and final `days` elements are the timestamps
@@ -31,7 +43,7 @@ const getStakingChartData = (rawStakingData: any[], days: number) => {
 
         return {
           time,
-          amount: amount.div(BigNumber.from("1000000000000000000")).toNumber(),
+          amount: parseInt(formatUnits(amount)),
           percentage,
         };
       }
@@ -43,14 +55,14 @@ const getStakingChartData = (rawStakingData: any[], days: number) => {
         label: "Amount Staked",
         //@ts-ignore
         data: JSON.stringify(fullData),
-        fill: false,
-        tension: 0.4,
-        pointRadius: 0,
-        pointHitRadius: 7,
-        pointHoverRadius: 7,
-        pointHoverBorderWidth: 2,
-        pointHoverBorderColor: "#000",
-        pointHoverBackgroundColor: "#CF75D5",
+        fill,
+        tension,
+        pointRadius,
+        pointHitRadius,
+        pointHoverRadius,
+        pointHoverBorderWidth,
+        pointHoverBorderColor,
+        pointHoverBackgroundColor: stakingGradientEnd,
         parsing: {
           xAxisKey: "time",
           yAxisKey: "amount",

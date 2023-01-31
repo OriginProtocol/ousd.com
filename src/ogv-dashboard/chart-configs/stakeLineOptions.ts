@@ -2,8 +2,8 @@ import { enUS } from "date-fns/locale";
 import { format } from "date-fns";
 import { ChartOptions, TooltipModel } from "chart.js";
 import { smSize, stakingGradientEnd, stakingGradientStart } from "../constants";
-import { utils } from "ethers";
-const { commify } = utils;
+import { tailwindConfig } from "../../utils";
+const { colors } = tailwindConfig.theme;
 
 const stakeLineOptions: ChartOptions<"line"> = {
   responsive: true,
@@ -71,8 +71,7 @@ const stakeLineOptions: ChartOptions<"line"> = {
 
           let innerHtml = `<div style="background-image: -webkit-linear-gradient(left, ${stakingGradientStart} -28.99%, ${stakingGradientEnd} 144.97%); color: gray; padding: 2px; border-radius: 0.5rem; min-width: 8rem; width: fit-content">`;
 
-          innerHtml +=
-            '<div style="width: full; background: #141519; border-radius: 0.5rem 0.5rem 0 0; padding: .5rem .5rem 0 .5rem;" class="flex justify-between"> ';
+          innerHtml += `<div style="width: full; background: ${colors["origin-bg-black"]}; border-radius: 0.5rem 0.5rem 0 0; padding: .5rem .5rem 0 .5rem;" class="flex justify-between"> `;
 
           innerHtml +=
             '<div style="font-family: Sailec; font-style: normal; color: white; padding-top: 0.5rem; font-weight: 600; line-height: 1rem">' +
@@ -83,7 +82,7 @@ const stakeLineOptions: ChartOptions<"line"> = {
 
           bodyLines.forEach((body) => {
             innerHtml +=
-              '<div style="background: #141519; text-color: #8493a6; border-radius: 0 0 0.5rem 0.5rem; padding: .5rem; font-size: 0.75rem; font-weight: 400;">' +
+              `<div style="background: ${colors["origin-bg-black"]}; text-color: ${colors["body-grey"]}; border-radius: 0 0 0.5rem 0.5rem; padding: .5rem; font-size: 0.75rem; font-weight: 400;">` +
               body +
               " OGV" +
               "</div>";
@@ -121,12 +120,12 @@ const stakeLineOptions: ChartOptions<"line"> = {
     mode: "index",
     intersect: false,
   },
-  borderColor: "#FFF",
+  borderColor: colors["white"],
   scales: {
     x: {
       type: "time",
       border: {
-        color: "#8493A6",
+        color: colors["body-grey"],
       },
       time: {
         displayFormats: {
@@ -146,7 +145,7 @@ const stakeLineOptions: ChartOptions<"line"> = {
         align: "start",
         maxRotation: 0,
         padding: 8,
-        color: "#b5beca",
+        color: colors["subheading"],
         font: () => {
           if (window.innerWidth < smSize)
             return {
@@ -168,7 +167,7 @@ const stakeLineOptions: ChartOptions<"line"> = {
       position: "right",
       ticks: {
         padding: 10,
-        color: "#b5beca",
+        color: colors["subheading"],
         font: () => {
           if (window.innerWidth < smSize)
             return {
@@ -180,11 +179,11 @@ const stakeLineOptions: ChartOptions<"line"> = {
         },
         callback: (value: number) => {
           if (value >= 1000000000) {
-            return (value / 1000000000).toPrecision(2) + "B";
+            return (value / 1000000000).toPrecision(3) + "B";
           } else if (value >= 1000000) {
-            return (value / 1000000).toPrecision(2) + "M";
+            return (value / 1000000).toPrecision(3) + "M";
           } else if (value >= 1000) {
-            return (value / 1000).toPrecision(2) + "K";
+            return (value / 1000).toPrecision(3) + "K";
           } else {
             return value;
           }
@@ -203,7 +202,7 @@ const stakeLineOptions: ChartOptions<"line"> = {
         font: {
           size: 16,
         },
-        color: "#B5BECA",
+        color: colors["subheading"],
         padding: {
           top: 12,
         },

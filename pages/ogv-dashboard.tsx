@@ -229,11 +229,8 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
   // 24HR ttl
   const cacheHit = lastUpdated ? Date.now() < lastUpdated + ttl : false;
   let stakingData: ChartData<"line", (number | Point)[], unknown>;
-  if (cacheHit) {
-    console.log("hitting cache");
-    stakingData = data;
-  } else {
-    console.log("missing cache");
+  if (cacheHit) stakingData = data;
+  else {
     stakingData = getStakingChartData(rawStakingData, days);
     ogvStakingCache.lastUpdated = Date.now();
     ogvStakingCache.data = stakingData;
