@@ -9,18 +9,12 @@ import {
   pointHoverBorderWidth,
   pointHoverBorderColor,
 } from "../constants";
+import { OgvRawData } from "../types";
 
-const get24HData = (rawData24H: {
-  prices: number[];
-  market_caps: number[];
-  total_volumes: number[];
-}) => {
-  const labels = rawData24H.prices.map((price: any) => price[0]);
+const get24HChartData = (rawData24H: OgvRawData) => {
+  const { labels, prices, marketCaps } = rawData24H;
 
-  const prices = rawData24H.prices.map((price: any) => price[1]);
-  const marketCaps = rawData24H.market_caps.map((price: any) => price[1]);
-
-  const priceData24H: ChartData<"line"> = {
+  const priceData24H: ChartData<"line", number[], number> = {
     labels,
     datasets: [
       {
@@ -38,7 +32,7 @@ const get24HData = (rawData24H: {
     ],
   };
 
-  const marketCapData24H: ChartData<"line"> = {
+  const marketCapData24H: ChartData<"line", number[], number> = {
     labels,
     datasets: [
       {
@@ -54,4 +48,4 @@ const get24HData = (rawData24H: {
   return { priceData24H, marketCapData24H };
 };
 
-export default get24HData;
+export default get24HChartData;
