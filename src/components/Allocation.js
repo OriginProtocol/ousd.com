@@ -146,7 +146,7 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                               }`}
                             >
                               {strategy.name === 'Convex Strategy' ? (
-                                <div className='flex flex-col xl:flex-row xl:flex-wrap mt-[22px] xl:space-x-10 space-y-2 xl:space-y-0'>
+                                <div className='flex flex-col 2xl:flex-row mt-[22px] 2xl:space-x-10 space-y-2 2xl:space-y-0'>
                                   <div className="flex flex-row justify-between">
                                     <div className="flex flex-row">
                                       <div className="relative w-[26px]">
@@ -226,7 +226,7 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                                 </div>
                               ) : strategy.name === 'Morpho Compound' ? (
                                 <>
-                                  <div className='flex flex-col xl:flex-row xl:flex-wrap mt-[22px] xl:space-x-10 space-y-2 xl:space-y-0'>
+                                  <div className='flex flex-col 2xl:flex-row mt-[22px] 2xl:space-x-10 space-y-2 2xl:space-y-0'>
                                     <div className="flex flex-row justify-between whitespace-nowrap">
                                       <div className="flex flex-row">
                                         <div className="relative w-6">
@@ -291,7 +291,7 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                                       )}%`}</Typography.Body3>
                                     </div>
                                   </div>
-                                  <div className='flex flex-col xl:flex-row xl:flex-wrap mt-[22px] xl:space-x-10 space-y-2 xl:space-y-0'>
+                                  <div className='flex flex-col 2xl:flex-row mt-2 2xl:mt-4 2xl:space-x-10 space-y-2 2xl:space-y-0'>
                                     <div className="flex flex-row justify-between whitespace-nowrap">
                                       <div className="flex flex-row">
                                         <div className="relative w-6">
@@ -358,7 +358,7 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                                   </div>
                                 </>
                               ) : (
-                                <div className='flex flex-col xl:flex-row xl:flex-wrap mt-[22px] xl:space-x-10 space-y-2 xl:space-y-0'>
+                                <div className='flex flex-col 2xl:flex-row mt-[22px] 2xl:space-x-10 space-y-2 2xl:space-y-0'>
                                   <div className="flex flex-row justify-between">
                                     <div className="flex flex-row">
                                       <div className="relative w-6">
