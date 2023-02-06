@@ -10,6 +10,7 @@ module.exports = {
         "origin-bg-black": "#141519",
         "origin-bg-dgrey": "#18191c",
         "origin-bg-grey": "#1e1f25",
+        "body-grey": "#8493a6",
         subheading: "#b5beca",
         tooltip: "#1e1f25",
         "origin-border": "#272727",

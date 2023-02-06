@@ -1,4 +1,4 @@
-export interface GetStorageAtResponse {
+interface GetStorageAtResponse {
   jsonrpc: string;
   id: number;
   result: string;

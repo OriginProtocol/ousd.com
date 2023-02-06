@@ -10,7 +10,7 @@ interface StakingBannerProps {
   width: number;
 }
 
-export const StakingBanner = ({ stakingApy, width }: StakingBannerProps) => {
+const StakingBanner = ({ stakingApy, width }: StakingBannerProps) => {
   return (
     <Section
       className="bg-origin-bg-black"
