@@ -10,6 +10,11 @@ import { theme, strategyMapping } from '../utils/constants'
 
 const Allocation = ({ strategies }) => {
   const [open, setOpen] = useState({})
+  const [loaded, setLoaded] = useState()
+
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
 
   const total = strategies?.reduce((t, s) => {
     return { total: t.total + s.total }
@@ -62,7 +67,7 @@ const Allocation = ({ strategies }) => {
               <div className="flex flex-col px-[16px] md:px-10 pt-2 pb-[10px] md:pt-3 md:pb-8">
                 <ThemeProvider theme={theme}>
                   <div className="flex flex-col justify-between">
-                    {strategiesSorted?.map((strategy) => {
+                    {loaded && strategiesSorted?.map((strategy) => {
                       if (
                         strategy.name === 'Vault' ||
                         strategy.name === 'OUSD MetaStrategy' ||
