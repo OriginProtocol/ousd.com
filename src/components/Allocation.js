@@ -364,7 +364,7 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                                       <div className="relative w-6">
                                         <Image
                                           src={assetRootPath(
-                                            `/images/${strategyMapping[strategy.name].tokenPrefix}dai.svg`
+                                            `/images/${strategyMapping[strategy.name]?.tokenPrefix}dai.svg`
                                           )}
                                           fill
                                           sizes='(max-width: 768px) 20px, 24px'
@@ -372,7 +372,7 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                                         />
                                       </div>
                                       <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                        {`${strategyMapping[strategy.name].token} DAI`}
+                                        {`${strategyMapping[strategy.name]?.token} DAI`}
                                         </Typography.Body3>
                                     </div>
                                     <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
@@ -385,7 +385,7 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                                       <div className="relative w-6">
                                         <Image
                                           src={assetRootPath(
-                                            `/images/${strategyMapping[strategy.name].tokenPrefix}usdc.svg`
+                                            `/images/${strategyMapping[strategy.name]?.tokenPrefix}usdc.svg`
                                           )}
                                           fill
                                           sizes='(max-width: 768px) 20px, 24px'
@@ -393,7 +393,7 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                                         />
                                       </div>
                                       <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                        {`${strategyMapping[strategy.name].token} USDC`}
+                                        {`${strategyMapping[strategy.name]?.token} USDC`}
                                       </Typography.Body3>
                                     </div>
                                     <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
@@ -406,7 +406,7 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                                       <div className="relative w-6">
                                         <Image
                                           src={assetRootPath(
-                                            `/images/${strategyMapping[strategy.name].tokenPrefix}usdt.svg`
+                                            `/images/${strategyMapping[strategy.name]?.tokenPrefix}usdt.svg`
                                           )}
                                           fill
                                           sizes='(max-width: 768px) 20px, 24px'
@@ -414,7 +414,7 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                                         />
                                       </div>
                                       <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                        {`${strategyMapping[strategy.name].token} USDT`}
+                                        {`${strategyMapping[strategy.name]?.token} USDT`}
                                       </Typography.Body3>
                                     </div>
                                     <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
@@ -425,7 +425,7 @@ strategy.name === 'Morpho Compound' && console.log(strategy)
                                 </div>
                               )}
                               <Typography.Body3 className="mt-4 text-[#b5beca] text-left text-[12px] md:text-[14px] leading-[23px]">
-                                {strategyMapping[strategy.name].description}
+                                {strategyMapping[strategy.name]?.description}
                               </Typography.Body3>
                               <Typography.Body3 className='flex flex-row mt-4 md:hidden text-left space-x-1.5 text-[#b5beca] text-[12px] font-medium'>
                                 <div>Less info</div>
