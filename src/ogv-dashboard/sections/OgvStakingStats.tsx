@@ -13,7 +13,7 @@ interface OgvStakingStatsProps {
   stakingData: ChartData<"line">;
 }
 
-export const OgvStakingStats = ({ stakingData }: OgvStakingStatsProps) => {
+const OgvStakingStats = ({ stakingData }: OgvStakingStatsProps) => {
   const { chartRef, chartData: chartStakingData } = useChartGradient(
     stakingData,
     stakingGradientStart,

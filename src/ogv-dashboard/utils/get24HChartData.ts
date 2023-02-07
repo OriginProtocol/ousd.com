@@ -1,42 +1,46 @@
 import { ChartData } from "chart.js";
+import {
+  priceGradientStart,
+  fill,
+  tension,
+  pointRadius,
+  pointHitRadius,
+  pointHoverRadius,
+  pointHoverBorderWidth,
+  pointHoverBorderColor,
+} from "../constants";
+import { OgvRawData } from "../types";
 
-export const get24HData = (rawData24H: {
-  prices: number[];
-  market_caps: number[];
-  total_volumes: number[];
-}) => {
-  const labels = rawData24H.prices.map((price: any) => price[0]);
+const get24HChartData = (rawData24H: OgvRawData) => {
+  const { labels, prices, marketCaps } = rawData24H;
 
-  const prices = rawData24H.prices.map((price: any) => price[1]);
-  const marketCaps = rawData24H.market_caps.map((price: any) => price[1]);
-
-  const priceData24H: ChartData<"line"> = {
+  const priceData24H: ChartData<"line", number[], number> = {
     labels,
     datasets: [
       {
         label: "Price",
         data: prices,
-        fill: false,
-        tension: 0.4,
-        pointRadius: 0,
-        pointHitRadius: 7,
-        pointHoverRadius: 7,
-        pointHoverBorderWidth: 2,
-        pointHoverBorderColor: "#000",
-        pointHoverBackgroundColor: "#8C66FC",
+        fill,
+        tension,
+        pointRadius,
+        pointHitRadius,
+        pointHoverRadius,
+        pointHoverBorderWidth,
+        pointHoverBorderColor,
+        pointHoverBackgroundColor: priceGradientStart,
       },
     ],
   };
 
-  const marketCapData24H: ChartData<"line"> = {
+  const marketCapData24H: ChartData<"line", number[], number> = {
     labels,
     datasets: [
       {
         label: "Market Cap",
         data: marketCaps,
         fill: false,
-        tension: 0.4,
-        pointRadius: 0,
+        tension,
+        pointRadius,
       },
     ],
   };
@@ -44,4 +48,4 @@ export const get24HData = (rawData24H: {
   return { priceData24H, marketCapData24H };
 };
 
-export default get24HData;
+export default get24HChartData;

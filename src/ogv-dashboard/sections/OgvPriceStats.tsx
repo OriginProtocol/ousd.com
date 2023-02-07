@@ -7,7 +7,7 @@ import { assetRootPath } from "../../utils/image";
 import { BigNumber, utils } from "ethers";
 const { commify, formatEther } = utils;
 
-export interface OgvPriceStatsProps {
+interface OgvPriceStatsProps {
   currentPrice: number;
   currentMarketCap: number;
   change24H: number;
@@ -19,7 +19,7 @@ export interface OgvPriceStatsProps {
     balance: string;
   }[];
 }
-export const OgvPriceStats = ({
+const OgvPriceStats = ({
   currentPrice,
   currentMarketCap,
   change24H,

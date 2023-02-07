@@ -1,10 +1,14 @@
+import Link from "./Link";
+import OgvRawData from "./OgvRawData";
 import { ChartData } from "chart.js";
-import { Link } from "./Link";
 
-export interface DashProps {
+interface DashProps {
   navLinks: Link[];
-  priceData24H: ChartData<"line">;
-  marketCapData24H: ChartData<"line">;
+  priceData24H: ChartData<"line", number[], number>;
+  marketCapData24H: ChartData<"line", number[], number>;
+  rawData7D: OgvRawData;
+  rawData30D: OgvRawData;
+  rawData365D: OgvRawData;
   stakingData: ChartData<"line">;
   currentPrice: number;
   currentMarketCap: number;

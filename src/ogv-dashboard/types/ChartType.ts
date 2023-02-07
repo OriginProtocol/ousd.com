@@ -1,4 +1,4 @@
-export enum ChartType {
+enum ChartType {
   Price,
   Market_Cap,
 }

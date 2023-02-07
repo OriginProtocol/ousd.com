@@ -30,10 +30,10 @@ import {
   nonCirculatingSupply as nonCirculating,
 } from "../src/ogv-dashboard/data";
 import {
-  fetchOGVPriceData,
   get24HChartData,
   fetchOGVStakingData,
   getStakingChartData,
+  getOGVPriceData,
 } from "../src/ogv-dashboard/utils";
 import {
   Heading,
@@ -73,6 +73,9 @@ const OgvDashboard = ({
   navLinks,
   priceData24H,
   marketCapData24H,
+  rawData7D,
+  rawData30D,
+  rawData365D,
   stakingData,
   currentPrice,
   currentMarketCap,
@@ -113,7 +116,16 @@ const OgvDashboard = ({
       />
 
       {/* OGV Price Chart */}
-      <OgvPriceChart {...{ priceData24H, marketCapData24H, width }} />
+      <OgvPriceChart
+        {...{
+          priceData24H,
+          marketCapData24H,
+          rawData7D,
+          rawData30D,
+          rawData365D,
+          width,
+        }}
+      />
 
       {/* OGV Staking Banner*/}
       <StakingBanner {...{ stakingApy, width }} />
@@ -144,7 +156,10 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
     },
   });
 
-  const rawData24HPromise = fetchOGVPriceData(1);
+  const rawData24HPromise = getOGVPriceData(1);
+  const rawData7DPromise = getOGVPriceData(7);
+  const rawData30DPromise = getOGVPriceData(30);
+  const rawData365DPromise = getOGVPriceData(365);
 
   const currentPriceDataPromise = fetch(
     "https://api.coingecko.com/api/v3/simple/price?ids=origin-dollar-governance&vs_currencies=usd&include_market_cap=true&include_24hr_change=true&precision=full"
@@ -194,6 +209,9 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
   let [
     navRes,
     rawData24H,
+    rawData7D,
+    rawData30D,
+    rawData365D,
     currentPriceData,
     totalSupply,
     rawStakingData,
@@ -201,6 +219,9 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
   ] = await Promise.all([
     navResPromise,
     rawData24HPromise,
+    rawData7DPromise,
+    rawData30DPromise,
+    rawData365DPromise,
     currentPriceDataPromise,
     totalSupplyPromise,
     rawStakingDataPromise,
@@ -229,11 +250,8 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
   // 24HR ttl
   const cacheHit = lastUpdated ? Date.now() < lastUpdated + ttl : false;
   let stakingData: ChartData<"line", (number | Point)[], unknown>;
-  if (cacheHit) {
-    console.log("hitting cache");
-    stakingData = data;
-  } else {
-    console.log("missing cache");
+  if (cacheHit) stakingData = data;
+  else {
     stakingData = getStakingChartData(rawStakingData, days);
     ogvStakingCache.lastUpdated = Date.now();
     ogvStakingCache.data = stakingData;
@@ -244,6 +262,9 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
       navLinks,
       priceData24H,
       marketCapData24H,
+      rawData7D,
+      rawData30D,
+      rawData365D,
       stakingData,
       currentPrice,
       currentMarketCap,
