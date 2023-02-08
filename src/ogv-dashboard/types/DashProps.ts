@@ -1,4 +1,4 @@
-import Link from "./Link";
+import { Link } from "../../types";
 import OgvRawData from "./OgvRawData";
 import { ChartData } from "chart.js";
 

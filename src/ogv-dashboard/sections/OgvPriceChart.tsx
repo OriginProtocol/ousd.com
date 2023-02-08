@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Section, ChartButton } from "../components";
+import { Section } from "../../components";
+import { ChartButton } from "../components";
 import { ChartTime, ChartType, OgvRawData } from "../types";
 import { priceGradientStart, priceGradientEnd, smSize } from "../constants";
 import { getOGVPriceData, setCacheData } from "../utils";
