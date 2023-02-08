@@ -5,7 +5,7 @@ import { Header } from "@originprotocol/origin-storybook";
 import { GetServerSideProps } from "next";
 import { ProofOfYieldProps } from "../src/proof-of-yield/types";
 import { fetchAPI } from "../lib/api";
-import { Heading } from "../src/proof-of-yield/sections";
+import { Heading, DailyYield } from "../src/proof-of-yield/sections";
 import Footer from "../src/components/Footer";
 
 const ProofOfYield = ({ navLinks }: ProofOfYieldProps) => {
@@ -18,6 +18,8 @@ const ProofOfYield = ({ navLinks }: ProofOfYieldProps) => {
 
       {/* Heading */}
       <Heading />
+
+      <DailyYield />
 
       <Footer locale={null} />
     </>
