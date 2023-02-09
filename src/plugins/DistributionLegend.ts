@@ -1,7 +1,6 @@
 import { Plugin } from "chart.js";
 import { BigNumber } from "ethers";
-
-const smSize = 640;
+import { smSize } from "../constants";
 
 const getOrCreateLegendList = (chart, id) => {
   const legendContainer = document.getElementById(id);

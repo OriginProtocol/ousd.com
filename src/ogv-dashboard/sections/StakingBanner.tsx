@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Section } from "../../components";
 import { assetRootPath } from "../../utils/image";
 import { Button } from "@originprotocol/origin-storybook";
-import { smSize } from "../constants";
+import { smSize } from "../../constants";
 
 interface StakingBannerProps {
   stakingApy: number;

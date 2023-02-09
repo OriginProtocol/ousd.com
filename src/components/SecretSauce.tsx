@@ -3,10 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { useViewWidth } from "../hooks";
 import { assetRootPath } from "../utils/image";
-
-const mdSize = 768;
-const lgSize = 1024;
-const xl2Size = 1536;
+import { mdSize, lgSize, xl2Size } from "../constants";
 
 function SecretSauce() {
   const width = useViewWidth();
