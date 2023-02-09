@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { Section } from "../../components";
 import { TableData, TableHead } from "../components";
 import { smSize, lgSize } from "../../constants";
@@ -20,15 +21,20 @@ const ex = {
 const mockData = [];
 
 for (let i = 0; i < 20; i++) {
-  mockData.push(ex);
+  mockData.push(Object.assign({ ...ex }, { date: ex.date + i * 86400000 }));
 }
 
 const highlightCss =
   "border border-[#8c66fc] bg-gradient-to-r from-gradient2-from to-gradient2-to";
 
 const DailyYield = ({}: DailyYieldProps) => {
+  const router = useRouter();
   const width = useViewWidth();
   const [days, seTableDataays] = useState(true);
+
+  const routeToYieldOnDay = (date: number) => {
+    router.push(`/proof-of-yield/${date}`);
+  };
 
   return (
     <Section className="mt-10 md:mt-28">
@@ -103,7 +109,10 @@ const DailyYield = ({}: DailyYieldProps) => {
 
         <tbody className="relative px-6">
           {mockData.map((item, i) => (
-            <tr className="border-t-2 border-black" key={item.date}>
+            <tr
+              className="group border-t-2  hover:bg-hover-bg border-black"
+              key={item.date}
+            >
               <TableData align="left" className="pl-8">
                 {new Date(item.date).toLocaleDateString(undefined, {
                   month: "short",
@@ -132,23 +141,31 @@ const DailyYield = ({}: DailyYieldProps) => {
                 </TableData>
               )}
               <TableData
-                className="whitespace-nowrap"
+                className="whitespace-nowrap px-6"
                 width="1%"
                 align="center"
               >
                 {width >= lgSize ? (
-                  <button className="rounded-[100px] px-6 py-2 text-origin-white mx-4 lg:mx-6 xl:mx-8">
-                    <span>Proof of yield</span>
-                    <Image
-                      src={assetRootPath("/images/arrow-right.svg")}
-                      width="20"
-                      height="20"
-                      alt="arrow-right"
-                      className="pl-3 inline"
-                    />
-                  </button>
+                  <div className="relative bg-gradient2 rounded-[100px] p-[1px]">
+                    <button
+                      onClick={() => routeToYieldOnDay(item.date)}
+                      className="relative w-full group-hover:bg-[#1b1a1abb] bg-origin-bg-grey rounded-[100px] px-4 lg:px-6 py-2 text-origin-white "
+                    >
+                      <span>Proof of yield</span>
+                      <Image
+                        src={assetRootPath("/images/arrow-right.svg")}
+                        width="20"
+                        height="20"
+                        alt="arrow-right"
+                        className="pl-3 inline translate-y-[-1px]"
+                      />
+                    </button>
+                  </div>
                 ) : (
-                  <button className="w-3 mx-4 translate-y-1/4">
+                  <button
+                    onClick={() => routeToYieldOnDay(item.date)}
+                    className="w-3 mx-4 flex justify-center items-center"
+                  >
                     <Image
                       width="1000"
                       height="1000"
