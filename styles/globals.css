@@ -253,13 +253,6 @@ section.black {
   --tw-gradient-to: #cf75d5;
 }
 
-.bg-gradient2 {
-  background-image: linear-gradient(to top right, var(--tw-gradient-stops));
-  --tw-gradient-from: #fedba8;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-  --tw-gradient-to: #cf75d5;
-}
-
 .h-80 {
   height: 20rem /* 320px */;
 }
