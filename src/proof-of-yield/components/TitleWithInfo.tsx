@@ -18,11 +18,13 @@ const TitleWithInfo = ({
   return (
     <div
       className={twMerge(
-        `text-base font-normal text-table-title w-fit flex items-center`,
+        `font-normal text-table-title w-fit flex items-center`,
         className
       )}
     >
-      <Typography.Body2 className={twMerge(`pr-2`, textClassName)}>
+      <Typography.Body2
+        className={twMerge(`text-xs md:text-base pr-2`, textClassName)}
+      >
         {title}
       </Typography.Body2>
       <Image

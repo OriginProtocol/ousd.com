@@ -12,6 +12,7 @@ import { smSize, lgSize } from "../../constants";
 import { useViewWidth } from "../../hooks";
 import { utils } from "ethers";
 import { assetRootPath } from "../../utils/image";
+import { Typography } from "@originprotocol/origin-storybook";
 const { commify } = utils;
 
 interface DailyYieldProps {}
@@ -72,10 +73,15 @@ const DailyYield = ({}: DailyYieldProps) => {
         <thead>
           <tr>
             <TableHead align="left" className="whitespace-nowrap pl-8">
-              Date
+              <Typography.Body2 className="text-xs md:text-base">
+                Date
+              </Typography.Body2>
             </TableHead>
-            <TableHead className="whitespace-nowrap pr-8 lg:pr-14 xl:pr-24">
-              <TitleWithInfo title="Yield distributed"></TitleWithInfo>
+            <TableHead className="sm:whitespace-nowrap pr-8 lg:pr-14 xl:pr-24">
+              <TitleWithInfo
+                textClassName="leading-4"
+                title="Yield distributed"
+              ></TitleWithInfo>
             </TableHead>
             <TableHead className="whitespace-nowrap pr-0 sm:pr-8 lg:pr-14 xl:pr-24">
               <TitleWithInfo title="APY"></TitleWithInfo>
@@ -94,7 +100,7 @@ const DailyYield = ({}: DailyYieldProps) => {
         <tbody className="relative px-6">
           {mockData.map((item, i) => (
             <tr
-              className="group border-t-2  hover:bg-hover-bg border-black"
+              className="group border-t-2 hover:bg-hover-bg border-origin-bg-black"
               key={item.date}
             >
               <TableData align="left" className="pl-8">

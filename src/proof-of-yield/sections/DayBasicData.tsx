@@ -7,11 +7,33 @@ import { Section } from "../../components";
 import {
   BasicData,
   Gradient2Button,
+  TableData,
   TableHead,
   TitleWithInfo,
 } from "../components";
 import { Typography } from "@originprotocol/origin-storybook";
+import { shortenAddress } from "../../utils";
 const { commify } = utils;
+
+const e = {
+  block: 16188461,
+  date: 1675886432000,
+  action: "Rebase",
+  yieldDistributed: 1873.92,
+  fees: 208.21,
+  transactionHash:
+    "0xd9973207c58e3a041786faba972417f853776b88e0453ea113eaa79e44ef4b07",
+};
+
+const mockData = [];
+for (let i = 0; i < 5; i++) {
+  mockData.push(
+    Object.assign(
+      { ...e },
+      { block: e.block + i * 100, date: e.date + i * 1500 }
+    )
+  );
+}
 
 interface DayBasicDataProps {
   timestamp: number;
@@ -55,7 +77,7 @@ const DayBasicData = ({ timestamp }: DayBasicDataProps) => {
       </div>
 
       <div className="w-full mt-14 flex">
-        <div className="flex flex-col w-2/3 mr-4 justify-between">
+        <div className="w-2/3 mr-4">
           {/* Basic Stats section */}
           <div className="flex">
             <BasicData className="flex-1 rounded-l-lg" title="Distribution APY">
@@ -70,7 +92,7 @@ const DayBasicData = ({ timestamp }: DayBasicDataProps) => {
           </div>
 
           {/* Yield distribution events */}
-          <div className="text-blurry">
+          <div className="text-blurry mt-14">
             <Typography.Body>Yield distribution events</Typography.Body>
             <Typography.Body3 className="mt-3 text-sm text-table-title">
               Sorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -83,19 +105,73 @@ const DayBasicData = ({ timestamp }: DayBasicDataProps) => {
                     Block / Date
                   </TableHead>
                   <TableHead align="left">Action</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead>
+                  <TableHead className="pr-6">Amount</TableHead>
+                  <TableHead className="pr-6">
                     <TitleWithInfo title="Fees"></TitleWithInfo>
                   </TableHead>
                   <TableHead className="pr-8">Transaction</TableHead>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                {mockData.map((item, i) => (
+                  <tr
+                    className="group border-t-2 hover:bg-hover-bg border-origin-bg-black"
+                    key={item.date}
+                  >
+                    <TableData align="left" className="pl-8">
+                      <Typography.Body2>{item.block}</Typography.Body2>
+                      <Typography.Body3 className="text-sm text-table-title">
+                        {moment
+                          .utc(item.date)
+                          .format(moment.localeData().longDateFormat("L"))}
+                        , {moment.utc(item.date).format("LTS")}
+                      </Typography.Body3>
+                    </TableData>
+                    <TableData
+                      align="left"
+                      className="whitespace-nowrap"
+                      width="1%"
+                    >
+                      <Typography.Body2>{item.action}</Typography.Body2>
+                      <Typography.Body3 className="text-sm text-table-title text-left w-full">
+                        (yield distribution)
+                      </Typography.Body3>
+                    </TableData>
+                    <TableData className="whitespace-nowrap pr-6">
+                      <Typography.Body2 className="">
+                        ${commify(item.yieldDistributed)}
+                      </Typography.Body2>
+                    </TableData>
+
+                    <TableData className="whitespace-nowrap pr-6" width="1%">
+                      <Typography.Body2 className="text-right w-full">
+                        ${item.fees}
+                      </Typography.Body2>
+                    </TableData>
+                    <TableData className="whitespace-nowrap pr-12" width="1%">
+                      {shortenAddress(item.transactionHash)}
+                      <a
+                        href={`https://etherscan.io/tx/${e.transactionHash}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block ml-2"
+                      >
+                        <Image
+                          src={assetRootPath("/images/ext-link.svg")}
+                          width="16"
+                          height="16"
+                          alt="ext-link"
+                        />
+                      </a>
+                    </TableData>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         </div>
         {/* Yield boost multiplier */}
-        <div className="min-w-[33%] w-fit rounded-lg bg-origin-bg-grey text-blurry">
+        <div className="min-w-[33%] w-fit h-min rounded-lg bg-origin-bg-grey text-blurry">
           <div className="flex justify-center items-center w-fit m-8">
             <Typography.Body className="inline mr-2">
               Yield boost multiplier
