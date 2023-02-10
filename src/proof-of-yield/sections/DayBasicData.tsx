@@ -41,7 +41,7 @@ interface DayBasicDataProps {
 
 const DayBasicData = ({ timestamp }: DayBasicDataProps) => {
   return (
-    <Section>
+    <Section className="mb-20">
       <Gradient2Button className="flex justify-center items-center">
         <Image
           src={assetRootPath("/images/arrow-left.svg")}

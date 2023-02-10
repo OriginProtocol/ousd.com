@@ -4,7 +4,10 @@ import transformLinks from "../../src/utils/transformLinks";
 import Error from "../404";
 import { useRouter } from "next/router";
 import { Header } from "@originprotocol/origin-storybook";
-import { DayBasicData } from "../../src/proof-of-yield/sections";
+import {
+  DayBasicData,
+  DayDripperBanner,
+} from "../../src/proof-of-yield/sections";
 import { YieldOnDayProps } from "../../src/proof-of-yield/types";
 import { GetServerSideProps } from "next";
 import { fetchAPI } from "../../lib/api";
@@ -26,6 +29,8 @@ const YieldOnDay = ({ navLinks }: YieldOnDayProps) => {
       <Header mappedLinks={navLinks} webProperty="ousd" />
 
       <DayBasicData timestamp={timestampNumber} />
+
+      <DayDripperBanner />
 
       <Footer locale={null} />
     </>
