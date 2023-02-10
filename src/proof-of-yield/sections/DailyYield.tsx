@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Section } from "../../components";
-import { TableData, TableHead } from "../components";
+import {
+  TableData,
+  TableHead,
+  Gradient2Button,
+  TitleWithInfo,
+} from "../components";
 import { smSize, lgSize } from "../../constants";
 import { useViewWidth } from "../../hooks";
 import { utils } from "ethers";
@@ -66,39 +71,18 @@ const DailyYield = ({}: DailyYieldProps) => {
 
         <thead>
           <tr>
-            <TableHead align="left" className="pl-8">
+            <TableHead align="left" className="whitespace-nowrap pl-8">
               Date
             </TableHead>
             <TableHead className="whitespace-nowrap pr-8 lg:pr-14 xl:pr-24">
-              <span className="pr-2">Yield distributed</span>
-              <Image
-                src={assetRootPath("/images/info.svg")}
-                width="16"
-                height="16"
-                alt="info"
-                className="mr-3 inline mb-[4px]"
-              />
+              <TitleWithInfo title="Yield distributed"></TitleWithInfo>
             </TableHead>
             <TableHead className="whitespace-nowrap pr-0 sm:pr-8 lg:pr-14 xl:pr-24">
-              <span className="pr-2">APY</span>
-              <Image
-                src={assetRootPath("/images/info.svg")}
-                width="16"
-                height="16"
-                alt="info"
-                className="mr-3 inline mb-[4px]"
-              />
+              <TitleWithInfo title="APY"></TitleWithInfo>
             </TableHead>
             {width >= smSize && (
               <TableHead className="whitespace-nowrap pr-0 xl:pr-8">
-                <span className="pr-2">Vault value</span>
-                <Image
-                  src={assetRootPath("/images/info.svg")}
-                  width="16"
-                  height="16"
-                  alt="info"
-                  className="mr-3 inline mb-[4px]"
-                />
+                <TitleWithInfo title="Vault value"></TitleWithInfo>
               </TableHead>
             )}
             <TableHead></TableHead>
@@ -146,21 +130,19 @@ const DailyYield = ({}: DailyYieldProps) => {
                 align="center"
               >
                 {width >= lgSize ? (
-                  <div className="relative bg-gradient2 rounded-[100px] p-[1px]">
-                    <button
-                      onClick={() => routeToYieldOnDay(item.date)}
-                      className="relative w-full group-hover:bg-[#1b1a1abb] bg-origin-bg-grey rounded-[100px] px-4 lg:px-6 py-2 text-origin-white "
-                    >
-                      <span>Proof of yield</span>
-                      <Image
-                        src={assetRootPath("/images/arrow-right.svg")}
-                        width="20"
-                        height="20"
-                        alt="arrow-right"
-                        className="pl-3 inline translate-y-[-1px]"
-                      />
-                    </button>
-                  </div>
+                  <Gradient2Button
+                    onClick={() => routeToYieldOnDay(item.date)}
+                    className="bg-origin-bg-grey w-full group-hover:bg-[#1b1a1abb]"
+                  >
+                    <span>Proof of yield</span>
+                    <Image
+                      src={assetRootPath("/images/arrow-right.svg")}
+                      width="20"
+                      height="20"
+                      alt="arrow-right"
+                      className="pl-3 inline translate-y-[-1px]"
+                    />
+                  </Gradient2Button>
                 ) : (
                   <button
                     onClick={() => routeToYieldOnDay(item.date)}

@@ -1,12 +1,12 @@
 import Head from "next/head";
 import React from "react";
-import transformLinks from "../src/utils/transformLinks";
+import transformLinks from "../../src/utils/transformLinks";
 import { Header } from "@originprotocol/origin-storybook";
 import { GetServerSideProps } from "next";
-import { ProofOfYieldProps } from "../src/proof-of-yield/types";
-import { fetchAPI } from "../lib/api";
-import { Heading, DailyYield } from "../src/proof-of-yield/sections";
-import Footer from "../src/components/Footer";
+import { ProofOfYieldProps } from "../../src/proof-of-yield/types";
+import { fetchAPI } from "../../lib/api";
+import { Heading, DailyYield } from "../../src/proof-of-yield/sections";
+import Footer from "../../src/components/Footer";
 
 const ProofOfYield = ({ navLinks }: ProofOfYieldProps) => {
   return (
