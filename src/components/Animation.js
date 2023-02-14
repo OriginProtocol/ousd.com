@@ -30,7 +30,7 @@ const Animation = ({ navLinks, active, initialTvl }) => {
         <div className="mt-[20px] lg:mt-16 px-8 md:px-16 lg:px-[134px] lg:pb-40 overflow-hidden">
           <div className='flex flex-col lg:flex-row justify-between max-w-[1432px] mx-auto space-x-20 xl:space-x-0'>
             <div className="lg:w-1/2 xl:w-7/12">
-              <Typography.H1 className='!text-[40px] md:!text-[64px] !leading-[40px] md:!leading-[72px]' style={{ fontWeight: 500 }}>
+              <Typography.H2 as="h1" className='!text-[40px] md:!text-[64px] !leading-[40px] md:!leading-[72px]' style={{ fontWeight: 500 }}>
                 The self-custodial,{' '}
                 <br className="hidden md:block" />
                 <span className="text-gradient2 font-black py-1">
@@ -38,7 +38,7 @@ const Animation = ({ navLinks, active, initialTvl }) => {
                 </span>
                 <br className="hidden lg:block" />
                 stablecoin
-              </Typography.H1>
+              </Typography.H2>
               <Typography.Body3 className="mt-6 mb-10 leading-[28px] text-[#b5beca]">
                 Origin Dollar simplifies DeFi by eliminating the need for staking or lock-ups. Hold OUSD in any Ethereum wallet and watch your balance increase every day.
               </Typography.Body3>
