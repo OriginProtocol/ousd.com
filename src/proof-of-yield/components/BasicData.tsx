@@ -18,13 +18,15 @@ const BasicData = ({
   return (
     <div
       className={twMerge(
-        `flex justify-start items-center px-8 py-6 bg-origin-bg-grey mr-1`,
+        `flex justify-start items-center px-4 lg:px-8 py-4 lg:py-6 bg-origin-bg-grey mr-1`,
         className
       )}
     >
       <div>
-        <TitleWithInfo {...{ title }}></TitleWithInfo>
-        <Typography.H6 className="block font-normal">{children}</Typography.H6>
+        <TitleWithInfo textClassName="whitespace-nowrap">{title}</TitleWithInfo>
+        <Typography.H6 className="block font-normal text-center lg:text-left">
+          {children}
+        </Typography.H6>
       </div>
     </div>
   );

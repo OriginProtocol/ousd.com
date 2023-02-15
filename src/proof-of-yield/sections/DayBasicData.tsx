@@ -7,12 +7,17 @@ import { Section } from "../../components";
 import {
   BasicData,
   Gradient2Button,
+  Table,
   TableData,
   TableHead,
   TitleWithInfo,
+  YieldBoostMultiplier,
 } from "../components";
 import { Typography } from "@originprotocol/origin-storybook";
+import { lgSize, xlSize } from "../../constants";
 import { shortenAddress } from "../../utils";
+import { useViewWidth } from "../../hooks";
+import { twMerge } from "tailwind-merge";
 const { commify } = utils;
 
 const e = {
@@ -35,13 +40,19 @@ for (let i = 0; i < 5; i++) {
   );
 }
 
+const eventChartColumnCssRight = "pr-6 xl:pr-8";
+const eventChartColumnCssLeft = "pl-6 xl:pr-8";
+
 interface DayBasicDataProps {
   timestamp: number;
+  sectionOverrideCss?: string;
 }
 
-const DayBasicData = ({ timestamp }: DayBasicDataProps) => {
+const DayBasicData = ({ timestamp, sectionOverrideCss }: DayBasicDataProps) => {
+  const width = useViewWidth();
+
   return (
-    <Section className="mb-20">
+    <Section className={twMerge("mb-20", sectionOverrideCss)}>
       <Gradient2Button className="flex justify-center items-center">
         <Image
           src={assetRootPath("/images/arrow-left.svg")}
@@ -58,10 +69,7 @@ const DayBasicData = ({ timestamp }: DayBasicDataProps) => {
         {moment(timestamp).format("MMM D, YYYY")} UTC
       </Typography.Body>
 
-      <TitleWithInfo
-        className="mt-10 mb-4"
-        title="Yield distributed"
-      ></TitleWithInfo>
+      <TitleWithInfo className="mt-10 mb-4">Yield distributed</TitleWithInfo>
 
       <div className="w-fit flex justify-center items-center">
         <Typography.H2 className="font-bold inline">
@@ -77,19 +85,41 @@ const DayBasicData = ({ timestamp }: DayBasicDataProps) => {
       </div>
 
       <div className="w-full mt-14 flex">
-        <div className="w-2/3 mr-4">
+        <div className="w-full lg:w-2/3 lg:mr-8">
           {/* Basic Stats section */}
           <div className="flex">
-            <BasicData className="flex-1 rounded-l-lg" title="Distribution APY">
+            <BasicData
+              className="flex-1 rounded-tl-lg xl:rounded-l-lg justify-center lg:justify-start"
+              title="Distribution APY"
+            >
               {commify(3.08)}%
             </BasicData>
-            <BasicData className="flex-1" title="OUSD vault value">
+            <BasicData
+              className="flex-1 rounded-tr-lg xl:rounded-none justify-center lg:justify-start"
+              title="OUSD vault value"
+            >
               ${commify(49063918)}
             </BasicData>
-            <BasicData className="flex-1 rounded-r-lg" title="Fees generated">
+            {width >= xlSize && (
+              <BasicData
+                className="flex-1 rounded-b-lg xl:rounded-bl-none xl:rounded-r-lg mt-1 xl:mt-0"
+                title="Fees generated"
+              >
+                ${commify(208.21)}
+              </BasicData>
+            )}
+          </div>
+
+          {width < xlSize && (
+            <BasicData
+              className="flex-1 flex justify-center rounded-b-lg xl:rounded-bl-none xl:rounded-r-lg mt-1 xl:mt-0"
+              title="Fees generated"
+            >
               ${commify(208.21)}
             </BasicData>
-          </div>
+          )}
+
+          {width < lgSize && <YieldBoostMultiplier />}
 
           {/* Yield distribution events */}
           <div className="text-blurry mt-14">
@@ -98,18 +128,24 @@ const DayBasicData = ({ timestamp }: DayBasicDataProps) => {
               Sorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
               vulputate libero et velit interdum, ac aliquet odio mattis.
             </Typography.Body3>
-            <table className="relative w-full bg-origin-bg-grey rounded-lg mt-6">
+            <Table className="mt-6">
               <thead>
                 <tr>
-                  <TableHead align="left" className="pl-8">
-                    Block / Date
+                  <TableHead align="left" className={eventChartColumnCssLeft}>
+                    Block / Time
                   </TableHead>
-                  <TableHead align="left">Action</TableHead>
-                  <TableHead className="pr-6">Amount</TableHead>
-                  <TableHead className="pr-6">
-                    <TitleWithInfo title="Fees"></TitleWithInfo>
+                  <TableHead align="left" className={eventChartColumnCssLeft}>
+                    Action
                   </TableHead>
-                  <TableHead className="pr-8">Transaction</TableHead>
+                  <TableHead className={eventChartColumnCssRight}>
+                    Amount
+                  </TableHead>
+                  <TableHead info={true} className={eventChartColumnCssRight}>
+                    Fees
+                  </TableHead>
+                  <TableHead className={eventChartColumnCssRight}>
+                    {width >= lgSize ? "Transaction" : "Txn"}
+                  </TableHead>
                 </tr>
               </thead>
               <tbody>
@@ -118,38 +154,27 @@ const DayBasicData = ({ timestamp }: DayBasicDataProps) => {
                     className="group border-t-2 hover:bg-hover-bg border-origin-bg-black"
                     key={item.date}
                   >
-                    <TableData align="left" className="pl-8">
-                      <Typography.Body2>{item.block}</Typography.Body2>
-                      <Typography.Body3 className="text-sm text-table-title">
-                        {moment
-                          .utc(item.date)
-                          .format(moment.localeData().longDateFormat("L"))}
-                        , {moment.utc(item.date).format("LTS")}
-                      </Typography.Body3>
-                    </TableData>
-                    <TableData
-                      align="left"
-                      className="whitespace-nowrap"
-                      width="1%"
-                    >
-                      <Typography.Body2>{item.action}</Typography.Body2>
-                      <Typography.Body3 className="text-sm text-table-title text-left w-full">
-                        (yield distribution)
-                      </Typography.Body3>
-                    </TableData>
-                    <TableData className="whitespace-nowrap pr-6">
-                      <Typography.Body2 className="">
-                        ${commify(item.yieldDistributed)}
+                    <TableData align="left" className={eventChartColumnCssLeft}>
+                      <Typography.Body2 className="text-xs md:text-base">
+                        {item.block}
                       </Typography.Body2>
+                      <Typography.Body3 className="text-xs md:text-sm text-table-title">
+                        {moment.utc(item.date).format("LTS")}
+                      </Typography.Body3>
+                    </TableData>
+                    <TableData align="left" className={eventChartColumnCssLeft}>
+                      {item.action}
+                    </TableData>
+                    <TableData className={eventChartColumnCssRight}>
+                      ${commify(item.yieldDistributed)}
                     </TableData>
 
-                    <TableData className="whitespace-nowrap pr-6" width="1%">
-                      <Typography.Body2 className="text-right w-full">
-                        ${item.fees}
-                      </Typography.Body2>
+                    <TableData className={eventChartColumnCssRight}>
+                      ${item.fees}
                     </TableData>
-                    <TableData className="whitespace-nowrap pr-12" width="1%">
-                      {shortenAddress(item.transactionHash)}
+                    <TableData className={eventChartColumnCssRight}>
+                      {width >= lgSize &&
+                        shortenAddress(item.transactionHash, 3)}
                       <a
                         href={`https://etherscan.io/tx/${e.transactionHash}`}
                         target="_blank"
@@ -167,98 +192,12 @@ const DayBasicData = ({ timestamp }: DayBasicDataProps) => {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </Table>
           </div>
         </div>
         {/* Yield boost multiplier */}
-        <div className="min-w-[33%] w-fit h-min rounded-lg bg-origin-bg-grey text-blurry">
-          <div className="flex justify-center items-center w-fit m-8">
-            <Typography.Body className="inline mr-2">
-              Yield boost multiplier
-            </Typography.Body>
-            <Image
-              src={assetRootPath("/images/info-white.svg")}
-              width="16"
-              height="16"
-              alt="info"
-              className="inline ml-1"
-            />
-          </div>
-          <div className="border-2 mx-8 border-origin-bg-black px-6 py-4 mt-6 rounded-t-lg flex justify-between items-center">
-            <div>
-              <Typography.Body className="inline mr-1">{1.16}%</Typography.Body>
-              <Typography.Body2 className="inline">APY</Typography.Body2>
-            </div>
-            <div>
-              <Typography.Body3 className="text-table-title text-sm">
-                Raw yield generated
-              </Typography.Body3>
-            </div>
-          </div>
-          <div className="border-2 mx-8 border-t-0 border-origin-bg-black px-6 py-4 flex justify-between items-center">
-            <div>
-              <Typography.Body className="inline mr-3">x</Typography.Body>
-              <Typography.Body className="inline mr-1">2.63</Typography.Body>
-              <Typography.Body2 className="inline">Boost</Typography.Body2>
-            </div>
-            <div className="max-w-[50%]">
-              <Typography.Body3 className="text-table-title text-sm text-right">
-                OUSD total supply ÷ Rebasing OUSD supply
-              </Typography.Body3>
-            </div>
-          </div>
-          <div className="border-2 mx-8 border-t-0 border-origin-bg-black px-6 py-4 flex justify-between items-center">
-            <div>
-              <Typography.Body className="inline mr-3">=</Typography.Body>
-              <Typography.Body className="inline mr-1">{3.08}%</Typography.Body>
-              <Typography.Body2 className="inline">APY</Typography.Body2>
-            </div>
-            <div>
-              <Typography.Body3 className="text-table-title text-sm text-right">
-                Distributed APY
-              </Typography.Body3>
-            </div>
-          </div>
-          <div className="mt-8 flex border-t-2 border-origin-bg-black">
-            <div className="w-1/2 py-6 justify-center items-center flex-col border-r-2 border-origin-bg-black px-8">
-              <TitleWithInfo
-                textClassName="text-sm"
-                title="Non-Rebasing supply"
-              />
-              <Typography.Body className="text-left w-full inline">
-                {" "}
-                {commify(30397664)}
-              </Typography.Body>
-              <Image
-                src={assetRootPath("/images/ousd-logo.svg")}
-                width="24"
-                height="24"
-                alt="ousd-logo"
-                className="inline mb-2 ml-1"
-              />
-            </div>
 
-            <div className="flex justify-center items-center my-6">
-              <div className="w-1/2 whitespace-nowrap">
-                <TitleWithInfo
-                  textClassName="text-sm"
-                  title="Rebasing supply"
-                />
-                <Typography.Body className="text-left w-full inline">
-                  {" "}
-                  {commify(18666254)}
-                </Typography.Body>
-                <Image
-                  src={assetRootPath("/images/ousd-logo.svg")}
-                  width="24"
-                  height="24"
-                  alt="ousd-logo"
-                  className="inline mb-2 ml-1"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+        {width >= lgSize && <YieldBoostMultiplier />}
       </div>
     </Section>
   );

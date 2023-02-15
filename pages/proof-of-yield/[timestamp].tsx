@@ -7,11 +7,14 @@ import { Header } from "@originprotocol/origin-storybook";
 import {
   DayBasicData,
   DayDripperBanner,
+  DayStrategyPerformance,
 } from "../../src/proof-of-yield/sections";
 import { YieldOnDayProps } from "../../src/proof-of-yield/types";
 import { GetServerSideProps } from "next";
 import { fetchAPI } from "../../lib/api";
 import Footer from "../../src/components/Footer";
+
+const overrideCss = "px-8 md:px-10 lg:px-10 xl:px-[8.375rem]";
 
 const YieldOnDay = ({ navLinks }: YieldOnDayProps) => {
   const router = useRouter();
@@ -26,11 +29,20 @@ const YieldOnDay = ({ navLinks }: YieldOnDayProps) => {
       <Head>
         <title>Proof of Yield</title>
       </Head>
-      <Header mappedLinks={navLinks} webProperty="ousd" />
+      <Header
+        className={overrideCss}
+        mappedLinks={navLinks}
+        webProperty="ousd"
+      />
 
-      <DayBasicData timestamp={timestampNumber} />
+      <DayBasicData
+        sectionOverrideCss={overrideCss}
+        timestamp={timestampNumber}
+      />
 
-      <DayDripperBanner />
+      <DayDripperBanner sectionOverrideCss={overrideCss} />
+
+      <DayStrategyPerformance sectionOverrideCss={overrideCss} />
 
       <Footer locale={null} />
     </>

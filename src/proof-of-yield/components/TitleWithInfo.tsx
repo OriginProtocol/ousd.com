@@ -1,20 +1,19 @@
-import React from "react";
+import React, { Children, PropsWithChildren } from "react";
 import Image from "next/image";
 import { assetRootPath } from "../../utils/image";
 import { twMerge } from "tailwind-merge";
 import { Typography } from "@originprotocol/origin-storybook";
 
 interface TitleWithInfoProps {
-  title: string;
   className?: string;
   textClassName?: string;
 }
 
 const TitleWithInfo = ({
-  title,
   className,
   textClassName,
-}: TitleWithInfoProps) => {
+  children,
+}: PropsWithChildren<TitleWithInfoProps>) => {
   return (
     <div
       className={twMerge(
@@ -25,7 +24,7 @@ const TitleWithInfo = ({
       <Typography.Body2
         className={twMerge(`text-xs md:text-base pr-2`, textClassName)}
       >
-        {title}
+        {children}
       </Typography.Body2>
       <Image
         src={assetRootPath("/images/info.svg")}

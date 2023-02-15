@@ -17,7 +17,7 @@ const TableData = ({
     <td
       align={`${align || "right"}`}
       className={twMerge(
-        `text-xs md:text-base text-table-data py-9`,
+        `text-xs md:text-base text-table-data py-6 lg:py-9 w-[1%] whitespace-nowrap`,
         className
       )}
       width={width || "auto"}

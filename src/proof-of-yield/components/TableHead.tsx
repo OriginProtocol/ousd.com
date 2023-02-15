@@ -1,12 +1,16 @@
+import { Typography } from "@originprotocol/origin-storybook";
 import { PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
+import TitleWithInfo from "./TitleWithInfo";
 
 interface TableHeadProps {
+  info?: boolean;
   align?: "left" | "right" | "center" | "justify" | "char";
   className?: string;
 }
 
 const TableHead = ({
+  info = false,
   align,
   className,
   children,
@@ -14,12 +18,15 @@ const TableHead = ({
   return (
     <th
       align={`${align || "right"}`}
-      className={twMerge(
-        `text-base font-normal py-6 text-table-title w-fit`,
-        className
-      )}
+      className={twMerge(`py-6 w-[1%] whitespace-nowrap`, className)}
     >
-      {children}
+      {info ? (
+        <TitleWithInfo>{children}</TitleWithInfo>
+      ) : (
+        <Typography.Body2 className="text-xs md:text-base text-table-title">
+          {children}
+        </Typography.Body2>
+      )}
     </th>
   );
 };

@@ -905,10 +905,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@originprotocol/origin-storybook@^0.27.0":
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/@originprotocol/origin-storybook/-/origin-storybook-0.27.0.tgz#0159a5666ca8511effba9f0e4155505ffb3352e4"
-  integrity sha512-hME0diJz+oMxuvCGmpXduzRM8bCn04zwv4tj7H5Hr9lIH3nf1apYoA93EMulNLzuGOR+GR4ILW0T598VN0X7/g==
+"@originprotocol/origin-storybook@^0.27.3":
+  version "0.27.3"
+  resolved "https://registry.yarnpkg.com/@originprotocol/origin-storybook/-/origin-storybook-0.27.3.tgz#6ae921729347d1b038ed2d4131f543cd8eb436c7"
+  integrity sha512-ozr/ioM1ogwBPTJCxnyR/Gur0QYlyAbThpaY3ZHcaPHC/NYNpQO+E14C+UwlQU76Og81CKnkWG9NEtef0KhsEQ==
   dependencies:
     "@heroicons/react" "^2.0.11"
     next "^10.2.3 || ^12.3.1"
