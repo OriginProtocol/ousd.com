@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { Section, ChartButton } from "../components";
-import { ChartTime, ChartType } from "../types";
+import { ChartTime, ChartType, OgvRawData } from "../types";
 import { priceGradientStart, priceGradientEnd, smSize } from "../constants";
-import { fetchOGVPriceData } from "../utils";
+import { getOGVPriceData, setCacheData } from "../utils";
 import { useChartGradient } from "../../hooks";
 import { ChartData, TimeScaleOptions } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { priceLineOptions } from "../chart-configs";
 
-export interface OgvPriceChartProps {
-  priceData24H: ChartData<"line">;
-  marketCapData24H: ChartData<"line">;
+interface OgvPriceChartProps {
+  priceData24H: ChartData<"line", number[], number>;
+  marketCapData24H: ChartData<"line", number[], number>;
+  rawData7D: OgvRawData;
+  rawData30D: OgvRawData;
+  rawData365D: OgvRawData;
   width: number;
 }
-
-const ogvPriceCache = {}; //on client
 
 const OgvPriceChart = ({
   priceData24H,
   marketCapData24H,
+  rawData7D,
+  rawData30D,
+  rawData365D,
   width,
 }: OgvPriceChartProps) => {
   const { chartRef, chartData: chartPriceData24H } = useChartGradient(
@@ -29,12 +33,12 @@ const OgvPriceChart = ({
   const [chartType, setChartType] = useState<ChartType>(ChartType.Price);
   const [chartTime, setChartTime] = useState<ChartTime>(ChartTime.ONE_DAY);
 
-  const alterChartType = (type: ChartType) => {
+  const alterChartType = async (type: ChartType) => {
     const { current: chart } = chartRef;
 
     if (!chart) return;
 
-    const { labels, prices, marketCaps } = ogvPriceCache[chartTime];
+    const { labels, prices, marketCaps } = await getOGVPriceData(chartTime);
 
     const newData = chartType === ChartType.Price ? marketCaps : prices;
     chart.data.datasets[0].data = newData;
@@ -53,7 +57,7 @@ const OgvPriceChart = ({
 
     if (!chart) return;
 
-    const { labels, prices, marketCaps } = await getOGVData(time);
+    const { labels, prices, marketCaps } = await getOGVPriceData(time);
 
     const newData = chartType === ChartType.Price ? prices : marketCaps;
     chart.data.datasets[0].data = newData;
@@ -72,11 +76,14 @@ const OgvPriceChart = ({
   };
 
   useEffect(() => {
-    ogvPriceCache[ChartTime.ONE_DAY] = {
+    setCacheData(ChartTime.ONE_DAY, {
       labels: priceData24H.labels,
       prices: priceData24H.datasets[0].data,
       marketCaps: marketCapData24H.datasets[0].data,
-    };
+    });
+    setCacheData(ChartTime.SEVEN_DAY, rawData7D);
+    setCacheData(ChartTime.THIRTY_DAY, rawData30D);
+    setCacheData(ChartTime.ONE_YEAR, rawData365D);
   }, [priceData24H, marketCapData24H]);
 
   return (
@@ -160,21 +167,4 @@ const TimeButtons = ({ chartTime, alterChartTime }: TimeButtonsProps) => {
   );
 };
 
-const getOGVData = async (days: number) => {
-  let labels;
-  let prices;
-  let marketCaps;
-
-  if (ogvPriceCache[days]) return ogvPriceCache[days];
-
-  const rawData = await fetchOGVPriceData(days);
-  labels = rawData.prices.map((price: any) => price[0]);
-
-  prices = rawData.prices.map((price: any) => price[1]);
-  marketCaps = rawData.market_caps.map((price: any) => price[1]);
-
-  ogvPriceCache[days] = { labels, prices, marketCaps };
-
-  return { labels, prices, marketCaps };
-};
 export default OgvPriceChart;

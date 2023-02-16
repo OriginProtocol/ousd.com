@@ -1,6 +1,6 @@
 import { ChartArea } from "chart.js";
 
-export function createGradient(
+function createGradient(
   ctx: CanvasRenderingContext2D,
   area: ChartArea,
   colorStart: string,

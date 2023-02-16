@@ -22,7 +22,7 @@ interface Block {
   baseFeePerGas: string;
 }
 
-export interface GetBlockByNumberResponse {
+interface GetBlockByNumberResponse {
   jsonrpc: string;
   id: number;
   result: Block;

@@ -1,4 +1,4 @@
-export interface Link {
+interface Link {
   href: string;
   label: string;
   isButton: boolean;

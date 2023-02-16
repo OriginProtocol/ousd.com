@@ -13,7 +13,7 @@ interface OgvStakingStatsProps {
   stakingData: ChartData<"line">;
 }
 
-export const OgvStakingStats = ({ stakingData }: OgvStakingStatsProps) => {
+const OgvStakingStats = ({ stakingData }: OgvStakingStatsProps) => {
   const { chartRef, chartData: chartStakingData } = useChartGradient(
     stakingData,
     stakingGradientStart,
@@ -22,9 +22,9 @@ export const OgvStakingStats = ({ stakingData }: OgvStakingStatsProps) => {
 
   return (
     <Section className="bg-origin-bg-black">
-      <Typography.H1 className="text-3xl md:text-8xl mt-20 px-[24px] sm:px-0">
+      <Typography.H3 className="mt-20 px-[24px] sm:px-0">
         OGV staking stats
-      </Typography.H1>
+      </Typography.H3>
       <Typography.Body className="mt-6 text-subheading px-[24px] sm:px-0">
         A significant portion of the OGV supply is locked voluntarily by holders
         who believe in the long-term growth of OUSD. OGV stakers receive fees
@@ -34,7 +34,7 @@ export const OgvStakingStats = ({ stakingData }: OgvStakingStatsProps) => {
       <div className="border-2 border-gray-700 w-full my-12 rounded-lg grid grid-cols-1 sm:grid-cols-2">
         <div className="h-[100px] sm:h-[156px] flex justify-center items-center border-gray-700 border-b-2 sm:border-b-0 sm:border-r-2">
           <div className="flex justify-center items-center flex-col sm:block">
-            <Typography.Body className="text-subheading">
+            <Typography.Body className="text-subheading mb-1">
               Amount currently staked
             </Typography.Body>
             <Typography.H6 className="font-bold md:text-3xl">
@@ -45,7 +45,7 @@ export const OgvStakingStats = ({ stakingData }: OgvStakingStatsProps) => {
         </div>
         <div className="h-[100px] sm:h-[156px] flex justify-center items-center">
           <div className="flex justify-center items-center flex-col sm:block">
-            <Typography.Body className="text-subheading">
+            <Typography.Body className="text-subheading mb-1">
               Percentage staked
             </Typography.Body>
             <Typography.H6 className="font-bold md:text-3xl">

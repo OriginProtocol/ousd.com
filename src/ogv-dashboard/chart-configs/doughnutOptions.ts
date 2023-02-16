@@ -1,6 +1,6 @@
 import { ChartOptions } from "chart.js";
 
-export const doughnutOptions: ChartOptions<"doughnut"> = {
+const doughnutOptions: ChartOptions<"doughnut"> = {
   maintainAspectRatio: false,
   cutout: "80%",
   plugins: {

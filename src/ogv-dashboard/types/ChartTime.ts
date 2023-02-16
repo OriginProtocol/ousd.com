@@ -1,4 +1,4 @@
-export enum ChartTime {
+enum ChartTime {
   ONE_DAY = 1,
   SEVEN_DAY = 7,
   THIRTY_DAY = 30,
