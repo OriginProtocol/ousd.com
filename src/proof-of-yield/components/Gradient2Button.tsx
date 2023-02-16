@@ -4,15 +4,22 @@ import { twMerge } from "tailwind-merge";
 interface Gradient2ButtonProps {
   onClick?: () => void;
   className?: string;
+  outerDivClassName?: string;
 }
 
 const Gradient2Button = ({
   onClick,
   className,
+  outerDivClassName,
   children,
 }: PropsWithChildren<Gradient2ButtonProps>) => {
   return (
-    <div className="relative bg-gradient2 rounded-[100px] p-[1px] w-fit">
+    <div
+      className={twMerge(
+        "relative bg-gradient2 rounded-[100px] p-[1px] w-fit",
+        outerDivClassName
+      )}
+    >
       <button
         onClick={onClick}
         className={twMerge(
