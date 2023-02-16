@@ -14,13 +14,28 @@ const TopExchanges = () => {
       <Typography.H3 className="md:text-6xl mt-28 px-[24px] sm:px-0 text-center">
         Listed on top exchanges
       </Typography.H3>
-      <div className="my-12 grid grid-cols-2 md:grid-cols-3 gap-0.5 md:gap-3 w-full">
+      <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-0.5 md:gap-3 w-full">
         <a
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.kucoin.com/trade/OGV-USDT"
         >
           <div className="bg-origin-bg-black relative cursor-pointer flex justify-center items-center h-[88px] md:h-52 rounded-tl-lg md:rounded-tl-3xl hover:bg-hover">
+            <Image
+              src={assetRootPath("/images/curve.svg")}
+              width="200"
+              height="200"
+              className="mx-8 w-28 md:w-36 lg:w-48"
+              alt="Kucoin logo"
+            />
+          </div>
+        </a>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.kucoin.com/trade/OGV-USDT"
+        >
+          <div className="bg-origin-bg-black relative cursor-pointer rounded-tr-lg md:rounded-none flex justify-center items-center h-[88px] md:h-52 hover:bg-hover">
             <Image
               src={assetRootPath("/images/kucoin.svg")}
               width="200"
@@ -60,6 +75,8 @@ const TopExchanges = () => {
             />
           </div>
         </a>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-0.5 md:gap-3 w-full mt-0.5 md:mt-3 md:mb-12">
         <a
           target="_blank"
           rel="noopener noreferrer"
@@ -80,7 +97,7 @@ const TopExchanges = () => {
           rel="noopener noreferrer"
           href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
         >
-          <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-[88px] md:h-52 rounded-bl-lg md:rounded-none hover:bg-hover">
+          <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-[88px] md:h-52 hover:bg-hover">
             <Image
               src={assetRootPath("/images/uniswap.svg")}
               width="200"
@@ -95,7 +112,24 @@ const TopExchanges = () => {
           rel="noopener noreferrer"
           href="https://www.bitget.com/spot/OGVUSDT_SPBL"
         >
-          <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-[88px] md:h-52 rounded-br-lg hover:bg-hover">
+          <div className="bg-origin-bg-black cursor-pointer hidden md:flex justify-center items-center h-[88px] md:h-52 rounded-br-lg hover:bg-hover">
+            <Image
+              src={assetRootPath("/images/bitget.svg")}
+              width="200"
+              height="200"
+              className="mx-8 w-28 md:w-36 lg:w-48"
+              alt="Bitget logo"
+            />
+          </div>
+        </a>
+      </div>
+      <div className="grid md:hidden grid-cols-1 gap-0.5 w-full mb-12">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.bitget.com/spot/OGVUSDT_SPBL"
+        >
+          <div className="bg-origin-bg-black cursor-pointer flex justify-center items-center h-[88px] md:h-52 rounded-b-lg hover:bg-hover">
             <Image
               src={assetRootPath("/images/bitget.svg")}
               width="200"

@@ -143,9 +143,12 @@ section.black {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 .gradient3 {
-  background-image: -webkit-linear-gradient(
+  background: -webkit-linear-gradient(90deg, #b361e6 -28.99%, #6a36fc 144.97%);
+}
+
+.gradient3a {
+  background: -webkit-linear-gradient(
     90deg,
     #b361e680 -28.99%,
     #6a36fc80 144.97%

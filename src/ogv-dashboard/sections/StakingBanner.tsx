@@ -14,7 +14,7 @@ const StakingBanner = ({ stakingApy, width }: StakingBannerProps) => {
   return (
     <Section
       className="bg-origin-bg-black"
-      innerDivClassName="relative h-fit mx-auto gradient3 rounded-2xl sm:rounded-lg overflow-hidden mt-28"
+      innerDivClassName="relative h-fit mx-auto gradient3a rounded-2xl sm:rounded-lg overflow-hidden mt-28"
     >
       <Image
         src={assetRootPath("/images/splines2.png")}
