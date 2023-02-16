@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Section } from "../../components";
 import { ChartButton } from "../components";
 import { ChartTime, ChartType, OgvRawData } from "../types";
-import { priceGradientStart, priceGradientEnd } from "../constants";
+import { priceGradientStart, priceGradientEnd } from "../../constants";
 import { smSize } from "../../constants";
 import { getOGVPriceData, setCacheData } from "../utils";
 import { useChartGradient } from "../../hooks";
