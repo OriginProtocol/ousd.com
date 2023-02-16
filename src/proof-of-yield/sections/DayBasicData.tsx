@@ -14,7 +14,7 @@ import {
   YieldBoostMultiplier,
 } from "../components";
 import { Typography } from "@originprotocol/origin-storybook";
-import { lgSize, xlSize } from "../../constants";
+import { smSize, lgSize, xlSize } from "../../constants";
 import { shortenAddress } from "../../utils";
 import { useViewWidth } from "../../hooks";
 import { twMerge } from "tailwind-merge";
@@ -134,12 +134,29 @@ const DayBasicData = ({ timestamp, sectionOverrideCss }: DayBasicDataProps) => {
                   <TableHead align="left" className={eventChartColumnCssLeft}>
                     Block / Time
                   </TableHead>
-                  <TableHead align="left" className={eventChartColumnCssLeft}>
-                    Action
-                  </TableHead>
-                  <TableHead className={eventChartColumnCssRight}>
-                    Amount
-                  </TableHead>
+                  {width >= smSize ? (
+                    <>
+                      <TableHead
+                        align="left"
+                        className={eventChartColumnCssLeft}
+                      >
+                        Action
+                      </TableHead>
+
+                      <TableHead className={eventChartColumnCssRight}>
+                        Amount
+                      </TableHead>
+                    </>
+                  ) : (
+                    <TableHead
+                      className={twMerge(
+                        eventChartColumnCssLeft,
+                        "whitespace-normal pr-4"
+                      )}
+                    >
+                      Amount / Action
+                    </TableHead>
+                  )}
                   <TableHead info={true} className={eventChartColumnCssRight}>
                     Fees
                   </TableHead>
@@ -162,12 +179,33 @@ const DayBasicData = ({ timestamp, sectionOverrideCss }: DayBasicDataProps) => {
                         {moment.utc(item.date).format("LTS")}
                       </Typography.Body3>
                     </TableData>
-                    <TableData align="left" className={eventChartColumnCssLeft}>
-                      {item.action}
-                    </TableData>
-                    <TableData className={eventChartColumnCssRight}>
-                      ${commify(item.yieldDistributed)}
-                    </TableData>
+                    {width >= smSize ? (
+                      <>
+                        <TableData
+                          align="left"
+                          className={eventChartColumnCssLeft}
+                        >
+                          {item.action}
+                        </TableData>
+                        <TableData className={eventChartColumnCssRight}>
+                          ${commify(item.yieldDistributed)}
+                        </TableData>
+                      </>
+                    ) : (
+                      <TableData
+                        className={twMerge(
+                          eventChartColumnCssLeft,
+                          "whitespace-normal pr-4"
+                        )}
+                      >
+                        <Typography.Body3 className="text-xs md:text-base text-table-data">
+                          {item.yieldDistributed}
+                        </Typography.Body3>
+                        <Typography.Body3 className="text-xs md:text-sm text-table-title">
+                          {item.action}
+                        </Typography.Body3>
+                      </TableData>
+                    )}
 
                     <TableData className={eventChartColumnCssRight}>
                       ${item.fees}

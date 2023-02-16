@@ -4,15 +4,7 @@ import { Typography } from "@originprotocol/origin-storybook";
 import { twMerge } from "tailwind-merge";
 import { Section } from "../../components";
 import { assetRootPath } from "../../utils/image";
-import {
-  Gradient2Button,
-  Table,
-  TableData,
-  TableHead,
-  TitleWithInfo,
-  PastWeekApyChart,
-  ChartDetailsButton,
-} from "../components";
+import { Table, TableData, TableHead, ChartDetailsButton } from "../components";
 import { commify } from "ethers/lib/utils";
 import { useViewWidth } from "../../hooks";
 import { lgSize } from "../../constants";
@@ -110,9 +102,9 @@ const mockStratData: StrategyData[] = partialMockStratData.map((e) => ({
   yieldPct: 32.0,
 }));
 
-const strategyChartColumnCssLeft = "pl-6 w-fit lg:w-auto";
+const strategyChartColumnCssLeft = "pl-6 lg:w-auto";
 const strategyChartColumnCssRight =
-  "pr-2 md:pr-6 w-fit lg:w-[1%] xl:pr-12 2xl:pr-20";
+  "pr-0 sm:pr-2 md:pr-6 w-fit lg:w-[1%] xl:pr-12 2xl:pr-20";
 
 interface DayStrategyPerformanceProps {
   sectionOverrideCss?: string;
@@ -148,7 +140,10 @@ const DayStrategyPerformance = ({
                 Last 7 days APY
               </TableHead>
             )}
-            <TableHead info={true} className={strategyChartColumnCssRight}>
+            <TableHead
+              info={true}
+              className={twMerge(strategyChartColumnCssRight, "pr-2")}
+            >
               APY
             </TableHead>
             <TableHead className={twMerge("py-3", strategyChartColumnCssRight)}>
@@ -174,7 +169,7 @@ const DayStrategyPerformance = ({
                   width="40"
                   height="40"
                   alt={e.img}
-                  className="mr-3"
+                  className="mr-3 hidden sm:inline"
                 />
                 <div>
                   <Typography.Body className="text-table-data">
@@ -200,7 +195,9 @@ const DayStrategyPerformance = ({
                   hehhlo
                 </TableData>
               )}
-              <TableData className={strategyChartColumnCssRight}>
+              <TableData
+                className={twMerge(strategyChartColumnCssRight, "pr-2")}
+              >
                 <Typography.Body className="text-table-data">
                   {e.apy}%
                 </Typography.Body>
