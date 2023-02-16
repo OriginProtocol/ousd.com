@@ -7,7 +7,7 @@ import { getStrapiMedia } from "../lib/media"
 import bundledCss from "@originprotocol/origin-storybook/lib/styles.css"
 import "../styles/globals.css"
 import { QueryClient, QueryClientProvider } from "react-query"
-import Contracts from 'components/Contracts'
+import Contracts from '../src/components/Contracts'
 import Script from 'next/script'
 import { GTM_ID, pageview } from '../lib/gtm'
 
