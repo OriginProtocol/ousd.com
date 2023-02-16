@@ -4,7 +4,13 @@ import { Typography } from "@originprotocol/origin-storybook";
 import { twMerge } from "tailwind-merge";
 import { Section } from "../../components";
 import { assetRootPath } from "../../utils/image";
-import { Table, TableData, TableHead, ChartDetailsButton } from "../components";
+import {
+  Table,
+  TableData,
+  TableHead,
+  ChartDetailsButton,
+  PastWeekApyChart,
+} from "../components";
 import { commify } from "ethers/lib/utils";
 import { useViewWidth } from "../../hooks";
 import { lgSize } from "../../constants";
@@ -89,13 +95,13 @@ const mockStratData: StrategyData[] = partialMockStratData.map((e) => ({
   allocationAbs: 2375810.0,
   allocationPct: 4.84,
   weekApyData: [
-    [1, 1],
-    [2, 1],
-    [3, 1],
-    [4, 1],
-    [5, 1],
-    [6, 1],
-    [7, 1],
+    [1, 4],
+    [2, 8],
+    [3, 2],
+    [4, 6],
+    [5, 2],
+    [6, 12],
+    [7, 3],
   ],
   apy: 2.48,
   yieldAbs: 50.92,
@@ -192,7 +198,7 @@ const DayStrategyPerformance = ({
               )}
               {width >= lgSize && (
                 <TableData className={strategyChartColumnCssRight}>
-                  hehhlo
+                  <PastWeekApyChart data={e.weekApyData} />
                 </TableData>
               )}
               <TableData

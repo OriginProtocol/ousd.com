@@ -7,7 +7,9 @@ import { Header } from "@originprotocol/origin-storybook";
 import {
   DayBasicData,
   DayDripperBanner,
+  DayOtherSources,
   DayStrategyPerformance,
+  DayTotal,
 } from "../../src/proof-of-yield/sections";
 import { YieldOnDayProps } from "../../src/proof-of-yield/types";
 import { GetServerSideProps } from "next";
@@ -43,6 +45,10 @@ const YieldOnDay = ({ navLinks }: YieldOnDayProps) => {
       <DayDripperBanner sectionOverrideCss={overrideCss} />
 
       <DayStrategyPerformance sectionOverrideCss={overrideCss} />
+
+      <DayOtherSources sectionOverrideCss={overrideCss} />
+
+      <DayTotal sectionOverrideCss={overrideCss} />
 
       <Footer locale={null} />
     </>

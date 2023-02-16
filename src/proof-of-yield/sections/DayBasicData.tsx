@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import moment from "moment";
 import { utils } from "ethers";
+import { useRouter } from "next/router";
 import { assetRootPath } from "../../utils/image";
 import { Section } from "../../components";
 import {
@@ -49,11 +50,15 @@ interface DayBasicDataProps {
 }
 
 const DayBasicData = ({ timestamp, sectionOverrideCss }: DayBasicDataProps) => {
+  const router = useRouter();
   const width = useViewWidth();
 
   return (
     <Section className={twMerge("mb-20", sectionOverrideCss)}>
-      <Gradient2Button className="flex justify-center items-center">
+      <Gradient2Button
+        onClick={router.back}
+        className="flex justify-center items-center"
+      >
         <Image
           src={assetRootPath("/images/arrow-left.svg")}
           width="20"
