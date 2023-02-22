@@ -1,5 +1,6 @@
 import React from "react";
 import Section from "./Section";
+import Image from "next/image";
 import { mdSize, lgSize, xl2Size } from "../constants";
 import { useViewWidth } from "../hooks";
 import { Typography } from "@originprotocol/origin-storybook";
