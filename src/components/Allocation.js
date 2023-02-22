@@ -17,6 +17,7 @@ const Allocation = ({ strategies }) => {
     if (strategyMapping[strategy]?.singleAsset) {
       if (!strategies[strategy]?.holdings) return
       return Object.keys(strategies[strategy]?.holdings).map((token) => {
+        if (token === 'COMP') return
         const name = strategyMapping[strategy].name + ' ' + token
         const protocol = strategyMapping[strategy]?.protocol
         return {
@@ -164,7 +165,7 @@ const Allocation = ({ strategies }) => {
                                         </Typography.Body3>
                                       </div>
                                       <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">{`${formatCurrency(
-                                        protocol.total ? (strategy.total / protocol.total) * 100 : 0,
+                                        protocol.total ? (strategy.total / total) * 100 : 0,
                                         2
                                       )}%`}
                                       </Typography.Body3>
