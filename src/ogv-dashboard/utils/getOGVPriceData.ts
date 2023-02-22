@@ -29,15 +29,12 @@ const getOGVPriceData = async (days: number) => {
   let prices;
   let marketCaps;
 
-  console.log(ogvPriceCache);
-
   // If an entry exists, and are we are on the client, return it. If we are on
   // the server, check if the entry is stale.
   if (
     ogvPriceCache[days] &&
     (!isServer || Date.now() < ogvPriceCache[days]!.lastUpdated! + ttls[days])
   ) {
-    console.log("hitting cache");
     return ogvPriceCache[days];
   }
 

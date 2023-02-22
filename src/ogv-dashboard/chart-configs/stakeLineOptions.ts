@@ -1,7 +1,8 @@
 import { enUS } from "date-fns/locale";
 import { format } from "date-fns";
 import { ChartOptions, TooltipModel } from "chart.js";
-import { smSize, stakingGradientEnd, stakingGradientStart } from "../constants";
+import { stakingGradientEnd, stakingGradientStart } from "../constants";
+import { smSize } from "../../constants";
 import { tailwindConfig } from "../../utils";
 const { colors } = tailwindConfig.theme;
 

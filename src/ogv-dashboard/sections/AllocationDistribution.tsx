@@ -1,5 +1,5 @@
 import React from "react";
-import { Section } from "../components";
+import { Section } from "../../components";
 import { Typography } from "@originprotocol/origin-storybook";
 import { utils } from "ethers";
 import { doughnutOptions } from "../chart-configs";

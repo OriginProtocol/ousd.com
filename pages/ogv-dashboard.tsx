@@ -24,7 +24,8 @@ import ogvAbi from "../src/constants/mainnetAbi/ogv.json";
 import { ChartLine, DistributionLegend } from "../src/plugins";
 import { BigNumber, ethers, providers } from "ethers";
 import { getRewardsApy } from "../src/utils/math";
-import { Link, DashProps } from "../src/ogv-dashboard/types";
+import { Link } from "../src/types";
+import { DashProps } from "../src/ogv-dashboard/types";
 import {
   doughnutData,
   nonCirculatingSupply as nonCirculating,

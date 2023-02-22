@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import shortenAddress from "../../utils/shortenAddress";
-import { Section } from "../components";
+import { Section } from "../../components";
 import { useOutOfBoundsClick } from "../../hooks";
 import { assetRootPath } from "../../utils/image";
 import { BigNumber, utils } from "ethers";
