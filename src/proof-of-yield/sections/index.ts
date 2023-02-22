@@ -10,3 +10,9 @@ export { default as DayDripperBanner } from "./DayDripperBanner";
 export { default as DayStrategyPerformance } from "./DayStrategyPerformance";
 export { default as DayOtherSources } from "./DayOtherSources";
 export { default as DayTotal } from "./DayTotal";
+
+/* Section for "dripper" route */
+export { default as DripperTop } from "./DripperTop";
+export { default as DripperBasicStats } from "./DripperBasicStats";
+export { default as DripperYieldData } from "./DripperYieldData";
+export { default as DripperFunds } from "./DripperFunds";

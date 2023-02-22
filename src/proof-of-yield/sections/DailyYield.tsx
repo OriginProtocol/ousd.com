@@ -1,17 +1,10 @@
 import React from "react";
 import { Section } from "../../components";
-import {
-  TableData,
-  TableHead,
-  TitleWithInfo,
-  Table,
-  ChartDetailsButton,
-} from "../components";
+import { TableData, TableHead, Table, ChartDetailsButton } from "../components";
 import { smSize } from "../../constants";
 import { useViewWidth } from "../../hooks";
 import { useRouter } from "next/router";
 import { utils } from "ethers";
-import { Typography } from "@originprotocol/origin-storybook";
 const { commify } = utils;
 
 interface DailyYieldProps {}
