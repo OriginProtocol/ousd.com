@@ -10,8 +10,11 @@ import AnimatedNumber from 'animated-number-react'
 
 const Animation = ({ navLinks, active, initialTvl }) => {
   const ousdTvl = useStoreState(ContractStore, (s) => s.ousdTvl || 0)
+  const [loaded, setLoaded] = useState()
 
   useEffect(() => {
+    setLoaded(true)
+
     ContractStore.update((s) => {
       s.refreshTvl = true
     })
@@ -67,13 +70,15 @@ const Animation = ({ navLinks, active, initialTvl }) => {
                         className='text-[36px] leading-[40px] md:text-[64px] md:leading-[68px] tabular-nums tracking-tighter md:tracking-tight'
                         style={{ fontWeight: 700 }}
                       >
-                        <AnimatedNumber
-                          value={ousdTvl ? ousdTvl : initialTvl}
-                          duration={2000}
-                          formatValue={(num) => {
-                            return `$${formatCurrency(num, 2)}`
-                          }}
-                        />
+                        {loaded &&
+                          <AnimatedNumber
+                            value={ousdTvl ? ousdTvl : initialTvl}
+                            duration={2000}
+                            formatValue={(num) => {
+                              return `$${formatCurrency(num, 2)}`
+                            }}
+                          />
+                        }
                       </Typography.H2>
                       <Typography.Body3 className="text-sm md:text-base text-[#b5beca] pt-[8px] whitespace-nowrap md:pt-[8px]">
                         Total value of OUSD wallet balances
