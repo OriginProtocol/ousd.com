@@ -55,7 +55,7 @@ section.burn {
 }
 
 section.error {
-  background-image: url(/images/splines-404.svg);
+  background-image: url(/images/splines-404.png);
   background-repeat: no-repeat;
   background-position: right bottom;
 }

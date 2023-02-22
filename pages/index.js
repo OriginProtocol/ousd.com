@@ -22,7 +22,7 @@ import transformLinks from '../src/utils/transformLinks'
 import { Typography, Header } from '@originprotocol/origin-storybook'
 import { assetRootPath } from '../src/utils/image'
 import capitalize from 'lodash/capitalize'
-import { setupContracts, fetchTvl } from 'utils/contracts'
+import { setupContracts, fetchTvl } from '../src/utils/contracts'
 
 const Home = ({ locale, onLocale, audits, seo, navLinks, apy, apyHistory, strategies, collateral, initialTvl, ogvStats }) => {
   const { pathname } = useRouter()

@@ -4,7 +4,7 @@ import { Card } from '@originprotocol/origin-storybook'
 import Moment from "react-moment"
 import { assetRootPath } from '../utils/image'
 import { capitalize } from 'lodash'
-import withIsMobile from 'hoc/withIsMobile'
+import withIsMobile from '../hoc/withIsMobile'
 
 const Dropdown = ({ options, option, setOption, category }) => {
   const [open, setOpen] = useState()
