@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { Section } from "../../components";
 import { Typography } from "@originprotocol/origin-storybook";
 
@@ -7,6 +8,8 @@ interface DayDripperBannerProps {
 }
 
 const DayDripperBanner = ({ sectionOverrideCss }: DayDripperBannerProps) => {
+  const router = useRouter();
+
   return (
     <Section
       className={sectionOverrideCss}
@@ -26,7 +29,10 @@ const DayDripperBanner = ({ sectionOverrideCss }: DayDripperBannerProps) => {
             dripper assures our users experience a smooth and predictable APY.
           </Typography.Body3>
         </div>
-        <button className="whitespace-nowrap rounded-full h-14 bg-gradient2 mt-8 md:mt-0 w-full md:w-auto">
+        <button
+          onClick={() => router.push("/proof-of-yield/dripper")}
+          className="whitespace-nowrap rounded-full h-14 bg-gradient2 mt-8 md:mt-0 w-full md:w-auto"
+        >
           <span className="px-10">View Dripper details</span>
         </button>
       </div>

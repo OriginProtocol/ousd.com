@@ -53,7 +53,7 @@ const OgvPriceStats = ({
       <div className="border-2 border-gray-700 w-full mt-20 rounded-lg grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
         <div className="sm:border-r-2 border-b-2 xl:border-b-0 flex justify-center items-center border-gray-700 h-fit">
           <div className="py-8">
-            <div className="text-base sm:text-xl text-subheading text-center sm:text-left">
+            <div className="text-base sm:text-xl text-subheading text-center sm:text-left mb-1">
               Current Price
             </div>
             <div className="flex items-center">
@@ -82,7 +82,7 @@ const OgvPriceStats = ({
         </div>
         <div className="xl:border-r-2 border-b-2 xl:border-b-0 flex justify-center items-center border-gray-700">
           <div className="py-8">
-            <div className="text-base sm:text-xl text-subheading text-center sm:text-left">
+            <div className="text-base sm:text-xl text-subheading text-center sm:text-left mb-1">
               Market Cap
             </div>
             <div className="text-lg md:text-[26px] 2xl:text-3x; font-bold text-center sm:text-left">
@@ -95,7 +95,7 @@ const OgvPriceStats = ({
         </div>
         <div className="sm:border-r-2 border-b-2 sm:border-b-0 flex justify-center items-center border-gray-700">
           <div className="py-8">
-            <div className="text-base sm:text-xl relative text-subheading text-center sm:text-left">
+            <div className="text-base sm:text-xl relative text-subheading text-center sm:text-left mb-1">
               Circulating Supply
               <div
                 className="sm:relative inline group"
@@ -171,7 +171,7 @@ const OgvPriceStats = ({
         </div>
         <div className="flex justify-center items-center">
           <div className="py-8">
-            <div className="text-base sm:text-xl relative text-subheading text-center sm:text-left">
+            <div className="text-base sm:text-xl relative text-subheading text-center sm:text-left mb-1">
               Total Supply
               <div
                 className="sm:relative inline group"

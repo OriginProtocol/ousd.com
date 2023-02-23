@@ -7,3 +7,4 @@ export { default as TitleWithInfo } from "./TitleWithInfo";
 export { default as PastWeekApyChart } from "./PastWeekApyChart";
 export { default as ChartDetailsButton } from "./ChartDetailsButton";
 export { default as YieldBoostMultiplier } from "./YieldBoostMultiplier";
+export { default as DripperGraph } from "./DripperGraph";

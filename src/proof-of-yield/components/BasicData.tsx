@@ -7,11 +7,13 @@ import TitleWithInfo from "./TitleWithInfo";
 
 interface BasicDataProps {
   title: string;
+  info?: boolean;
   className?: string;
 }
 
 const BasicData = ({
   title,
+  info = true,
   className,
   children,
 }: PropsWithChildren<BasicDataProps>) => {
@@ -23,7 +25,13 @@ const BasicData = ({
       )}
     >
       <div>
-        <TitleWithInfo textClassName="whitespace-nowrap">{title}</TitleWithInfo>
+        {info ? (
+          <TitleWithInfo>{title}</TitleWithInfo>
+        ) : (
+          <Typography.Body2 className="text-xs md:text-base text-table-title">
+            {title}
+          </Typography.Body2>
+        )}
         <Typography.H6 className="block font-normal text-center lg:text-left">
           {children}
         </Typography.H6>
