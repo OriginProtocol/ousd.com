@@ -86,35 +86,21 @@ const DripperGraph = ({
   return (
     <div
       className={twMerge(
-        "bg-origin-bg-black rounded-lg w-[825px] relative mx-auto",
+        "bg-origin-bg-black rounded-lg w-full lg:w-[825px] relative mx-auto",
         className,
         bgClassName
       )}
     >
       {/* Yield In/Out Basic Data */}
-      <div className="p-6 flex justify-between">
+      <div className="p-6 pb-0 flex justify-between">
         <div>
           <Typography.Body>{title}</Typography.Body>
           <Typography.Body3 className="text-sm mt-2">
             Jan 29 2024
           </Typography.Body3>
-          <Typography.H7 className="inline mr-2">
-            ${commify(2500.36)}
-          </Typography.H7>
-          {extraData?.map((data, i) => (
-            // Static Array
-            <div key={i} className="inline mr-3">
-              <Typography.Body3 className="text-sm inline mr-1">
-                {data.value}
-              </Typography.Body3>
-              <Typography.Body3 className="text-sm text-table-title inline">
-                {data.title}
-              </Typography.Body3>
-            </div>
-          ))}
         </div>
         {setTime && (
-          <div className="p-2 flex">
+          <div className="p-0 lg:p-2 flex">
             <Gradient2Button
               onClick={() => setChartTime(ChartTime.SEVEN_DAY)}
               outerDivClassName={`rounded-lg ${
@@ -122,7 +108,7 @@ const DripperGraph = ({
                   ? "bg-gradient2"
                   : twMerge("bg-origin-bg-black", bgClassName)
               } mr-2`}
-              className={`rounded-lg px-7 py-3 ${
+              className={`rounded-lg px-1 sm:px-3 py-[5.5px] lg:px-7 lg:py-3 ${
                 chartTime === ChartTime.SEVEN_DAY
                   ? "bg-[#1b1a1abb]"
                   : twMerge("bg-origin-bg-black", bgClassName)
@@ -138,7 +124,7 @@ const DripperGraph = ({
                   ? "bg-gradient2"
                   : twMerge("bg-origin-bg-black", bgClassName)
               } mr-2`}
-              className={`rounded-lg px-7 py-3 ${
+              className={`rounded-lg px-1 sm:px-3 py-[5.5px] lg:px-7 lg:py-3 ${
                 chartTime === ChartTime.THIRTY_DAY
                   ? "bg-[#1b1a1abb]"
                   : twMerge("bg-origin-bg-black", bgClassName)
@@ -153,7 +139,7 @@ const DripperGraph = ({
                   ? "bg-gradient2"
                   : twMerge("bg-origin-bg-black", bgClassName)
               } mr-2`}
-              className={`rounded-lg px-7 py-3 ${
+              className={`rounded-lg px-1 sm:px-3 py-[5.5px] lg:px-7 lg:py-3 ${
                 chartTime === ChartTime.ONE_YEAR
                   ? "bg-[#1b1a1abb]"
                   : twMerge("bg-origin-bg-black", bgClassName)
@@ -164,7 +150,23 @@ const DripperGraph = ({
           </div>
         )}
       </div>
-
+      <div className="pb-2 lg:pb-6">
+        <Typography.H7 className="inline mr-2 pl-6">
+          {" "}
+          ${commify(2500.36)}
+        </Typography.H7>
+        {extraData?.map((data, i) => (
+          // Static Array
+          <div key={i} className="inline mr-3">
+            <Typography.Body3 className="text-sm inline mr-1">
+              {data.value}
+            </Typography.Body3>
+            <Typography.Body3 className="text-sm text-table-title inline">
+              {data.title}
+            </Typography.Body3>
+          </div>
+        ))}
+      </div>
       {/* Yield In/Out Chart */}
       <div className="relative h-[215px]" id={"dripper-chart" + graphId}>
         <Bar data={chartData} options={barOptionsCopy} />

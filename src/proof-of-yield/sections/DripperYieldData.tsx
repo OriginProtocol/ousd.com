@@ -1,14 +1,20 @@
 import { Typography } from "@originprotocol/origin-storybook";
 import { commify } from "ethers/lib/utils";
+import { over } from "lodash";
 import Image from "next/image";
 import React from "react";
+import { twMerge } from "tailwind-merge";
 import { Section } from "../../components";
 import { assetRootPath } from "../../utils/image";
 import { DripperGraph } from "../components";
 
-const DripperYieldData = () => {
+interface DripperYieldDataProps {
+  overrideCss?: string;
+}
+
+const DripperYieldData = ({ overrideCss }: DripperYieldDataProps) => {
   return (
-    <Section className="bg-origin-bg-grey mt-20">
+    <Section className={twMerge("bg-origin-bg-grey mt-20", overrideCss)}>
       <Typography.H5 className="pt-20 text-center">
         Yield in, Yield out
       </Typography.H5>

@@ -13,20 +13,26 @@ import {
 import Footer from "../../src/components/Footer";
 import { DripperBasicStats } from "../../src/proof-of-yield/sections";
 
+const sectionOverrideCss = "px-4 md:px-10 lg:px-24 xl:px-[8.375rem]";
+
 const Dripper = ({ navLinks }: DripperProps) => {
   return (
     <>
       <Head>Proof of Yield Dripper</Head>
 
-      <Header mappedLinks={navLinks} webProperty="ousd"></Header>
+      <Header
+        className={sectionOverrideCss}
+        mappedLinks={navLinks}
+        webProperty="ousd"
+      />
 
-      <DripperTop />
+      <DripperTop overrideCss={sectionOverrideCss} />
 
-      <DripperBasicStats />
+      <DripperBasicStats overrideCss={sectionOverrideCss} />
 
-      <DripperYieldData />
+      <DripperYieldData overrideCss={sectionOverrideCss} />
 
-      <DripperFunds />
+      <DripperFunds overrideCss={sectionOverrideCss} />
 
       <Footer locale={null} />
     </>

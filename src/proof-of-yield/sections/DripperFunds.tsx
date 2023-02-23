@@ -1,11 +1,16 @@
 import { Typography } from "@originprotocol/origin-storybook";
 import React from "react";
+import { twMerge } from "tailwind-merge";
 import { Section } from "../../components";
 import { DripperGraph } from "../components";
 
-const DripperFunds = () => {
+interface DripperFundsProps {
+  overrideCss?: string;
+}
+
+const DripperFunds = ({ overrideCss }: DripperFundsProps) => {
   return (
-    <Section className="bg-origin-bg-black pt-20">
+    <Section className={twMerge("bg-origin-bg-black pt-20", overrideCss)}>
       <Typography.H5 className="text-center">Dripper funds</Typography.H5>
       <Typography.Body3 className="text-sm mt-3 text-center text-table-title">
         Historical view of funds held in the dripper

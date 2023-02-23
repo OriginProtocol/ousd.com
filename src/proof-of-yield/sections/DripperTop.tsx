@@ -4,10 +4,15 @@ import { Section } from "../../components";
 import { assetRootPath } from "../../utils/image";
 import { Typography } from "@originprotocol/origin-storybook";
 import { Gradient2Button } from "../components";
+import { twMerge } from "tailwind-merge";
 
-const DripperTop = () => {
+interface DripperTopProps {
+  overrideCss?: string;
+}
+
+const DripperTop = ({ overrideCss }: DripperTopProps) => {
   return (
-    <Section className="mt-10">
+    <Section className={twMerge("mt-10", overrideCss)}>
       {/* Back button */}
       <div className="cursor-pointer">
         <Image
