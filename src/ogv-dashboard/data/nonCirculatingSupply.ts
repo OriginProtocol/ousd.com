@@ -1,4 +1,4 @@
-export const nonCirculatingSupply = [
+const nonCirculatingSupply = [
   {
     address: "0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899",
     internalLabel: "5 of 8",

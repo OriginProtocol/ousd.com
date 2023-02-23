@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { Section } from "../components";
+import { Section } from "../../components";
 import { assetRootPath } from "../../utils/image";
 import { Button } from "@originprotocol/origin-storybook";
 
@@ -8,7 +8,7 @@ interface HeadingProps {
   stakingApy: number;
 }
 
-export const Heading = ({ stakingApy }: HeadingProps) => {
+const Heading = ({ stakingApy }: HeadingProps) => {
   return (
     <Section className="bg-origin-bg-black px-[24px]">
       <div className="flex flex-col md:flex-row relative">

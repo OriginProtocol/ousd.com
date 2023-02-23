@@ -1,12 +1,14 @@
 import { enUS } from "date-fns/locale";
 import { format } from "date-fns";
 import { ChartOptions, TooltipModel } from "chart.js";
-import { smSize } from "../constants";
-import { priceGradientStart, priceGradientEnd } from "../constants";
+import { smSize } from "../../constants";
+import { priceGradientStart, priceGradientEnd } from "../../constants";
+import { tailwindConfig } from "../../utils";
 import { utils } from "ethers";
+const { colors } = tailwindConfig.theme;
 const { commify } = utils;
 
-export const priceLineOptions: ChartOptions<"line"> = {
+const priceLineOptions: ChartOptions<"line"> = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -65,8 +67,7 @@ export const priceLineOptions: ChartOptions<"line"> = {
 
           let innerHtml = `<div style="background-image: -webkit-linear-gradient(left, ${priceGradientStart} -28.99%, ${priceGradientEnd} 144.97%); color: gray; padding: 2px; border-radius: 0.5rem; min-width: 8rem; width: fit-content">`;
 
-          innerHtml +=
-            '<div style="width: full; background: #141519; border-radius: 0.5rem 0.5rem 0 0; padding: .5rem .5rem 0 .5rem;" class="flex justify-between"> ';
+          innerHtml += `<div style="width: full; background: ${colors["origin-bg-black"]}; border-radius: 0.5rem 0.5rem 0 0; padding: .5rem .5rem 0 .5rem;" class="flex justify-between"> `;
 
           titleLines.forEach((title) => {
             innerHtml +=
@@ -79,7 +80,7 @@ export const priceLineOptions: ChartOptions<"line"> = {
           bodyLines.forEach((body) => {
             if (body[0].charAt(0) !== "$") body[0] = "$" + body[0];
             innerHtml +=
-              '<div style="background: #141519; border-radius: 0 0 0.5rem 0.5rem; padding: .5rem; color: white; font-weight: 600;">' +
+              `<div style="background: ${colors["origin-bg-black"]}; border-radius: 0 0 0.5rem 0.5rem; padding: .5rem; color: white; font-weight: 600;">` +
               body +
               "</div>";
           });
@@ -116,12 +117,12 @@ export const priceLineOptions: ChartOptions<"line"> = {
     mode: "index",
     intersect: false,
   },
-  borderColor: "#FFF",
+  borderColor: colors["white"],
   scales: {
     x: {
       type: "time",
       border: {
-        color: "#8493A6",
+        color: colors["body-grey"],
       },
       time: {
         displayFormats: {
@@ -141,7 +142,7 @@ export const priceLineOptions: ChartOptions<"line"> = {
         align: "start",
         maxRotation: 0,
         padding: 8,
-        color: "#b5beca",
+        color: colors["subheading"],
         font: () => {
           if (window.innerWidth < smSize)
             return {
@@ -168,7 +169,7 @@ export const priceLineOptions: ChartOptions<"line"> = {
           if (typeof val === "string") val = parseFloat(val);
           return "$" + commify(parseFloat(val.toPrecision(3)));
         },
-        color: "#b5beca",
+        color: colors["subheading"],
         font: () => {
           if (window.innerWidth < smSize)
             return {
