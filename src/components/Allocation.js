@@ -11,6 +11,11 @@ import { groupBy} from 'lodash'
 
 const Allocation = ({ strategies }) => {
   const [open, setOpen] = useState({})
+  const [loaded, setLoaded] = useState()
+
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
   
   // split strategies into separate yield sources by token
   const yieldSources = Object.keys(strategies).flatMap((strategy) => {
@@ -77,7 +82,7 @@ const Allocation = ({ strategies }) => {
               <div className="flex flex-col px-[16px] md:px-10 pt-2 pb-[10px] md:pt-3 md:pb-8">
                 <ThemeProvider theme={theme}>
                   <div className="flex flex-col justify-between">
-                    {protocolsSorted?.map((protocol, i) => {
+                    {loaded && protocolsSorted?.map((protocol, i) => {
                       if (protocol.name == 'undefined' || protocol.name === 'Vault') return
                       return (
                         <div
