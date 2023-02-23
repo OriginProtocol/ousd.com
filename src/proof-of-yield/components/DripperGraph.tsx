@@ -14,6 +14,8 @@ import {
 } from "chart.js";
 import { barOptions } from "../chart-configs";
 import { tailwindConfig } from "../../utils";
+import { cloneDeep } from "lodash";
+import { createTooltip } from "../utils";
 
 ChartJS.register(CategoryScale, TimeScale, BarElement, Tooltip);
 
@@ -21,6 +23,7 @@ const colors = tailwindConfig.theme.colors;
 
 interface DripperGraphProps {
   setTime?: boolean;
+  graphId: number;
   extraData?: {
     title: string;
     value: string;
@@ -39,12 +42,13 @@ const dataX = [];
 const dataY = [];
 
 for (let i = 0; i < 30; i++) {
-  dataX.push(i);
+  dataX.push(Date.now() + i * 24 * 60 * 60 * 1000);
   dataY.push(((Math.random() * 100000) % 8) + 20);
 }
 
 const DripperGraph = ({
   setTime = true,
+  graphId,
   extraData,
   className,
   bgClassName,
@@ -68,6 +72,11 @@ const DripperGraph = ({
       },
     ],
   };
+
+  // Can't have all the options pointing to the same address in memory
+  const barOptionsCopy = cloneDeep(barOptions);
+
+  barOptionsCopy.plugins.tooltip.external = createTooltip(graphId);
 
   if (bgClassName)
     chartData.datasets[0].backgroundColor = colors[bgClassName.substring(3)];
@@ -155,8 +164,8 @@ const DripperGraph = ({
       </div>
 
       {/* Yield In/Out Chart */}
-      <div className="h-[215px]">
-        <Bar data={chartData} options={barOptions} />
+      <div className="relative h-[215px]" id={"dripper-chart" + graphId}>
+        <Bar data={chartData} options={barOptionsCopy} />
       </div>
     </div>
   );

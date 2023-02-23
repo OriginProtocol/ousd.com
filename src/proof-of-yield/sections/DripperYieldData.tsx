@@ -20,6 +20,7 @@ const DripperYieldData = () => {
       <div className="relative">
         <DripperGraph
           className="mt-14 mb-3"
+          graphId={1}
           extraData={[
             { title: "APY", value: "4.37%" },
             { title: "Supply", value: commify("57615375") },
@@ -43,6 +44,7 @@ const DripperYieldData = () => {
       <div className="relative pb-20">
         <DripperGraph
           className="mt-3"
+          graphId={2}
           extraData={[
             { title: "APY", value: "4.37%" },
             { title: "Supply", value: commify("57615375") },

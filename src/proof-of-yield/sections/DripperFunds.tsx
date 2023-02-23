@@ -10,7 +10,11 @@ const DripperFunds = () => {
       <Typography.Body3 className="text-sm mt-3 text-center text-table-title">
         Historical view of funds held in the dripper
       </Typography.Body3>
-      <DripperGraph className="mt-14" bgClassName="bg-origin-bg-grey" />
+      <DripperGraph
+        className="mt-14"
+        graphId={3}
+        bgClassName="bg-origin-bg-grey"
+      />
     </Section>
   );
 };
