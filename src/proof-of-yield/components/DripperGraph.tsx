@@ -24,6 +24,7 @@ const colors = tailwindConfig.theme.colors;
 interface DripperGraphProps {
   setTime?: boolean;
   graphId: number;
+  title: string;
   extraData?: {
     title: string;
     value: string;
@@ -43,12 +44,13 @@ const dataY = [];
 
 for (let i = 0; i < 30; i++) {
   dataX.push(Date.now() + i * 24 * 60 * 60 * 1000);
-  dataY.push(((Math.random() * 100000) % 8) + 20);
+  dataY.push(((Math.random() * 100000) % 1500) + 2500);
 }
 
 const DripperGraph = ({
   setTime = true,
   graphId,
+  title,
   extraData,
   className,
   bgClassName,
@@ -92,7 +94,7 @@ const DripperGraph = ({
       {/* Yield In/Out Basic Data */}
       <div className="p-6 flex justify-between">
         <div>
-          <Typography.Body>Yield earned</Typography.Body>
+          <Typography.Body>{title}</Typography.Body>
           <Typography.Body3 className="text-sm mt-2">
             Jan 29 2024
           </Typography.Body3>

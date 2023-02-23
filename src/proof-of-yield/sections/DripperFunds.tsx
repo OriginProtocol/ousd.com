@@ -13,6 +13,7 @@ const DripperFunds = () => {
       <DripperGraph
         className="mt-14"
         graphId={3}
+        title="Funds held by dripper"
         bgClassName="bg-origin-bg-grey"
       />
     </Section>

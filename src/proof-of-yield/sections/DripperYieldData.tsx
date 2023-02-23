@@ -21,18 +21,21 @@ const DripperYieldData = () => {
         <DripperGraph
           className="mt-14 mb-3"
           graphId={1}
+          title="Yield earned"
           extraData={[
             { title: "APY", value: "4.37%" },
             { title: "Supply", value: commify("57615375") },
           ]}
         />
-        {/* <Image
-          src={assetRootPath("/images/dripper-arrow-left.svg")}
-          width={400}
-          height={400}
-          alt="dripper-arrow-left"
-          className="absolute top-0 right-0 -translate-x-[20%] translate-y-[68%]"
-        /> */}
+      </div>
+
+      <div className="flex justify-center">
+        <Image
+          src={assetRootPath("/images/blue-down-arrow.svg")}
+          width={24}
+          height={24}
+          alt="arrow down"
+        />
       </div>
 
       <div className="flex justify-center mt-3">
@@ -41,23 +44,26 @@ const DripperYieldData = () => {
         </button>
       </div>
 
+      <div className="flex justify-center mt-3">
+        <Image
+          src={assetRootPath("/images/blue-down-arrow.svg")}
+          width={24}
+          height={24}
+          alt="arrow down"
+        />
+      </div>
+
       <div className="relative pb-20">
         <DripperGraph
           className="mt-3"
           graphId={2}
+          title="Yield distributed"
           extraData={[
             { title: "APY", value: "4.37%" },
             { title: "Supply", value: commify("57615375") },
           ]}
           setTime={false}
         />
-        {/* <Image
-          src={assetRootPath("/images/dripper-arrow-right.svg")}
-          width={400}
-          height={400}
-          alt="dripper-arrow-right"
-          className="absolute bottom-0 left-0 translate-x-[20%] -translate-y-[66%]"
-        /> */}
       </div>
     </Section>
   );
