@@ -15,3 +15,6 @@ export const pointHitRadius = 7;
 export const pointHoverRadius = 7;
 export const pointHoverBorderWidth = 2;
 export const pointHoverBorderColor = "#000";
+
+// Dripper bar chart constants
+export const blankFill = "#141519";

@@ -16,7 +16,7 @@ const Gradient2Button = ({
   return (
     <div
       className={twMerge(
-        "relative bg-gradient2 rounded-[100px] p-[1px] w-fit",
+        "relative bg-gradient2 rounded-[100px] p-[1px] w-fit h-fit",
         outerDivClassName
       )}
     >
