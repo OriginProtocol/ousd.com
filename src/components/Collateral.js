@@ -8,16 +8,16 @@ import { formatCurrency, rounded } from "../utils/math";
 import { tokenColors, strategyMapping } from "../utils/constants";
 
 const Collateral = ({ collateral, strategies }) => {
-  const [open, setOpen] = useState();
+  const [open, setOpen] = useState()
 
   const total = collateral?.reduce((t, s) => {
     return {
       total: Number(t.total) + Number(s.name === "ousd" ? 0 : s.total),
     };
-  }).total;
+  }).total
 
-  strategies.sort((a, b) => a.total - b.total).reverse();
-
+  const strategiesSorted = strategies && Object.keys(strategies).sort((a, b) => strategies[a].total - strategies[b].total).reverse()
+  
   const chartData = collateral?.map((token) => {
     return {
       title: token.name.toUpperCase(),
@@ -25,15 +25,15 @@ const Collateral = ({ collateral, strategies }) => {
         ? (token.name === "ousd" ? 0 : Number(token.total) / 3 / total) * 100
         : 0,
       color: tokenColors[token.name] || "#ff0000",
-    };
-  });
+    }
+  })
 
   const tokenNames = {
     dai: "Dai",
     usdc: "USD Coin",
     usdt: "Tether",
     ousd: "Origin Dollar",
-  };
+  }
 
   return (
     <>
@@ -127,8 +127,8 @@ const Collateral = ({ collateral, strategies }) => {
                 open ? "" : "hidden"
               }`}
             >
-              {strategies?.map((strategy, i) => {
-                const tokens = ["dai", "usdc", "usdt", "ousd"];
+              {strategies && strategiesSorted?.map((strategy, i) => {
+                const tokens = ["DAI", "USDC", "USDT", "OUSD"]
                 return (
                   <div
                     className="p-4 md:p-6 rounded-[7px] bg-[#1e1f25]"
@@ -136,7 +136,7 @@ const Collateral = ({ collateral, strategies }) => {
                   >
                     <Link
                       href={`https://etherscan.io/address/${
-                        strategyMapping[strategy.name]?.address
+                        strategyMapping[strategy]?.address
                       }`}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -146,7 +146,7 @@ const Collateral = ({ collateral, strategies }) => {
                         className="text-[16px] leading-[28px]"
                         style={{ fontWeight: 500 }}
                       >
-                        {strategyMapping[strategy.name]?.name}
+                        {strategyMapping[strategy]?.name}
                       </Typography.Body>
                       <Image
                         src={assetRootPath("/images/link.svg")}
@@ -161,8 +161,7 @@ const Collateral = ({ collateral, strategies }) => {
                     </Typography.Body3>
                     <div className="grid grid-cols-2 gap-x-12 gap-y-1 md:gap-y-3 mt-2">
                       {tokens.map((token, i) => {
-                        if (token === "ousd" && rounded(strategy.ousd) === "0")
-                          return;
+                        if (token === "OUSD" && (!strategies[strategy].holdings.OUSD || rounded(strategies[strategy].holdings.OUSD) === "0")) return
                         return (
                           <div className="flex flex-row space-x-2" key={i}>
                             <Image
@@ -177,14 +176,14 @@ const Collateral = ({ collateral, strategies }) => {
                               </Typography.Body3>
                               <Link
                                 href={
-                                  strategyMapping[strategy.name]?.token
+                                  strategyMapping[strategy]?.token
                                     ? `https://etherscan.io/token/${
-                                        strategyMapping[strategy.name]?.token
+                                        strategyMapping[strategy]?.token
                                       }?a=${
-                                        strategyMapping[strategy.name]?.address
+                                        strategyMapping[strategy]?.address
                                       }`
                                     : `https://etherscan.io/address/${
-                                        strategyMapping[strategy.name]?.address
+                                        strategyMapping[strategy]?.address
                                       }#tokentxns`
                                 }
                                 target="_blank"
@@ -192,7 +191,7 @@ const Collateral = ({ collateral, strategies }) => {
                                 className="flex flex-row space-x-1"
                               >
                                 <Typography.Body3 className="text-[12px] leading-[19px] text-[#b5beca]">
-                                  {`$${rounded(strategy[token], 2)}`}
+                                  {`$${rounded(strategies[strategy].holdings[token], 2)}`}
                                 </Typography.Body3>
                                 <Image
                                   src={assetRootPath("/images/link.svg")}
