@@ -67,6 +67,16 @@ export default function Footer({ locale }) {
                 </Typography.Body3>
               </Link>
               <Link
+                href={"/partners"}
+                target="_parent"
+                rel="noopener noreferrer"
+                className="lg:mr-10 mt-[20px] lg:mt-2"
+              >
+                <Typography.Body3 className="text-[#fafbfb]">
+                  Partners
+                </Typography.Body3>
+              </Link>
+              <Link
                 href={"/blog"}
                 target="_parent"
                 rel="noopener noreferrer"
