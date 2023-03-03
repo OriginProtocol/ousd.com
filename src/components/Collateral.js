@@ -9,22 +9,35 @@ import { tokenColors, strategyMapping } from "../utils/constants";
 
 const Collateral = ({ collateral, strategies }) => {
   const [open, setOpen] = useState()
+  const backingTokens = ['dai', 'usdc', 'usdt']
 
   const total = collateral?.reduce((t, s) => {
     return {
-      total: Number(t.total) + Number(s.name === "ousd" ? 0 : s.total),
+      total: Number(t.total) + Number(s.total),
     };
   }).total
 
   const strategiesSorted = strategies && Object.keys(strategies).sort((a, b) => strategies[a].total - strategies[b].total).reverse()
-  
-  const chartData = collateral?.map((token) => {
+
+  // asset totals that are not displayed get distributed evenly to the backing stable totals
+  const extra = collateral.filter(token => !backingTokens.includes(token.name)).reduce((t, s) => {
     return {
-      title: token.name.toUpperCase(),
+      total: Number(t.total) + Number(s.total),
+    };
+  }).total / backingTokens.length
+
+  const backing = collateral.filter(token => backingTokens.includes(token.name)).map((token) => {
+    token = {...token, total: Number(token.total) + extra}
+    return token
+  })
+
+  const chartData = backing?.map((token) => {
+    return {
+      title: token?.name.toUpperCase(),
       value: total
-        ? (token.name === "ousd" ? 0 : Number(token.total) / 3 / total) * 100
+        ? Number(token?.total) / total * 100
         : 0,
-      color: tokenColors[token.name] || "#ff0000",
+      color: tokenColors[token?.name] || "#ff0000",
     }
   })
 
@@ -66,7 +79,7 @@ const Collateral = ({ collateral, strategies }) => {
               </div>
               <div className="md:w-1/2 md:ml-10 xl:ml-32 mt-6 md:my-auto pl-0 md:py-10 text-left">
                 <div className="flex flex-col justify-between space-y-2">
-                  {collateral?.map((token, i) => {
+                  {backing?.map((token, i) => {
                     if (token.name === "ousd") return;
                     return (
                       <div
@@ -128,7 +141,7 @@ const Collateral = ({ collateral, strategies }) => {
               }`}
             >
               {strategies && strategiesSorted?.map((strategy, i) => {
-                const tokens = ["DAI", "USDC", "USDT", "OUSD"]
+                const tokens = ["DAI", "USDC", "USDT", "OUSD", "LUSD"]
                 return (
                   <div
                     className="p-4 md:p-6 rounded-[7px] bg-[#1e1f25]"
@@ -162,6 +175,7 @@ const Collateral = ({ collateral, strategies }) => {
                     <div className="grid grid-cols-2 gap-x-12 gap-y-1 md:gap-y-3 mt-2">
                       {tokens.map((token, i) => {
                         if (token === "OUSD" && (!strategies[strategy].holdings.OUSD || rounded(strategies[strategy].holdings.OUSD) === "0")) return
+                        if (token === "LUSD" && (!strategies[strategy].holdings.LUSD || rounded(strategies[strategy].holdings.LUSD) === "0")) return
                         return (
                           <div className="flex flex-row space-x-2" key={i}>
                             <Image
