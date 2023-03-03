@@ -26,7 +26,18 @@ const Collateral = ({ collateral, strategies }) => {
     };
   }).total / backingTokens.length
 
+  const ousd_holdings = strategies.ousd_metastrat.holdings
+  const ousd_metastrat_3crv = backingTokens.map((t) => {
+      return ousd_holdings[t.toUpperCase()]
+  }).reduce((a, b) => Number(a) + Number(b))
+
+  const lusd_holdings = strategies.lusd_metastrat.holdings
+  const lusd_metastrat_3crv = backingTokens.map((t) => {
+      return lusd_holdings[t.toUpperCase()]
+  }).reduce((a, b) => Number(a) + Number(b))
+
   const backing = collateral.filter(token => backingTokens.includes(token.name)).map((token) => {
+    const extra = ousd_metastrat_3crv ? ousd_holdings[token.name.toUpperCase()] * ousd_holdings.OUSD / ousd_metastrat_3crv : 0 + lusd_metastrat_3crv ? lusd_holdings[token.name.toUpperCase()] * lusd_holdings.LUSD / lusd_metastrat_3crv : 0
     token = {...token, total: Number(token.total) + extra}
     return token
   })
