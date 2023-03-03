@@ -9,22 +9,40 @@ import { tokenColors, strategyMapping } from "../utils/constants";
 
 const Collateral = ({ collateral, strategies }) => {
   const [open, setOpen] = useState()
+  const backingTokens = ['dai', 'usdc', 'usdt']
 
   const total = collateral?.reduce((t, s) => {
     return {
-      total: Number(t.total) + Number(s.name === "ousd" ? 0 : s.total),
+      total: Number(t.total) + Number(s.total),
     };
   }).total
 
   const strategiesSorted = strategies && Object.keys(strategies).sort((a, b) => strategies[a].total - strategies[b].total).reverse()
-  
-  const chartData = collateral?.map((token) => {
+
+  // asset totals that are not displayed get distributed to the backing stable totals proportional to 3pool balance
+  const ousd_holdings = strategies.ousd_metastrat.holdings
+  const ousd_metastrat_3crv = backingTokens.map((t) => {
+      return ousd_holdings[t.toUpperCase()]
+  }).reduce((a, b) => Number(a) + Number(b))
+
+  const lusd_holdings = strategies.lusd_metastrat.holdings
+  const lusd_metastrat_3crv = backingTokens.map((t) => {
+      return lusd_holdings[t.toUpperCase()]
+  }).reduce((a, b) => Number(a) + Number(b))
+
+  const backing = collateral.filter(token => backingTokens.includes(token.name)).map((token) => {
+    const extra = ousd_metastrat_3crv ? ousd_holdings[token.name.toUpperCase()] * ousd_holdings.OUSD / ousd_metastrat_3crv : 0 + lusd_metastrat_3crv ? lusd_holdings[token.name.toUpperCase()] * lusd_holdings.LUSD / lusd_metastrat_3crv : 0
+    token = {...token, total: Number(token.total) + extra}
+    return token
+  })
+
+  const chartData = backing?.map((token) => {
     return {
-      title: token.name.toUpperCase(),
+      title: token?.name.toUpperCase(),
       value: total
-        ? (token.name === "ousd" ? 0 : Number(token.total) / 3 / total) * 100
+        ? Number(token?.total) / total * 100
         : 0,
-      color: tokenColors[token.name] || "#ff0000",
+      color: tokenColors[token?.name] || "#ff0000",
     }
   })
 
@@ -66,7 +84,7 @@ const Collateral = ({ collateral, strategies }) => {
               </div>
               <div className="md:w-1/2 md:ml-10 xl:ml-32 mt-6 md:my-auto pl-0 md:py-10 text-left">
                 <div className="flex flex-col justify-between space-y-2">
-                  {collateral?.map((token, i) => {
+                  {backing?.map((token, i) => {
                     if (token.name === "ousd") return;
                     return (
                       <div
@@ -128,7 +146,7 @@ const Collateral = ({ collateral, strategies }) => {
               }`}
             >
               {strategies && strategiesSorted?.map((strategy, i) => {
-                const tokens = ["DAI", "USDC", "USDT", "OUSD"]
+                const tokens = ["dai", "usdc", "usdt", "ousd", "lusd"]
                 return (
                   <div
                     className="p-4 md:p-6 rounded-[7px] bg-[#1e1f25]"
@@ -161,7 +179,8 @@ const Collateral = ({ collateral, strategies }) => {
                     </Typography.Body3>
                     <div className="grid grid-cols-2 gap-x-12 gap-y-1 md:gap-y-3 mt-2">
                       {tokens.map((token, i) => {
-                        if (token === "OUSD" && (!strategies[strategy].holdings.OUSD || rounded(strategies[strategy].holdings.OUSD) === "0")) return
+                        if (token === "ousd" && (!strategies[strategy].holdings.OUSD || rounded(strategies[strategy].holdings.OUSD) === "0")) return
+                        if (token === "lusd" && (!strategies[strategy].holdings.LUSD || rounded(strategies[strategy].holdings.LUSD) === "0")) return
                         return (
                           <div className="flex flex-row space-x-2" key={i}>
                             <Image
@@ -191,7 +210,7 @@ const Collateral = ({ collateral, strategies }) => {
                                 className="flex flex-row space-x-1"
                               >
                                 <Typography.Body3 className="text-[12px] leading-[19px] text-[#b5beca]">
-                                  {`$${rounded(strategies[strategy].holdings[token], 2)}`}
+                                  {`$${rounded(strategies[strategy].holdings[token.toUpperCase()], 2)}`}
                                 </Typography.Body3>
                                 <Image
                                   src={assetRootPath("/images/link.svg")}

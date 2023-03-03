@@ -16,7 +16,7 @@
 
 .article h3 {
   font-family: 'Sailec';
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   line-height: 2.25rem;
 }
 
@@ -34,8 +34,12 @@
   margin-top: 1.5rem;
 }
 
-.article h1 + p, .article h2 + p, .article h3 + p {
+.article h1 + p, .article h2 + p {
   margin-top: 2.5rem;
+}
+
+.article h3 + p {
+  margin-top: 1.5rem;
 }
 
 .article ul {
@@ -72,19 +76,23 @@
   color: #228dff;
 }
 
+.article strong {
+  font-weight: 700;
+}
+
 @media (max-width: 768px) {
   .article h1 {
     font-size: 1.5rem;
     line-height: 2rem;
   }
-  
+
   .article h2 {
-    font-size: 1.25rem;
+    font-size: 1.375rem;
     line-height: 2rem;
   }
-  
+
   .article h3 {
-    font-size: 1.125;
+    font-size: 1.125rem;
     line-height: 1.75rem;
   }
 
@@ -97,7 +105,11 @@
     margin-top: 2.5rem;
   }
 
-  .article h1 + p, .article h2 + p, .article h3 + p {
+  .article h1 + p, .article h2 + p {
     margin-top: 1.5rem;
+  }
+
+  .article h3 + p {
+    margin-top: 1rem;
   }
 }
