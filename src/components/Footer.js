@@ -1,28 +1,28 @@
-import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 //import { getDocsLink } from '../utils/getDocsLink'
-import { assetRootPath } from '../utils/image'
-import { useRouter } from 'next/router'
-import { Typography } from '@originprotocol/origin-storybook'
+import { assetRootPath } from "../utils/image";
+import { useRouter } from "next/router";
+import { Typography } from "@originprotocol/origin-storybook";
 
-const termsURL = `${process.env.NEXT_PUBLIC_WEBSITE_URL}/tos`
-const privacyURL = `${process.env.NEXT_PUBLIC_WEBSITE_URL}/privacy`
+const termsURL = `${process.env.NEXT_PUBLIC_WEBSITE_URL}/tos`;
+const privacyURL = `${process.env.NEXT_PUBLIC_WEBSITE_URL}/privacy`;
 
 export default function Footer({ locale }) {
-  const { pathname } = useRouter()
+  const { pathname } = useRouter();
 
   return (
     <>
-      <footer>
-        <div className="max-w-screen-[1432px] mx-auto relative overflow-hidden px-8 md:px-[64px] lg:px-[134px] py-10 lg:pt-32 lg:pb-10 divide-[#ffffff33] divide-y-2 text-white">
+      <footer className="px-4 sm:px-8 md:px-16 lg:px-[8.375rem]">
+        <div className="max-w-[89.5rem] mx-auto relative overflow-hidden  py-10 lg:pt-32 lg:pb-10 divide-[#ffffff33] divide-y-2 text-white">
           <div className="flex flex-col lg:flex-row justify-between pb-10 lg:pb-[88px] text-left">
             <div className="relative w-28 h-8 lg:w-32 mb-10 lg:mb-0">
               <Image
                 src={assetRootPath(`/images/origin-white.svg`)}
                 fill
-                sizes='(max-width: 768px) 112px, 56px'
-                alt='origin'
+                sizes="(max-width: 768px) 112px, 56px"
+                alt="origin"
               />
             </div>
             <div className="flex flex-col lg:flex-row justify-between">
@@ -47,7 +47,7 @@ export default function Footer({ locale }) {
                 </Typography.Body3>
               </Link>
               <Link
-                href={'https://governance.ousd.com/'}
+                href={"https://governance.ousd.com/"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="lg:mr-10 mt-[20px] lg:mt-2"
@@ -67,7 +67,17 @@ export default function Footer({ locale }) {
                 </Typography.Body3>
               </Link>
               <Link
-                href={'/blog'}
+                href={"/partners"}
+                target="_parent"
+                rel="noopener noreferrer"
+                className="lg:mr-10 mt-[20px] lg:mt-2"
+              >
+                <Typography.Body3 className="text-[#fafbfb]">
+                  Partners
+                </Typography.Body3>
+              </Link>
+              <Link
+                href={"/blog"}
                 target="_parent"
                 rel="noopener noreferrer"
                 prefetch={false}
@@ -89,7 +99,7 @@ export default function Footer({ locale }) {
                 </Typography.Body3>
               </Link>*/}
               <Link
-                href={'/ogv-dashboard'}
+                href={"/ogv-dashboard"}
                 target="_parent"
                 rel="noopener noreferrer"
                 prefetch={false}
@@ -129,14 +139,10 @@ export default function Footer({ locale }) {
                 rel="noopener noreferrer"
                 className="mr-4"
               >
-                <Typography.Caption2>
-                  Terms of Service
-                </Typography.Caption2>
+                <Typography.Caption2>Terms of Service</Typography.Caption2>
               </Link>
               <Link href={privacyURL} target="_blank" rel="noopener noreferrer">
-                <Typography.Caption2>
-                  Privacy Policy
-                </Typography.Caption2>
+                <Typography.Caption2>Privacy Policy</Typography.Caption2>
               </Link>
             </div>
           </div>
@@ -149,5 +155,5 @@ export default function Footer({ locale }) {
         }
       `}</style>
     </>
-  )
+  );
 }

@@ -4,12 +4,12 @@ import Seo from "./strapi/seo"
 import { Typography, Header } from "@originprotocol/origin-storybook"
 import Image from "next/image"
 import Link from "next/link"
-import Footer from "components/Footer"
-import styles from "styles/Article.module.css"
+import Footer from "../components/Footer"
+import styles from "../styles/Article.module.css"
 import formatSeo from "../utils/seo"
 import sanitizeHtml from 'sanitize-html'
 import he from 'he'
-import { sanitizationOptions } from "utils/constants"
+import { sanitizationOptions } from "../utils/constants"
 
 const Article = ({ article, navLinks }) => {
   const [loaded, setLoaded] = useState()

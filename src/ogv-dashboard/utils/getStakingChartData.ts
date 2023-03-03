@@ -8,8 +8,8 @@ import {
   pointHoverRadius,
   pointHoverBorderWidth,
   pointHoverBorderColor,
-  stakingGradientEnd,
-} from "../constants";
+} from "../../constants";
+import { stakingGradientEnd } from "../constants";
 import { GetStorageAtResponse } from "../types";
 import { BigNumber, utils } from "ethers";
 const { formatUnits } = utils;

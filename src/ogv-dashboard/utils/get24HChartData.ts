@@ -8,7 +8,7 @@ import {
   pointHoverRadius,
   pointHoverBorderWidth,
   pointHoverBorderColor,
-} from "../constants";
+} from "../../constants";
 import { OgvRawData } from "../types";
 
 const get24HChartData = (rawData24H: OgvRawData) => {

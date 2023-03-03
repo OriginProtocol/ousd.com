@@ -1,11 +1,11 @@
 import { ethers } from 'ethers'
-import addresses from 'constants/contractAddresses'
-import ogvAbi from 'constants/mainnetAbi/ogv.json'
-import veogvAbi from 'constants/mainnetAbi/veogv.json'
-import ousdAbi from 'constants/mainnetAbi/ousd.json'
-import vaultAbi from 'constants/mainnetAbi/vault.json'
-import dripperAbi from 'constants/mainnetAbi/dripper.json'
-import ContractStore from 'stores/ContractStore'
+import addresses from '../constants/contractAddresses'
+import ogvAbi from '../constants/mainnetAbi/ogv.json'
+import veogvAbi from '../constants/mainnetAbi/veogv.json'
+import ousdAbi from '../constants/mainnetAbi/ousd.json'
+import vaultAbi from '../constants/mainnetAbi/vault.json'
+import dripperAbi from '../constants/mainnetAbi/dripper.json'
+import ContractStore from '../stores/ContractStore'
 
 export const getContract = (address, abi, provider) => {
   try {

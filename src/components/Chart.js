@@ -1,5 +1,5 @@
 import { Line } from 'react-chartjs-2'
-import withIsMobile from 'hoc/withIsMobile'
+import withIsMobile from '../hoc/withIsMobile'
 
 const LineChart = ({ chartData, isMobile }) => {
   return (

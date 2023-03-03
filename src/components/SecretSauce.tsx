@@ -1,22 +1,21 @@
-import { Typography } from "@originprotocol/origin-storybook";
-import Image from "next/image";
 import React from "react";
+import Section from "./Section";
+import Image from "next/image";
+import { mdSize, lgSize, xl2Size } from "../constants";
 import { useViewWidth } from "../hooks";
+import { Typography } from "@originprotocol/origin-storybook";
 import { assetRootPath } from "../utils/image";
-
-const mdSize = 768;
-const lgSize = 1024;
-const xl2Size = 1536;
+import { Gradient2Button } from "../proof-of-yield/components";
 
 function SecretSauce() {
   const width = useViewWidth();
 
   return (
-    <section className="px-4 sm:px-8 md:px-16 lg:px-[8.375rem] bg-origin-bg-dgrey">
+    <Section className="bg-origin-bg-dgrey">
       <Typography.H3 className="pt-14 md:pt-[120px] mb-4 md:mb-20 w-full text-center">
         Not-so-secret sauce
       </Typography.H3>
-      <div className="relative max-w-[89.5rem]  h-fit mx-auto flex flex-col lg:flex-row justify-center items-center">
+      <div className="relative h-fit flex flex-col lg:flex-row justify-center items-center">
         <div className="lg:w-3/5 xl:w-1/3 mb-12 lg:mb-0 lg:mr-24">
           <p className="font-sansInter font-normal text-base xl:text-lg mb-6">
             Multiple factors contribute to OUSD outperforming its underlying
@@ -49,7 +48,7 @@ function SecretSauce() {
               : "w-[768px]"
           } h-fit px-4 max-w-[100vw]`}
         >
-          <img
+          <Image
             src={
               (width < xl2Size && width >= lgSize) || width < mdSize
                 ? assetRootPath("/images/secret-sauce-mobile.png")
@@ -62,7 +61,21 @@ function SecretSauce() {
           />
         </div>
       </div>
-    </section>
+      <div className="w-full flex justify-center mt-20">
+        <Gradient2Button
+          outerDivClassName="w-full md:w-fit mb-[120px]"
+          className="bg-transparent hover:bg-transparent text-center w-full"
+        >
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://docs.ousd.com/core-concepts/elastic-supply/rebasing-and-smart-contracts"
+          >
+            <Typography.H7 className="px-20 py-2">Learn more</Typography.H7>
+          </a>
+        </Gradient2Button>
+      </div>
+    </Section>
   );
 }
 
