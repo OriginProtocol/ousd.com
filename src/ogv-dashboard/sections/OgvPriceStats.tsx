@@ -5,6 +5,8 @@ import { Section } from "../../components";
 import { useOutOfBoundsClick } from "../../hooks";
 import { assetRootPath } from "../../utils/image";
 import { BigNumber, utils } from "ethers";
+import { NonCirculatingSupply } from "../types";
+import { calculateCirculatingSupply } from "../utils";
 const { commify, formatEther } = utils;
 
 interface OgvPriceStatsProps {
@@ -12,12 +14,7 @@ interface OgvPriceStatsProps {
   currentMarketCap: number;
   change24H: number;
   totalSupply: string;
-  nonCirculatingSupply: {
-    address: string;
-    internalLabel: string;
-    publicLabel: string;
-    balance: string;
-  }[];
+  nonCirculatingSupply: NonCirculatingSupply;
 }
 const OgvPriceStats = ({
   currentPrice,
@@ -36,17 +33,6 @@ const OgvPriceStats = ({
     setShowCirculatingTooltip(false)
   );
   useOutOfBoundsClick(totalTooltip, () => setShowTotalTooltip(false));
-
-  const calcualteCirculatingSupply = () => {
-    const total = BigNumber.from(totalSupply);
-    const nonCirculatingBalances = nonCirculatingSupply.map((e) =>
-      BigNumber.from(e.balance)
-    );
-    const nonCirculatingTotal = nonCirculatingBalances.reduce((a, b) =>
-      a.add(b)
-    );
-    return total.sub(nonCirculatingTotal);
-  };
 
   return (
     <Section className="bg-origin-bg-black">
@@ -165,7 +151,16 @@ const OgvPriceStats = ({
               </div>
             </div>
             <div className="text-lg md:text-[26px] 2xl:text-3x; font-bold text-center sm:text-left">
-              {commify(formatEther(calcualteCirculatingSupply())).split(".")[0]}
+              {
+                commify(
+                  formatEther(
+                    calculateCirculatingSupply(
+                      totalSupply,
+                      nonCirculatingSupply
+                    )
+                  )
+                ).split(".")[0]
+              }
             </div>
           </div>
         </div>
