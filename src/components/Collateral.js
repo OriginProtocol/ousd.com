@@ -141,7 +141,7 @@ const Collateral = ({ collateral, strategies }) => {
               }`}
             >
               {strategies && strategiesSorted?.map((strategy, i) => {
-                const tokens = ["DAI", "USDC", "USDT", "OUSD", "LUSD"]
+                const tokens = ["dai", "usdc", "usdt", "ousd", "lusd"]
                 return (
                   <div
                     className="p-4 md:p-6 rounded-[7px] bg-[#1e1f25]"
@@ -174,8 +174,8 @@ const Collateral = ({ collateral, strategies }) => {
                     </Typography.Body3>
                     <div className="grid grid-cols-2 gap-x-12 gap-y-1 md:gap-y-3 mt-2">
                       {tokens.map((token, i) => {
-                        if (token === "OUSD" && (!strategies[strategy].holdings.OUSD || rounded(strategies[strategy].holdings.OUSD) === "0")) return
-                        if (token === "LUSD" && (!strategies[strategy].holdings.LUSD || rounded(strategies[strategy].holdings.LUSD) === "0")) return
+                        if (token === "ousd" && (!strategies[strategy].holdings.OUSD || rounded(strategies[strategy].holdings.OUSD) === "0")) return
+                        if (token === "lusd" && (!strategies[strategy].holdings.LUSD || rounded(strategies[strategy].holdings.LUSD) === "0")) return
                         return (
                           <div className="flex flex-row space-x-2" key={i}>
                             <Image
@@ -205,7 +205,7 @@ const Collateral = ({ collateral, strategies }) => {
                                 className="flex flex-row space-x-1"
                               >
                                 <Typography.Body3 className="text-[12px] leading-[19px] text-[#b5beca]">
-                                  {`$${rounded(strategies[strategy].holdings[token], 2)}`}
+                                  {`$${rounded(strategies[strategy].holdings[token.toUpperCase()], 2)}`}
                                 </Typography.Body3>
                                 <Image
                                   src={assetRootPath("/images/link.svg")}
