@@ -35,6 +35,7 @@ import {
   fetchOGVStakingData,
   getStakingChartData,
   getOGVPriceData,
+  calculateCirculatingSupply,
 } from "../src/ogv-dashboard/utils";
 import {
   Heading,
@@ -45,6 +46,7 @@ import {
   TopExchanges,
   OgvStakingStats,
 } from "../src/ogv-dashboard/sections";
+import { formatEther } from "@ethersproject/units";
 
 ChartJS.register(
   CategoryScale,
@@ -240,11 +242,13 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
 
   const navLinks: Link[] = transformLinks(navRes.data) as Link[];
 
-  const {
-    usd: currentPrice,
-    usd_market_cap: currentMarketCap,
-    usd_24h_change: change24H,
-  } = currentPriceData["origin-dollar-governance"];
+  const { usd: currentPrice, usd_24h_change: change24H } =
+    currentPriceData["origin-dollar-governance"];
+
+  const currentMarketCap =
+    parseFloat(
+      formatEther(calculateCirculatingSupply(totalSupply, nonCirculatingSupply))
+    ) * currentPrice;
 
   const { lastUpdated, data, ttl } = ogvStakingCache;
 
