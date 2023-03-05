@@ -9,7 +9,10 @@ const calculateCirculatingSupply = (
   const nonCirculatingBalances = nonCirculatingSupply.map((e) =>
     BigNumber.from(e.balance)
   );
-  const nonCirculatingTotal = nonCirculatingBalances.reduce((a, b) => a.add(b));
+  const nonCirculatingTotal = nonCirculatingBalances.reduce(
+    (a, b) => a.add(b),
+    BigNumber.from("0")
+  );
   return total.sub(nonCirculatingTotal);
 };
 
