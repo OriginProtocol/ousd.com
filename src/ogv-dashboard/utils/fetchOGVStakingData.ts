@@ -58,9 +58,9 @@ const fetchOGVStakingData = async (
         [
           ogvContractAddress,
           ogvTotalSupplySlot.toHexString(),
-          calcXDaysAgoBlock(i + days, currentBlock, ethBlocksPerDay),
+          calcXDaysAgoBlock(i, currentBlock, ethBlocksPerDay),
         ],
-        i
+        i + days
       )
     );
   }
@@ -69,7 +69,7 @@ const fetchOGVStakingData = async (
     reqs.push(
       createRequest(
         "eth_getBlockByNumber",
-        ["0x" + (currentBlock - i * ethBlocksPerDay).toString(16), true],
+        [calcXDaysAgoBlock(i, currentBlock, ethBlocksPerDay), true],
         i + days * 2
       )
     );

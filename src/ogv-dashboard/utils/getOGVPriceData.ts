@@ -42,7 +42,9 @@ const getOGVPriceData = async (days: number) => {
   labels = rawData.prices.map((price: any) => price[0]);
 
   prices = rawData.prices.map((price: any) => price[1]);
-  marketCaps = rawData.market_caps.map((price: any) => price[1]);
+  // Since coingecko is providing incorrect data, we will calculate market cap
+  // manually from the price
+  marketCaps = []; // rawData.market_caps.map((price: any) => price[1]);
 
   ogvPriceCache[days] = {
     labels,
