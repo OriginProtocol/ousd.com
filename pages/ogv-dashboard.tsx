@@ -36,6 +36,7 @@ import {
   getStakingChartData,
   getOGVPriceData,
   calculateCirculatingSupply,
+  calculateMarketCap,
 } from "../src/ogv-dashboard/utils";
 import {
   Heading,
@@ -238,17 +239,33 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
 
   currentPriceData = await currentPriceData.json();
 
-  const { priceData24H, marketCapData24H } = get24HChartData(rawData24H);
-
   const navLinks: Link[] = transformLinks(navRes.data) as Link[];
 
   const { usd: currentPrice, usd_24h_change: change24H } =
     currentPriceData["origin-dollar-governance"];
 
-  const currentMarketCap =
-    parseFloat(
-      formatEther(calculateCirculatingSupply(totalSupply, nonCirculatingSupply))
-    ) * currentPrice;
+  const circulatingSupply = calculateCirculatingSupply(
+    totalSupply,
+    nonCirculatingSupply
+  );
+
+  // Calculate market cap
+  rawData24H.marketCaps = rawData24H.prices.map((p: number) =>
+    calculateMarketCap(circulatingSupply, p)
+  );
+  rawData7D.marketCaps = rawData7D.prices.map((p: number) =>
+    calculateMarketCap(circulatingSupply, p)
+  );
+  rawData30D.marketCaps = rawData30D.prices.map((p: number) =>
+    calculateMarketCap(circulatingSupply, p)
+  );
+  rawData365D.marketCaps = rawData365D.prices.map((p: number) =>
+    calculateMarketCap(circulatingSupply, p)
+  );
+
+  const { priceData24H, marketCapData24H } = get24HChartData(rawData24H);
+
+  const currentMarketCap = calculateMarketCap(circulatingSupply, currentPrice);
 
   const { lastUpdated, data, ttl } = ogvStakingCache;
 
