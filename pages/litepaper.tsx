@@ -61,7 +61,10 @@ const Litepaper = ({ navLinks, litePaper }: LitepaperProps) => {
   );
 };
 
-export const getStaticProps = async (): Promise<{ props: LitepaperProps }> => {
+export const getStaticProps = async (): Promise<{
+  props: LitepaperProps;
+  revalidate: number;
+}> => {
   const navRes = await fetchAPI("/ousd-nav-links", {
     populate: {
       links: {
@@ -112,6 +115,7 @@ export const getStaticProps = async (): Promise<{ props: LitepaperProps }> => {
       navLinks,
       litePaper,
     },
+    revalidate: 300,
   };
 };
 
