@@ -1,15 +1,16 @@
 import Head from "next/head";
-import React, { useEffect, useRef } from "react";
 import transformLinks from "../src/utils/transformLinks";
 import Footer from "../src/components/Footer";
 import moment from "moment";
+import { useRef } from "react";
 import { Link } from "../src/types";
 import { Header } from "@originprotocol/origin-storybook";
 import { fetchAPI } from "../lib/api";
 import { ContentIntro, Title, Content } from "../src/litepaper/sections";
 import { LitePaperData } from "../src/litepaper/types";
-import { useRefs } from "../src/hooks";
+import { useRefs, useViewWidth } from "../src/hooks";
 import { TableOfContents } from "../src/litepaper/components";
+import { xlSize } from "../src/constants";
 
 interface LitePaper {
   lastUpdated: number;
@@ -24,6 +25,7 @@ interface LitepaperProps {
 const Litepaper = ({ navLinks, litePaper }: LitepaperProps) => {
   const { lastUpdated, data } = litePaper;
 
+  const width = useViewWidth();
   const headingRefs = useRefs<HTMLDivElement>(data.length);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -37,16 +39,23 @@ const Litepaper = ({ navLinks, litePaper }: LitepaperProps) => {
       {/* Page title */}
       <Title lastUpdated={lastUpdated} />
 
-      <div className="mt-12 grid grid-cols-[calc((100%-793px)/2)1fr]">
-        <TableOfContents
-          data={data}
-          headingRefs={headingRefs}
-          className="sticky self-start top-1/2 -translate-y-1/3 z-30"
-        />
-        {/* Table of contents and Litepaper image */}
-        <ContentIntro data={data} headingRefs={headingRefs} />
-        <Content data={data} headingRefs={headingRefs} />
-      </div>
+      {width > xlSize ? (
+        <div className="mt-12 grid grid-cols-[calc((100%-793px)/2)1fr]">
+          <TableOfContents
+            data={data}
+            headingRefs={headingRefs}
+            className="sticky self-start top-1/2 -translate-y-1/3 z-30"
+          />
+          {/* Table of contents and Litepaper image */}
+          <ContentIntro data={data} headingRefs={headingRefs} />
+          <Content data={data} headingRefs={headingRefs} />
+        </div>
+      ) : (
+        <div className="mt-12 flex flex-col items-center">
+          <ContentIntro data={data} headingRefs={headingRefs} />
+          <Content data={data} headingRefs={headingRefs} />
+        </div>
+      )}
       <Footer locale={null} />
     </div>
   );

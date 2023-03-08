@@ -15,7 +15,7 @@ const Content = ({ data, headingRefs }: ContentProps) => {
         {" "}
         {data.map((s, i) => (
           //  key={i} ok since array will not be reordered
-          <div className="w-[793px] mx-auto" key={i}>
+          <div className="lg:w-[793px] mx-auto" key={i}>
             <div id={i.toString()} ref={headingRefs[i]} className="scroll-mt-6">
               {s.isSubtitle ? (
                 <Typography.Body2 className="my-6 font-bold">

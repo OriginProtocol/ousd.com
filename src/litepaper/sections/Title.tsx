@@ -10,10 +10,10 @@ interface TitleProps {
 const Title = ({ lastUpdated }: TitleProps) => {
   return (
     <Section innerDivClassName="flex items-center flex-col">
-      <Typography.H4 className="w-[763px] mb-6">
+      <Typography.H4 className="lg:w-[763px] mb-6">
         OUSD/OGV litepaper
       </Typography.H4>
-      <Typography.Body2 className="w-[763px] text-table-title">
+      <Typography.Body2 className="lg:w-[763px] text-table-title">
         Last updated {moment(lastUpdated).format("MMMM DD, YYYY")}
       </Typography.Body2>
     </Section>

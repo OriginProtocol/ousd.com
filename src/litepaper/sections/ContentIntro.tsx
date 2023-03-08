@@ -11,13 +11,13 @@ interface ContentIntroProps {
 
 const ContentIntro = ({ data, headingRefs }: ContentIntroProps) => {
   return (
-    <div className="relative z-20 w-[793px]">
+    <div className="px-4 sm:px-8 md:px-16 lg:px-0 relative z-20 lg:w-[793px]">
       <img
         src={assetRootPath("/images/litepaper-bg.svg")}
         alt="litepaper-bg"
         className="w-full z-20"
       />
-      <div className="z-10 bg-origin-bg-grey -translate-x-[calc((100%-793px)/2)] absolute bottom-0 w-screen h-1/2 z-[-1]" />
+      <div className="block bg-origin-bg-grey -translate-x-[calc((100%-793px)/2)] absolute bottom-0 w-[200vw] h-1/2 z-[-1]" />
     </div>
   );
 };
