@@ -40,7 +40,8 @@ const TableOfContents = ({
               data[i + 1]?.isSubtitle
                 ? true
                 : false,
-            className: "cursor-pointer pointer-events-auto",
+            className:
+              "cursor-pointer pointer-events-auto flex justify-start items-center text-left",
             onClick: () =>
               headingRefs[i].current?.scrollIntoView({ behavior: "smooth" }),
           }}
@@ -79,20 +80,24 @@ const Title = ({
           activeId === i
             ? "text-origin-white font-bold"
             : "text-subheading font-normal"
-        } ${subtitle ? "my-1" : `mt-4 ${!hasSubtitles && "mb-4"}`} block`,
+        } ${subtitle ? "my-1" : `mt-4 ${!hasSubtitles && "mb-4"}`}`,
         className
       )}
       onClick={onClick}
     >
       <Typography.Body3
-        as="span"
-        className={`text-sm mr-4 ${subtitle ? "invisible" : "visible"}`}
+        as="div"
+        className={`inline text-sm mr-4 h-full ${
+          subtitle ? "invisible" : "visible"
+        }`}
       >{`0${sectionNumber}`}</Typography.Body3>{" "}
-      <Typography.Body3
-        as="span"
-        className={`${subtitle ? "text-xs" : "text-sm"}`}
-      >{`${subtitle ? "-" : ""}${title}`}</Typography.Body3>
-      {children}
+      <div className="inline">
+        <Typography.Body3
+          as="span"
+          className={`${subtitle ? "text-xs" : "text-sm"}`}
+        >{`${subtitle ? "-" : ""}${title}`}</Typography.Body3>
+        {children}
+      </div>
     </button>
   );
 };
