@@ -19,7 +19,7 @@ const TableOfContents = ({
   return (
     <div
       className={twMerge(
-        `bg-origin-bg-grey px-8 rounded-lg pointer-events-none w-fit mx-auto`,
+        `bg-origin-bg-grey px-8 rounded-lg pointer-events-none w-fit ml-auto mr-6`,
         className
       )}
     >
@@ -34,6 +34,12 @@ const TableOfContents = ({
             activeId,
             title: t.title,
             subtitle: t.isSubtitle ? true : false,
+            // If the previous item is a different section number and the next item is a subtitle, then this item is a main title
+            hasSubtitles:
+              data[i - 1]?.sectionNumber !== t.sectionNumber &&
+              data[i + 1]?.isSubtitle
+                ? true
+                : false,
             className: "cursor-pointer pointer-events-auto",
             onClick: () =>
               headingRefs[i].current?.scrollIntoView({ behavior: "smooth" }),
@@ -50,6 +56,7 @@ interface TitleProps {
   sectionNumber: number;
   activeId: number;
   subtitle: boolean;
+  hasSubtitles: boolean;
   onClick?: () => void;
   className?: string;
 }
@@ -60,6 +67,7 @@ const Title = ({
   sectionNumber,
   activeId,
   subtitle,
+  hasSubtitles,
   onClick,
   className,
   children,
@@ -71,7 +79,7 @@ const Title = ({
           activeId === i
             ? "text-origin-white font-bold"
             : "text-subheading font-normal"
-        } my-4 block`,
+        } ${subtitle ? "my-1" : `mt-4 ${!hasSubtitles && "mb-4"}`} block`,
         className
       )}
       onClick={onClick}

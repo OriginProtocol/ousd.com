@@ -44,7 +44,7 @@ const Litepaper = ({ navLinks, litePaper }: LitepaperProps) => {
           <TableOfContents
             data={data}
             headingRefs={headingRefs}
-            className="sticky self-start top-1/2 -translate-y-1/3 z-30"
+            className="sticky self-start top-12 z-30"
           />
           {/* Table of contents and Litepaper image */}
           <ContentIntro data={data} headingRefs={headingRefs} />
