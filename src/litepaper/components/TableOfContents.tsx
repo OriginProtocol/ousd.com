@@ -8,7 +8,7 @@ import React, {
   useRef,
 } from "react";
 import { twMerge } from "tailwind-merge";
-import { useRefs } from "../../hooks";
+import { useIntersectionObserver, useRefs } from "../../hooks";
 import { LitePaperData } from "../types";
 
 interface TableOfContentsProps {
@@ -21,10 +21,12 @@ const TableOfContents = ({
   data,
   headingRefs,
 }: TableOfContentsProps) => {
+  const activeId = useIntersectionObserver(headingRefs);
+
   return (
     <div
       className={twMerge(
-        "text-table-title bg-origin-bg-grey px-8 rounded-lg pointer-events-none w-fit mx-auto",
+        `bg-origin-bg-grey px-8 rounded-lg pointer-events-none w-fit mx-auto`,
         className
       )}
     >
@@ -34,7 +36,9 @@ const TableOfContents = ({
         <Title
           {...{
             key: i,
-            i: t.sectionNumber,
+            sectionNumber: t.sectionNumber,
+            i,
+            activeId,
             title: t.title,
             subtitle: t.isSubtitle ? true : false,
             className: "cursor-pointer pointer-events-auto",
@@ -50,6 +54,8 @@ const TableOfContents = ({
 interface TitleProps {
   title: string;
   i: number;
+  sectionNumber: number;
+  activeId: number;
   key: number;
   subtitle: boolean;
   onClick?: () => void;
@@ -59,17 +65,31 @@ interface TitleProps {
 const Title = ({
   title,
   i,
+  sectionNumber,
+  activeId,
   subtitle,
   onClick,
   className,
   children,
 }: PropsWithChildren<TitleProps>) => {
+  console.log(activeId, i, title);
+
   return (
-    <button className={twMerge(`my-4 block`, className)} onClick={onClick}>
+    <button
+      className={twMerge(
+        `${
+          activeId === i
+            ? "text-origin-white font-bold"
+            : "text-subheading font-normal"
+        } my-4 block`,
+        className
+      )}
+      onClick={onClick}
+    >
       <Typography.Body3
         as="span"
         className={`text-sm mr-4 ${subtitle ? "invisible" : "visible"}`}
-      >{`0${i}`}</Typography.Body3>{" "}
+      >{`0${sectionNumber}`}</Typography.Body3>{" "}
       <Typography.Body3
         as="span"
         className={`${subtitle ? "text-xs" : "text-sm"}`}

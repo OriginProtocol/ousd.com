@@ -16,17 +16,15 @@ const Content = ({ data, headingRefs }: ContentProps) => {
         {data.map((s, i) => (
           //  key={i} ok since array will not be reordered
           <div className="w-[793px] mx-auto" key={i}>
-            {s.isSubtitle ? (
-              <div ref={headingRefs[i]} className="scroll-mt-6">
+            <div id={i.toString()} ref={headingRefs[i]} className="scroll-mt-6">
+              {s.isSubtitle ? (
                 <Typography.Body2 className="my-6 font-bold">
                   {s.title}
                 </Typography.Body2>
-              </div>
-            ) : (
-              <div ref={headingRefs[i]} className="scroll-mt-6">
+              ) : (
                 <Typography.H6 className="mb-6 mt-12">{s.title}</Typography.H6>
-              </div>
-            )}
+              )}
+            </div>
             {/* HTML comes from CMS which we control */}
             <div dangerouslySetInnerHTML={{ __html: s.text }} />
           </div>
