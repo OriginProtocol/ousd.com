@@ -31,7 +31,7 @@ const TableOfContents = ({
       )}
     >
       <div className="z-10 bg-origin-bg-grey absolute bottom-0 h-1/2" />
-      {data.map((t, i) => (
+      {data?.map((t, i) => (
         //   key={i} ok since array will not be reordered
         <Title
           {...{

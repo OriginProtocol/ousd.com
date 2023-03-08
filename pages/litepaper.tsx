@@ -26,7 +26,7 @@ const Litepaper = ({ navLinks, litePaper }: LitepaperProps) => {
   const { lastUpdated, data } = litePaper;
 
   const width = useViewWidth();
-  const headingRefs = useRefs<HTMLDivElement>(data.length);
+  const headingRefs = useRefs<HTMLDivElement>(data?.length);
   const contentRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -87,7 +87,7 @@ export const getStaticProps = async (): Promise<{ props: LitepaperProps }> => {
   let lastUpdate = moment(0);
   let sectionCount = 0;
 
-  const litePaperData = litePaperReq.data.map(({ attributes }) => {
+  const litePaperData = litePaperReq.data?.map(({ attributes }) => {
     const updatedAt = moment(attributes.updatedAt);
     if (!attributes.isSubtitle) sectionCount++;
 
@@ -103,7 +103,7 @@ export const getStaticProps = async (): Promise<{ props: LitepaperProps }> => {
 
   const litePaper = {
     lastUpdated: lastUpdate.valueOf(),
-    data: litePaperData,
+    data: litePaperData || null,
   };
 
   const navLinks: Link[] = transformLinks(navRes.data) as Link[];
