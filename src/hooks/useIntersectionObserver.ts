@@ -6,8 +6,7 @@ const useIntersectionObserver = (elements: RefObject<HTMLElement>[]) => {
 
   useEffect(() => {
     observer.current = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => setActiveId(parseInt(entry.target.id))),
+      (entries) => setActiveId(parseInt(entries[0].target.id)),
       {
         // re run when element is in the top 20% of the viewport
         rootMargin: "0% 0% -90% 0px",
