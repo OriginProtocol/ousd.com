@@ -1,14 +1,7 @@
 import { Typography } from "@originprotocol/origin-storybook";
-import React, {
-  ForwardedRef,
-  forwardRef,
-  PropsWithChildren,
-  RefObject,
-  useEffect,
-  useRef,
-} from "react";
+import React, { PropsWithChildren, RefObject } from "react";
 import { twMerge } from "tailwind-merge";
-import { useIntersectionObserver, useRefs } from "../../hooks";
+import { useIntersectionObserver } from "../../hooks";
 import { LitePaperData } from "../types";
 
 interface TableOfContentsProps {
@@ -34,8 +27,8 @@ const TableOfContents = ({
       {data.map((t, i) => (
         //   key={i} ok since array will not be reordered
         <Title
+          key={i}
           {...{
-            key: i,
             sectionNumber: t.sectionNumber,
             i,
             activeId,
@@ -56,7 +49,6 @@ interface TitleProps {
   i: number;
   sectionNumber: number;
   activeId: number;
-  key: number;
   subtitle: boolean;
   onClick?: () => void;
   className?: string;
@@ -72,8 +64,6 @@ const Title = ({
   className,
   children,
 }: PropsWithChildren<TitleProps>) => {
-  console.log(activeId, i, title);
-
   return (
     <button
       className={twMerge(
