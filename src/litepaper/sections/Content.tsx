@@ -13,7 +13,7 @@ const Content = ({ data, headingRefs }: ContentProps) => {
     <div className="w-screen bg-origin-bg-grey">
       <Section className="pt-16 pb-[120px] bg-origin-bg-grey">
         {" "}
-        {data.map((s, i) => (
+        {data?.map((s, i) => (
           //  key={i} ok since array will not be reordered
           <div className="lg:w-[793px] mx-auto" key={i}>
             <div id={i.toString()} ref={headingRefs[i]} className="scroll-mt-6">

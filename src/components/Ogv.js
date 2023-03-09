@@ -181,7 +181,7 @@ const Ogv = ({ stats }) => {
                 <div className="w-full flex flex-col justify-between items-center mt-0 md:mt-3 mb-8 lg:mx-0">
                   <div className="flex justify-between">
                     <Link
-                      href="https://www.kucoin.com/trade/OGV-USDT"
+                      href="https://curve.fi/#/ethereum/pools/factory-crypto-205/swap"
                       target="_blank"
                       rel="nofollow noreferrer"
                       className=""

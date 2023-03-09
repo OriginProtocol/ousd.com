@@ -26,7 +26,7 @@ const Litepaper = ({ navLinks, litePaper }: LitepaperProps) => {
   const { lastUpdated, data } = litePaper;
 
   const width = useViewWidth();
-  const headingRefs = useRefs<HTMLDivElement>(data.length);
+  const headingRefs = useRefs<HTMLDivElement>(data?.length);
   const contentRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -44,7 +44,7 @@ const Litepaper = ({ navLinks, litePaper }: LitepaperProps) => {
           <TableOfContents
             data={data}
             headingRefs={headingRefs}
-            className="sticky self-start top-1/2 -translate-y-1/3 z-30"
+            className="sticky self-start top-12 z-30"
           />
           {/* Table of contents and Litepaper image */}
           <ContentIntro data={data} headingRefs={headingRefs} />
@@ -61,7 +61,10 @@ const Litepaper = ({ navLinks, litePaper }: LitepaperProps) => {
   );
 };
 
-export const getStaticProps = async (): Promise<{ props: LitepaperProps }> => {
+export const getStaticProps = async (): Promise<{
+  props: LitepaperProps;
+  revalidate: number;
+}> => {
   const navRes = await fetchAPI("/ousd-nav-links", {
     populate: {
       links: {
@@ -87,23 +90,26 @@ export const getStaticProps = async (): Promise<{ props: LitepaperProps }> => {
   let lastUpdate = moment(0);
   let sectionCount = 0;
 
-  const litePaperData = litePaperReq.data.map(({ attributes }) => {
-    const updatedAt = moment(attributes.updatedAt);
-    if (!attributes.isSubtitle) sectionCount++;
+  const litePaperData = litePaperReq.data
+    ?.map(({ id, attributes }) => {
+      const updatedAt = moment(attributes.updatedAt);
+      if (!attributes.isSubtitle) sectionCount++;
 
-    if (updatedAt.isAfter(lastUpdate)) lastUpdate = updatedAt;
+      if (updatedAt.isAfter(lastUpdate)) lastUpdate = updatedAt;
 
-    return {
-      title: attributes.title,
-      text: attributes.text,
-      isSubtitle: attributes.isSubtitle,
-      sectionNumber: sectionCount,
-    };
-  });
+      return {
+        id,
+        title: attributes.title,
+        text: attributes.text,
+        isSubtitle: attributes.isSubtitle,
+        sectionNumber: sectionCount,
+      };
+    })
+    .sort((a, b) => a.id - b.id);
 
   const litePaper = {
     lastUpdated: lastUpdate.valueOf(),
-    data: litePaperData,
+    data: litePaperData || null,
   };
 
   const navLinks: Link[] = transformLinks(navRes.data) as Link[];
@@ -112,6 +118,7 @@ export const getStaticProps = async (): Promise<{ props: LitepaperProps }> => {
       navLinks,
       litePaper,
     },
+    revalidate: 300,
   };
 };
 
