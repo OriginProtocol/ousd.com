@@ -95,60 +95,59 @@ const DripperGraph = ({
       <div className="p-6 pb-0 flex justify-between">
         <div>
           <Typography.Body>{title}</Typography.Body>
-          <Typography.Body3 className="text-sm mt-2">
+          <Typography.Body3 className="text-sm text-table-title mt-2">
             Jan 29 2024
           </Typography.Body3>
         </div>
-        {setTime && (
-          <div className="p-0 lg:p-2 flex">
-            <Gradient2Button
-              onClick={() => setChartTime(ChartTime.SEVEN_DAY)}
-              outerDivClassName={`rounded-lg ${
-                chartTime === ChartTime.SEVEN_DAY
-                  ? "bg-gradient2"
-                  : twMerge("bg-origin-bg-black", bgClassName)
-              } mr-2`}
-              className={`rounded-lg px-1 sm:px-3 py-[5.5px] lg:px-7 lg:py-3 ${
-                chartTime === ChartTime.SEVEN_DAY
-                  ? "bg-[#1b1a1abb]"
-                  : twMerge("bg-origin-bg-black", bgClassName)
-              }`}
-            >
-              7D
-            </Gradient2Button>
 
-            <Gradient2Button
-              onClick={() => setChartTime(ChartTime.THIRTY_DAY)}
-              outerDivClassName={`rounded-lg ${
-                chartTime === ChartTime.THIRTY_DAY
-                  ? "bg-gradient2"
-                  : twMerge("bg-origin-bg-black", bgClassName)
-              } mr-2`}
-              className={`rounded-lg px-1 sm:px-3 py-[5.5px] lg:px-7 lg:py-3 ${
-                chartTime === ChartTime.THIRTY_DAY
-                  ? "bg-[#1b1a1abb]"
-                  : twMerge("bg-origin-bg-black", bgClassName)
-              }`}
-            >
-              30D
-            </Gradient2Button>
-            <Gradient2Button
-              onClick={() => setChartTime(ChartTime.ONE_YEAR)}
-              outerDivClassName={`rounded-lg ${
-                chartTime === ChartTime.ONE_YEAR
-                  ? "bg-gradient2"
-                  : twMerge("bg-origin-bg-black", bgClassName)
-              } mr-2`}
-              className={`rounded-lg px-1 sm:px-3 py-[5.5px] lg:px-7 lg:py-3 ${
-                chartTime === ChartTime.ONE_YEAR
-                  ? "bg-[#1b1a1abb]"
-                  : twMerge("bg-origin-bg-black", bgClassName)
-              }`}
-            >
-              365D
-            </Gradient2Button>
-          </div>
-        )}
+        <div className={`${setTime ? "visible" : "invisible"} p-0 lg:p-2 flex`}>
+          <Gradient2Button
+            onClick={() => setChartTime(ChartTime.SEVEN_DAY)}
+            outerDivClassName={`rounded-lg ${
+              chartTime === ChartTime.SEVEN_DAY
+                ? "bg-gradient2"
+                : twMerge("bg-origin-bg-black", bgClassName)
+            } mr-2`}
+            className={`rounded-lg px-1 sm:px-3 py-[5.5px] lg:px-7 lg:py-3 ${
+              chartTime === ChartTime.SEVEN_DAY
+                ? "bg-[#1b1a1abb]"
+                : twMerge("bg-origin-bg-black", bgClassName)
+            }`}
+          >
+            7D
+          </Gradient2Button>
+
+          <Gradient2Button
+            onClick={() => setChartTime(ChartTime.THIRTY_DAY)}
+            outerDivClassName={`rounded-lg ${
+              chartTime === ChartTime.THIRTY_DAY
+                ? "bg-gradient2"
+                : twMerge("bg-origin-bg-black", bgClassName)
+            } mr-2`}
+            className={`rounded-lg px-1 sm:px-3 py-[5.5px] lg:px-7 lg:py-3 ${
+              chartTime === ChartTime.THIRTY_DAY
+                ? "bg-[#1b1a1abb]"
+                : twMerge("bg-origin-bg-black", bgClassName)
+            }`}
+          >
+            30D
+          </Gradient2Button>
+          <Gradient2Button
+            onClick={() => setChartTime(ChartTime.ONE_YEAR)}
+            outerDivClassName={`rounded-lg ${
+              chartTime === ChartTime.ONE_YEAR
+                ? "bg-gradient2"
+                : twMerge("bg-origin-bg-black", bgClassName)
+            } mr-2`}
+            className={`rounded-lg px-1 sm:px-3 py-[5.5px] lg:px-7 lg:py-3 ${
+              chartTime === ChartTime.ONE_YEAR
+                ? "bg-[#1b1a1abb]"
+                : twMerge("bg-origin-bg-black", bgClassName)
+            }`}
+          >
+            365D
+          </Gradient2Button>
+        </div>
       </div>
       <div className="pb-2 lg:pb-6">
         <Typography.H7 className="inline mr-2 pl-6">
@@ -156,7 +155,7 @@ const DripperGraph = ({
           ${commify(2500.36)}
         </Typography.H7>
         {extraData?.map((data, i) => (
-          // Static Array
+          // Static Array, key={i} ok
           <div key={i} className="inline mr-3">
             <Typography.Body3 className="text-sm inline mr-1">
               {data.value}

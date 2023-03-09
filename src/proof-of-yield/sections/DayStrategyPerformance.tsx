@@ -31,47 +31,47 @@ let partialMockStratData: { name: string; protocol: string; img: string }[] = [
   {
     name: "Aave DAI",
     protocol: "Aave",
-    img: "adai",
+    img: "tokens/aave-dai",
   },
   {
     name: "Aave USDC",
     protocol: "Aave",
-    img: "ausdc",
+    img: "tokens/aave-usdc",
   },
   {
     name: "Aave USDT",
     protocol: "Aave",
-    img: "ausdt",
+    img: "tokens/aave-usdt",
   },
   {
     name: "Compound DAI",
     protocol: "Compound",
-    img: "cdai",
+    img: "tokens/compound-dai",
   },
   {
     name: "Compound USDC",
     protocol: "Compound",
-    img: "cusdc",
+    img: "tokens/compound-usdc",
   },
   {
     name: "Compound USDT",
     protocol: "Compound",
-    img: "cusdt",
+    img: "tokens/compound-usdt",
   },
   {
     name: "DAI+USDC+USDT",
     protocol: "Convex",
-    img: "convex-3pool",
+    img: "tokens/convex-3pool",
   },
   {
     name: "LUSD+3Crv",
     protocol: "Convex",
-    img: "convex-lusd",
+    img: "tokens/convex-lusd",
   },
   {
     name: "OUSD+3Crv",
     protocol: "Convex",
-    img: "convex-meta",
+    img: "tokens/convex-meta",
   },
   {
     name: "Compound DAI",
@@ -108,7 +108,7 @@ const mockStratData: StrategyData[] = partialMockStratData.map((e) => ({
   yieldPct: 32.0,
 }));
 
-const strategyChartColumnCssLeft = "pl-6 lg:w-auto";
+const strategyChartColumnCssLeft = "pl-4 md:pl-6 lg:w-auto";
 const strategyChartColumnCssRight =
   "pr-0 sm:pr-2 md:pr-6 w-fit lg:w-[1%] xl:pr-12 2xl:pr-20";
 
@@ -152,23 +152,29 @@ const DayStrategyPerformance = ({
             >
               APY
             </TableHead>
-            <TableHead className={twMerge("py-3", strategyChartColumnCssRight)}>
+            <TableHead
+              className={twMerge("py-3", strategyChartColumnCssRight, "pr-4")}
+            >
               Yield / <br /> % of total
             </TableHead>
-            <TableHead className={strategyChartColumnCssRight}>
+            {/* <TableHead className={strategyChartColumnCssRight}>
               {width >= lgSize && "More details"}
-            </TableHead>
+            </TableHead> */}
           </tr>
         </thead>
         <tbody>
-          {mockStratData.map((e) => (
+          {mockStratData.map((e, i) => (
             <tr
-              className="group border-t-2 hover:bg-hover-bg border-origin-bg-black"
+              className="group border-t md:border-t-2 hover:bg-hover-bg border-origin-bg-black"
               key={`${e.name}-${e.protocol}`}
             >
               <TableData
                 align="left"
-                className={twMerge(strategyChartColumnCssLeft, "flex")}
+                className={twMerge(
+                  strategyChartColumnCssLeft,
+                  `${i + 1 == mockStratData.length ? "rounded-bl-lg" : ""}`,
+                  "flex"
+                )}
               >
                 <Image
                   src={assetRootPath(`/images/${e.img}.svg`)}
@@ -178,10 +184,10 @@ const DayStrategyPerformance = ({
                   className="mr-3 hidden sm:inline"
                 />
                 <div>
-                  <Typography.Body className="text-table-data">
+                  <Typography.Body className="text-xs text-table-data">
                     {e.name}
                   </Typography.Body>
-                  <Typography.Body2 className="text-table-title">
+                  <Typography.Body2 className="text-[11px] md:text-sm text-table-title">
                     {e.protocol}
                   </Typography.Body2>
                 </div>
@@ -204,23 +210,28 @@ const DayStrategyPerformance = ({
               <TableData
                 className={twMerge(strategyChartColumnCssRight, "pr-2")}
               >
-                <Typography.Body className="text-table-data">
+                <Typography.Body className="text-xs text-table-data">
                   {e.apy}%
                 </Typography.Body>
               </TableData>
-              <TableData className={strategyChartColumnCssRight}>
-                <Typography.Body className="text-table-data">
+              <TableData
+                className={twMerge(
+                  strategyChartColumnCssRight,
+                  `pr-4 ${i + 1 == mockStratData.length ? "rounded-br-lg" : ""}`
+                )}
+              >
+                <Typography.Body className="text-xs text-table-data">
                   ${commify(e.yieldAbs)}
                 </Typography.Body>
-                <Typography.Body3 className="text-sm text-table-title">
+                <Typography.Body3 className="text-[11px] md:text-sm text-table-title">
                   {e.yieldPct}%
                 </Typography.Body3>{" "}
               </TableData>
-              <TableData className={strategyChartColumnCssRight}>
+              {/* <TableData className={strategyChartColumnCssRight}>
                 <ChartDetailsButton onClick={() => {}}>
                   Details
                 </ChartDetailsButton>
-              </TableData>
+              </TableData> */}
             </tr>
           ))}
         </tbody>

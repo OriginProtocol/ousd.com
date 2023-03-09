@@ -12,7 +12,7 @@ interface DripperTopProps {
 
 const DripperTop = ({ overrideCss }: DripperTopProps) => {
   return (
-    <Section className={twMerge("mt-10", overrideCss)}>
+    <Section className={twMerge("", overrideCss)}>
       {/* Back button */}
       <div className="cursor-pointer">
         <Image
@@ -26,7 +26,9 @@ const DripperTop = ({ overrideCss }: DripperTopProps) => {
       </div>
 
       {/* Title */}
-      <Typography.H3 className="mt-14">OUSD yield dripper</Typography.H3>
+      <Typography.H3 className="mt-14 font-bold">
+        OUSD yield dripper
+      </Typography.H3>
 
       <Gradient2Button outerDivClassName="mt-12">
         <a
@@ -34,11 +36,11 @@ const DripperTop = ({ overrideCss }: DripperTopProps) => {
           href="https://etherscan.io/token/0x9c354503C38481a7A7a51629142963F98eCC12D0"
           rel="noreferrer noopener"
         >
-          View dripper contract
+          <span className="text-sm">View dripper contract</span>
           <Image
             src={assetRootPath("/images/ext-link.svg")}
-            width="12"
-            height="12"
+            width="10"
+            height="10"
             alt="ext-link"
             className="inline ml-3"
           />
