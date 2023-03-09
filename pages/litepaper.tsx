@@ -90,19 +90,22 @@ export const getStaticProps = async (): Promise<{
   let lastUpdate = moment(0);
   let sectionCount = 0;
 
-  const litePaperData = litePaperReq.data?.map(({ attributes }) => {
-    const updatedAt = moment(attributes.updatedAt);
-    if (!attributes.isSubtitle) sectionCount++;
+  const litePaperData = litePaperReq.data
+    ?.map(({ id, attributes }) => {
+      const updatedAt = moment(attributes.updatedAt);
+      if (!attributes.isSubtitle) sectionCount++;
 
-    if (updatedAt.isAfter(lastUpdate)) lastUpdate = updatedAt;
+      if (updatedAt.isAfter(lastUpdate)) lastUpdate = updatedAt;
 
-    return {
-      title: attributes.title,
-      text: attributes.text,
-      isSubtitle: attributes.isSubtitle,
-      sectionNumber: sectionCount,
-    };
-  });
+      return {
+        id,
+        title: attributes.title,
+        text: attributes.text,
+        isSubtitle: attributes.isSubtitle,
+        sectionNumber: sectionCount,
+      };
+    })
+    .sort((a, b) => a.id - b.id);
 
   const litePaper = {
     lastUpdated: lastUpdate.valueOf(),
