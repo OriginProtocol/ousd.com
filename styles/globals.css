@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+ul li {
+  list-style-type: disc;
+  margin-left: 40px;
+}
+
 html,
 body {
   background-color: #141519;
