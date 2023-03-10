@@ -2,6 +2,8 @@ import "chartjs-adapter-date-fns";
 import { Header } from "@originprotocol/origin-storybook";
 import { GetServerSideProps } from "next";
 import { fetchAPI } from "../lib/api";
+import Seo from '../src/components/strapi/seo';
+import formatSeo from '../src/utils/seo';
 import transformLinks from "../src/utils/transformLinks";
 import Head from "next/head";
 import Footer from "../src/components/Footer";
@@ -24,7 +26,7 @@ import ogvAbi from "../src/constants/mainnetAbi/ogv.json";
 import { ChartLine, DistributionLegend } from "../src/plugins";
 import { BigNumber, ethers, providers } from "ethers";
 import { getRewardsApy } from "../src/utils/math";
-import { Link } from "../src/types";
+import { Link, PageSeo } from "../src/types";
 import { DashProps } from "../src/ogv-dashboard/types";
 import {
   doughnutData,
@@ -74,6 +76,7 @@ const ogvStakingCache: {
 // Dependency flow: constants, types -> chart-configs, data, utils -> components -> sections -> index.tsx (this file)
 
 const OgvDashboard = ({
+  seo,
   navLinks,
   priceData24H,
   marketCapData24H,
@@ -103,6 +106,7 @@ const OgvDashboard = ({
       <Head>
         <title>Dashboard</title>
       </Head>
+      <Seo seo={seo} />
       <Header mappedLinks={navLinks} webProperty="ousd" />
 
       {/* Heading */}
@@ -152,6 +156,7 @@ const OgvDashboard = ({
 export const getServerSideProps: GetServerSideProps = async (): Promise<{
   props: DashProps;
 }> => {
+  const seoResPromise = fetchAPI('/ousd/page/en/%2Fogv-dashboard')
   const navResPromise = fetchAPI("/ousd-nav-links", {
     populate: {
       links: {
@@ -211,6 +216,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
   const totalSupplyPromise: Promise<BigNumber> = OGV.totalSupply();
 
   let [
+    seoRes,
     navRes,
     rawData24H,
     rawData7D,
@@ -221,6 +227,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
     rawStakingData,
     ...nonCirculatingBalances
   ] = await Promise.all([
+    seoResPromise,
     navResPromise,
     rawData24HPromise,
     rawData7DPromise,
@@ -239,6 +246,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
 
   currentPriceData = await currentPriceData.json();
 
+  const seo: PageSeo = formatSeo(seoRes?.data) as PageSeo;
   const navLinks: Link[] = transformLinks(navRes.data) as Link[];
 
   const { usd: currentPrice, usd_24h_change: change24H } =
@@ -281,6 +289,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
 
   return {
     props: {
+      seo,
       navLinks,
       priceData24H,
       marketCapData24H,
