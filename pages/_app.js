@@ -1,29 +1,31 @@
-import App from "next/app"
-import Head from "next/head"
-import React, { createContext, useEffect } from "react"
-import { useRouter } from "next/router"
-import { fetchAPI } from "../lib/api"
-import { getStrapiMedia } from "../lib/media"
-import bundledCss from "@originprotocol/origin-storybook/lib/styles.css"
-import "../styles/globals.css"
-import { QueryClient, QueryClientProvider } from "react-query"
-import Contracts from '../src/components/Contracts'
-import Script from 'next/script'
-import { GTM_ID, pageview } from '../lib/gtm'
+import App from "next/app";
+import Head from "next/head";
+import React, { createContext, useEffect } from "react";
+import { useRouter } from "next/router";
+import { fetchAPI } from "../lib/api";
+import { getStrapiMedia } from "../lib/media";
+import bundledCss from "@originprotocol/origin-storybook/lib/styles.css";
+import "../styles/globals.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+import Contracts from "../src/components/Contracts";
+import Script from "next/script";
+import { GTM_ID, pageview } from "../lib/gtm";
+import { usePreviousRoute } from "../src/hooks";
 
-const queryClient = new QueryClient()
-export const GlobalContext = createContext({})
+const queryClient = new QueryClient();
+export const GlobalContext = createContext({});
 
 const MyApp = ({ Component, pageProps }) => {
-  const { global } = pageProps
-  const router = useRouter()
+  const { global } = pageProps;
+  const router = useRouter();
+  usePreviousRoute();
 
   useEffect(() => {
-    router.events.on('routeChangeComplete', pageview)
+    router.events.on("routeChangeComplete", pageview);
     return () => {
-      router.events.off('routeChangeComplete', pageview)
-    }
-  }, [router.events])
+      router.events.off("routeChangeComplete", pageview);
+    };
+  }, [router.events]);
 
   return (
     <>
@@ -53,8 +55,8 @@ const MyApp = ({ Component, pageProps }) => {
         </QueryClientProvider>
       </GlobalContext.Provider>
     </>
-  )
-}
+  );
+};
 
 // getInitialProps disables automatic static optimization for pages that don't
 // have getStaticProps. So article, category and home pages still get SSG.
@@ -62,7 +64,7 @@ const MyApp = ({ Component, pageProps }) => {
 // https://github.com/vercel/next.js/discussions/10949
 MyApp.getInitialProps = async (ctx) => {
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
-  const appProps = await App.getInitialProps(ctx)
+  const appProps = await App.getInitialProps(ctx);
 
   // Fetch global site settings from Strapi
   const globalRes = await fetchAPI("/global", {
@@ -72,7 +74,7 @@ MyApp.getInitialProps = async (ctx) => {
         populate: "*",
       },
     },
-  })
+  });
 
   // Pass the data to our page via props
   return {
@@ -90,7 +92,7 @@ MyApp.getInitialProps = async (ctx) => {
         <></>
       ),
     ],
-  }
-}
+  };
+};
 
-export default MyApp
+export default MyApp;
