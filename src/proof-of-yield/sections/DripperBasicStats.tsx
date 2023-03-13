@@ -11,7 +11,7 @@ interface DripperBasicStats {
 
 const DripperBasicStats = ({ overrideCss }: DripperBasicStats) => {
   return (
-    <Section className={twMerge("mt-20", overrideCss)}>
+    <Section className={twMerge("mt-10 md:mt-20", overrideCss)}>
       <Typography.Body>Dripper funds</Typography.Body>
       <div className="w-full lg:w-3/4 max-w-[818px] flex mt-6">
         <BasicData
