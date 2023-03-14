@@ -78,7 +78,7 @@ const Faq = ({ locale, faq }) => {
                   >
                     {"Still have questions?"}
                     <br />
-                    {"Reach out to us on "}
+                    {"Join the community on "}
                     <Link
                       href="https://originprotocol.com/discord"
                       target="_blank"
