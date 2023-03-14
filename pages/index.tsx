@@ -1,37 +1,55 @@
-import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import Head from "next/head"
-import Animation from '../src/components/Animation'
-import Apy from '../src/components/Apy'
-import Allocation from '../src/components/Allocation'
-import Collateral from '../src/components/Collateral'
-import Ogv from '../src/components/Ogv'
-import Footer from '../src/components/Footer'
-import { SecretSauce } from "../src/components"
-import Seo from '../src/components/strapi/seo'
-import { useRouter } from 'next/router'
-import { fetchAPI } from '../lib/api'
-import { fetchApy } from '../lib/apy'
-import { fetchApyHistory } from '../lib/apyHistory'
-import { fetchAllocation } from '../lib/allocation'
-import { fetchCollateral } from '../lib/collateral'
-import { fetchOgvStats } from '../lib/ogv'
-import formatSeo from '../src/utils/seo'
-import transformLinks from '../src/utils/transformLinks'
-import { Typography, Header } from '@originprotocol/origin-storybook'
-import { assetRootPath } from '../src/utils/image'
-import capitalize from 'lodash/capitalize'
-import { setupContracts, fetchTvl } from '../src/utils/contracts'
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import Head from "next/head";
+import Animation from "../src/components/Animation";
+import Apy from "../src/components/Apy";
+import Allocation from "../src/components/Allocation";
+import formatSeo from "../src/utils/seo";
+import transformLinks from "../src/utils/transformLinks";
+import Collateral from "../src/components/Collateral";
+import Ogv from "../src/components/Ogv";
+import Footer from "../src/components/Footer";
+import Seo from "../src/components/strapi/seo";
+import capitalize from "lodash/capitalize";
+import { SecretSauce, Faq } from "../src/components";
+import { useRouter } from "next/router";
+import { fetchAPI } from "../lib/api";
+import { fetchApy } from "../lib/apy";
+import { fetchApyHistory } from "../lib/apyHistory";
+import { fetchAllocation } from "../lib/allocation";
+import { fetchCollateral } from "../lib/collateral";
+import { fetchOgvStats } from "../lib/ogv";
+import { Typography } from "@originprotocol/origin-storybook";
+import { assetRootPath } from "../src/utils/image";
+import { setupContracts, fetchTvl } from "../src/utils/contracts";
 
-const Home = ({ locale, onLocale, audits, seo, navLinks, apy, apyHistory, strategies, collateral, initialTvl, ogvStats }) => {
-  const { pathname } = useRouter()
-  const active = capitalize(pathname.slice(1))
-  const [loaded, setLoaded] = useState()
+interface FaqData {
+  id: number;
+  attributes: {
+    question: string;
+    answer: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+  };
+}
 
-  useEffect(() => {
-    setLoaded(true)
-  }, [])
+const Home = ({
+  locale,
+  audits,
+  seo,
+  navLinks,
+  faq,
+  apy,
+  apyHistory,
+  strategies,
+  collateral,
+  initialTvl,
+  ogvStats,
+}) => {
+  const { pathname } = useRouter();
+  const active = capitalize(pathname.slice(1));
 
   return (
     <>
@@ -44,7 +62,7 @@ const Home = ({ locale, onLocale, audits, seo, navLinks, apy, apyHistory, strate
       <SecretSauce />
       <Allocation strategies={strategies} />
       <Collateral collateral={collateral} strategies={strategies} />
-      
+
       <section className="home black">
         <div className="px-[16px] md:px-[64px] lg:px-[200px] py-14 md:py-[120px] text-center">
           <Typography.H6
@@ -53,8 +71,13 @@ const Home = ({ locale, onLocale, audits, seo, navLinks, apy, apyHistory, strate
           >
             Audited by leading security experts
           </Typography.H6>
-          <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-[#b5beca]" style={{ fontDisplay: 'swap' }}>
-            Securing your funds is OUSD’s top priority. Changes to the protocol are reviewed by internal and external auditors on an ongoing basis.
+          <Typography.Body3
+            className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-[#b5beca]"
+            style={{ fontDisplay: "swap" }}
+          >
+            Securing your funds is OUSD&apos;s top priority. Changes to the
+            protocol are reviewed by internal and external auditors on an
+            ongoing basis.
           </Typography.Body3>
           <div className="max-w-[1134px] mx-auto mt-20 mb-10 md:mb-20 rounded-xl px-[16px] xl:px-[86px] py-6 md:py-[56px] bg-[#1e1f25]">
             <div className="grid grid-rows-2 grid-cols-2 gap-y-10 lg:flex lg:flex-row lg:justify-between mx-auto">
@@ -72,11 +95,11 @@ const Home = ({ locale, onLocale, audits, seo, navLinks, apy, apyHistory, strate
                         <Image
                           src={assetRootPath(
                             `/images/${audit.attributes.name
-                              .replace(/ /g, '-')
+                              .replace(/ /g, "-")
                               .toLowerCase()}.svg`
                           )}
                           fill
-                          sizes='(max-width: 768px) 56px, (max-width: 1024px) 80px, (max-width: 1536px) 56px, 80px'
+                          sizes="(max-width: 768px) 56px, (max-width: 1024px) 80px, (max-width: 1536px) 56px, 80px"
                           alt={audit.name}
                         />
                       </div>
@@ -85,7 +108,7 @@ const Home = ({ locale, onLocale, audits, seo, navLinks, apy, apyHistory, strate
                       {audit.attributes.name}
                     </Typography.Body>
                   </Link>
-                )
+                );
               })}
             </div>
           </div>
@@ -95,44 +118,55 @@ const Home = ({ locale, onLocale, audits, seo, navLinks, apy, apyHistory, strate
             rel="noopener noreferrer"
             className="bttn gradient2"
           >
-            <Typography.H7 className="font-normal" style={{ fontDisplay: 'swap' }}>
+            <Typography.H7
+              className="font-normal"
+              style={{ fontDisplay: "swap" }}
+            >
               Review audits
             </Typography.H7>
           </Link>
         </div>
       </section>
       <Ogv stats={ogvStats} />
+      <Faq locale={null} faq={faq} />
       <Footer locale={locale} />
     </>
-  )
-}
+  );
+};
 
 export async function getStaticProps() {
-  const { vault, dripper } = setupContracts()
-  const initialTvl = await fetchTvl(vault, dripper)
-  const apyHistory = await fetchApyHistory()
-  const apy = await fetchApy()
-  const allocation = await fetchAllocation()
-  const collateral = await fetchCollateral()
-  const ogvStats = await fetchOgvStats()
+  const { vault, dripper } = setupContracts();
+  const initialTvl = await fetchTvl(vault, dripper);
+  const apyHistory = await fetchApyHistory();
+  const apy = await fetchApy();
+  const allocation = await fetchAllocation();
+  const collateral = await fetchCollateral();
+  const ogvStats = await fetchOgvStats();
 
-  const auditsRes = await fetchAPI('/ousd-audits')
-  const seoRes = await fetchAPI('/ousd/page/en/%2F')
-  const navRes = await fetchAPI('/ousd-nav-links', {
+  const auditsRes = await fetchAPI("/ousd-audits");
+
+  const faqRes: { data: FaqData[] } = await fetchAPI("/ousd-faqs");
+  const seoRes = await fetchAPI("/ousd/page/en/%2F");
+  const navRes = await fetchAPI("/ousd-nav-links", {
     populate: {
       links: {
-        populate: '*',
+        populate: "*",
       },
     },
-  })
+  });
 
-  const navLinks = transformLinks(navRes.data)
+  const navLinks = transformLinks(navRes.data);
+
+  console.log(faqRes?.data);
+
+  const faqData = faqRes?.data.sort((a, b) => a.id - b.id) || [];
 
   return {
     props: {
       audits: auditsRes.data,
       seo: formatSeo(seoRes?.data),
       navLinks,
+      faq: faqData,
       initialTvl,
       apy,
       apyHistory: apyHistory || [],
@@ -141,7 +175,7 @@ export async function getStaticProps() {
       ogvStats,
     },
     revalidate: 5 * 60, // Cache response for 5m
-  }
+  };
 }
 
-export default Home
+export default Home;
