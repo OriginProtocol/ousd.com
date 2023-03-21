@@ -2,8 +2,8 @@ import "chartjs-adapter-date-fns";
 import { Header } from "@originprotocol/origin-storybook";
 import { GetServerSideProps } from "next";
 import { fetchAPI } from "../lib/api";
-import Seo from '../src/components/strapi/seo';
-import formatSeo from '../src/utils/seo';
+import Seo from "../src/components/strapi/seo";
+import formatSeo from "../src/utils/seo";
 import transformLinks from "../src/utils/transformLinks";
 import Head from "next/head";
 import Footer from "../src/components/Footer";
@@ -49,7 +49,6 @@ import {
   TopExchanges,
   OgvStakingStats,
 } from "../src/ogv-dashboard/sections";
-import { formatEther } from "@ethersproject/units";
 
 ChartJS.register(
   CategoryScale,
@@ -156,7 +155,7 @@ const OgvDashboard = ({
 export const getServerSideProps: GetServerSideProps = async (): Promise<{
   props: DashProps;
 }> => {
-  const seoResPromise = fetchAPI('/ousd/page/en/%2Fogv-dashboard')
+  const seoResPromise = fetchAPI("/ousd/page/en/%2Fogv-dashboard");
   const navResPromise = fetchAPI("/ousd-nav-links", {
     populate: {
       links: {

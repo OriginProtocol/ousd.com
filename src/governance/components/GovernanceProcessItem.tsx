@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Typography } from "@originprotocol/origin-storybook";
 import { twMerge } from "tailwind-merge";
-import { Gradient2Button } from "../../proof-of-yield/components";
+import { Gradient2Button } from "../../components";
 import { assetRootPath } from "../../utils/image";
 
 interface GovernanceProcessItemProps {
