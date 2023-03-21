@@ -1,11 +1,11 @@
 import Head from "next/head";
 import React from "react";
 import transformLinks from "../src/utils/transformLinks";
-import { GovernanceIntro } from "../src/governance/sections";
+import Footer from "../src/components/Footer";
+import { GovernanceIntro, GovernanceProcess } from "../src/governance/sections";
 import { Header } from "@originprotocol/origin-storybook";
 import { fetchAPI } from "../lib/api";
 import { Link } from "../src/types";
-import Footer from "../src/components/Footer";
 
 const overrideCss = "px-4 sm:px-4 md:px-10 lg:px-10 bg-origin-bg-grey";
 
@@ -28,6 +28,9 @@ const GovernanceInfo = ({ navLinks }: GovernanceProps) => {
 
       {/* Introduction */}
       <GovernanceIntro sectionOverrideCss={overrideCss} />
+
+      {/* Governance Process */}
+      <GovernanceProcess sectionOverrideCss={overrideCss} />
 
       <Footer locale={null} />
     </>

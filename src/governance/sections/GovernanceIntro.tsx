@@ -14,21 +14,21 @@ const GovernanceIntro = ({ sectionOverrideCss }: GovernanceIntroProps) => {
   return (
     <Section
       className={sectionOverrideCss}
-      innerDivClassName="relative bg-origin-bg-black pt-8 lg:pt-20"
+      innerDivClassName="relative bg-origin-bg-black pt-8 lg:pt-20 overflow-hidden"
     >
       <Image
         src={assetRootPath("/images/splines20.png")}
         width="700"
         height="700"
         alt="splines"
-        className="absolute top-0 right-0"
+        className="absolute top-0 right-0 max-w-[300px] max-h-[300px] translate-x-[10%] lg:max-w-[500px] lg:max-h-[500px] xl:max-w-[700px] xl:max-h-[700px]"
       />
 
       <Typography.H4 className="z-10 relative px-6 lg:px-20">
         Fully decentralized governance
       </Typography.H4>
 
-      <Typography.Body2 className="mt-8 md:mt-10 max-w-[60%] relative z-10 px-6 lg:px-20">
+      <Typography.Body2 className="mt-8 md:mt-10 lg:max-w-[90%] xl:max-w-[60%] relative z-10 px-6 lg:px-20">
         The Origin Dollar protocol consists of a set of automated smart
         contracts on the Ethereum blockchain. This code, protected by a 48-hour
         timelock, is owned and controlled by a global community of OGV token
@@ -58,7 +58,7 @@ const GovernanceIntro = ({ sectionOverrideCss }: GovernanceIntroProps) => {
       </a>
 
       {/* Stats */}
-      <div className="relative flex mt-12 z-10">
+      <div className="relative flex flex-col items-center lg:flex-row mt-12 z-10">
         <GovernanceStats
           className="border-l-0"
           title="Registered voters"

@@ -8,6 +8,7 @@ module.exports = {
       },
       colors: {
         "origin-bg-black": "#141519",
+        "origin-bg-blackt": "#141519cc",
         "origin-bg-dgrey": "#18191c",
         "origin-bg-grey": "#1e1f25",
         "origin-white": "#fafbfb",
