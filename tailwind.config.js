@@ -16,6 +16,7 @@ module.exports = {
         "gradient2-from": "#8c66fc33",
         "gradient2-to": "#0274f133",
         "body-grey": "#8493a6",
+        "range-border": "#3a3d4d",
         "table-title": "#828699",
         "table-data": "#ebecf2",
         "hover-bg": "#222329",

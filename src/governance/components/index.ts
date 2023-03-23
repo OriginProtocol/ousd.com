@@ -10,3 +10,6 @@ export { default as Step5 } from "./Step5";
 
 export { default as LargeScreenChooser } from "./LargeScreenChooser";
 export { default as SmallScreenChooser } from "./SmallScreenChooser";
+
+export { default as RangeInput } from "./RangeInput";
+export { default as RangeOutput } from "./RangeOutput";

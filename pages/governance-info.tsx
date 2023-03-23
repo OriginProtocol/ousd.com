@@ -6,6 +6,7 @@ import {
   GovernanceIntro,
   GovernanceProcess,
   StepByStep,
+  Calculator,
 } from "../src/governance/sections";
 import { Header } from "@originprotocol/origin-storybook";
 import { fetchAPI } from "../lib/api";
@@ -38,6 +39,9 @@ const GovernanceInfo = ({ navLinks }: GovernanceProps) => {
 
       {/* Step by step instructions on governance */}
       <StepByStep sectionOverrideCss={overrideCss} />
+
+      {/* OGV to veOGV Calculator */}
+      <Calculator sectionOverrideCss={overrideCss} />
 
       <Footer locale={null} />
     </>
