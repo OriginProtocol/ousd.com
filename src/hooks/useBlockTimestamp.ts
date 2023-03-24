@@ -5,7 +5,7 @@ const useBlockTimestamp = () => {
   const [blockTimestamp, setBlockTimestamp] = useState<number | null>(null);
 
   useEffect(() => {
-    let timestampInterval;
+    let timestampInterval: ReturnType<typeof setInterval>;
 
     (async () => {
       try {
@@ -13,13 +13,10 @@ const useBlockTimestamp = () => {
           process.env.NEXT_PUBLIC_ETHEREUM_RPC_PROVIDER
         );
 
-        // Refreshes blockTimestamp every 8 seconds
-        timestampInterval = setInterval(async () => {
-          const blockTimestamp = (
-            await provider.getBlock(await provider.getBlockNumber())
-          ).timestamp;
-          setBlockTimestamp(blockTimestamp);
-        }, 8000);
+        const blockTimestamp = (
+          await provider.getBlock(await provider.getBlockNumber())
+        ).timestamp;
+        setBlockTimestamp(blockTimestamp);
       } catch (error) {
         console.error("Unable to fetch block.timestamp");
         throw error;
