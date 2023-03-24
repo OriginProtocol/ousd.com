@@ -1,5 +1,5 @@
 import { Typography } from "@originprotocol/origin-storybook";
-import React, { PropsWithChildren, RefObject } from "react";
+import React, { PropsWithChildren, RefObject, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { useIntersectionObserver } from "../../hooks";
 import { LitePaperData } from "../types";
@@ -14,7 +14,15 @@ const TableOfContents = ({
   data,
   headingRefs,
 }: TableOfContentsProps) => {
-  const activeId = useIntersectionObserver(headingRefs);
+  const [activeId, setActiveId] = useState<number>(0);
+  useIntersectionObserver(
+    headingRefs,
+    (entries) => setActiveId(parseInt(entries[0].target.id)),
+    {
+      // re run when element is in the top 10% of the viewport
+      rootMargin: "0% 0% -90% 0px",
+    }
+  );
 
   return (
     <div
