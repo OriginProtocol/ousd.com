@@ -4,10 +4,13 @@ import { twMerge } from "tailwind-merge";
 import { Section } from "../../components";
 import { RangeInput, RangeOutput } from "../components";
 import { commify } from "ethers/lib/utils";
-import { useBlockTimestamp, useViewWidth } from "../../hooks";
+import {
+  useBlockTimestamp,
+  useIntersectionObserver,
+  useRefs,
+  useViewWidth,
+} from "../../hooks";
 import { mdSize } from "../../constants";
-import { providers } from "ethers";
-import { SECONDS_IN_A_MONTH } from "../constants";
 import { veOgvToOgv } from "../utils";
 
 interface CalculatorProps {
@@ -68,6 +71,11 @@ const Calculator = ({ sectionOverrideCss }: CalculatorProps) => {
   const [onChainReq, setOnChainReq] = useState(0);
   const blockTimestamp = useBlockTimestamp();
 
+  const [firstViewIntervalId, setFirstViewIntervalId] =
+    useState<NodeJS.Timeout>();
+  const [firstView, setFirstView] = useState(false);
+  const [targetRef] = useRefs<HTMLDivElement>(1);
+
   useEffect(() => {
     const snapshotReq = veOgvToOgv(blockTimestamp, 10_000, lockupDuration);
     const onChainReq = veOgvToOgv(blockTimestamp, 1_000_000, lockupDuration);
@@ -75,11 +83,38 @@ const Calculator = ({ sectionOverrideCss }: CalculatorProps) => {
     setOnChainReq(onChainReq);
   }, [lockupDuration, blockTimestamp]);
 
+  useIntersectionObserver(
+    [targetRef],
+    ([entry]) => {
+      // Update the state when the target element intersects with the viewport
+      if (entry.isIntersecting && !firstView) setFirstView(true);
+    },
+    { rootMargin: "0% 0% -50% 0px" }
+  );
+
+  // We want the animation to run only once... the first time the component is
+  // viewed by the user.
+  useEffect(() => {
+    if (!firstView) return;
+
+    const id = setInterval(() => {
+      setLockupDuration((lockupDuration) => {
+        if (lockupDuration >= 24) clearInterval(id);
+        return lockupDuration + 1;
+      });
+    }, 100);
+
+    setFirstViewIntervalId(id);
+  }, [firstView]);
+
   return (
     <Section
       className={twMerge("py-20", sectionOverrideCss)}
       innerDivClassName="bg-origin-bg-black px-6 py-10 lg:py-16 lg:px-20 rounded-lg"
+      ref={targetRef}
+      onClick={() => clearInterval(firstViewIntervalId)}
     >
+      {/* <div ref={targetRef}></div> */}
       <Typography.H6>OGV to veOGV calculator</Typography.H6>
       <Typography.Body2 className="mt-8">
         Select your staking period to see how much OGV is needed for Snapshot
