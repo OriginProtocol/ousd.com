@@ -11,14 +11,28 @@ import {
 import { Header } from "@originprotocol/origin-storybook";
 import { fetchAPI } from "../lib/api";
 import { Link } from "../src/types";
+import {
+  fetchContributorsFromRepos,
+  fetchImprovementProposals,
+  fetchVoterCount,
+} from "../src/governance/utils";
 
 const overrideCss = "px-4 sm:px-4 md:px-10 lg:px-10 bg-origin-bg-grey";
 
 interface GovernanceProps {
   navLinks: Link[];
+  holderCount: number;
+  contributorCount: number;
+  improvementProposalCount: number;
 }
 
-const GovernanceInfo = ({ navLinks }: GovernanceProps) => {
+const GovernanceInfo = ({
+  navLinks,
+  holderCount,
+  contributorCount,
+
+  improvementProposalCount,
+}: GovernanceProps) => {
   return (
     <>
       <Head>
@@ -32,7 +46,12 @@ const GovernanceInfo = ({ navLinks }: GovernanceProps) => {
       />
 
       {/* Introduction */}
-      <GovernanceIntro sectionOverrideCss={overrideCss} />
+      <GovernanceIntro
+        sectionOverrideCss={overrideCss}
+        holderCount={holderCount}
+        contributorCount={contributorCount}
+        improvementProposalCount={improvementProposalCount}
+      />
 
       {/* Governance Process */}
       <GovernanceProcess sectionOverrideCss={overrideCss} />
@@ -61,9 +80,16 @@ export const getStaticProps = async (): Promise<{
   });
   const navLinks: Link[] = transformLinks(navRes.data) as Link[];
 
+  const holderCount = await fetchVoterCount();
+  const contributors = await fetchContributorsFromRepos();
+  const improvementProposalCount = await fetchImprovementProposals();
+
   return {
     props: {
       navLinks,
+      holderCount,
+      contributorCount: contributors.length,
+      improvementProposalCount,
     },
     revalidate: 300,
   };

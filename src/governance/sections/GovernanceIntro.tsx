@@ -8,9 +8,17 @@ import { commify } from "ethers/lib/utils";
 
 interface GovernanceIntroProps {
   sectionOverrideCss?: string;
+  holderCount: number;
+  contributorCount: number;
+  improvementProposalCount: number;
 }
 
-const GovernanceIntro = ({ sectionOverrideCss }: GovernanceIntroProps) => {
+const GovernanceIntro = ({
+  sectionOverrideCss,
+  holderCount,
+  contributorCount,
+  improvementProposalCount,
+}: GovernanceIntroProps) => {
   return (
     <Section
       className={sectionOverrideCss}
@@ -62,15 +70,15 @@ const GovernanceIntro = ({ sectionOverrideCss }: GovernanceIntroProps) => {
         <GovernanceStats
           className="border-l-0"
           title="Registered voters"
-          value={commify(1437)}
+          value={commify(holderCount)}
         ></GovernanceStats>
         <GovernanceStats
           title="Open-source contributors"
-          value={commify(273)}
+          value={commify(contributorCount)}
         ></GovernanceStats>
         <GovernanceStats
           title="Improvement proposals"
-          value={commify(66)}
+          value={commify(improvementProposalCount)}
         ></GovernanceStats>
       </div>
     </Section>

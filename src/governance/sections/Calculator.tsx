@@ -73,7 +73,7 @@ const Calculator = ({ sectionOverrideCss }: CalculatorProps) => {
     const onChainReq = veOgvToOgv(blockTimestamp, 1_000_000, lockupDuration);
     setSnapshotReq(snapshotReq);
     setOnChainReq(onChainReq);
-  }, [lockupDuration]);
+  }, [lockupDuration, blockTimestamp]);
 
   return (
     <Section
