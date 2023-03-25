@@ -12,7 +12,7 @@ const GovernanceStats = ({ title, value, className }: GovernanceStatsProps) => {
   return (
     <div
       className={twMerge(
-        "flex-1 border-t-2 border-origin-bg-grey bg-origin-bg-blackt py-6 pl-6 lg:pl-20 border-l-2 w-full lg:w-auto flex justify-center",
+        "flex-1 border-t-2 border-origin-bg-grey bg-origin-bg-blackt py-6 border-l-2 w-full lg:w-auto flex justify-center",
         className
       )}
     >

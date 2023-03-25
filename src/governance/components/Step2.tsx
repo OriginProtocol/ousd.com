@@ -29,6 +29,14 @@ const Step2 = ({ stakingApy, className }: Step2Props) => {
       <Gradient2Button
         outerDivClassName="mt-10"
         className="bg-transparent hover:bg-transparent py-3 px-8 lg:px-10"
+        onClick={() =>
+          process.browser &&
+          window.open(
+            "https://governance.ousd.com/stake",
+            "_blank",
+            "noopener noreferrer"
+          )
+        }
       >
         <Typography.Body2>Stake OGV</Typography.Body2>
       </Gradient2Button>

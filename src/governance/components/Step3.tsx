@@ -31,7 +31,11 @@ const Step3 = ({ className }: Step3Props) => {
         outerDivClassName="mt-10"
         onClick={() =>
           process.browser &&
-          window.open("https://www.google.com", "_blank", "noopener noreferrer")
+          window.open(
+            "https://discord.com/channels/404673842007506945/1025438212908396564/",
+            "_blank",
+            "noopener noreferrer"
+          )
         }
       >
         <Typography.Body2 className="inline">

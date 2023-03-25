@@ -48,7 +48,7 @@ const GovernanceIntro = ({
       <a
         target="_blank"
         rel="noopener noreferrer"
-        href="https://www.google.com"
+        href="https://docs.ousd.com/governance/overview"
       >
         <div className="flex items-center mt-4 w-fit cursor-pointer px-6 lg:px-20">
           <Typography.Body3 className="text-sm text-gradient2">

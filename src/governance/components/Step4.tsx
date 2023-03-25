@@ -36,7 +36,7 @@ const Step4 = ({ className }: Step4Props) => {
         outerDivClassName="mt-10 inline py-4 px-5 mr-4"
         onClick={() =>
           process.browser &&
-          window.open("https://www.google.com", "_blank", "noopener noreferrer")
+          window.open("https://vote.ousd.com/", "_blank", "noopener noreferrer")
         }
       >
         <Typography.Body2 className="inline">
@@ -55,7 +55,11 @@ const Step4 = ({ className }: Step4Props) => {
         outerDivClassName="inline py-4 px-5"
         onClick={() =>
           process.browser &&
-          window.open("https://www.google.com", "_blank", "noopener noreferrer")
+          window.open(
+            "https://governance.ousd.com/",
+            "_blank",
+            "noopener noreferrer"
+          )
         }
       >
         <Typography.Body2 className="inline">
