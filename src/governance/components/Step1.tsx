@@ -59,7 +59,8 @@ const Step1 = ({ className }: Step1Props) => {
       </Typography.Body2>
 
       <Typography.Body2 className="font-normal mt-2 text-white-grey">
-        Use the calculator below to see how much staked OGV you would need to create off-chain and on-chain proposals.
+        Use the calculator below to see how much staked OGV you would need to
+        create off-chain and on-chain proposals.
       </Typography.Body2>
     </div>
   );

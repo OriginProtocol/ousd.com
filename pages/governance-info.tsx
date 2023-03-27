@@ -71,18 +71,27 @@ export const getStaticProps = async (): Promise<{
   props: GovernanceProps;
   revalidate: number;
 }> => {
-  const navRes = await fetchAPI("/ousd-nav-links", {
+  const navResPromise = fetchAPI("/ousd-nav-links", {
     populate: {
       links: {
         populate: "*",
       },
     },
   });
-  const navLinks: Link[] = transformLinks(navRes.data) as Link[];
 
-  const holderCount = await fetchVoterCount();
-  const contributors = await fetchContributorsFromRepos();
-  const improvementProposalCount = await fetchImprovementProposals();
+  const holderCountPromise = fetchVoterCount();
+  const contributorsPromise = fetchContributorsFromRepos();
+  const improvementProposalCountPromise = fetchImprovementProposals();
+
+  const [navRes, holderCount, contributors, improvementProposalCount] =
+    await Promise.all([
+      navResPromise,
+      holderCountPromise,
+      contributorsPromise,
+      improvementProposalCountPromise,
+    ]);
+
+  const navLinks: Link[] = transformLinks(navRes.data) as Link[];
 
   return {
     props: {

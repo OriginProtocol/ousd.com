@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { Typography } from "@originprotocol/origin-storybook";
 import { Section } from "../../components";
@@ -31,8 +31,8 @@ interface StepByStepProps {
 
 const StepByStep = ({ sectionOverrideCss }: StepByStepProps) => {
   const width = useViewWidth();
-  const [activeLarge, setActiveLarge] = React.useState(1);
-  const [activeSmall, setActiveSmall] = React.useState<ActiveSmall>({
+  const [activeLarge, setActiveLarge] = useState(1);
+  const [activeSmall, setActiveSmall] = useState<ActiveSmall>({
     1: false,
     2: false,
     3: false,

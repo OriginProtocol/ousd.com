@@ -12,12 +12,15 @@ const Step2 = ({ stakingApy, className }: Step2Props) => {
     <div className={className}>
       <Typography.Body2 className="font-medium text-blurry">
         With your OGV in a Web3 wallet (e.g. Metamask), connect to
-        <span className="ml-1 text-[#ffcf88]">the OUSD governance staking page.</span>
+        <span className="ml-1 text-[#ffcf88]">
+          the OUSD governance staking page.
+        </span>
       </Typography.Body2>
 
       <Typography.Body2 className="font-normal mt-4 text-white-grey">
-        Select the amount of OGV you wish to stake and your desired duration.
-        A longer lock-up will maximize your voting power and your share of the variable staking rewards.
+        Select the amount of OGV you wish to stake and your desired duration. A
+        longer lock-up will maximize your voting power and your share of the
+        variable staking rewards.
       </Typography.Body2>
 
       <Gradient2Button

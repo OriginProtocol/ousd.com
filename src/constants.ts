@@ -18,3 +18,7 @@ export const pointHoverBorderColor = "#000";
 
 // Dripper bar chart constants
 export const blankFill = "#141519";
+
+// Staking constants
+export const stakingDecayFactor = 1.8;
+export const beginEpoch = 1657584000;

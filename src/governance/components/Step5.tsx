@@ -16,10 +16,15 @@ const Step5 = ({ className }: Step5Props) => {
       </Typography.Body2>
 
       <Typography.Body2 className="text-white-grey mt-4">
-        Voting power is determined by the number of veOGV (staked OGV) in your Web3 wallet. It's free to vote on Snapshot proposals and there is no minimum amount required.
+        Voting power is determined by the number of veOGV (staked OGV) in your
+        Web3 wallet. It&apos;s free to vote on Snapshot proposals and there is
+        no minimum amount required.
         <br />
         <br />
-        On-chain votes require Ethereum gas to be recorded on the blockchain. Once an on-chain proposal is approved, 48 hours must pass before the proposal can be executed. This would give everyone a chance to take action if a malicious proposal were to get through.
+        On-chain votes require Ethereum gas to be recorded on the blockchain.
+        Once an on-chain proposal is approved, 48 hours must pass before the
+        proposal can be executed. This would give everyone a chance to take
+        action if a malicious proposal were to get through.
       </Typography.Body2>
 
       <Gradient2Button

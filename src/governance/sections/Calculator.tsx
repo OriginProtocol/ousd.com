@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Typography } from "@originprotocol/origin-storybook";
 import { twMerge } from "tailwind-merge";
 import { Section } from "../../components";
 import { RangeInput, RangeOutput } from "../components";
 import { commify } from "ethers/lib/utils";
 import {
-  useBlockTimestamp,
+  useBlock,
   useIntersectionObserver,
   useRefs,
   useViewWidth,
@@ -17,71 +17,63 @@ interface CalculatorProps {
   sectionOverrideCss?: string;
 }
 
+const values = [1, 12, 24, 36, 48];
+
 const lockupDurationInputMarkers = [
   {
     label: "1 month",
-    value: 1,
   },
   {
     label: "12 months",
-    value: 12,
   },
   {
     label: "24 months",
-    value: 24,
   },
   {
     label: "36 months",
-    value: 36,
   },
   {
     label: "48 months",
-    value: 48,
   },
-];
+].map((e, i) => ({ ...e, value: values[i] }));
 
 const lockupDurationInputMarkersSmall = [
   {
     label: "1M",
-    value: 1,
   },
   {
     label: "12M",
-    value: 12,
   },
   {
     label: "24M",
-    value: 24,
   },
   {
     label: "36M",
-    value: 36,
   },
   {
     label: "48M",
-    value: 48,
   },
-];
+].map((e, i) => ({ ...e, value: values[i] }));
 
 const Calculator = ({ sectionOverrideCss }: CalculatorProps) => {
   const width = useViewWidth();
 
   const [lockupDuration, setLockupDuration] = useState(1);
-  const [snapshotReq, setSnapshotReq] = useState(0);
-  const [onChainReq, setOnChainReq] = useState(0);
-  const blockTimestamp = useBlockTimestamp();
+  const block = useBlock();
+  const blockTimestamp = block?.timestamp;
+  const snapshotReq = useMemo(
+    () => veOgvToOgv(blockTimestamp, 10_000, lockupDuration),
+    [blockTimestamp, lockupDuration]
+  );
+  const onChainReq = useMemo(
+    () => veOgvToOgv(blockTimestamp, 1_000_000, lockupDuration),
+    [blockTimestamp, lockupDuration]
+  );
 
   const [firstViewIntervalId, setFirstViewIntervalId] =
     useState<NodeJS.Timeout>();
   const [firstView, setFirstView] = useState(false);
   const [targetRef] = useRefs<HTMLDivElement>(1);
-
-  useEffect(() => {
-    const snapshotReq = veOgvToOgv(blockTimestamp, 10_000, lockupDuration);
-    const onChainReq = veOgvToOgv(blockTimestamp, 1_000_000, lockupDuration);
-    setSnapshotReq(snapshotReq);
-    setOnChainReq(onChainReq);
-  }, [lockupDuration, blockTimestamp]);
 
   useIntersectionObserver(
     [targetRef],
