@@ -188,4 +188,5 @@ const DripperGraph = forwardRef<ChartJS<"bar">, DripperGraphProps>(
   }
 );
 
+DripperGraph.displayName = "DripperGraph";
 export default DripperGraph;

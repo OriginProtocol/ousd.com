@@ -5,7 +5,7 @@ import ContractStore from "../stores/ContractStore";
 import { BigNumber, utils } from "ethers";
 
 export const useOgv = () => {
-  const { ogv, veogv } = useStoreState(ContractStore, (s) => s.contracts || {});
+  const { ogv, veogv } = useStoreState(ContractStore, (s) => s.contracts);
   const [totalStaked, setTotalStaked] = useState<string>();
   const [totalSupply, setTotalSupply] = useState<string>();
   const [totalVeSupply, setTotalVeSupply] = useState<string>();
