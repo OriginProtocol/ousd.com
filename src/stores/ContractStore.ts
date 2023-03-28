@@ -12,10 +12,18 @@ interface Contracts {
 interface IContractStore {
   refreshTvl: boolean;
   contracts: Contracts;
+  apy: any;
+  ogvStats: any;
 }
 
-const ContractStore = new Store({
-  contracts: {},
+const ContractStore = new Store<IContractStore>({
+  contracts: {
+    ousd: null,
+    vault: null,
+    dripper: null,
+    ogv: null,
+    veogv: null,
+  },
   apy: {},
   ogvStats: {
     price: 0,
