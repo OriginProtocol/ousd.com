@@ -1,43 +1,49 @@
-const locales = require('./locales');
-const { withSentryConfig } = require('@sentry/nextjs');
+const locales = require("./locales");
+const { withSentryConfig } = require("@sentry/nextjs");
 
-const { STRAPI_API_URL, NEXT_PUBLIC_DAPP_URL, APP_ENV } = process.env
+const { STRAPI_API_URL, NEXT_PUBLIC_DAPP_URL, APP_ENV } = process.env;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    optimizeCss: true
-  }
-}
+    optimizeCss: true,
+  },
+};
 
 const dappPaths = [
-  '/earn',
-  '/wrap',
-  '/signTransfer',
-  '/stake',
-  '/dashboard',
-  '/history',
-  '/pool/:pool_name*',
-]
+  "/earn",
+  "/wrap",
+  "/signTransfer",
+  "/stake",
+  "/dashboard",
+  "/history",
+  "/pool/:pool_name*",
+];
 
-const dappRedirects = dappPaths.map(path => ({
+const dappRedirects = dappPaths.map((path) => ({
   source: path,
   destination: `${NEXT_PUBLIC_DAPP_URL}${path}`,
-  permanent: true
-}))
+  permanent: true,
+}));
 
 const moduleExports = {
   ...nextConfig,
   reactStrictMode: true,
   images: {
     loader: "default",
-    domains: ["localhost", "0.0.0.0", "cmsmediaproduction.s3.amazonaws.com", "cmsmediastaging.s3.amazonaws.com", "avatars.githubusercontent.com"],
+    domains: [
+      "localhost",
+      "0.0.0.0",
+      "cmsmediaproduction.s3.amazonaws.com",
+      "cmsmediastaging.s3.amazonaws.com",
+      "avatars.githubusercontent.com",
+    ],
   },
   i18n: {
     locales,
-    defaultLocale: 'en',
+    defaultLocale: "en",
   },
   staticPageGenerationTimeout: 120,
   sentry: {
@@ -52,33 +58,32 @@ const moduleExports = {
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: "/:path*",
         headers: [
           {
-            key: 'Content-Security-Policy',
-            value:
-              "frame-ancestors 'none'",
+            key: "Content-Security-Policy",
+            value: "frame-ancestors 'none'",
           },
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
+            key: "X-Frame-Options",
+            value: "DENY",
           },
           {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains'
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000; includeSubDomains",
           },
           {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block'
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
           },
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'Cross-Origin-Opener-Policy-Report-Only',
-            value: 'same-origin-allow-popups'
-          }
+            key: "Cross-Origin-Opener-Policy-Report-Only",
+            value: "same-origin-allow-popups",
+          },
         ],
       },
     ];
@@ -88,44 +93,48 @@ const moduleExports = {
     return [
       ...dappRedirects,
       {
-        source: '/swap',
+        source: "/swap",
         destination: `${NEXT_PUBLIC_DAPP_URL}`,
-        permanent: true
+        permanent: true,
       },
       {
-        source: '/dapp',
+        source: "/dapp",
         destination: `${NEXT_PUBLIC_DAPP_URL}`,
-        permanent: true
+        permanent: true,
       },
       {
-        source: '/mint',
+        source: "/mint",
         destination: `${NEXT_PUBLIC_DAPP_URL}`,
-        permanent: true
+        permanent: true,
       },
       {
-        source: '/earn-info',
+        source: "/earn-info",
         destination: `/`,
-        permanent: true
+        permanent: true,
       },
       {
-        source: '/governance',
+        source: "/governance",
         destination: `/`,
-        permanent: true
-      }
-    ]
+        permanent: true,
+      },
+    ];
   },
   async rewrites() {
     return {
-      beforeFiles: [{
-        source: '/sitemap.xml',
-        destination: `${STRAPI_API_URL}/api/ousd/sitemap`
-      }, {
-        source: '/robots.txt',
-        destination: APP_ENV === 'prod' ? '/robots.prod.txt' : '/robots.staging.txt',
-      }]
-    }
+      beforeFiles: [
+        {
+          source: "/sitemap.xml",
+          destination: `${STRAPI_API_URL}/api/ousd/sitemap`,
+        },
+        {
+          source: "/robots.txt",
+          destination:
+            APP_ENV === "prod" ? "/robots.prod.txt" : "/robots.staging.txt",
+        },
+      ],
+    };
   },
-}
+};
 
 const sentryWebpackPluginOptions = {
   // Additional config options for the Sentry Webpack plugin. Keep in mind that
@@ -137,8 +146,8 @@ const sentryWebpackPluginOptions = {
   silent: true, // Suppresses all logs
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options.
-}
+};
 
 // Make sure adding Sentry options is the last code to run before exporting, to
 // ensure that your source maps include changes from all other Webpack plugins
-module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions)
+module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);
