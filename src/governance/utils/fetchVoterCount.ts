@@ -8,7 +8,7 @@ const fetchVoterCount = async () => {
 
   try {
     const response: Response = await fetch(
-      "https://api.ethplorer.io/getTokenInfo/0x0c4576ca1c365868e162554af8e385dc3e7c66d9?apiKey=freekey"
+      `${process.env.NEXT_PUBLIC_ETHPLORER_URL}/getTokenInfo/0x0c4576ca1c365868e162554af8e385dc3e7c66d9?apiKey=freekey`
     );
 
     const { holdersCount } = await response.json();

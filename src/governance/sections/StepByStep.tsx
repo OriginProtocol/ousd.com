@@ -14,7 +14,7 @@ import {
 import { assetRootPath } from "../../utils/image";
 import { useOgv, useViewWidth } from "../../hooks";
 import { getRewardsApy } from "../../utils/math";
-import { lgSize } from "../../constants";
+import { lgSize, stakingDecayFactor } from "../../constants";
 import { ActiveSmall } from "../types";
 
 const titles = [
@@ -42,7 +42,11 @@ const StepByStep = ({ sectionOverrideCss }: StepByStepProps) => {
 
   const { totalVeSupply } = useOgv();
   const stakingApy =
-    getRewardsApy(100 * 1.8 ** (48 / 12), 100, parseFloat(totalVeSupply)) || 0;
+    getRewardsApy(
+      100 * stakingDecayFactor ** (48 / 12),
+      100,
+      parseFloat(totalVeSupply)
+    ) || 0;
 
   return (
     <Section
