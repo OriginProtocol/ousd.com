@@ -20,7 +20,7 @@ const ChartDetailsButton = ({
       {width >= lgSize ? (
         <Gradient2Button
           onClick={onClick}
-          className="bg-origin-bg-grey w-full group-hover:bg-[#1b1a1abb]"
+          className="bg-origin-bg-grey w-full group-hover:bg-[#1b1a1abb] text-sm"
         >
           <span>{children}</span>
           <Image
@@ -34,11 +34,11 @@ const ChartDetailsButton = ({
       ) : (
         <button
           onClick={onClick}
-          className="w-3 mx-4 flex justify-center items-center"
+          className="w-3 mx-0 flex justify-end items-center"
         >
           <Image
-            width="1000"
-            height="1000"
+            width="7"
+            height="7"
             src={assetRootPath("/images/arrow.svg")}
             alt="arrow"
           />

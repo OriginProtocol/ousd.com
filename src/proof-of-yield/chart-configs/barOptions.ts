@@ -1,15 +1,22 @@
-import { ChartOptions, TooltipModel } from "chart.js";
-import { commify } from "ethers/lib/utils";
 import moment from "moment";
+import { ChartOptions } from "chart.js";
+import { commify } from "ethers/lib/utils";
+import { mdSize } from "../../constants";
 
-const barOptions: ChartOptions<"bar"> = {
+const barOptions: (e?: Partial<ChartOptions<"bar">>) => ChartOptions<"bar"> = (
+  extraOptions
+) => ({
   responsive: true,
   maintainAspectRatio: false,
   layout: {
-    padding: {
-      bottom: 24,
-      left: 24,
-      right: 24,
+    padding: () => {
+      let padding = 24;
+      if (window.innerWidth < mdSize) padding = 12;
+      return {
+        left: padding,
+        right: padding,
+        bottom: padding,
+      };
     },
   },
   plugins: {
@@ -32,6 +39,7 @@ const barOptions: ChartOptions<"bar"> = {
       display: false,
     },
   },
-};
+  ...extraOptions,
+});
 
 export default barOptions;

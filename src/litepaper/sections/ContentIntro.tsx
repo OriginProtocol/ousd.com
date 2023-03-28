@@ -11,7 +11,7 @@ interface ContentIntroProps {
 
 const ContentIntro = ({ data, headingRefs }: ContentIntroProps) => {
   return (
-    <div className="px-4 sm:px-8 md:px-16 lg:px-0 relative z-20 lg:w-[793px]">
+    <div className="px-4 sm:px-8 md:px-16 lg:px-0 relative z-20 w-full lg:w-[793px]">
       <img
         src={assetRootPath("/images/litepaper-bg.svg")}
         alt="litepaper-bg"

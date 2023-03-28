@@ -85,8 +85,9 @@ const DailyYield = ({}: DailyYieldProps) => {
         <tbody className="relative px-6">
           {mockData.map((item, i) => (
             <tr
-              className="group border-t-2 hover:bg-hover-bg border-origin-bg-black"
+              className="group border-t md:border-t-2 hover:bg-hover-bg border-origin-bg-black cursor-pointer"
               key={item.date}
+              onClick={() => routeToYieldOnDay(item.date)}
             >
               <TableData align="left" className="pl-8">
                 {new Date(item.date).toLocaleDateString(undefined, {
