@@ -141,9 +141,9 @@ section.black {
 
 .text-gradient2 {
   background-image: -webkit-linear-gradient(
-    left,
+    bottom,
     #8c66fc -28.99%,
-    #0274f1 144.97%
+    #0274f1 144%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

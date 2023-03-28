@@ -20,7 +20,7 @@ const BasicData = ({
   return (
     <div
       className={twMerge(
-        `flex justify-start items-center px-4 lg:px-8 py-4 lg:py-6 bg-origin-bg-grey mr-1`,
+        `flex justify-start items-center px-4 lg:px-8 py-4 lg:py-6 bg-origin-bg-grey mr-0.5`,
         className
       )}
     >
@@ -32,9 +32,9 @@ const BasicData = ({
             {title}
           </Typography.Body2>
         )}
-        <Typography.H6 className="block font-normal text-center lg:text-left">
+        <Typography.H7 className="block font-bold text-left lg:text-left mt-1 text-xl">
           {children}
-        </Typography.H6>
+        </Typography.H7>
       </div>
     </div>
   );

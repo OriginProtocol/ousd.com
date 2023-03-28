@@ -11,9 +11,9 @@ interface DripperBasicStats {
 
 const DripperBasicStats = ({ overrideCss }: DripperBasicStats) => {
   return (
-    <Section className={twMerge("mt-20", overrideCss)}>
+    <Section className={twMerge("mt-10 md:mt-20", overrideCss)}>
       <Typography.Body>Dripper funds</Typography.Body>
-      <div className="w-full lg:w-3/4 flex mt-6">
+      <div className="w-full lg:w-3/4 max-w-[818px] flex mt-6">
         <BasicData
           className="rounded-l-lg flex-1 justify-center lg:justify-start"
           title="Funds held by dripper"
@@ -32,7 +32,7 @@ const DripperBasicStats = ({ overrideCss }: DripperBasicStats) => {
       <Typography.Body3 className="text-sm text-table-title mt-3">
         Sentence or two about Dripper funds. Either that or use tooltips below
       </Typography.Body3>
-      <div className="w-full lg:w-3/4 flex mt-6">
+      <div className="w-full lg:w-3/4 max-w-[818px] flex mt-6">
         <BasicData
           className="rounded-l-lg flex-1 justify-center lg:justify-start"
           title="Per day"
@@ -41,7 +41,7 @@ const DripperBasicStats = ({ overrideCss }: DripperBasicStats) => {
           ${commify(1529)}
         </BasicData>
         <BasicData
-          className="rounded-r-lg flex-1 justify-center lg:justify-start"
+          className="flex-1 justify-center lg:justify-start"
           title="Per hour"
           info={false}
         >
