@@ -9,7 +9,7 @@ const Table = ({ className, children }: PropsWithChildren<TableProps>) => {
   return (
     <table
       className={twMerge(
-        "relative w-full bg-origin-bg-grey rounded-lg border-spacing-0",
+        "relative w-full bg-origin-bg-grey rounded md:rounded-lg border-spacing-0",
         className
       )}
     >

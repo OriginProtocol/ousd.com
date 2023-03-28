@@ -28,8 +28,8 @@ const TitleWithInfo = ({
       </Typography.Body2>
       <Image
         src={assetRootPath("/images/info.svg")}
-        width="16"
-        height="16"
+        width="12"
+        height="12"
         alt="info"
         className="inline"
       />

@@ -40,6 +40,7 @@ const PastWeekApyChart = ({ data }: PastWeekApyChartProps) => {
         fill,
         tension: 0.1,
         pointRadius,
+        borderWidth: 1,
         pointHitRadius,
         pointHoverRadius,
         pointHoverBorderWidth,

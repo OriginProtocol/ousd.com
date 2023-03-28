@@ -19,7 +19,7 @@ const TableOfContents = ({
   return (
     <div
       className={twMerge(
-        `bg-origin-bg-grey px-8 rounded-lg pointer-events-none w-fit ml-auto mr-6`,
+        `bg-origin-bg-grey max-w-[262px] px-8 rounded-lg pointer-events-none w-fit ml-auto mr-auto 2xl:mr-12`,
         className
       )}
     >

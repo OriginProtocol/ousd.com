@@ -15,12 +15,12 @@ const DayDripperBanner = ({ sectionOverrideCss }: DayDripperBannerProps) => {
       className={sectionOverrideCss}
       innerDivClassName="border-t-2 border-origin-bg-grey"
     >
-      <div className="w-full mt-20 bg-origin-bg-grey py-10 px-12 flex flex-col md:flex-row rounded-lg items-center">
+      <div className="w-full mt-10 md:mt-20 bg-origin-bg-grey py-10 px-12 flex flex-col md:flex-row rounded-lg items-center">
         <div>
-          <Typography.Body className="mb-4">
+          <Typography.Body className="text-xl mb-4">
             Introducing the OUSD Dripper
           </Typography.Body>
-          <Typography.Body3 className="text-sm text-table-title mr-0 md:mr-[52px] lg:mr-[104px]">
+          <Typography.Body3 className="text-sm leading-6 text-table-title mr-0 md:mr-[52px] lg:mr-[104px]">
             Yield that is harvested is converted to USDT and placed into the
             dripper. The dripper releases this yield to users steadily over
             time. The reason for the dripper is that it smooths out the yield to
@@ -33,7 +33,9 @@ const DayDripperBanner = ({ sectionOverrideCss }: DayDripperBannerProps) => {
           onClick={() => router.push("/proof-of-yield/dripper")}
           className="whitespace-nowrap rounded-full h-14 bg-gradient2 mt-8 md:mt-0 w-full md:w-auto"
         >
-          <span className="px-10">View Dripper details</span>
+          <span className="px-10 flex justify-center items-center">
+            View Dripper details
+          </span>
         </button>
       </div>
     </Section>

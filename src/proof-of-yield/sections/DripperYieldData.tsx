@@ -1,21 +1,42 @@
+import React, { useEffect, useRef } from "react";
+import Image from "next/image";
 import { Typography } from "@originprotocol/origin-storybook";
 import { commify } from "ethers/lib/utils";
-import { over } from "lodash";
-import Image from "next/image";
-import React from "react";
 import { twMerge } from "tailwind-merge";
 import { Section } from "../../components";
 import { assetRootPath } from "../../utils/image";
 import { DripperGraph } from "../components";
+import { Chart } from "chart.js";
+import { forwardMouseEvent } from "../utils";
 
 interface DripperYieldDataProps {
   overrideCss?: string;
 }
 
 const DripperYieldData = ({ overrideCss }: DripperYieldDataProps) => {
+  const graphRef1 = useRef<Chart<"bar">>();
+  const graphRef2 = useRef<Chart<"bar">>();
+
+  useEffect(() => {
+    const mouseOut1 = (event) =>
+      forwardMouseEvent(graphRef2.current.canvas, event);
+    const mouseOut2 = (event) =>
+      forwardMouseEvent(graphRef1.current.canvas, event);
+
+    graphRef1.current.canvas.onmouseout = mouseOut1;
+    graphRef2.current.canvas.onmouseout = mouseOut2;
+
+    return () => {
+      graphRef1.current?.canvas.removeEventListener("mouseout", mouseOut1);
+      graphRef2.current?.canvas.removeEventListener("mouseout", mouseOut2);
+    };
+  }, []);
+
   return (
-    <Section className={twMerge("bg-origin-bg-grey mt-20", overrideCss)}>
-      <Typography.H5 className="pt-20 text-center">
+    <Section
+      className={twMerge("bg-origin-bg-grey mt-14 md:mt-20", overrideCss)}
+    >
+      <Typography.H5 className="pt-14 md:pt-20 text-center">
         Yield in, Yield out
       </Typography.H5>
       <Typography.Body3 className="text-center text-sm text-table-title mt-3">
@@ -25,9 +46,17 @@ const DripperYieldData = ({ overrideCss }: DripperYieldDataProps) => {
 
       <div className="relative">
         <DripperGraph
-          className="mt-14 mb-3"
+          ref={graphRef1}
+          className="mt-8 md:mt-14 mb-3"
           graphId={1}
           title="Yield earned"
+          extraOptions={{
+            onHover(event) {
+              if (!event.native.isTrusted) return;
+
+              forwardMouseEvent(graphRef2.current.canvas, event);
+            },
+          }}
           extraData={[
             { title: "APY", value: "4.37%" },
             { title: "Supply", value: commify("57615375") },
@@ -41,13 +70,14 @@ const DripperYieldData = ({ overrideCss }: DripperYieldDataProps) => {
           width={24}
           height={24}
           alt="arrow down"
+          className="w-[14px] h-[14px] md:w-[24px] md:h-[24px]"
         />
       </div>
 
       <div className="flex justify-center mt-3">
-        <button className="py-4 px-16 bg-origin-bg-black rounded-lg">
+        <div className="py-4 px-16 bg-origin-bg-black rounded-lg text-xs md:text-base w-full md:w-auto h-[40px] md:h-[56px] flex justify-center items-center">
           OUSD Dripper
-        </button>
+        </div>
       </div>
 
       <div className="flex justify-center mt-3">
@@ -56,14 +86,23 @@ const DripperYieldData = ({ overrideCss }: DripperYieldDataProps) => {
           width={24}
           height={24}
           alt="arrow down"
+          className="w-[14px] h-[14px] md:w-[24px] md:h-[24px]"
         />
       </div>
 
-      <div className="relative pb-20">
+      <div className="relative pb-14 md:pb-20">
         <DripperGraph
+          ref={graphRef2}
           className="mt-3"
           graphId={2}
           title="Yield distributed"
+          extraOptions={{
+            onHover(event) {
+              if (!event.native.isTrusted) return;
+
+              forwardMouseEvent(graphRef1.current.canvas, event);
+            },
+          }}
           extraData={[
             { title: "APY", value: "4.37%" },
             { title: "Supply", value: commify("57615375") },
