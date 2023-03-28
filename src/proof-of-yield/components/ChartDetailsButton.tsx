@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import Image from "next/image";
-import { Gradient2Button } from ".";
+import { Gradient2Button } from "../../components";
 import { useViewWidth } from "../../hooks";
 import { lgSize } from "../../constants";
 import { assetRootPath } from "../../utils/image";

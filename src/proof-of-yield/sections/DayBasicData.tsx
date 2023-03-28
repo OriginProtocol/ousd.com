@@ -7,13 +7,13 @@ import { assetRootPath } from "../../utils/image";
 import { Section } from "../../components";
 import {
   BasicData,
-  Gradient2Button,
   Table,
   TableData,
   TableHead,
   TitleWithInfo,
   YieldBoostMultiplier,
 } from "../components";
+import { Gradient2Button } from "../../components";
 import { Typography } from "@originprotocol/origin-storybook";
 import { smSize, lgSize, xlSize } from "../../constants";
 import { shortenAddress } from "../../utils";
