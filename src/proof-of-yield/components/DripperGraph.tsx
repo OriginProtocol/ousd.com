@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import Gradient2Button from "../../components/Gradient2Button";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,12 +12,10 @@ import {
 import { barOptions } from "../chart-configs";
 import { tailwindConfig } from "../../utils";
 import { createTooltip } from "../utils";
-import { TypedChartComponent } from "react-chartjs-2/dist/types";
 import { twMerge } from "tailwind-merge";
 import { Typography } from "@originprotocol/origin-storybook";
 import { Bar } from "react-chartjs-2";
 import { commify } from "ethers/lib/utils";
-import Gradient2Button from "./Gradient2Button";
 
 ChartJS.register(CategoryScale, TimeScale, BarElement, Tooltip);
 

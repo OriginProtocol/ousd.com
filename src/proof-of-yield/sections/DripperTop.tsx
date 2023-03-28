@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Section } from "../../components";
 import { assetRootPath } from "../../utils/image";
 import { Typography } from "@originprotocol/origin-storybook";
-import { Gradient2Button } from "../components";
+import { Gradient2Button } from "../../components";
 import { twMerge } from "tailwind-merge";
 import { useRouter } from "next/router";
 import { useGetPreviousRoute } from "../../hooks";

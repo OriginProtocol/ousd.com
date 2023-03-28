@@ -1,22 +1,17 @@
-import { useEffect, useState, useRef, RefObject } from "react";
+import { useEffect, RefObject } from "react";
 
-const useIntersectionObserver = (elements: RefObject<HTMLElement>[]) => {
-  const observer = useRef<IntersectionObserver>();
-  const [activeId, setActiveId] = useState<number>(0);
-
+const useIntersectionObserver = (
+  elements: RefObject<HTMLElement>[],
+  cb: IntersectionObserverCallback,
+  options?: IntersectionObserverInit
+) => {
   useEffect(() => {
-    observer.current = new IntersectionObserver(
-      (entries) => setActiveId(parseInt(entries[0].target.id)),
-      {
-        // re run when element is in the top 20% of the viewport
-        rootMargin: "0% 0% -90% 0px",
-      }
-    );
+    const observer = new IntersectionObserver(cb, options);
 
-    elements.forEach((e) => observer.current.observe(e.current));
-  }, []);
+    elements.forEach((e) => observer.observe(e.current));
 
-  return activeId;
+    return () => observer.disconnect();
+  }, elements);
 };
 
 export default useIntersectionObserver;

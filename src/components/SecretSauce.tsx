@@ -5,7 +5,7 @@ import { mdSize, lgSize, xl2Size } from "../constants";
 import { useViewWidth } from "../hooks";
 import { Typography } from "@originprotocol/origin-storybook";
 import { assetRootPath } from "../utils/image";
-import { Gradient2Button } from "../proof-of-yield/components";
+import { Gradient2Button } from "../components";
 
 function SecretSauce() {
   const width = useViewWidth();

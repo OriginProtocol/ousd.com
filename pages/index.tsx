@@ -157,8 +157,6 @@ export async function getStaticProps() {
 
   const navLinks = transformLinks(navRes.data);
 
-  console.log(faqRes?.data);
-
   const faqData = faqRes?.data.sort((a, b) => a.id - b.id) || [];
 
   return {
