@@ -58,7 +58,7 @@ const StepByStep = ({ sectionOverrideCss }: StepByStepProps) => {
       />
 
       <Typography.H6 className="font-normal">
-        Step-by-step guide for voting and creating proposals
+        Step-by-step guide for creating proposals and voting
       </Typography.H6>
 
       {/* Content after title */}

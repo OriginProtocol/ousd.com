@@ -12,7 +12,7 @@ const Step1 = ({ className }: Step1Props) => {
   return (
     <div className={className}>
       <Typography.Body2>
-        OGV can be purchased from any of AMMs or exchanges listed below:
+        OGV can be purchased from many of the top AMMs and exchanges.
       </Typography.Body2>
 
       {/* AMMs */}
@@ -55,12 +55,11 @@ const Step1 = ({ className }: Step1Props) => {
       </div>
 
       <Typography.Body2 className="font-medium mt-8 text-blurry">
-        Unsure how much OGV you need to create proposals?
+        Unsure how much OGV you need?
       </Typography.Body2>
 
       <Typography.Body2 className="font-normal mt-2 text-white-grey">
-        Use the calculator below to see how much staked OGV is needed for
-        creating both on and off chain proposals, dependent on the time staked.
+        Use the calculator below to see how much staked OGV you would need to create off-chain and on-chain proposals.
       </Typography.Body2>
     </div>
   );

@@ -12,23 +12,17 @@ const Step4 = ({ className }: Step4Props) => {
   return (
     <div className={className}>
       <Typography.Body2 className="text-blurry">
-        If you want to submit a proposal, you can do this through the gasless
-        snapshot voting.
+        Create a non-binding proposal on Snapshot or a binding, on-chain proposal when you're ready for an up/down vote.
       </Typography.Body2>
 
       <Typography.Body2 className="text-white-grey mt-4">
-        Sorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis
-        molestie, dictum est a, mattis tellus. Sed dignissim, metus nec
-        fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus
-        elit sed risus. Maecenas eget condimentum velit, sit amet feugiat
-        lectus. Class aptent taciti sociosqu ad litora torquent per conubia
-        nostra, per inceptos himenaeos. Praesent auctor purus luctus enim
-        egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse
-        ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi
-        convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
+        You will need to connect the Web3 wallet containing your veOGV (staked OGV) to verify eligibility and determine your voting power.
         <br />
         <br />
-        Add quorum details
+        Off-chain proposals are great for temperature checks and signaling votes since they are gasless. Snapshot also supports several different voting systems with innovative ways to calculate the outcome of a proposal.
+        <br />
+        <br />
+        On-chain proposals are submitted directly to the governance contracts in the form of executable code. This requires some technical knowledge and is usually preceded by a Snapshot vote and forum discussion.
       </Typography.Body2>
 
       <Gradient2Button

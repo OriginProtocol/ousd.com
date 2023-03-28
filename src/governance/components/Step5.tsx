@@ -12,19 +12,14 @@ const Step5 = ({ className }: Step5Props) => {
   return (
     <div className={className}>
       <Typography.Body2 className="text-blurry">
-        If you wish to vote
+        Influence the future of the protocol by casting your vote.
       </Typography.Body2>
 
       <Typography.Body2 className="text-white-grey mt-4">
-        Sorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis
-        molestie, dictum est a, mattis tellus. Sed dignissim, metus nec
-        fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus
-        elit sed risus. Maecenas eget condimentum velit, sit amet feugiat
-        lectus. Class aptent taciti sociosqu ad litora torquent per conubia
-        nostra, per inceptos himenaeos. Praesent auctor purus luctus enim
-        egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse
-        ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi
-        convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
+        Voting power is determined by the number of veOGV (staked OGV) in your Web3 wallet. It's free to vote on Snapshot proposals and there is no minimum amount required.
+        <br />
+        <br />
+        On-chain votes require Ethereum gas to be recorded on the blockchain. Once an on-chain proposal is approved, 48 hours must pass before the proposal can be executed. This would give everyone a chance to take action if a malicious proposal were to get through.
       </Typography.Body2>
 
       <Gradient2Button

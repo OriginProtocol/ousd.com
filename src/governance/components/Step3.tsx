@@ -12,18 +12,11 @@ const Step3 = ({ className }: Step3Props) => {
   return (
     <div className={className}>
       <Typography.Body2 className="text-blurry">
-        Whether you're wanting to discuss a proposal you have in mind, to get a
-        feeling from the community, or looking to participate in discissions on
-        exisiting proposals, this is the place to start.
+        In the <strong>ousd-governance-forum</strong> within the Origin Discord server, you can create a new post summarizing your proposal or join an existing discussion.
       </Typography.Body2>
 
       <Typography.Body2 className="text-white-grey mt-4">
-        Sorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis
-        molestie, dictum est a, mattis tellus. Sed dignissim, metus nec
-        fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus
-        elit sed risus. Maecenas eget condimentum velit, sit amet feugiat
-        lectus. Class aptent taciti sociosqu ad litora torquent per conubia
-        nostra, per inceptos himenaeos.
+        There should be a forum post representing each proposal that exists on Snapshot or the OUSD governance portal. It's best to go ahead and create a proposal and forum post at the same time rather than wait for approval. There's no harm in getting a signal and starting the conversation.
       </Typography.Body2>
 
       <Gradient2Button
