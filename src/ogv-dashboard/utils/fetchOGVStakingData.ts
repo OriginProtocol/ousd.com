@@ -80,7 +80,7 @@ const fetchOGVStakingData = async (
     body: JSON.stringify(reqs),
     headers: { "Content-Type": "application/json" },
   });
-
+  console.log("staking data", await res.clone().text())
   const data = await res.json();
   return data;
 };
