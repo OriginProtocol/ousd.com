@@ -99,10 +99,9 @@ const OgvDashboard = ({
   const stakingApy =
     getRewardsApy(100 * 1.8 ** (48 / 12), 100, parseFloat(totalVeSupply)) || 0;
 
-  if (error) {
-    return  <Error navLinks={[]} />;
-  }
-
+    if (error) {
+      return  <Error navLinks={[]} />;
+    }
   return (
     <>
       <Head>
@@ -247,8 +246,6 @@ export const getStaticProps: GetStaticProps = async (): Promise<{
       ...e,
       balance: nonCirculatingBalances[i].toString(),
     }));
-
-    console.log('currentPriceData', await currentPriceData.clone().text())
 
     currentPriceData = await currentPriceData.json();
 

@@ -63,11 +63,11 @@ const fetchOGVPriceData = async (
   market_caps: number[];
   total_volumes: number[];
 }> => {
-  const resp = await fetch(
-    `https://api.coingecko.com/api/v3/coins/origin-dollar-governance/market_chart?vs_currency=usd&days=${days}`
-  )
-  console.log("fetchOGVPriceData", await resp.clone().text())
-  return await resp.json();
+  return await (
+    await fetch(
+      `https://api.coingecko.com/api/v3/coins/origin-dollar-governance/market_chart?vs_currency=usd&days=${days}`
+    )
+  ).json();
 };
 
 export default getOGVPriceData;
