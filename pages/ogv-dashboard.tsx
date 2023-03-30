@@ -1,6 +1,6 @@
 import "chartjs-adapter-date-fns";
 import { Header } from "@originprotocol/origin-storybook";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import { fetchAPI } from "../lib/api";
 import Seo from "../src/components/strapi/seo";
 import formatSeo from "../src/utils/seo";
@@ -90,10 +90,6 @@ const OgvDashboard = ({
   doughnutData,
   nonCirculatingSupply,
 }: DashProps) => {
-  //@ts-ignore
-  if (typeof stakingData.datasets[0].data === "string")
-    stakingData.datasets[0].data = JSON.parse(stakingData.datasets[0].data);
-
   const width = useViewWidth();
 
   const { totalVeSupply } = useOgv();
@@ -152,7 +148,7 @@ const OgvDashboard = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (): Promise<{
+export const getStaticProps: GetStaticProps = async (): Promise<{
   props: DashProps;
 }> => {
   const seoResPromise = fetchAPI("/ousd/page/en/%2Fogv-dashboard");

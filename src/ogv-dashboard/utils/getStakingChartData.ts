@@ -54,7 +54,7 @@ const getStakingChartData = (rawStakingData: any[], days: number) => {
       {
         label: "Amount Staked",
         //@ts-ignore
-        data: JSON.stringify(fullData),
+        data: fullData,
         fill,
         tension,
         pointRadius,
