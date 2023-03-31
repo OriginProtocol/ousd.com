@@ -11,7 +11,7 @@ import { groupBy } from "lodash";
 
 const Allocation = ({ strategies }) => {
   const [open, setOpen] = useState({});
-  const [loaded, setLoaded] = useState();
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setLoaded(true);
@@ -59,6 +59,7 @@ const Allocation = ({ strategies }) => {
       return {
         name: protocol,
         strategies: protocols[protocol],
+        // @ts-ignore
         total: protocols[protocol].reduce((t, s) => {
           return { total: t.total + s.total };
         }).total,
@@ -67,6 +68,7 @@ const Allocation = ({ strategies }) => {
     .sort((a, b) => a.total - b.total)
     .reverse();
 
+  // @ts-ignore
   const total = yieldSources?.reduce((t, s) => {
     return { total: t.total + s.total };
   }).total;
@@ -152,6 +154,7 @@ const Allocation = ({ strategies }) => {
                               <LinearProgress
                                 variant="determinate"
                                 value={(protocol.total / total) * 100}
+                                // @ts-ignore
                                 color={protocol.name}
                                 sx={{
                                   bgcolor: "#141519",

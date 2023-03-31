@@ -70,9 +70,11 @@ export function exportToCsv(filename, rows) {
   }
 
   var blob = new Blob([csvFile], { type: "text/csv;charset=utf-8;" });
-  if (navigator.msSaveBlob) {
+  // @ts-ignore
+  if (navigator?.msSaveBlob) {
     // IE 10+
-    navigator.msSaveBlob(blob, filename);
+    // @ts-ignore
+    navigator?.msSaveBlob(blob, filename);
   } else {
     var link = document.createElement("a");
     if (link.download !== undefined) {

@@ -27,7 +27,8 @@ export const distributionLegendPlugin: (id: string) => Plugin = (
 ) => ({
   id,
   afterUpdate(chart, args, options) {
-    if (chart.config.type !== "doughnut") return;
+    // @ts-ignore
+    if (chart?.config?.type !== "doughnut") return;
     const ul = getOrCreateLegendList(chart, options.containerId);
 
     while (ul.firstChild) ul.firstChild.remove();

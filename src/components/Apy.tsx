@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { Chart as ChartJS } from "chart.js/auto";
-import { Chart } from "react-chartjs-2";
 import LineChart from "../components/Chart";
 import { Typography } from "@originprotocol/origin-storybook";
 import zipObject from "lodash/zipObject";
@@ -13,7 +12,7 @@ import { CategoryScale } from "chart.js";
 ChartJS.register(CategoryScale);
 
 const Apy = ({ apy, apyData }) => {
-  const [loaded, setLoaded] = useState();
+  const [loaded, setLoaded] = useState(false);
   const apyOptions = apy;
   const daysToApy = zipObject(apyDayOptions, apyOptions);
   const [apyDays, setApyDays] = useState(
@@ -45,7 +44,7 @@ const Apy = ({ apy, apyData }) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("last_user_selected_apy", apyDays);
+    localStorage.setItem("last_user_selected_apy", String(apyDays));
     setLoaded(true);
   }, [apyDays]);
 
@@ -72,6 +71,7 @@ const Apy = ({ apy, apyData }) => {
     if (data.length === 0) return;
     else {
       setChartData({
+        // @ts-ignore
         label: "APY",
         labels: data.map((d) => new Date(d.day).toString().slice(4, 10)),
         datasets: [
@@ -97,6 +97,7 @@ const Apy = ({ apy, apyData }) => {
     }
   }, [apyHistory, apyDays]);
 
+  // @ts-ignore
   return (
     <>
       <section className="home bg-[#1e1f25]">
@@ -119,7 +120,11 @@ const Apy = ({ apy, apyData }) => {
               <div className="flex flex-col lg:flex-row justify-between">
                 <div className="mt-[0px] md:mt-[16px]">
                   <Typography.H2 className="font-bold xl:inline lg:text-left">
-                    {formatCurrency(daysToApy[apyDays] * 100, 2) + "% "}
+                    {formatCurrency(
+                      // @ts-ignore
+                      daysToApy[apyDays] * 100,
+                      2
+                    ) + "% "}
                   </Typography.H2>
                   <Typography.H7 className="text-sm font-normal md:text-2xl text-[#b5beca] mt-[4px] xl:mt-0 xl:inline lg:text-left opacity-70">{`Trailing ${apyDays}-day APY`}</Typography.H7>
                 </div>

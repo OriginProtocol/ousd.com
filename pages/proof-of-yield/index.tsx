@@ -21,7 +21,7 @@ const ProofOfYield = ({ navLinks }: ProofOfYieldProps) => {
 
       <DailyYield />
 
-      <Footer locale={null} />
+      <Footer />
     </>
   );
 };

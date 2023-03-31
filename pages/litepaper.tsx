@@ -56,7 +56,7 @@ const Litepaper = ({ navLinks, litePaper }: LitepaperProps) => {
           <Content data={data} headingRefs={headingRefs} />
         </div>
       )}
-      <Footer locale={null} />
+      <Footer />
     </div>
   );
 };
