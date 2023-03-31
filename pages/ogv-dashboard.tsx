@@ -49,6 +49,7 @@ import {
   TopExchanges,
   OgvStakingStats,
 } from "../src/ogv-dashboard/sections";
+import { fetchOgvStats } from "../src/utils";
 
 ChartJS.register(
   CategoryScale,
@@ -150,6 +151,7 @@ const OgvDashboard = ({
 
 export const getStaticProps: GetStaticProps = async (): Promise<{
   props: DashProps;
+  revalidate: number;
 }> => {
   const seoResPromise = fetchAPI("/ousd/page/en/%2Fogv-dashboard");
   const navResPromise = fetchAPI("/ousd-nav-links", {
@@ -165,9 +167,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<{
   const rawData30DPromise = getOGVPriceData(30);
   const rawData365DPromise = getOGVPriceData(365);
 
-  const currentPriceDataPromise = fetch(
-    "https://api.coingecko.com/api/v3/simple/price?ids=origin-dollar-governance&vs_currencies=usd&include_market_cap=true&include_24hr_change=true&precision=full"
-  );
+  const ogvStatsPromise = fetchOgvStats();
 
   const provider = new providers.JsonRpcProvider(
     process.env.NEXT_PUBLIC_ETHEREUM_RPC_PROVIDER
@@ -217,7 +217,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<{
     rawData7D,
     rawData30D,
     rawData365D,
-    currentPriceData,
+    ogvStats,
     totalSupply,
     rawStakingData,
     ...nonCirculatingBalances
@@ -228,7 +228,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<{
     rawData7DPromise,
     rawData30DPromise,
     rawData365DPromise,
-    currentPriceDataPromise,
+    ogvStatsPromise,
     totalSupplyPromise,
     rawStakingDataPromise,
     ...nonCirculating.map((e) => OGV.balanceOf(e.address)),
@@ -239,13 +239,10 @@ export const getStaticProps: GetStaticProps = async (): Promise<{
     balance: nonCirculatingBalances[i].toString(),
   }));
 
-  currentPriceData = await currentPriceData.json();
-
   const seo: PageSeo = formatSeo(seoRes?.data) as PageSeo;
   const navLinks: Link[] = transformLinks(navRes.data) as Link[];
 
-  const { usd: currentPrice, usd_24h_change: change24H } =
-    currentPriceData["origin-dollar-governance"];
+  const { price: currentPrice, change24H } = ogvStats;
 
   const circulatingSupply = calculateCirculatingSupply(
     totalSupply,
@@ -299,6 +296,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<{
       doughnutData,
       nonCirculatingSupply,
     },
+    revalidate: 60 * 5,
   };
 };
 
