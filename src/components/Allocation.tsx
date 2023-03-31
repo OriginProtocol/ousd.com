@@ -129,8 +129,10 @@ const Allocation = ({ strategies }) => {
                                     src={protocolMapping[protocol.name]?.image}
                                     fill
                                     sizes="(max-width: 768px) 64px, 128px"
-                                    objectFit="contain"
-                                    objectPosition="0%"
+                                    style={{
+                                      objectFit: "contain",
+                                      objectPosition: "0%",
+                                    }}
                                     alt={protocol.name}
                                   />
                                 </div>
