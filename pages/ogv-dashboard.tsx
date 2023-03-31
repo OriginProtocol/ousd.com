@@ -151,6 +151,7 @@ const OgvDashboard = ({
 
 export const getStaticProps: GetStaticProps = async (): Promise<{
   props: DashProps;
+  revalidate: number;
 }> => {
   const seoResPromise = fetchAPI("/ousd/page/en/%2Fogv-dashboard");
   const navResPromise = fetchAPI("/ousd-nav-links", {
@@ -295,6 +296,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<{
       doughnutData,
       nonCirculatingSupply,
     },
+    revalidate: 60 * 5,
   };
 };
 
