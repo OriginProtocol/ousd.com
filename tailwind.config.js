@@ -33,8 +33,17 @@ module.exports = {
         "gradient1-to": "#cf75d5",
         "gradient1-tot": "#cf75d533",
       },
+      backgroundImage: {
+        gradient:
+          "linear-gradient(90deg, rgba(140, 102, 252, 0.3) -28.99%, rgba(2, 116, 241, 0.3) 144.97%)",
+        gradient2: "linear-gradient(90deg, #8C66FC -28.99%, #0274F1 144.97%)",
+        gradient3: "linear-gradient(91.16deg, #FEDBA8 -3.29%, #CF75D5 106.42%)",
+      },
       boxShadow: {
         tooltip: "0px 6px 12px #000000",
+        sidebar: "0px 9px 20px rgba(0, 0, 0, 0.4)",
+        filter:
+          "0px 27px 80px rgba(0, 0, 0, 0.07), 0px 6.0308px 17.869px rgba(0, 0, 0, 0.0417275), 0px 1.79553px 5.32008px rgba(0, 0, 0, 0.0282725)",
       },
     },
   },
