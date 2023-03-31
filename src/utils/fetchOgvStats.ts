@@ -1,3 +1,5 @@
+import { get } from "lodash";
+
 const fetchOgvStats = async () => {
   const endpoints = [
     `${process.env.CMC_API}/v2/cryptocurrency/quotes/latest?symbol=ogv`,
@@ -13,17 +15,17 @@ const fetchOgvStats = async () => {
       });
       if (!response.ok) {
         console.error(response);
-        return {};
+        return [];
       }
       return await response.json();
     })
   );
 
-  console.log("ads", ogvStats);
+  console.log();
 
   return {
-    price: ogvStats[0].data.OGV[0].quote.USD.price,
-    change24H: ogvStats[0].data.OGV[0].quote.USD.percent_change_24h,
+    price: get(ogvStats, "[0].data.OGV[0].quote.USD.price"),
+    change24H: get(ogvStats, "[0].data.OGV[0].quote.USD.percent_change_24h"),
     circulatingSupply: ogvStats[1],
     totalSupply: ogvStats[2],
   };
