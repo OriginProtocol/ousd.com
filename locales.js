@@ -1,4 +1,1 @@
-module.exports = [
-  'en',
-  'es',
-]
+module.exports = ["en", "es"];
