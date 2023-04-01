@@ -50,7 +50,7 @@ const YieldOnDay = ({ navLinks }: YieldOnDayProps) => {
 
       <DayTotal sectionOverrideCss={overrideCss} />
 
-      <Footer locale={null} />
+      <Footer />
     </>
   );
 };

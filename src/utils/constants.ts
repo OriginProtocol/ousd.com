@@ -5,6 +5,7 @@ export const DEFAULT_SELECTED_APY = 30;
 
 export const theme = createTheme({
   palette: {
+    // @ts-ignore
     Compound: {
       main: "#00d592",
     },

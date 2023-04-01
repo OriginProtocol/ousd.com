@@ -10,6 +10,7 @@ const Contracts = () => {
     const contractsToExport = setupContracts();
 
     ContractStore.update((s) => {
+      // @ts-ignore
       s.contracts = contractsToExport;
     });
 

@@ -5,6 +5,10 @@ const formatSeo = (seoRes) => {
     metaTitle: seoRes.metaTitle,
     metaDescription: seoRes.metaDescription,
     shareImage: seoRes.metaImage || null,
+    structuredData: null,
+    metaViewport: null,
+    canonicalURL: null,
+    metaSocial: null,
   };
 
   if (seoRes.structuredData) {

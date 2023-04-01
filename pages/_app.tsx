@@ -28,7 +28,10 @@ const queryClient = new QueryClient({
   },
 });
 
-export const GlobalContext = createContext({});
+export const GlobalContext = createContext({
+  defaultSeo: {},
+  siteName: "",
+});
 
 const { provider, webSocketProvider } = configureChains(
   [mainnet],

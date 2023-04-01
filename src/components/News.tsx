@@ -7,7 +7,7 @@ import { capitalize } from "lodash";
 import withIsMobile from "../hoc/withIsMobile";
 
 const Dropdown = ({ options, option, setOption, category }) => {
-  const [open, setOpen] = useState();
+  const [open, setOpen] = useState(false);
   const optionsFormatted = category
     ? [
         {
@@ -34,7 +34,7 @@ const Dropdown = ({ options, option, setOption, category }) => {
   return (
     <div
       className="relative w-full md:w-[200px]"
-      tabIndex="1"
+      tabIndex={1}
       onBlur={() => setOpen(false)}
     >
       <div
@@ -118,6 +118,7 @@ const News = ({ articles, meta, categories, isMobile, pageRef }) => {
 
     let pageNumbers = [1, 2, pages, pages - 1, page, page - 1, page + 1];
     pageNumbers = pageNumbers.filter((number) => number > 0 && number <= pages);
+    // @ts-ignore
     pageNumbers = [...new Set(pageNumbers)];
     pageNumbers = pageNumbers.sort((a, b) => a - b);
     setPageNumbers(pageNumbers);
@@ -134,7 +135,12 @@ const News = ({ articles, meta, categories, isMobile, pageRef }) => {
               setOption={setCategory}
               category
             />
-            <Dropdown option={order} setOption={setOrder} />
+            <Dropdown
+              option={order}
+              setOption={setOrder}
+              options={undefined}
+              category={undefined}
+            />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 md:mt-20">
             {currentPageArticles.map((a, i) => {

@@ -129,7 +129,7 @@ const Home = ({
       </section>
       <Ogv stats={ogvStats} />
       <Faq locale={null} faq={faq} />
-      <Footer locale={locale} />
+      <Footer />
     </>
   );
 };

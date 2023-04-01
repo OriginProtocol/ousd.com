@@ -144,7 +144,7 @@ const OgvDashboard = ({
       <TopExchanges />
 
       {/* Always takes up width of full screen */}
-      <Footer locale={null} />
+      <Footer />
     </>
   );
 };

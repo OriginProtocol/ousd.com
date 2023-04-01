@@ -28,10 +28,6 @@ const LineChart = ({ chartData, isMobile }) => {
               displayColors: false,
               backgroundColor: "#1e1f25C0",
               callbacks: {
-                label: function (context) {
-                  const value = context.parsed.y;
-                  return value + "%";
-                },
                 label: function (tooltipItem) {
                   return tooltipItem.formattedValue + "%";
                 },
@@ -47,6 +43,7 @@ const LineChart = ({ chartData, isMobile }) => {
             x: {
               grid: {
                 display: false,
+                // @ts-ignore
                 borderColor: "#8493a6",
                 borderWidth: 2,
                 padding: -100,
@@ -61,7 +58,7 @@ const LineChart = ({ chartData, isMobile }) => {
                   return (
                     isMobile ? (index + 22) % 28 === 0 : (index + 8) % 14 === 0
                   )
-                    ? this.getLabelForValue(val)
+                    ? this.getLabelForValue(Number(val))
                     : null;
                 },
               },
@@ -72,7 +69,7 @@ const LineChart = ({ chartData, isMobile }) => {
               ticks: {
                 color: "#b5beca",
                 callback: function (val) {
-                  return val === 0 ? null : this.getLabelForValue(val);
+                  return val === 0 ? null : this.getLabelForValue(Number(val));
                 },
               },
             },

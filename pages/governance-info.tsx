@@ -62,7 +62,7 @@ const GovernanceInfo = ({
       {/* OGV to veOGV Calculator */}
       <Calculator sectionOverrideCss={overrideCss} />
 
-      <Footer locale={null} />
+      <Footer />
     </>
   );
 };

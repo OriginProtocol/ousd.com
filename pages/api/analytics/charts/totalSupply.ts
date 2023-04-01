@@ -45,12 +45,8 @@ export const getTotalSupply = async () => {
       ],
     };
   } catch (e) {
-    const error = new Error("A server error occurred");
-    error.status = 500;
-    error.info = {
-      message: e.message,
-    };
-    throw error;
+    console.error(e);
+    throw e;
   }
 };
 

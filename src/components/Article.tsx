@@ -12,7 +12,7 @@ import he from "he";
 import { sanitizationOptions } from "../utils/constants";
 
 const Article = ({ article, navLinks }) => {
-  const [loaded, setLoaded] = useState();
+  const [loaded, setLoaded] = useState(true);
   const imageUrl = article.cover?.url;
   const seo = formatSeo(article.seo);
 
