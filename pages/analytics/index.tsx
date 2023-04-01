@@ -28,11 +28,11 @@ import {
 import { useAPYChart } from "../../src/analytics/hooks/useAPYChart";
 import { useTotalSupplyChart } from "../../src/analytics/hooks/useTotalSupplyChart";
 import { useMarketshareChart } from "../../src/analytics/hooks/useMarketshareChart";
-import { useCollateralChart } from "../../src/analytics/hooks/useCollateralChart";
+// import { useCollateralChart } from "../../src/analytics/hooks/useCollateralChart";
 import { GetServerSideProps } from "next";
 import { fetchAllocation } from "../../lib/allocation";
 import { fetchCollateral } from "../../lib/collateral";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 ChartJS.register(
   CategoryScale,
@@ -149,6 +149,7 @@ const TotalSupplyChartContainer = () => {
 const OUSDMarketshareContainer = () => {
   const [{ data, filter, isFetching }, { onChangeFilter }] =
     useMarketshareChart();
+  // @ts-ignore
   return (
     <LayoutBox
       loadingClassName="flex items-center justify-center h-[370px] w-full"

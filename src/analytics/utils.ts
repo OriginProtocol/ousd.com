@@ -1,4 +1,5 @@
 import { isMobile } from "react-device-detect";
+import { ChartOptions } from "chart.js";
 
 export const backingTokens = {
   DAI: {
@@ -92,7 +93,7 @@ export const borderFormatting = {
   pointHitRadius: 1,
 };
 
-export const chartOptions = {
+export const chartOptions: ChartOptions<"line"> = {
   responsive: true,
   aspectRatio: isMobile ? 1 : 3,
   plugins: {
@@ -129,7 +130,7 @@ export const chartOptions = {
         padding: 20,
         callback: function (val, index) {
           return (isMobile ? (index + 22) % 28 === 0 : (index + 8) % 14 === 0)
-            ? this.getLabelForValue(val)
+            ? this.getLabelForValue(Number(val))
             : null;
         },
       },
@@ -149,7 +150,7 @@ export const chartOptions = {
       ticks: {
         color: "#828699",
         callback: function (val) {
-          return val === 0 ? null : this.getLabelForValue(val);
+          return val === 0 ? null : this.getLabelForValue(Number(val));
         },
       },
     },

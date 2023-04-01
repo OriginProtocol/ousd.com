@@ -34,7 +34,7 @@ const Dripper = ({ navLinks }: DripperProps) => {
 
       <DripperFunds overrideCss={sectionOverrideCss} />
 
-      <Footer locale={null} />
+      <Footer />
     </>
   );
 };

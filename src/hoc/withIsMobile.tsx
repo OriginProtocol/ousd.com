@@ -30,7 +30,8 @@ const withIsMobile = (WrappedComponent) => {
         isMobile={isMobile}
         isMobileApp={
           process.browser
-            ? typeof window.ReactNativeWebView !== "undefined"
+            ? // @ts-ignore
+              typeof window.ReactNativeWebView !== "undefined"
             : false
         }
       />

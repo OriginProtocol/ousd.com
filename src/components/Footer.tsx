@@ -9,7 +9,7 @@ import { Typography } from "@originprotocol/origin-storybook";
 const termsURL = `${process.env.NEXT_PUBLIC_WEBSITE_URL}/tos`;
 const privacyURL = `${process.env.NEXT_PUBLIC_WEBSITE_URL}/privacy`;
 
-export default function Footer({ locale }) {
+export default function Footer() {
   const { pathname } = useRouter();
 
   return (

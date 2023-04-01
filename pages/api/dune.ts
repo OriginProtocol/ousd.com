@@ -5,13 +5,8 @@ export const queryByJob = async (jobId) => {
     const client = new DuneClient(process.env.DUNE_API_KEY);
     return await client.getResult(jobId);
   } catch (e) {
-    console.log(e);
-    const error = new Error("A server error occurred");
-    error.status = 500;
-    error.info = {
-      message: e.message,
-    };
-    throw error;
+    console.error(e);
+    throw e;
   }
 };
 

@@ -6,7 +6,7 @@ import { apyHistoryService } from "../services/apy-history.service";
 
 const useApyHistoryQuery = (apyHistory, options = {}) => {
   return useQuery(
-    QUERY_KEYS.ApyHistory(),
+    QUERY_KEYS.ApyHistory(365),
     () => apyHistoryService.fetchApyHistory(),
     {
       initialData: apyHistory,

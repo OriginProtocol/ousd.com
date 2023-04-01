@@ -34,7 +34,13 @@ export const fetchTvl = async (vault, dripper) => {
 export const setupContracts = () => {
   const provider = new ethers.providers.StaticJsonRpcProvider(
     process.env.NEXT_PUBLIC_ETHEREUM_RPC_PROVIDER,
-    { chainId: parseInt(process.env.NEXT_PUBLIC_ETHEREUM_RPC_CHAIN_ID) }
+    {
+      chainId: parseInt(
+        process.env.NEXT_PUBLIC_ETHEREUM_RPC_CHAIN_ID || "1",
+        10
+      ),
+      name: "mainnet",
+    }
   );
 
   const ousd = getContract(addresses.mainnet.OUSDProxy, ousdAbi, provider);

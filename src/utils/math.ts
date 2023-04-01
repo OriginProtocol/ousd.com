@@ -32,7 +32,7 @@ export const formatCurrency = (value, decimals, truncate = true) => {
 export const formatPercentage = (decimal: number, decimals = 2): string =>
   `${(decimal * 100).toFixed(decimals)}%`;
 
-export const rounded = (value, decimals, truncate = true) => {
+export const rounded = (value, decimals = 0, truncate = true) => {
   if (value > 1000000)
     return formatCurrency(value / 1000000, decimals, truncate) + "m";
   if (value > 1000)

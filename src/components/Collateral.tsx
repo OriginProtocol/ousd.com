@@ -8,7 +8,7 @@ import { formatCurrency, rounded } from "../utils/math";
 import { tokenColors, strategyMapping } from "../utils/constants";
 
 const Collateral = ({ collateral, strategies }) => {
-  const [open, setOpen] = useState();
+  const [open, setOpen] = useState(false);
   const backingTokens = ["dai", "usdc", "usdt"];
 
   const total = collateral?.reduce((t, s) => {
