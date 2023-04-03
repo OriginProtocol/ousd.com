@@ -2,8 +2,8 @@ const formatSeo = (seoRes) => {
   if (!seoRes) return {};
 
   const seo = {
-    metaTitle: seoRes.metaTitle,
-    metaDescription: seoRes.metaDescription,
+    metaTitle: seoRes.metaTitle || null,
+    metaDescription: seoRes.metaDescription || null,
     shareImage: seoRes.metaImage || null,
     structuredData: null,
     metaViewport: null,
