@@ -17,7 +17,7 @@ function SecretSauce() {
         Not-so-secret sauce
       </Typography.H3>
       <div className="relative h-fit">
-        <p className="font-sansInter font-normal text-xl xl:text-lg inline mr-2">
+        <p className="font-sansInter font-normal text-base md:text-xl xl:text-lg inline mr-2">
           Multiple factors contribute to OUSD outperforming its underlying
           strategies, but there&apos;s one big one. While 100% of the collateral
           is used to generate yield, only some of the OUSD in circulation is
