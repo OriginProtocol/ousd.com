@@ -162,7 +162,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
               The OGV airdrop
             </Typography.H3>
             <Typography.Body3
-              className="max-w-[943px] mt-3 md:mt-4 text-[14px] md:text-[20px] leading-[23px] md:leading-[36px] text-[#b5beca]"
+              className="max-w-[943px] mt-3 md:mt-4 text-[14px] md:text-[20px] leading-[23px] md:leading-[36px] text-subheading"
               style={{ fontWeight: 400 }}
             >
               As of July 12th, over 40,000 OGN holders and all OUSD holders
@@ -202,7 +202,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                   <Typography.H4 className="text-[20px] lg:text-[24px] leading-[36px] lg:leading-[32px]">
                     Airdrop allocation stats
                   </Typography.H4>
-                  <Typography.Body3 className="mt-4 lg:mt-8 text-[20px] leading-[36px] text-[#b5beca]">
+                  <Typography.Body3 className="mt-4 lg:mt-8 text-[20px] leading-[36px] text-subheading">
                     Airdrop total
                   </Typography.Body3>
                   <div className="lg:mt-1 space-x-1.5">
@@ -228,7 +228,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                           height="16"
                           alt="Purple dot"
                         />
-                        <Typography.Body3 className="text-[20px] leading-[36px] text-[#b5beca]">
+                        <Typography.Body3 className="text-[20px] leading-[36px] text-subheading">
                           OGN holders
                         </Typography.Body3>
                       </div>
@@ -243,7 +243,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                           {"OGV"}
                         </Typography.Body>
                       </div>
-                      <Typography.Body3 className="text-[16px] leading-[28px] text-[#b5beca]">
+                      <Typography.Body3 className="text-[16px] leading-[28px] text-subheading">
                         (68.97%)
                       </Typography.Body3>
                     </div>
@@ -255,7 +255,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                           height="16"
                           alt="Purple dot"
                         />
-                        <Typography.Body3 className="text-[20px] leading-[36px] text-[#b5beca]">
+                        <Typography.Body3 className="text-[20px] leading-[36px] text-subheading">
                           OUSD holders
                         </Typography.Body3>
                       </div>
@@ -270,7 +270,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                           {"OGV"}
                         </Typography.Body>
                       </div>
-                      <Typography.Body3 className="text-[16px] leading-[28px] text-[#b5beca]">
+                      <Typography.Body3 className="text-[16px] leading-[28px] text-subheading">
                         (31.03%)
                       </Typography.Body3>
                     </div>
@@ -280,7 +280,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                   <Typography.H4 className="text-[20px] lg:text-[24px] leading-[36px] lg:leading-[32px]">
                     Claim stats
                   </Typography.H4>
-                  <Typography.Body3 className="mt-4 lg:mt-8 text-[20px] leading-[36px] text-[#b5beca]">
+                  <Typography.Body3 className="mt-4 lg:mt-8 text-[20px] leading-[36px] text-subheading">
                     Tokens claimed
                   </Typography.Body3>
                   <div className="mt-1 space-x-1.5">
@@ -297,7 +297,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                       {"OGV"}
                     </Typography.Body>
                   </div>
-                  <Typography.Body3 className="text-[16px] leading-[28px] text-[#b5beca]">
+                  <Typography.Body3 className="text-[16px] leading-[28px] text-subheading">
                     {`(${formatCurrency(
                       ((distributorInitialOgv - burnedAmount) * 100) /
                         distributorInitialOgv,
@@ -306,7 +306,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                   </Typography.Body3>
                   <div className="flex flex-col lg:flex-row mt-6 lg:mt-8 space-y-6 lg:space-x-10 lg:space-y-0">
                     <div>
-                      <Typography.Body3 className="text-[20px] leading-[36px] text-[#b5beca]">
+                      <Typography.Body3 className="text-[20px] leading-[36px] text-subheading">
                         OGN holders
                       </Typography.Body3>
                       <div className="space-x-1.5">
@@ -324,7 +324,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                           {"OGV"}
                         </Typography.Body>
                       </div>
-                      <Typography.Body3 className="text-[16px] leading-[28px] text-[#b5beca]">
+                      <Typography.Body3 className="text-[16px] leading-[28px] text-subheading">
                         {`(${formatCurrency(
                           ((optionalDistributorInitialOgv -
                             parseFloat(optionalLockupBalance)) /
@@ -335,7 +335,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                       </Typography.Body3>
                     </div>
                     <div>
-                      <Typography.Body3 className="text-[20px] leading-[36px] text-[#b5beca]">
+                      <Typography.Body3 className="text-[20px] leading-[36px] text-subheading">
                         OUSD holders
                       </Typography.Body3>
                       <div className="space-x-1.5">
@@ -353,7 +353,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                           {"OGV"}
                         </Typography.Body>
                       </div>
-                      <Typography.Body3 className="text-[16px] leading-[28px] text-[#b5beca]">
+                      <Typography.Body3 className="text-[16px] leading-[28px] text-subheading">
                         {`(${formatCurrency(
                           ((mandatoryDistributorInitialOgv -
                             parseFloat(mandatoryLockupBalance)) /
@@ -373,7 +373,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                   </Typography.H4>
                   <div className="flex flex-col lg:flex-row justify-between mt-4 lg:mt-8 space-y-6 lg:space-y-0">
                     <div>
-                      <Typography.Body3 className="text-[20px] leading-[36px] text-[#b5beca]">
+                      <Typography.Body3 className="text-[20px] leading-[36px] text-subheading">
                         Total staked
                       </Typography.Body3>
                       <div className="mt-1 space-x-1.5">
@@ -392,7 +392,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                       </div>
                     </div>
                     <div className="lg:pr-10">
-                      <Typography.Body3 className="text-[20px] leading-[36px] text-[#b5beca]">
+                      <Typography.Body3 className="text-[20px] leading-[36px] text-subheading">
                         Percentage staked
                       </Typography.Body3>
                       <Typography.H4

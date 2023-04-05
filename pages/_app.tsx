@@ -1,20 +1,20 @@
+import "../styles/globals.css";
+import Script from "next/script";
+//@ts-ignore
+import bundledCss from "@originprotocol/origin-storybook/lib/styles.css";
 import App from "next/app";
 import Head from "next/head";
-import React, { createContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { WagmiConfig, createClient, configureChains, mainnet } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import { fetchAPI } from "../lib/api";
 import { getStrapiMedia } from "../lib/media";
-// @ts-ignore
-import bundledCss from "@originprotocol/origin-storybook/lib/styles.css";
-import "../styles/globals.css";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Contracts from "../src/components/Contracts";
-import Script from "next/script";
 import { GTM_ID, pageview } from "../lib/gtm";
-import { usePreviousRoute } from "../src/hooks";
 import transformLinks from "../src/utils/transformLinks";
+import { useContracts, usePreviousRoute } from "../src/hooks";
+import { createContext, useEffect } from "react";
+import "../styles/globals.css";
 
 const defaultQueryFn = async ({ queryKey }) => {
   return await fetch(queryKey).then((res) => res.json());
@@ -51,6 +51,7 @@ const MyApp = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || ((page) => page);
 
   usePreviousRoute();
+  useContracts();
 
   useEffect(() => {
     router.events.on("routeChangeComplete", pageview);
@@ -69,7 +70,6 @@ const MyApp = ({ Component, pageProps }) => {
       </Head>
       <GlobalContext.Provider value={global?.attributes}>
         <QueryClientProvider client={queryClient}>
-          <Contracts />
           <Script
             id="gtag-base"
             strategy="afterInteractive"

@@ -1,11 +1,11 @@
 import React from "react";
-import Section from "./Section";
+import Section from "../../components/Section";
 import Image from "next/image";
-import { mdSize, lgSize, xl2Size } from "../constants";
-import { useViewWidth } from "../hooks";
+import { mdSize, lgSize, xl2Size } from "../../constants";
+import { useViewWidth } from "../../hooks";
 import { Typography } from "@originprotocol/origin-storybook";
-import { assetRootPath } from "../utils/image";
-import { Gradient2Button } from "../components";
+import { assetRootPath } from "../../utils/image";
+import { Gradient2Button } from "../../components";
 
 function SecretSauce() {
   const width = useViewWidth();
@@ -15,7 +15,7 @@ function SecretSauce() {
       <Typography.H3 className="pt-14 md:pt-[120px] mb-4 md:mb-20 w-full text-center">
         Not-so-secret sauce
       </Typography.H3>
-      <div className="relative h-fit flex flex-col lg:flex-row justify-center items-center">
+      <div className="relative h-fit flex flex-col lg:!flex-row justify-center items-center">
         <div className="lg:w-3/5 xl:w-1/3 mb-12 lg:mb-0 lg:mr-24">
           <p className="font-sansInter font-normal text-base xl:text-lg mb-6">
             Multiple factors contribute to OUSD outperforming its underlying
@@ -35,10 +35,10 @@ function SecretSauce() {
             yield, but the reality is that much of OUSD&apos;s supply is held in
             AMMs where liquidity providers are motivated to forego their yield
             in exchange for other incentives. <br />
-            <br /> Additional sources of OUSD’s above-market yield include exit
-            fees, smart rebalancing, and automated compounding. As the protocol
-            grows, OUSD holders enjoy greater economies of scale with the cost
-            of funds management spread out over a larger pool of users.
+            <br /> Additional sources of OUSD&apos;s above-market yield include
+            exit fees, smart rebalancing, and automated compounding. As the
+            protocol grows, OUSD holders enjoy greater economies of scale with
+            the cost of funds management spread out over a larger pool of users.
           </p>
         </div>
         <div

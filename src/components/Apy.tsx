@@ -109,7 +109,7 @@ const Apy = ({ apy, apyData }) => {
             A high-yield, <span className="text-gradient2 py-1">low-risk </span>
             DeFi strategy
           </Typography.H6>
-          <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-[#b5beca]">
+          <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-subheading">
             Grow your stablecoin portfolio by swapping USDC, USDT, or DAI to
             OUSD. Yields are generated on-chain, distributed directly to your
             wallet, and compounded automatically. Your funds are never risked on
@@ -126,10 +126,10 @@ const Apy = ({ apy, apyData }) => {
                       2
                     ) + "% "}
                   </Typography.H2>
-                  <Typography.H7 className="text-sm font-normal md:text-2xl text-[#b5beca] mt-[4px] xl:mt-0 xl:inline lg:text-left opacity-70">{`Trailing ${apyDays}-day APY`}</Typography.H7>
+                  <Typography.H7 className="text-sm font-normal md:text-2xl text-subheading mt-[4px] xl:mt-0 xl:inline lg:text-left opacity-70">{`Trailing ${apyDays}-day APY`}</Typography.H7>
                 </div>
                 <div className="flex flex-col w-[286px] sm:w-[425px] mt-6 lg:mt-0 mx-[auto] lg:mx-0">
-                  <Typography.Body3 className="text-sm md:text-base text-[#b5beca]">
+                  <Typography.Body3 className="text-sm md:text-base text-subheading">
                     Moving average
                   </Typography.Body3>
                   <div className="flex flex-row justify-between mt-[12px]">
@@ -149,14 +149,14 @@ const Apy = ({ apy, apyData }) => {
                               className={`w-full h-full py-[14px] rounded-lg ${
                                 apyDays === days
                                   ? "gradient4"
-                                  : "text-[#b5beca]"
+                                  : "text-subheading"
                               }`}
                             >
                               <Typography.Body3
                                 className={`${
                                   apyDays === days
                                     ? "text-[#fafbfb] font-medium"
-                                    : "text-[#b5beca]"
+                                    : "text-subheading"
                                 }`}
                               >{`${days}-day`}</Typography.Body3>
                             </div>

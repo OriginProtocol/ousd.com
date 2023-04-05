@@ -2,17 +2,15 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
-import Animation from "../src/components/Animation";
 import Apy from "../src/components/Apy";
 import Allocation from "../src/components/Allocation";
 import formatSeo from "../src/utils/seo";
 import transformLinks from "../src/utils/transformLinks";
 import Collateral from "../src/components/Collateral";
-import Ogv from "../src/components/Ogv";
 import Footer from "../src/components/Footer";
 import Seo from "../src/components/strapi/seo";
 import capitalize from "lodash/capitalize";
-import { SecretSauce, Faq } from "../src/components";
+import { Hero, SecretSauce, Faq, Ogv } from "../src/homepage/sections";
 import { useRouter } from "next/router";
 import { fetchAPI } from "../lib/api";
 import { fetchApy } from "../lib/apy";
@@ -20,23 +18,35 @@ import { fetchApyHistory } from "../lib/apyHistory";
 import { fetchAllocation } from "../lib/allocation";
 import { fetchCollateral } from "../lib/collateral";
 import { fetchOgvStats } from "../lib/ogv";
-import { Typography } from "@originprotocol/origin-storybook";
+import { Header, Typography } from "@originprotocol/origin-storybook";
 import { assetRootPath } from "../src/utils/image";
 import { setupContracts, fetchTvl } from "../src/utils/contracts";
+import {
+  Audit,
+  FaqData,
+  ApyHistory,
+  Strategies,
+  Collateral as CollateralType,
+  OgvStats,
+} from "../src/homepage/types";
+import { PageSeo as SeoType, Link as LinkType } from "../src/types";
 
-interface FaqData {
-  id: number;
-  attributes: {
-    question: string;
-    answer: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-  };
+interface HomeProps {
+  audits: Audit[];
+  seo: SeoType;
+  navLinks: LinkType[];
+  faq: FaqData[];
+  apy: number[];
+  apyHistory: ApyHistory;
+  strategies: Strategies;
+  collateral: CollateralType[];
+  initialTvl: number;
+  ogvStats: OgvStats;
 }
 
+const sectionOverrideCss = "px-4 sm:px-4 md:px-4 lg:!px-10";
+
 const Home = ({
-  locale,
   audits,
   seo,
   navLinks,
@@ -47,7 +57,7 @@ const Home = ({
   collateral,
   initialTvl,
   ogvStats,
-}) => {
+}: HomeProps) => {
   const { pathname } = useRouter();
   const active = capitalize(pathname.slice(1));
 
@@ -57,7 +67,14 @@ const Home = ({
         <title>Origin Dollar</title>
       </Head>
       <Seo seo={seo} />
-      <Animation navLinks={navLinks} active={active} initialTvl={initialTvl} />
+
+      <Header
+        className={sectionOverrideCss}
+        mappedLinks={navLinks}
+        webProperty="ousd"
+        active={active}
+      />
+      <Hero initialTvl={initialTvl} sectionOverrideCss={sectionOverrideCss} />
       <Apy apy={apy} apyData={apyHistory} />
       <SecretSauce />
       <Allocation strategies={strategies} />
@@ -72,7 +89,7 @@ const Home = ({
             Audited by leading security experts
           </Typography.H6>
           <Typography.Body3
-            className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-[#b5beca]"
+            className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-subheading"
             style={{ fontDisplay: "swap" }}
           >
             Securing your funds is OUSD&apos;s top priority. Changes to the
@@ -100,7 +117,7 @@ const Home = ({
                           )}
                           fill
                           sizes="(max-width: 768px) 56px, (max-width: 1024px) 80px, (max-width: 1536px) 56px, 80px"
-                          alt={audit.name}
+                          alt={audit.attributes.name}
                         />
                       </div>
                     </div>
@@ -128,7 +145,7 @@ const Home = ({
         </div>
       </section>
       <Ogv stats={ogvStats} />
-      <Faq locale={null} faq={faq} />
+      <Faq faq={faq} />
       <Footer />
     </>
   );

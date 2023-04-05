@@ -122,7 +122,7 @@ export default function Footer() {
               </Link>
             </div>
           </div>
-          <div className="flex flex-col lg:flex-row justify-between pt-8 lg:pt-10 text-[#b5beca]">
+          <div className="flex flex-col lg:flex-row justify-between pt-8 lg:pt-10 text-subheading">
             <Link
               href={process.env.NEXT_PUBLIC_WEBSITE_URL}
               target="_blank"
