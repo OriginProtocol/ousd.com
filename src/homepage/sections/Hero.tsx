@@ -37,7 +37,7 @@ const Hero = ({ initialTvl, sectionOverrideCss }: HeroProps) => {
       parseFloat(totalVeSupply)
     ) || 0;
 
-  ("px-4 sm:px-4 md:px-4 lg:!px-10");
+  ("px-4 sm:px-4 md:px-4 lg:px-10");
 
   return (
     <>
@@ -81,10 +81,10 @@ const Hero = ({ initialTvl, sectionOverrideCss }: HeroProps) => {
         />
         <div
           className={
-            "relative bg-gradient2 rounded-[100px] p-[1px] h-fit mt-7 lg:mt-14 w-full md:!w-fit"
+            "relative bg-gradient2 rounded-[100px] p-[1px] h-fit mt-7 lg:mt-14 w-full md:w-fit"
           }
         >
-          <div className="relative bg-origin-bg-black rounded-[100px] px-4 lg:!px-6 py-2 text-origin-white flex items-center justify-center md:justify-start">
+          <div className="relative bg-origin-bg-black rounded-[100px] px-4 lg:px-6 py-2 text-origin-white flex items-center justify-center md:justify-start">
             <Image
               src={assetRootPath("/images/ousd.svg")}
               width={64}
@@ -104,7 +104,7 @@ const Hero = ({ initialTvl, sectionOverrideCss }: HeroProps) => {
         {width < mdSize && <GetOusdButton />}
 
         {/* Wallet container */}
-        <div className="mt-10 lg:mt-20 bg-origin-bg-dgreyt w-full flex flex-col lg:!flex-row rounded-lg lg:!pr-16 relative">
+        <div className="mt-10 lg:mt-20 bg-origin-bg-dgreyt w-full flex flex-col lg:flex-row rounded-lg lg:pr-16 relative">
           {width < lgSize && (
             <OusdList className="px-6 pt-6" bullets={bullets} />
           )}
@@ -134,8 +134,8 @@ const GetOusdButton = () => {
           "noopener noreferrer"
         )
       }
-      outerDivClassName="w-full md:!w-auto mt-4 md:mt-0"
-      className="bg-transparent hover:bg-transparent w-full md:!w-auto lg:!px-20 py-3 lg:!py-5"
+      outerDivClassName="w-full md:w-auto mt-4 md:mt-0"
+      className="bg-transparent hover:bg-transparent w-full md:w-auto lg:px-20 py-3 lg:py-5"
     >
       <Typography.H7 className="font-normal text-center">
         Get OUSD

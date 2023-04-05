@@ -47,7 +47,7 @@ interface HomeProps {
   ogvStats: OgvStats;
 }
 
-const sectionOverrideCss = "px-4 sm:px-4 md:px-4 lg:!px-10";
+const sectionOverrideCss = "px-4 sm:px-4 md:px-4 lg:px-10";
 
 const Home = ({
   audits,

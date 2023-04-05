@@ -1,7 +1,7 @@
+import bundledCss from "@originprotocol/origin-storybook/lib/styles.css";
 import "../styles/globals.css";
 import Script from "next/script";
 //@ts-ignore
-import bundledCss from "@originprotocol/origin-storybook/lib/styles.css";
 import App from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -14,7 +14,6 @@ import { GTM_ID, pageview } from "../lib/gtm";
 import transformLinks from "../src/utils/transformLinks";
 import { useContracts, usePreviousRoute } from "../src/hooks";
 import { createContext, useEffect } from "react";
-import "../styles/globals.css";
 
 const defaultQueryFn = async ({ queryKey }) => {
   return await fetch(queryKey).then((res) => res.json());

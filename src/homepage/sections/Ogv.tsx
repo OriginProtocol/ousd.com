@@ -40,20 +40,20 @@ const Ogv = ({ stats }: OgvProps) => {
       <section className="gradient3 relative z-0">
         <div className="relative divide-black divide-y-2">
           <div>
-            <div className="flex flex-col lg:!flex-row overflow-hidden max-w-screen-[1432px] mx-auto px-8 md:px-16 py-14 lg:!py-[120px] lg:!pl-[134px] lg:!pr-[208px] text-center lg:!text-left space-x-0 lg:!space-x-20 xl:space-x-0">
-              <div className="lg:!w-2/3">
+            <div className="flex flex-col lg:flex-row overflow-hidden max-w-screen-[1432px] mx-auto px-8 md:px-16 py-14 lg:py-[120px] lg:pl-[134px] lg:pr-[208px] text-center lg:text-left space-x-0 lg:space-x-20 xl:space-x-0">
+              <div className="lg:w-2/3">
                 <Typography.H2
-                  className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px] lg:!text-left"
+                  className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px] lg:text-left"
                   style={{ fontWeight: 700 }}
                 >
                   Governed by OGV stakers
                 </Typography.H2>
-                <Typography.Body3 className="mt-[16px] leading-[28px] lg:!text-left">
+                <Typography.Body3 className="mt-[16px] leading-[28px] lg:text-left">
                   {
                     "OUSD's future is shaped by voters who lock their OGV and participate in decentralized governance."
                   }
                 </Typography.Body3>
-                <div className="mt-8 block lg:!hidden">
+                <div className="mt-8 block lg:hidden">
                   <Image
                     src={assetRootPath(`/images/ogv.svg`)}
                     width="186"
@@ -62,22 +62,22 @@ const Ogv = ({ stats }: OgvProps) => {
                     alt="ogv"
                   />
                 </div>
-                <div className="flex flex-col justify-between w-full my-8 md:my-20 lg:!w-4/5 text-left font-weight-bold">
+                <div className="flex flex-col justify-between w-full my-8 md:my-20 lg:w-4/5 text-left font-weight-bold">
                   <div className="flex flex-row justify-between">
                     <div className="w-36 md:w-96">
-                      <Typography.Body3 className="text-xs lg:!text-base font-bold tracking-[0.06em]">
+                      <Typography.Body3 className="text-xs lg:text-base font-bold tracking-[0.06em]">
                         {"OGV PRICE"}
                       </Typography.Body3>
-                      <Typography.H5 className="mt-[4px] font-bold lg:!text-[28px] xl:text-[40px]">{`$${formatCurrency(
+                      <Typography.H5 className="mt-[4px] font-bold lg:text-[28px] xl:text-[40px]">{`$${formatCurrency(
                         price,
                         4
                       )}`}</Typography.H5>
                     </div>
                     <div className="w-36 md:w-96">
-                      <Typography.Body3 className="text-xs lg:!text-base font-bold tracking-[0.06em]">
+                      <Typography.Body3 className="text-xs lg:text-base font-bold tracking-[0.06em]">
                         {"OGV MARKET CAP"}
                       </Typography.Body3>
-                      <Typography.H5 className="mt-[4px] font-bold lg:!text-[28px] xl:text-[40px]">{`$${formatCurrency(
+                      <Typography.H5 className="mt-[4px] font-bold lg:text-[28px] xl:text-[40px]">{`$${formatCurrency(
                         circulatingSupply * price,
                         0
                       )}`}</Typography.H5>
@@ -85,24 +85,24 @@ const Ogv = ({ stats }: OgvProps) => {
                   </div>
                   <div className="flex flex-row justify-between mt-10">
                     <div className="w-36 md:w-96">
-                      <Typography.Body3 className="text-xs lg:!text-base font-bold tracking-[0.06em]">
+                      <Typography.Body3 className="text-xs lg:text-base font-bold tracking-[0.06em]">
                         {"CIRCULATING SUPPLY"}
                       </Typography.Body3>
-                      <Typography.H5 className="mt-[4px] font-bold lg:!text-[28px] xl:text-[40px]">
+                      <Typography.H5 className="mt-[4px] font-bold lg:text-[28px] xl:text-[40px]">
                         {formatCurrency(circulatingSupply, 0)}
                       </Typography.H5>
                     </div>
                     <div className="w-36 md:w-96">
-                      <Typography.Body3 className="text-xs lg:!text-base font-bold tracking-[0.06em]">
+                      <Typography.Body3 className="text-xs lg:text-base font-bold tracking-[0.06em]">
                         {"TOTAL SUPPLY"}
                       </Typography.Body3>
-                      <Typography.H5 className="mt-[4px] font-bold lg:!text-[28px] xl:text-[40px]">
+                      <Typography.H5 className="mt-[4px] font-bold lg:text-[28px] xl:text-[40px]">
                         {formatCurrency(totalSupply, 0)}
                       </Typography.H5>
                     </div>
                   </div>
                 </div>{" "}
-                <span className="hidden lg:!flex">
+                <span className="hidden lg:flex">
                   <Link
                     href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
                     target="_blank"
@@ -138,19 +138,19 @@ const Ogv = ({ stats }: OgvProps) => {
                 </span>*/}
               </div>
               <div>
-                <div className="hidden lg:!block">
+                <div className="hidden lg:block">
                   <Image
                     src={assetRootPath(`/images/ogv.svg`)}
                     width="397"
                     height="397"
-                    className="hidden lg:!block"
+                    className="hidden lg:block"
                     alt="ogv"
                   />
                 </div>
                 <Link
                   href="/ogv-dashboard"
                   target="_parent"
-                  className="bg-black bttn mb-10 lg:!hidden"
+                  className="bg-black bttn mb-10 lg:hidden"
                 >
                   <Typography.H7 className="font-normal">
                     View dashboard
@@ -159,7 +159,7 @@ const Ogv = ({ stats }: OgvProps) => {
                 <Typography.Body3 className="mt-8 text-center text-white opacity-75">
                   OGV is listed on top exchanges
                 </Typography.Body3>
-                <div className="w-full flex flex-col justify-between items-center mt-0 md:mt-3 mb-8 lg:!mx-0">
+                <div className="w-full flex flex-col justify-between items-center mt-0 md:mt-3 mb-8 lg:mx-0">
                   <div className="flex justify-between">
                     <Link
                       href="https://curve.fi/#/ethereum/pools/factory-crypto-205/swap"
@@ -202,7 +202,7 @@ const Ogv = ({ stats }: OgvProps) => {
                   href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bttn bg-black block lg:!hidden text-center"
+                  className="bttn bg-black block lg:hidden text-center"
                 >
                   <Typography.H7 className="font-normal">Buy OGV</Typography.H7>
                 </Link>
@@ -226,7 +226,7 @@ const Ogv = ({ stats }: OgvProps) => {
                 </Typography.H2>
                 <Typography.Body3 className="mt-[16px] mb-10 font-normal text-[#fafbfb]">
                   Fees and voting rights accrue to OGV stakers. Control the
-                  future of OUSD <br className="hidden lg:!block" />
+                  future of OUSD <br className="hidden lg:block" />
                   and profit from its growth.
                 </Typography.Body3>
                 <Link

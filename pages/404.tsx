@@ -33,7 +33,7 @@ const Error404 = ({ navLinks }) => {
                 {"Sorry, we can’t seem to find that page"}
               </Typography.H3>
             </div>
-            <Link href="/" className="bttn !mt-10 md:!mt-20 !ml-0 gradient2">
+            <Link href="/" className="bttn !mt-10 md:mt-20 !ml-0 gradient2">
               <Typography.H7
                 className="font-normal"
                 style={{ fontDisplay: "swap" }}

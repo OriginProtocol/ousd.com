@@ -72,7 +72,7 @@ function SecretSauce() {
       </div>
       <div className="w-full flex justify-center mt-10 d:mt-20">
         <Gradient2Button
-          outerDivClassName="w-full md:!w-fit mb-14 md:mb-[120px]"
+          outerDivClassName="w-full md:w-fit mb-14 md:mb-[120px]"
           className="bg-transparent hover:bg-transparent text-center w-full"
         >
           <a

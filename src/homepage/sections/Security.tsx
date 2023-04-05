@@ -80,7 +80,7 @@ const Security = ({ audits, sectionOverrideCss }: SecurityProps) => {
         <SecurityFeature
           title="48hr timelock"
           subtitle="If a malicious vote were to ever pass, users are given 48hrs to withdraw their funds before any new code is implemented."
-          className="mt-6 w-full md:w-1/2 md:!mr-6"
+          className="mt-6 w-full md:w-1/2 md:mr-6"
         >
           <div className="w-full flex justify-center">
             <Image
