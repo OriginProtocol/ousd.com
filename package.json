@@ -61,7 +61,9 @@
     "wagmi": "^0.12.7"
   },
   "devDependencies": {
+    "@types/he": "^1.2.0",
     "@types/lodash": "^4.14.191",
+    "@types/sanitize-html": "^2.9.0",
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.17",
     "tailwind": "^4.0.0",
