@@ -1,7 +1,7 @@
+//@ts-ignore
 import bundledCss from "@originprotocol/origin-storybook/lib/styles.css";
 import "../styles/globals.css";
 import Script from "next/script";
-//@ts-ignore
 import App from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
