@@ -36,7 +36,7 @@ export const getApy = async () => {
         },
         {
           id: "total",
-          label: "Current",
+          label: "APY",
           data: total,
         },
       ],

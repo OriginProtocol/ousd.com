@@ -40,7 +40,7 @@ export const getProtocolRevenue = async () => {
       datasets: [
         {
           id: "total",
-          label: "Current",
+          label: "Daily Revenue",
           data: total,
         },
       ],

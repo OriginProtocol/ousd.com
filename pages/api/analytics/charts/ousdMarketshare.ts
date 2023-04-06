@@ -20,7 +20,7 @@ export const getOUSDMarketshareRelativeToETH = async () => {
       datasets: [
         {
           id: "total",
-          label: "Current",
+          label: "%",
           data: total.map((item) => item * 100),
         },
       ],
