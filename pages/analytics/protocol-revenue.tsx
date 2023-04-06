@@ -59,7 +59,9 @@ const ProtocolChart = ({
   chartOptions,
   filter,
 }) => {
-  const dailyProtocolRevenue = "";
+  const last2Days = takeRight(data?.datasets?.[0]?.data, 2);
+  const dailyRevenue = sumOfDifferences(last2Days);
+
   return (
     <LayoutBox
       loadingClassName="flex items-center justify-center h-[350px] w-full"
@@ -68,7 +70,7 @@ const ProtocolChart = ({
       <div className="flex flex-row justify-between w-full h-[150px] p-4 md:p-6">
         <DefaultChartHeader
           title="Daily Protocol Revenue"
-          display={dailyProtocolRevenue}
+          display={`$${formatCurrency(dailyRevenue, 0)}`}
           date={last(data?.labels)}
         />
         <div className="flex flex-col space-y-2">

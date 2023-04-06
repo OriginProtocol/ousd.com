@@ -75,9 +75,7 @@ class DuneClient {
 
   private async _checkCache<T>(key) {
     try {
-      const parsedResult = JSON.parse(await this.cacheClient.get(key));
-      console.log({ parsedResult });
-      return parsedResult;
+      return JSON.parse(await this.cacheClient.get(key));
     } catch (error) {
       console.error(
         logPrefix,
