@@ -1,5 +1,5 @@
 interface OgvStats {
-  ogvPrice: number;
+  price: number;
   circulatingSupply: number;
   totalSupply: number;
 }
