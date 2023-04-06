@@ -124,10 +124,6 @@ class DuneClient {
 
   private async _get<T>(url: string): Promise<T> {
     console.debug(logPrefix, `GET received input url=${url}`);
-    const result = await this._checkCache(url);
-    if (result) {
-      return result;
-    }
     const response = fetch(url, {
       method: "GET",
       headers: {
@@ -178,23 +174,10 @@ class DuneClient {
     return response as GetStatusResponse;
   }
 
-  async getResult(
-    jobID: string,
-    cacheExpiration: number
-  ): Promise<ResultsResponse> {
+  async getResult(jobID: string): Promise<ResultsResponse> {
     const key = `${BASE_URL}/execution/${jobID}/results`;
     const response: ResultsResponse = await this._get(key);
     console.debug(logPrefix, `get_result response ${JSON.stringify(response)}`);
-    // Store in cache for `cacheExpiration`
-    if (this.cacheClient.status === CACHE_READY_STATE) {
-      const cachedResultSet = JSON.stringify(response);
-      await this.cacheClient.set(key, cachedResultSet, "EX", cacheExpiration);
-      console.log(
-        logPrefix,
-        `get_result cached response ${cachedResultSet}`,
-        `${cacheExpiration} seconds`
-      );
-    }
     return response as ResultsResponse;
   }
 
@@ -217,25 +200,55 @@ class DuneClient {
         parameters
       )}`
     );
-    const { execution_id: jobID } = await this.execute(queryID, parameters);
-    let { state } = await this.getStatus(jobID);
-    while (!TERMINAL_STATES.includes(state)) {
-      console.info(
-        logPrefix,
-        `waiting for query execution ${jobID} to complete: current state ${state}`
-      );
-      await sleep(pingFrequency);
-      state = (await this.getStatus(jobID)).state;
-    }
-    if (state === ExecutionState.COMPLETED) {
-      console.log({
-        state,
-      });
-      return this.getResult(jobID, cacheExpiration);
+
+    // Check redis cache
+    console.log("Checking cahche meow", {
+      queryID,
+    });
+
+    const result = await this._checkCache(String(queryID));
+
+    console.log("CACHE RESULT", {
+      queryID,
+      result,
+    });
+
+    if (result) {
+      return result;
     } else {
-      const message = `refresh (execution ${jobID}) yields incomplete terminal state ${state}`;
-      console.error(logPrefix, message);
-      throw new DuneError(message);
+      const { execution_id: jobID } = await this.execute(queryID, parameters);
+      let { state } = await this.getStatus(jobID);
+      while (!TERMINAL_STATES.includes(state)) {
+        console.info(
+          logPrefix,
+          `waiting for query execution ${jobID} to complete: current state ${state}`
+        );
+        await sleep(pingFrequency);
+        state = (await this.getStatus(jobID)).state;
+      }
+      if (state === ExecutionState.COMPLETED) {
+        const result = this.getResult(jobID);
+        // Store in cache by jobID and `cacheExpiration`
+        if (this.cacheClient.status === CACHE_READY_STATE) {
+          const cachedResultSet = JSON.stringify(result);
+          await this.cacheClient.set(
+            String(queryID),
+            cachedResultSet,
+            "EX",
+            cacheExpiration
+          );
+          console.log(
+            logPrefix,
+            `get_result cached response for ${queryID}: ${cacheExpiration} seconds`
+          );
+        }
+
+        return result;
+      } else {
+        const message = `refresh (execution ${jobID}) yields incomplete terminal state ${state}`;
+        console.error(logPrefix, message);
+        throw new DuneError(message);
+      }
     }
   }
 }
