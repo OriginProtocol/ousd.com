@@ -87,10 +87,10 @@ const Home = ({
         sectionOverrideCss={sectionOverrideCss}
       />
       <Apy daysToApy={daysToApy} apyData={apyHistory} />
-      <SecretSauce />
       <Allocation strategies={strategies} />
       <Collateral collateral={collateral} strategies={strategies} />
       <Security audits={audits} sectionOverrideCss={sectionOverrideCss} />
+      <SecretSauce />
       <Ogv stats={ogvStats} />
       <Faq faq={faq} />
       <Footer />
