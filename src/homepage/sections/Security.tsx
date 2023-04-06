@@ -26,19 +26,17 @@ const Security = ({ audits, sectionOverrideCss }: SecurityProps) => {
         className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"
         style={{ fontWeight: 500 }}
       >
-        Audited by leading security experts
+        Security first
       </Typography.H6>
       <Typography.Body3
         className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-subheading"
         style={{ fontDisplay: "swap" }}
       >
-        Securing your funds is OUSD&apos;s top priority. Changes to the protocol
-        are reviewed by internal and external auditors on an ongoing basis.
+        Rigorous processes and safeguards have been implemented to protect OUSD.
       </Typography.Body3>
       <SecurityFeature
-        title="Audited by leading security experts"
-        subtitle="Securing your funds is OUSD's top priority. Changes to the protocol
-        are reviewed by internal and external auditors on an ongoing basis."
+        title="Audited by world-class experts"
+        subtitle="Changes to the protocol are reviewed by internal and external auditors on an ongoing basis."
         className="mt-10 md:mt-20"
       >
         <div className="grid grid-rows-2 grid-cols-2 gap-y-10 lg:flex lg:flex-row lg:justify-between mx-auto">
@@ -78,8 +76,8 @@ const Security = ({ audits, sectionOverrideCss }: SecurityProps) => {
       </SecurityFeature>
       <div className="flex flex-col md:flex-row relative mb-10 md:mb-20 max-w-[1134px] mx-auto">
         <SecurityFeature
-          title="48hr timelock"
-          subtitle="If a malicious vote were to ever pass, users are given 48hrs to withdraw their funds before any new code is implemented."
+          title="48-hour timelock"
+          subtitle="If a malicious vote were to ever pass, users are given 48 hours to withdraw their funds before any new code is implemented."
           className="mt-6 w-full md:w-1/2 md:mr-6"
         >
           <div className="w-full flex justify-center">
@@ -93,7 +91,7 @@ const Security = ({ audits, sectionOverrideCss }: SecurityProps) => {
         </SecurityFeature>
         <SecurityFeature
           title="Bug bounties"
-          subtitle="Security is our top priority and we've taken every effort to make sure our code is secure and works as intended. However, we still offer bug bounties on any vulnerabilities that may have gone undetected"
+          subtitle="A $250,000 reward is offered through Immunefi, Web3's leading bug bounty platform. In over two years, no major vulnerability has been identified in OUSD's open-source code."
           className="mt-6 w-full md:w-1/2"
         >
           <div className="w-full flex justify-center">
