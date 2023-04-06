@@ -60,29 +60,30 @@ class DuneClient {
 
   constructor(apiKey: string) {
     this.apiKey = apiKey;
-
-    if (process.env.REDIS_TLS_URL) {
-      this.cacheClient = new Redis(process.env.REDIS_TLS_URL, {
+    if (process.env.REDIS_URL) {
+      this.cacheClient = new Redis(process.env.REDIS_URL, {
         tls: {
           rejectUnauthorized: false,
         },
+      });
+
+      this.cacheClient.on("ready", function () {
+        console.log("Cache connected for DUNE API");
       });
     }
   }
 
   private async _checkCache<T>(key) {
     try {
-      console.debug(logPrefix, `_checkCache key=${key}`);
-      if (this.cacheClient.status !== CACHE_READY_STATE) {
-        return null;
-      }
-      return this.cacheClient.get(key);
+      const parsedResult = JSON.parse(await this.cacheClient.get(key));
+      console.log({ parsedResult });
+      return parsedResult;
     } catch (error) {
       console.error(
         logPrefix,
         `caught unhandled response error ${JSON.stringify(error)}`
       );
-      throw error;
+      return null;
     }
   }
 
@@ -200,21 +201,9 @@ class DuneClient {
         parameters
       )}`
     );
-
-    // Check redis cache
-    console.log("Checking cahche meow", {
-      queryID,
-    });
-
-    const result = await this._checkCache(String(queryID));
-
-    console.log("CACHE RESULT", {
-      queryID,
-      result,
-    });
-
-    if (result) {
-      return result;
+    const data = await this._checkCache(String(queryID));
+    if (data) {
+      return data as ResultsResponse;
     } else {
       const { execution_id: jobID } = await this.execute(queryID, parameters);
       let { state } = await this.getStatus(jobID);
@@ -227,7 +216,7 @@ class DuneClient {
         state = (await this.getStatus(jobID)).state;
       }
       if (state === ExecutionState.COMPLETED) {
-        const result = this.getResult(jobID);
+        const result = await this.getResult(jobID);
         // Store in cache by jobID and `cacheExpiration`
         if (this.cacheClient.status === CACHE_READY_STATE) {
           const cachedResultSet = JSON.stringify(result);
@@ -242,7 +231,6 @@ class DuneClient {
             `get_result cached response for ${queryID}: ${cacheExpiration} seconds`
           );
         }
-
         return result;
       } else {
         const message = `refresh (execution ${jobID}) yields incomplete terminal state ${state}`;
