@@ -84,7 +84,7 @@ const Hero = ({ initialTvl, sectionOverrideCss }: HeroProps) => {
             "relative bg-gradient2 rounded-[100px] p-[1px] h-fit mt-7 lg:mt-14 w-full md:w-fit"
           }
         >
-          <div className="relative bg-origin-bg-black rounded-[100px] px-4 lg:px-6 py-2 text-origin-white flex items-center justify-center md:justify-start">
+          <div className="relative bg-origin-bg-black rounded-[100px] px-4 lg:px-2 py-2 text-origin-white flex items-center justify-center md:justify-start">
             <Image
               src={assetRootPath("/images/ousd.svg")}
               width={64}

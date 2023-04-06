@@ -40,7 +40,7 @@ export default function Footer() {
                 href={process.env.NEXT_PUBLIC_GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mr-10 mt-[20px] lg!mt-2"
+                className="mr-10 mt-[20px] lg:mt-2"
               >
                 <Typography.Body3 className="text-[#fafbfb]">
                   GitHub
