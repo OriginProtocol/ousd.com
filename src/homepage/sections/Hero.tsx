@@ -1,24 +1,23 @@
-import React, { FunctionComponent } from "react";
-import Link from "next/link";
+import React from "react";
 import Image from "next/image";
-import { Typography, Header } from "@originprotocol/origin-storybook";
-import { Link as LinkType } from "../../types";
+import { Typography } from "@originprotocol/origin-storybook";
 import { Gradient2Button, Section } from "../../components";
 import { assetRootPath } from "../../utils/image";
-import { getRewardsApy } from "../../utils/math";
-import { lgSize, mdSize, stakingDecayFactor } from "../../constants";
+import { formatCurrency } from "../../utils/math";
+import { lgSize, mdSize } from "../../constants";
 import { useOgv, useViewWidth } from "../../hooks";
 import { GrowingWallet } from "../components";
-import { commify } from "ethers/lib/utils";
 import { commifyToDecimalPlaces } from "../../utils";
 import { twMerge } from "tailwind-merge";
+import { Dictionary } from "lodash";
 
 interface HeroProps {
+  daysToApy: Dictionary<number>;
   initialTvl: number;
   sectionOverrideCss?: string;
 }
 
-const Hero = ({ initialTvl, sectionOverrideCss }: HeroProps) => {
+const Hero = ({ daysToApy, initialTvl, sectionOverrideCss }: HeroProps) => {
   const { totalVeSupply } = useOgv();
   const width = useViewWidth();
 
@@ -29,13 +28,6 @@ const Hero = ({ initialTvl, sectionOverrideCss }: HeroProps) => {
     "AAA security rating from Insurance",
     `$${commifyToDecimalPlaces(initialTvl, 2)} total value`,
   ];
-
-  const stakingApy =
-    getRewardsApy(
-      100 * stakingDecayFactor ** (48 / 12),
-      100,
-      parseFloat(totalVeSupply)
-    ) || 0;
 
   ("px-4 sm:px-4 md:px-4 lg:px-10");
 
@@ -94,9 +86,14 @@ const Hero = ({ initialTvl, sectionOverrideCss }: HeroProps) => {
             />
             <div className="flex items-end mr-12">
               <Typography.H3 className="mr-1 md:mr-3">
-                {stakingApy.toFixed(2)}%
+                {formatCurrency(daysToApy[30] * 100, 2)}%
               </Typography.H3>
-              <Typography.H7 className="font-normal md:mb-2">APY</Typography.H7>
+              <div className="flex flex-col">
+                <Typography.Body3 className="text-[11px] text-table-title translate-y-[5px] md:translate-y-0">
+                  30-day
+                </Typography.Body3>
+                <Typography.H7 className="font-normal">APY</Typography.H7>
+              </div>
             </div>
             {width >= mdSize && <GetOusdButton />}
           </div>
