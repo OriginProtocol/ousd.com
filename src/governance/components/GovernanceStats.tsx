@@ -17,7 +17,7 @@ const GovernanceStats = ({ title, value, className }: GovernanceStatsProps) => {
       )}
     >
       <div className="text-center lg:text-left">
-        <Typography.H6>{value}</Typography.H6>
+        <Typography.H6 className="text-2xl">{value}</Typography.H6>
         <Typography.Body2 className="text-table-title">
           {title}
         </Typography.Body2>
