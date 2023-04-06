@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import transformLinks from "../utils/transformLinks";
-import Footer from "./Footer";
-import { Typography, Header } from "@originprotocol/origin-storybook";
-import { fetchAPI } from "../../lib/api";
-import { assetRootPath } from "../utils/image";
+import { Typography } from "@originprotocol/origin-storybook";
+import { assetRootPath } from "../../utils/image";
 
-const Faq = ({ locale, faq }) => {
+const Faq = ({ faq }) => {
   const [open, setOpen] = useState({});
 
   return (

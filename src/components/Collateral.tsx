@@ -77,7 +77,7 @@ const Collateral = ({ collateral, strategies }) => {
           >
             Always 100% collateralized
           </Typography.H6>
-          <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-[#b5beca]">
+          <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-subheading">
             OUSD is backed 1:1 by the most trusted collateral in crypto.
             Reserves are verifiable on-chain. You can redeem OUSD immediately at
             any time.
@@ -141,7 +141,7 @@ const Collateral = ({ collateral, strategies }) => {
                               )}%`}
                             </Typography.Body>
                             <Typography.Body
-                              className="text-[12px] md:text-[16px] text-[#b5beca]"
+                              className="text-[12px] md:text-[16px] text-subheading"
                               style={{ fontWeight: 400 }}
                             >
                               {`$${formatCurrency(token.total, 0)}`}
@@ -187,7 +187,7 @@ const Collateral = ({ collateral, strategies }) => {
                           alt="External link"
                         />
                       </Link>
-                      <Typography.Body3 className="mt-2 md:mt-4 text-[12px] leading-[20px] text-[#b5beca]">
+                      <Typography.Body3 className="mt-2 md:mt-4 text-[12px] leading-[20px] text-subheading">
                         Collateral
                       </Typography.Body3>
                       <div className="grid grid-cols-2 gap-x-12 gap-y-1 md:gap-y-3 mt-2">
@@ -228,7 +228,7 @@ const Collateral = ({ collateral, strategies }) => {
                                   rel="noopener noreferrer"
                                   className="flex flex-row space-x-1"
                                 >
-                                  <Typography.Body3 className="text-[12px] leading-[19px] text-[#b5beca]">
+                                  <Typography.Body3 className="text-[12px] leading-[19px] text-subheading">
                                     {`$${rounded(
                                       strategies[strategy].holdings[
                                         token.toUpperCase()

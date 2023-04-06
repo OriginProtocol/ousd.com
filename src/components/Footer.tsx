@@ -14,7 +14,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="px-4 sm:px-8 md:px-16 lg:px-[8.375rem]">
+      <footer className="px-4 sm:!px-8 md:px-16 lg:px-[8.375rem]">
         <div className="max-w-[89.5rem] mx-auto relative overflow-hidden py-10 lg:pt-32 lg:pb-10 divide-[#ffffff33] divide-y-2 text-white">
           <div className="flex flex-col lg:flex-row justify-between pb-10 lg:pb-[88px] text-left">
             <div className="relative w-28 h-8 lg:w-32 mb-10 lg:mb-0">
@@ -122,7 +122,7 @@ export default function Footer() {
               </Link>
             </div>
           </div>
-          <div className="flex flex-col lg:flex-row justify-between pt-8 lg:pt-10 text-[#b5beca]">
+          <div className="flex flex-col lg:flex-row justify-between pt-8 lg:pt-10 text-subheading">
             <Link
               href={process.env.NEXT_PUBLIC_WEBSITE_URL}
               target="_blank"
