@@ -1,3 +1,4 @@
+import Redis from "ioredis";
 import { DuneError } from "./error";
 import { QueryParameter } from "./queryParameter";
 import {
@@ -13,27 +14,27 @@ console.debug = function () {};
 export const jobsLookup = {
   apy: {
     queryId: 2206479,
-    jobId: "01GVGDBRYDRTE4HKRQFWW2PAVQ",
+    expiresAfter: 86400,
   },
   totalSupplyOUSD: {
     queryId: 2207035,
-    jobId: "01GVGP1A5BBJN9KRQ1RRV7HFFQ",
+    expiresAfter: 86400,
   },
   protocolRevenue: {
     queryId: 2294306,
-    jobId: "",
+    expiresAfter: 86400,
   },
   totalSupplyBreakdown: {
     queryId: 2207179,
-    jobId: "",
+    expiresAfter: 86400,
   },
   ousdSupplyRelativeEthereum: {
     queryId: 2207183,
-    jobId: "01GVGNA3DYSFVZ5FT0FRYBHGRW",
+    expiresAfter: 86400,
   },
   ousdTradingVolume: {
     queryId: 2207189,
-    jobId: "",
+    expiresAfter: 86400,
   },
 };
 
@@ -50,11 +51,39 @@ const logPrefix = "dune-client:";
 const sleep = (seconds: number) =>
   new Promise((resolve) => setTimeout(resolve, seconds * 1000));
 
+const CACHE_READY_STATE = "ready";
+
 class DuneClient {
   apiKey: string;
 
+  cacheClient;
+
   constructor(apiKey: string) {
     this.apiKey = apiKey;
+
+    if (process.env.REDIS_TLS_URL) {
+      this.cacheClient = new Redis(process.env.REDIS_TLS_URL, {
+        tls: {
+          rejectUnauthorized: false,
+        },
+      });
+    }
+  }
+
+  private async _checkCache<T>(key) {
+    try {
+      console.debug(logPrefix, `_checkCache key=${key}`);
+      if (this.cacheClient.status !== CACHE_READY_STATE) {
+        return null;
+      }
+      return this.cacheClient.get(key);
+    } catch (error) {
+      console.error(
+        logPrefix,
+        `caught unhandled response error ${JSON.stringify(error)}`
+      );
+      throw error;
+    }
   }
 
   private async _handleResponse<T>(
@@ -95,6 +124,10 @@ class DuneClient {
 
   private async _get<T>(url: string): Promise<T> {
     console.debug(logPrefix, `GET received input url=${url}`);
+    const result = await this._checkCache(url);
+    if (result) {
+      return result;
+    }
     const response = fetch(url, {
       method: "GET",
       headers: {
@@ -145,11 +178,23 @@ class DuneClient {
     return response as GetStatusResponse;
   }
 
-  async getResult(jobID: string): Promise<ResultsResponse> {
-    const response: ResultsResponse = await this._get(
-      `${BASE_URL}/execution/${jobID}/results`
-    );
+  async getResult(
+    jobID: string,
+    cacheExpiration: number
+  ): Promise<ResultsResponse> {
+    const key = `${BASE_URL}/execution/${jobID}/results`;
+    const response: ResultsResponse = await this._get(key);
     console.debug(logPrefix, `get_result response ${JSON.stringify(response)}`);
+    // Store in cache for `cacheExpiration`
+    if (this.cacheClient.status === CACHE_READY_STATE) {
+      const cachedResultSet = JSON.stringify(response);
+      await this.cacheClient.set(key, cachedResultSet, "EX", cacheExpiration);
+      console.log(
+        logPrefix,
+        `get_result cached response ${cachedResultSet}`,
+        `${cacheExpiration} seconds`
+      );
+    }
     return response as ResultsResponse;
   }
 
@@ -163,7 +208,8 @@ class DuneClient {
   async refresh(
     queryID: number,
     parameters?: QueryParameter[],
-    pingFrequency: number = 5
+    pingFrequency: number = 5,
+    cacheExpiration: number = 86400
   ): Promise<ResultsResponse> {
     console.info(
       logPrefix,
@@ -182,7 +228,10 @@ class DuneClient {
       state = (await this.getStatus(jobID)).state;
     }
     if (state === ExecutionState.COMPLETED) {
-      return this.getResult(jobID);
+      console.log({
+        state,
+      });
+      return this.getResult(jobID, cacheExpiration);
     } else {
       const message = `refresh (execution ${jobID}) yields incomplete terminal state ${state}`;
       console.error(logPrefix, message);
