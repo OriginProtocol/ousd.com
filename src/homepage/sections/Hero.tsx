@@ -24,8 +24,8 @@ const Hero = ({ daysToApy, initialTvl, sectionOverrideCss }: HeroProps) => {
   const bullets = [
     "No staking",
     "No lock-ups",
-    "Auto-compounding in your wallet",
-    "AAA security rating from Insurance",
+    "Auto-compounding",
+    "AAA security rating from Insurace",
     `$${commifyToDecimalPlaces(initialTvl, 2)} total value`,
   ];
 
