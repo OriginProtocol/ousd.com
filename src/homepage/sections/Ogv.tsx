@@ -13,7 +13,7 @@ interface OgvProps {
 }
 
 const Ogv = ({ stats }: OgvProps) => {
-  const { ogvPrice: price, circulatingSupply, totalSupply } = stats;
+  const { price, circulatingSupply, totalSupply } = stats;
 
   useEffect(() => {
     ContractStore.update(({ ogvStats }) => {

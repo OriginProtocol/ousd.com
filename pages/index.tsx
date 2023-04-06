@@ -21,7 +21,7 @@ import { fetchApy } from "../lib/apy";
 import { fetchApyHistory } from "../lib/apyHistory";
 import { fetchAllocation } from "../lib/allocation";
 import { fetchCollateral } from "../lib/collateral";
-import { fetchOgvStats } from "../lib/ogv";
+import { fetchOgvStats } from "../src/utils";
 import { Header } from "@originprotocol/origin-storybook";
 import { setupContracts, fetchTvl } from "../src/utils/contracts";
 import {
