@@ -33,6 +33,8 @@ import {
   OgvStats,
 } from "../src/homepage/types";
 import { PageSeo as SeoType, Link as LinkType } from "../src/types";
+import { zipObject } from "lodash";
+import { apyDayOptions } from "../src/utils/constants";
 
 interface HomeProps {
   audits: Audit[];
@@ -64,6 +66,8 @@ const Home = ({
   const { pathname } = useRouter();
   const active = capitalize(pathname.slice(1));
 
+  const apyOptions = apy;
+  const daysToApy = zipObject(apyDayOptions, apyOptions);
   return (
     <>
       <Head>
@@ -77,8 +81,12 @@ const Home = ({
         webProperty="ousd"
         active={active}
       />
-      <Hero initialTvl={initialTvl} sectionOverrideCss={sectionOverrideCss} />
-      <Apy apy={apy} apyData={apyHistory} />
+      <Hero
+        daysToApy={daysToApy}
+        initialTvl={initialTvl}
+        sectionOverrideCss={sectionOverrideCss}
+      />
+      <Apy daysToApy={daysToApy} apyData={apyHistory} />
       <SecretSauce />
       <Allocation strategies={strategies} />
       <Collateral collateral={collateral} strategies={strategies} />
