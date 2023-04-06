@@ -10,24 +10,12 @@ const Contracts = () => {
     const contractsToExport = setupContracts();
 
     ContractStore.update((s) => {
-      // @ts-ignore
+      //@ts-expect-error
       s.contracts = contractsToExport;
     });
-
-    if (!refreshTvl) {
-      return;
-    }
-
-    const tvlInterval = setInterval(() => {
-      fetchTvl(contractsToExport.vault, contractsToExport.dripper);
-    }, 12000);
-
-    return () => {
-      clearInterval(tvlInterval);
-    };
   }, [refreshTvl]);
 
-  return null;
+  return "";
 };
 
 export default Contracts;

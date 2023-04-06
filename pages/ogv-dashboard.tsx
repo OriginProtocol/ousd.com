@@ -50,6 +50,7 @@ import {
   OgvStakingStats,
 } from "../src/ogv-dashboard/sections";
 import { fetchOgvStats } from "../src/utils";
+import { stakingDecayFactor } from "../src/constants";
 
 ChartJS.register(
   CategoryScale,
@@ -95,7 +96,11 @@ const OgvDashboard = ({
 
   const { totalVeSupply } = useOgv();
   const stakingApy =
-    getRewardsApy(100 * 1.8 ** (48 / 12), 100, parseFloat(totalVeSupply)) || 0;
+    getRewardsApy(
+      100 * stakingDecayFactor ** (48 / 12),
+      100,
+      parseFloat(totalVeSupply)
+    ) || 0;
 
   return (
     <>

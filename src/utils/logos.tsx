@@ -1,16 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Typography } from "@originprotocol/origin-storybook";
-import { assetRootPath } from "../utils/image";
-import { useStoreState } from "pullstate";
-import useCirculatingSupplyQuery from "../queries/useCirculatingSupplyQuery";
-import usePriceQuery from "../queries/usePriceQuery";
-import useTotalSupplyQuery from "../queries/useTotalSupplyQuery";
-import ContractStore from "../stores/ContractStore";
-import { formatCurrency } from "../utils/math";
+import { useState } from "react";
 
-const Huobi = () => {
+export const Huobi = () => {
   return (
     <>
       <svg
@@ -163,7 +153,7 @@ const Huobi = () => {
   );
 };
 
-const Uniswap = () => {
+export const Uniswap = () => {
   return (
     <>
       <svg
@@ -203,7 +193,7 @@ const Uniswap = () => {
   );
 };
 
-const Kucoin = () => {
+export const Kucoin = () => {
   return (
     <>
       <svg
@@ -331,7 +321,7 @@ const Kucoin = () => {
   );
 };
 
-const Curve = () => {
+export const Curve = () => {
   const [hover, setHover] = useState(false);
 
   return (
@@ -1039,8 +1029,8 @@ const Curve = () => {
               y2="23.8518"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint1_linear_2931_24934"
@@ -1050,8 +1040,8 @@ const Curve = () => {
               y2="22.8107"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint2_linear_2931_24934"
@@ -1061,8 +1051,8 @@ const Curve = () => {
               y2="16.6218"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint3_linear_2931_24934"
@@ -1072,8 +1062,8 @@ const Curve = () => {
               y2="14.934"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint4_linear_2931_24934"
@@ -1083,8 +1073,8 @@ const Curve = () => {
               y2="23.1606"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint5_linear_2931_24934"
@@ -1094,8 +1084,8 @@ const Curve = () => {
               y2="15.2747"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint6_linear_2931_24934"
@@ -1105,8 +1095,8 @@ const Curve = () => {
               y2="11.0361"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint7_linear_2931_24934"
@@ -1116,8 +1106,8 @@ const Curve = () => {
               y2="9.93074"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint8_linear_2931_24934"
@@ -1127,8 +1117,8 @@ const Curve = () => {
               y2="8.57122"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint9_linear_2931_24934"
@@ -1138,8 +1128,8 @@ const Curve = () => {
               y2="17.8831"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint10_linear_2931_24934"
@@ -1149,8 +1139,8 @@ const Curve = () => {
               y2="14.423"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint11_linear_2931_24934"
@@ -1160,8 +1150,8 @@ const Curve = () => {
               y2="7.85163"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint12_linear_2931_24934"
@@ -1171,8 +1161,8 @@ const Curve = () => {
               y2="11.391"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint13_linear_2931_24934"
@@ -1182,8 +1172,8 @@ const Curve = () => {
               y2="7.10503"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint14_linear_2931_24934"
@@ -1193,8 +1183,8 @@ const Curve = () => {
               y2="12.3382"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint15_linear_2931_24934"
@@ -1204,8 +1194,8 @@ const Curve = () => {
               y2="10.939"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint16_linear_2931_24934"
@@ -1215,8 +1205,8 @@ const Curve = () => {
               y2="17.968"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint17_linear_2931_24934"
@@ -1226,8 +1216,8 @@ const Curve = () => {
               y2="19.6722"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint18_linear_2931_24934"
@@ -1237,8 +1227,8 @@ const Curve = () => {
               y2="18.5275"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint19_linear_2931_24934"
@@ -1248,8 +1238,8 @@ const Curve = () => {
               y2="12.4968"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint20_linear_2931_24934"
@@ -1259,8 +1249,8 @@ const Curve = () => {
               y2="18.7154"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint21_linear_2931_24934"
@@ -1270,8 +1260,8 @@ const Curve = () => {
               y2="19.5843"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint22_linear_2931_24934"
@@ -1281,8 +1271,8 @@ const Curve = () => {
               y2="19.018"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint23_linear_2931_24934"
@@ -1292,8 +1282,8 @@ const Curve = () => {
               y2="24.6775"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint24_linear_2931_24934"
@@ -1303,8 +1293,8 @@ const Curve = () => {
               y2="11.7285"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint25_linear_2931_24934"
@@ -1314,8 +1304,8 @@ const Curve = () => {
               y2="19.5787"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint26_linear_2931_24934"
@@ -1325,8 +1315,8 @@ const Curve = () => {
               y2="13.7809"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint27_linear_2931_24934"
@@ -1336,8 +1326,8 @@ const Curve = () => {
               y2="18.9713"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint28_linear_2931_24934"
@@ -1347,8 +1337,8 @@ const Curve = () => {
               y2="19.5301"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint29_linear_2931_24934"
@@ -1358,8 +1348,8 @@ const Curve = () => {
               y2="19.3238"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint30_linear_2931_24934"
@@ -1369,8 +1359,8 @@ const Curve = () => {
               y2="21.1042"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint31_linear_2931_24934"
@@ -1380,8 +1370,8 @@ const Curve = () => {
               y2="18.4756"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint32_linear_2931_24934"
@@ -1391,8 +1381,8 @@ const Curve = () => {
               y2="22.3146"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint33_linear_2931_24934"
@@ -1402,8 +1392,8 @@ const Curve = () => {
               y2="24.9795"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint34_linear_2931_24934"
@@ -1413,8 +1403,8 @@ const Curve = () => {
               y2="25.299"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint35_linear_2931_24934"
@@ -1424,8 +1414,8 @@ const Curve = () => {
               y2="26.0762"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint36_linear_2931_24934"
@@ -1435,8 +1425,8 @@ const Curve = () => {
               y2="22.8135"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint37_linear_2931_24934"
@@ -1446,8 +1436,8 @@ const Curve = () => {
               y2="27.286"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint38_linear_2931_24934"
@@ -1457,8 +1447,8 @@ const Curve = () => {
               y2="25.5825"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint39_linear_2931_24934"
@@ -1468,8 +1458,8 @@ const Curve = () => {
               y2="23.3896"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint40_linear_2931_24934"
@@ -1479,8 +1469,8 @@ const Curve = () => {
               y2="25.3653"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint41_linear_2931_24934"
@@ -1490,8 +1480,8 @@ const Curve = () => {
               y2="30.5028"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint42_linear_2931_24934"
@@ -1501,8 +1491,8 @@ const Curve = () => {
               y2="25.3117"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint43_linear_2931_24934"
@@ -1512,8 +1502,8 @@ const Curve = () => {
               y2="32.4588"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint44_linear_2931_24934"
@@ -1523,8 +1513,8 @@ const Curve = () => {
               y2="33.4169"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint45_linear_2931_24934"
@@ -1534,8 +1524,8 @@ const Curve = () => {
               y2="27.0679"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint46_linear_2931_24934"
@@ -1545,8 +1535,8 @@ const Curve = () => {
               y2="28.4744"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint47_linear_2931_24934"
@@ -1556,8 +1546,8 @@ const Curve = () => {
               y2="25.1432"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint48_linear_2931_24934"
@@ -1567,8 +1557,8 @@ const Curve = () => {
               y2="28.9236"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint49_linear_2931_24934"
@@ -1578,8 +1568,8 @@ const Curve = () => {
               y2="31.2541"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint50_linear_2931_24934"
@@ -1589,8 +1579,8 @@ const Curve = () => {
               y2="33.1663"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint51_linear_2931_24934"
@@ -1600,8 +1590,8 @@ const Curve = () => {
               y2="31.9548"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint52_linear_2931_24934"
@@ -1611,8 +1601,8 @@ const Curve = () => {
               y2="26.7498"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint53_linear_2931_24934"
@@ -1622,8 +1612,8 @@ const Curve = () => {
               y2="26.725"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint54_linear_2931_24934"
@@ -1633,8 +1623,8 @@ const Curve = () => {
               y2="25.4751"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint55_linear_2931_24934"
@@ -1644,8 +1634,8 @@ const Curve = () => {
               y2="24.8263"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint56_linear_2931_24934"
@@ -1655,8 +1645,8 @@ const Curve = () => {
               y2="21.3491"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint57_linear_2931_24934"
@@ -1666,8 +1656,8 @@ const Curve = () => {
               y2="28.0601"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint58_linear_2931_24934"
@@ -1677,8 +1667,8 @@ const Curve = () => {
               y2="35.3988"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint59_linear_2931_24934"
@@ -1688,8 +1678,8 @@ const Curve = () => {
               y2="25.5124"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint60_linear_2931_24934"
@@ -1699,8 +1689,8 @@ const Curve = () => {
               y2="29.5508"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint61_linear_2931_24934"
@@ -1710,8 +1700,8 @@ const Curve = () => {
               y2="30.4577"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint62_linear_2931_24934"
@@ -1721,8 +1711,8 @@ const Curve = () => {
               y2="26.1624"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint63_linear_2931_24934"
@@ -1732,8 +1722,8 @@ const Curve = () => {
               y2="28.2214"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint64_linear_2931_24934"
@@ -1743,8 +1733,8 @@ const Curve = () => {
               y2="24.843"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint65_linear_2931_24934"
@@ -1754,8 +1744,8 @@ const Curve = () => {
               y2="26.9149"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint66_linear_2931_24934"
@@ -1765,8 +1755,8 @@ const Curve = () => {
               y2="24.814"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint67_linear_2931_24934"
@@ -1776,8 +1766,8 @@ const Curve = () => {
               y2="24.1818"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint68_linear_2931_24934"
@@ -1787,8 +1777,8 @@ const Curve = () => {
               y2="24.8683"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint69_linear_2931_24934"
@@ -1798,8 +1788,8 @@ const Curve = () => {
               y2="24.9887"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint70_linear_2931_24934"
@@ -1809,8 +1799,8 @@ const Curve = () => {
               y2="24.6246"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint71_linear_2931_24934"
@@ -1820,8 +1810,8 @@ const Curve = () => {
               y2="27.0632"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint72_linear_2931_24934"
@@ -1831,8 +1821,8 @@ const Curve = () => {
               y2="26.5714"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint73_linear_2931_24934"
@@ -1842,8 +1832,8 @@ const Curve = () => {
               y2="24.082"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint74_linear_2931_24934"
@@ -1853,8 +1843,8 @@ const Curve = () => {
               y2="24.4857"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint75_linear_2931_24934"
@@ -1864,8 +1854,8 @@ const Curve = () => {
               y2="23.701"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint76_linear_2931_24934"
@@ -1875,8 +1865,8 @@ const Curve = () => {
               y2="23.8683"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint77_linear_2931_24934"
@@ -1886,8 +1876,8 @@ const Curve = () => {
               y2="25.1953"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint78_linear_2931_24934"
@@ -1897,8 +1887,8 @@ const Curve = () => {
               y2="28.2523"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint79_linear_2931_24934"
@@ -1908,8 +1898,8 @@ const Curve = () => {
               y2="22.9825"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint80_linear_2931_24934"
@@ -1919,8 +1909,8 @@ const Curve = () => {
               y2="18.7431"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint81_linear_2931_24934"
@@ -1930,8 +1920,8 @@ const Curve = () => {
               y2="21.6169"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint82_linear_2931_24934"
@@ -1941,8 +1931,8 @@ const Curve = () => {
               y2="22.2967"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint83_linear_2931_24934"
@@ -1952,8 +1942,8 @@ const Curve = () => {
               y2="22.4367"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint84_linear_2931_24934"
@@ -1963,8 +1953,8 @@ const Curve = () => {
               y2="22.8356"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint85_linear_2931_24934"
@@ -1974,8 +1964,8 @@ const Curve = () => {
               y2="21.8782"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint86_linear_2931_24934"
@@ -1985,8 +1975,8 @@ const Curve = () => {
               y2="20.9188"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint87_linear_2931_24934"
@@ -1996,8 +1986,8 @@ const Curve = () => {
               y2="21.2214"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint88_linear_2931_24934"
@@ -2007,8 +1997,8 @@ const Curve = () => {
               y2="20.2409"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint89_linear_2931_24934"
@@ -2018,8 +2008,8 @@ const Curve = () => {
               y2="20.5619"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint90_linear_2931_24934"
@@ -2029,8 +2019,8 @@ const Curve = () => {
               y2="19.4079"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint91_linear_2931_24934"
@@ -2040,8 +2030,8 @@ const Curve = () => {
               y2="17.2195"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint92_linear_2931_24934"
@@ -2051,8 +2041,8 @@ const Curve = () => {
               y2="19.8663"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint93_linear_2931_24934"
@@ -2062,8 +2052,8 @@ const Curve = () => {
               y2="19.9656"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint94_linear_2931_24934"
@@ -2073,8 +2063,8 @@ const Curve = () => {
               y2="16.9762"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint95_linear_2931_24934"
@@ -2084,8 +2074,8 @@ const Curve = () => {
               y2="18.5113"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint96_linear_2931_24934"
@@ -2095,8 +2085,8 @@ const Curve = () => {
               y2="19.2154"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint97_linear_2931_24934"
@@ -2106,8 +2096,8 @@ const Curve = () => {
               y2="18.3769"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint98_linear_2931_24934"
@@ -2117,8 +2107,8 @@ const Curve = () => {
               y2="18.7429"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint99_linear_2931_24934"
@@ -2128,8 +2118,8 @@ const Curve = () => {
               y2="18.4842"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint100_linear_2931_24934"
@@ -2139,8 +2129,8 @@ const Curve = () => {
               y2="19.0651"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint101_linear_2931_24934"
@@ -2150,8 +2140,8 @@ const Curve = () => {
               y2="17.9451"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint102_linear_2931_24934"
@@ -2161,8 +2151,8 @@ const Curve = () => {
               y2="18.0241"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint103_linear_2931_24934"
@@ -2172,8 +2162,8 @@ const Curve = () => {
               y2="27.4107"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint104_linear_2931_24934"
@@ -2183,8 +2173,8 @@ const Curve = () => {
               y2="26.5015"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint105_linear_2931_24934"
@@ -2194,8 +2184,8 @@ const Curve = () => {
               y2="29.6306"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint106_linear_2931_24934"
@@ -2205,8 +2195,8 @@ const Curve = () => {
               y2="29.6585"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint107_linear_2931_24934"
@@ -2216,8 +2206,8 @@ const Curve = () => {
               y2="27.9124"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint108_linear_2931_24934"
@@ -2227,8 +2217,8 @@ const Curve = () => {
               y2="26.9509"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint109_linear_2931_24934"
@@ -2238,8 +2228,8 @@ const Curve = () => {
               y2="25.9261"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint110_linear_2931_24934"
@@ -2249,8 +2239,8 @@ const Curve = () => {
               y2="20.12"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint111_linear_2931_24934"
@@ -2260,8 +2250,8 @@ const Curve = () => {
               y2="24.3839"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
             <linearGradient
               id="paint112_linear_2931_24934"
@@ -2271,8 +2261,8 @@ const Curve = () => {
               y2="29.9122"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FEDBA8" />
-              <stop offset="0.878478" stop-color="#CF75D5" />
+              <stop stopColor="#FEDBA8" />
+              <stop offset="0.878478" stopColor="#CF75D5" />
             </linearGradient>
           </defs>
         </svg>
@@ -2972,268 +2962,3 @@ const Curve = () => {
     </div>
   );
 };
-
-const Ogv = ({ stats }) => {
-  const price = useStoreState(ContractStore, (s) => {
-    return s.ogvStats.price || 0;
-  });
-
-  const circulatingSupply = useStoreState(ContractStore, (s) => {
-    return s.ogvStats.circulating || 0;
-  });
-
-  const totalSupply = useStoreState(ContractStore, (s) => {
-    return s.ogvStats.total || 0;
-  });
-
-  const priceQuery = usePriceQuery(stats[0], {
-    onSuccess: (price) => {
-      ContractStore.update((s) => {
-        s.ogvStats.price = price["origin-dollar-governance"].usd;
-      });
-    },
-  });
-
-  const circulatingSupplyQuery = useCirculatingSupplyQuery(stats[1], {
-    onSuccess: (circulatingSupply) => {
-      ContractStore.update((s) => {
-        s.ogvStats.circulating = circulatingSupply;
-      });
-    },
-  });
-
-  const totalSupplyQuery = useTotalSupplyQuery(stats[2], {
-    onSuccess: (totalSupply) => {
-      ContractStore.update((s) => {
-        s.ogvStats.total = totalSupply;
-      });
-    },
-  });
-
-  useEffect(() => {
-    priceQuery.refetch();
-    circulatingSupplyQuery.refetch();
-    totalSupplyQuery.refetch();
-  }, [price, circulatingSupply, totalSupply]);
-
-  return (
-    <>
-      <section className="gradient3 relative z-0">
-        <div className="relative divide-black divide-y-2">
-          <div>
-            <div className="flex flex-col lg:flex-row overflow-hidden max-w-screen-[1432px] mx-auto px-8 md:px-16 py-14 lg:py-[120px] lg:pl-[134px] lg:pr-[208px] text-center lg:text-left space-x-0 lg:space-x-20 xl:space-x-0">
-              <div className="lg:w-2/3">
-                <Typography.H2
-                  className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px] lg:text-left"
-                  style={{ fontWeight: 700 }}
-                >
-                  Governed by OGV stakers
-                </Typography.H2>
-                <Typography.Body3 className="mt-[16px] leading-[28px] lg:text-left">
-                  {
-                    "OUSD's future is shaped by voters who lock their OGV and participate in decentralized governance."
-                  }
-                </Typography.Body3>
-                <div className="mt-8 block lg:hidden">
-                  <Image
-                    src={assetRootPath(`/images/ogv.svg`)}
-                    width="186"
-                    height="186"
-                    className="mx-auto"
-                    alt="ogv"
-                  />
-                </div>
-                <div className="flex flex-col justify-between w-full my-8 md:my-20 lg:w-4/5 text-left font-weight-bold">
-                  <div className="flex flex-row justify-between">
-                    <div className="w-36 md:w-96">
-                      <Typography.Body3 className="text-xs lg:text-base font-bold tracking-[0.06em]">
-                        {"OGV PRICE"}
-                      </Typography.Body3>
-                      <Typography.H5 className="mt-[4px] font-bold lg:text-[28px] xl:text-[40px]">{`$${formatCurrency(
-                        price,
-                        4
-                      )}`}</Typography.H5>
-                    </div>
-                    <div className="w-36 md:w-96">
-                      <Typography.Body3 className="text-xs lg:text-base font-bold tracking-[0.06em]">
-                        {"OGV MARKET CAP"}
-                      </Typography.Body3>
-                      <Typography.H5 className="mt-[4px] font-bold lg:text-[28px] xl:text-[40px]">{`$${formatCurrency(
-                        circulatingSupply * price,
-                        0
-                      )}`}</Typography.H5>
-                    </div>
-                  </div>
-                  <div className="flex flex-row justify-between mt-10">
-                    <div className="w-36 md:w-96">
-                      <Typography.Body3 className="text-xs lg:text-base font-bold tracking-[0.06em]">
-                        {"CIRCULATING SUPPLY"}
-                      </Typography.Body3>
-                      <Typography.H5 className="mt-[4px] font-bold lg:text-[28px] xl:text-[40px]">
-                        {formatCurrency(circulatingSupply, 0)}
-                      </Typography.H5>
-                    </div>
-                    <div className="w-36 md:w-96">
-                      <Typography.Body3 className="text-xs lg:text-base font-bold tracking-[0.06em]">
-                        {"TOTAL SUPPLY"}
-                      </Typography.Body3>
-                      <Typography.H5 className="mt-[4px] font-bold lg:text-[28px] xl:text-[40px]">
-                        {formatCurrency(totalSupply, 0)}
-                      </Typography.H5>
-                    </div>
-                  </div>
-                </div>
-                <span className="hidden lg:flex">
-                  <Link
-                    href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bttn bg-black !ml-0"
-                  >
-                    <Typography.H7 className="font-normal">
-                      Buy OGV
-                    </Typography.H7>
-                  </Link>
-                  <Link
-                    href="/ogv-dashboard"
-                    target="_parent"
-                    className="bg-black bttn rounded-full"
-                  >
-                    <Typography.H7 className="font-normal">
-                      View dashboard
-                    </Typography.H7>
-                  </Link>
-                </span>
-                {/*<span>
-                <Link
-                  href="/ogv"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  prefetch={false}
-                  className="bttn gradient2"
-                >
-                  <Typography.H7 className="font-normal">
-                    View dashboard
-                  </Typography.H7>
-                </Link>
-                </span>*/}
-              </div>
-              <div>
-                <div className="hidden lg:block">
-                  <Image
-                    src={assetRootPath(`/images/ogv.svg`)}
-                    width="397"
-                    height="397"
-                    className="hidden lg:block"
-                    alt="ogv"
-                  />
-                </div>
-                <Link
-                  href="/ogv-dashboard"
-                  target="_parent"
-                  className="bg-black bttn mb-10 lg:hidden"
-                >
-                  <Typography.H7 className="font-normal">
-                    View dashboard
-                  </Typography.H7>
-                </Link>
-                <Typography.Body3 className="mt-8 text-center text-white opacity-75">
-                  OGV is listed on top exchanges
-                </Typography.Body3>
-                <div className="w-full flex flex-col justify-between items-center mt-0 md:mt-3 mb-8 lg:mx-0">
-                  <div className="flex justify-between">
-                    <Link
-                      href="https://curve.fi/#/ethereum/pools/factory-crypto-205/swap"
-                      target="_blank"
-                      rel="nofollow noreferrer"
-                      className=""
-                    >
-                      <Curve />
-                    </Link>
-                    <Link
-                      href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
-                      target="_blank"
-                      rel="nofollow noreferrer"
-                      className="ml-[10px]"
-                    >
-                      <Uniswap />
-                    </Link>
-                  </div>
-                  <div className="flex items-center">
-                    <Link
-                      href="https://www.huobi.com/en-in/exchange/ogv_usdt"
-                      target="_blank"
-                      rel="nofollow noreferrer"
-                      className=""
-                    >
-                      <Huobi />
-                    </Link>
-
-                    <Link
-                      href="https://www.kucoin.com/trade/OGV-USDT"
-                      target="_blank"
-                      rel="nofollow noreferrer"
-                      className="mt-[8px]"
-                    >
-                      <Kucoin />
-                    </Link>
-                  </div>
-                </div>
-                <Link
-                  href="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bttn bg-black block lg:hidden text-center"
-                >
-                  <Typography.H7 className="font-normal">Buy OGV</Typography.H7>
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="overflow-hidden max-w-screen-2xl mx-auto px-8 md:px-[134px] pt-[62px] pb-[52px] md:py-[120px] text-center">
-              <div>
-                <Typography.H2
-                  className="text-[32px] md:text-[56px] leading-[36px] md:leading-[64px]"
-                  style={{ fontWeight: 500 }}
-                >
-                  Stake OGV
-                </Typography.H2>
-                <Typography.H2
-                  className="mt-3 md:mt-1 text-[48px] leading-[48px] md:text-[56px] md:leading-[64px] text-gradient1"
-                  style={{ fontWeight: 700 }}
-                >
-                  To Earn OGV
-                </Typography.H2>
-                <Typography.Body3 className="mt-[16px] mb-10 font-normal text-[#fafbfb]">
-                  Fees and voting rights accrue to OGV stakers. Control the
-                  future of OUSD <br className="hidden lg:block" />
-                  and profit from its growth.
-                </Typography.Body3>
-                <Link
-                  href="https://governance.ousd.com/stake"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bttn bg-black"
-                >
-                  <Typography.H7 className="font-normal">
-                    Earn rewards
-                  </Typography.H7>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-        <Image
-          src={assetRootPath(`/images/splines21.png`)}
-          width="1073"
-          height="1058"
-          className="absolute w-3/5 left-0 bottom-0 -z-10"
-          alt="splines"
-        />
-      </section>
-    </>
-  );
-};
-
-export default Ogv;

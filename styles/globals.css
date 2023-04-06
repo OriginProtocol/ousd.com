@@ -310,3 +310,8 @@ section.black {
     width: 30rem /* 480px */;
   }
 }
+
+.home-ul li {
+  list-style-image: url(/images/⟶.svg);
+  padding-inline-start: 20px;
+}

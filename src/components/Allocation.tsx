@@ -83,7 +83,7 @@ const Allocation = ({ strategies }) => {
           >
             Fully transparent on the Ethereum blockchain
           </Typography.H6>
-          <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-[#b5beca]">
+          <Typography.Body3 className="md:max-w-[943px] mt-[16px] mx-auto leading-[28px] text-subheading">
             Funds are deployed to automated, on-chain, blue-chip stablecoin
             strategies. There are no gatekeepers or centralized money managers
             and governance is entirely decentralized.
@@ -94,7 +94,7 @@ const Allocation = ({ strategies }) => {
             </Typography.H7>
             <div>
               <Typography.H7
-                className="flex flex-row justify-between mt-4 md:mt-10 px-8 md:px-[72px] text-[#b5beca]"
+                className="flex flex-row justify-between mt-4 md:mt-10 px-8 md:px-[72px] text-subheading"
                 style={{ fontWeight: 400, lineHeight: "20px" }}
               >
                 <div className="text-[14px] md:text-[16px]">Yield source</div>
@@ -138,7 +138,7 @@ const Allocation = ({ strategies }) => {
                                 </div>
                                 <div>
                                   <Typography.H7
-                                    className="inline items-center text-[12px] md:text-[24px] text-[#b5beca]"
+                                    className="inline items-center text-[12px] md:text-[24px] text-subheading"
                                     style={{ fontWeight: 400 }}
                                   >{`$${formatCurrency(
                                     protocol.total,
@@ -166,7 +166,7 @@ const Allocation = ({ strategies }) => {
                                 className="mt-5"
                               />
                               <Typography.Caption2
-                                className={`flex flex-row mt-4 md:hidden text-left space-x-1.5 text-[#b5beca] font-medium ${
+                                className={`flex flex-row mt-4 md:hidden text-left space-x-1.5 text-subheading font-medium ${
                                   open[protocol.name] ? "hidden" : ""
                                 }`}
                               >
@@ -203,7 +203,7 @@ const Allocation = ({ strategies }) => {
                                             {strategy.name}
                                           </Typography.Body3>
                                         </div>
-                                        <Typography.Body3 className="text-[#b5beca] font-light text-[12px] md:text-[16px]">
+                                        <Typography.Body3 className="text-subheading font-light text-[12px] md:text-[16px]">
                                           {`${formatCurrency(
                                             protocol.total
                                               ? (strategy.total / total) * 100
@@ -215,10 +215,10 @@ const Allocation = ({ strategies }) => {
                                     );
                                   })}
                                 </div>
-                                <Typography.Body3 className="mt-4 text-[#b5beca] text-left text-[12px] md:text-[14px] leading-[23px]">
+                                <Typography.Body3 className="mt-4 text-subheading text-left text-[12px] md:text-[14px] leading-[23px]">
                                   {protocolMapping[protocol.name]?.description}
                                 </Typography.Body3>
-                                <Typography.Body3 className="flex flex-row mt-4 md:hidden text-left space-x-1.5 text-[#b5beca] text-[12px] font-medium">
+                                <Typography.Body3 className="flex flex-row mt-4 md:hidden text-left space-x-1.5 text-subheading text-[12px] font-medium">
                                   <div>Less info</div>
                                   <Image
                                     src={assetRootPath(`/images/arrow-up.svg`)}

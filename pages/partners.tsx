@@ -43,7 +43,7 @@ const Partners = ({ seo, navLinks, partners }) => {
             >
               Partners
             </Typography.H2>
-            <Typography.Body3 className="max-w-[943px] mt-2 md:mt-6 text-[16px] md:text-[20px] leading-[28px] md:leading-[36px] text-[#b5beca]">
+            <Typography.Body3 className="max-w-[943px] mt-2 md:mt-6 text-[16px] md:text-[20px] leading-[28px] md:leading-[36px] text-subheading">
               OUSD is a constantly evolving ecosystem offering the best-risk
               adjusted yields in DeFi.
               <br />
@@ -124,7 +124,7 @@ const Partners = ({ seo, navLinks, partners }) => {
                     >
                       {partner.attributes.name}
                     </Typography.H4>
-                    <Typography.Body3 className="mt-6 text-[16px leading-[28px] text-[#b5beca]">
+                    <Typography.Body3 className="mt-6 text-[16px leading-[28px] text-subheading">
                       {partner.attributes.description}
                     </Typography.Body3>
                   </Link>
