@@ -1,5 +1,6 @@
+import { chunk, last, takeRight, map } from "lodash";
 import DuneClient, { toChartData, jobsLookup } from "../../../../lib/dune";
-import { formatLabels } from "../../../../lib/dune/utils";
+import { sumOf } from "../../../../src/analytics/utils";
 
 export const getProtocolRevenue = async () => {
   try {
@@ -11,13 +12,31 @@ export const getProtocolRevenue = async () => {
 
     rows.reverse();
 
-    const { total, labels } = toChartData(rows, {
+    const chunked = chunk(rows, 2);
+
+    const dailyRevRows = chunked.reduce((acc, chunk) => {
+      const [before, after] = chunk;
+      if (after) {
+        acc.push({
+          // @ts-ignore
+          ousd_amount:
+            parseFloat(after?.ousd_amount) - parseFloat(before?.ousd_amount),
+          day: after?.day,
+        });
+      }
+      return acc;
+    }, []);
+
+    const { total, labels } = toChartData(dailyRevRows, {
       ousd_amount: "total",
       day: "labels",
     });
 
+    const allRawAmounts = map(rows, "ousd_amount");
+    const dailyDevAmounts = map(dailyRevRows, "ousd_amount");
+
     return {
-      labels: formatLabels(labels),
+      labels,
       datasets: [
         {
           id: "total",
@@ -25,6 +44,11 @@ export const getProtocolRevenue = async () => {
           data: total,
         },
       ],
+      aggregations: {
+        dailyRevenue: last(dailyDevAmounts),
+        weeklyRevenue: sumOf(takeRight(dailyDevAmounts, 7)),
+        allTimeRevenue: last(allRawAmounts),
+      },
     };
   } catch (e) {
     console.error(e);

@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { useMemo, useState } from "react";
-import { borderFormatting } from "../utils";
+import { borderFormatting, filterByDuration, formatDisplay } from "../utils";
 
 export const useAPYChart = () => {
   const { data, isFetching } = useQuery(`/api/analytics/charts/apy`, {
@@ -18,18 +18,23 @@ export const useAPYChart = () => {
   });
 
   const chartData = useMemo(() => {
-    return {
-      labels: data?.labels,
-      datasets: data?.datasets?.reduce((acc, dataset) => {
-        if (!chartState?.typeOf || dataset.id === chartState?.typeOf) {
-          acc.push({
-            ...dataset,
-            ...borderFormatting,
-          });
-        }
-        return acc;
-      }, []),
-    };
+    return formatDisplay(
+      filterByDuration(
+        {
+          labels: data?.labels,
+          datasets: data?.datasets?.reduce((acc, dataset) => {
+            if (!chartState?.typeOf || dataset.id === chartState?.typeOf) {
+              acc.push({
+                ...dataset,
+                ...borderFormatting,
+              });
+            }
+            return acc;
+          }, []),
+        },
+        chartState?.duration
+      )
+    );
   }, [JSON.stringify(data), chartState?.duration, chartState?.typeOf]);
 
   const onChangeFilter = (value) => {
