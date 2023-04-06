@@ -7,3 +7,4 @@ export { default as useIntersectionObserver } from "./useIntersectionObserver";
 export { default as usePreviousRoute } from "./usePreviousRoute";
 export { default as useGetPreviousRoute } from "./useGetPreviousRoute";
 export { default as useBlock } from "./useBlock";
+export { default as useContracts } from "./useContracts";

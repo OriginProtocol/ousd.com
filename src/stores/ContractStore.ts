@@ -10,6 +10,7 @@ interface Contracts {
 }
 
 interface IContractStore {
+  ousdTvl: any;
   refreshTvl: boolean;
   contracts: Contracts;
   apy: any;
@@ -30,6 +31,7 @@ const ContractStore = new Store<IContractStore>({
     circulating: 0,
     total: 0,
   },
+  ousdTvl: 0,
   refreshTvl: false,
 });
 
