@@ -301,7 +301,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<{
       doughnutData,
       nonCirculatingSupply,
     },
-    revalidate: 60 * 5,
+    revalidate: 60 * 15,
   };
 };
 

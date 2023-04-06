@@ -136,7 +136,7 @@ export async function getStaticProps() {
       collateral: collateral.collateral,
       ogvStats,
     },
-    revalidate: 5 * 60, // Cache response for 5m
+    revalidate: 60 * 15, // Cache response for 15m
   };
 }
 
