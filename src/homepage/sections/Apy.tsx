@@ -11,19 +11,18 @@ import { CategoryScale } from "chart.js";
 import { Section } from "../../components";
 import { ApyHistory } from "../types";
 import { twMerge } from "tailwind-merge";
+import { Dictionary } from "lodash";
 
 ChartJS.register(CategoryScale);
 
 interface ApyProps {
-  apy: number[];
+  daysToApy: Dictionary<number>;
   apyData: ApyHistory;
   sectionOverrideCss?: string;
 }
 
-const Apy = ({ apy, apyData, sectionOverrideCss }: ApyProps) => {
+const Apy = ({ daysToApy, apyData, sectionOverrideCss }: ApyProps) => {
   const [loaded, setLoaded] = useState(false);
-  const apyOptions = apy;
-  const daysToApy = zipObject(apyDayOptions, apyOptions);
   const [apyDays, setApyDays] = useState(
     process.browser &&
       localStorage.getItem("last_user_selected_apy") !== null &&
