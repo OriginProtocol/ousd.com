@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useState, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -8,6 +8,10 @@ import { Typography } from "@originprotocol/origin-storybook";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 import Button from "../Button";
+import { fetchAPI } from "../../../lib/api";
+import transformLinks from "../../utils/transformLinks";
+import { useRouter } from "next/router";
+import { NavigationContext } from "../../../pages/_app";
 
 const RealTimeStats = dynamic(() => import("../RealTimeStats"), {
   ssr: false,
@@ -28,7 +32,7 @@ const NavigationSidebar = ({
   <div className="flex flex-col h-full mt-6 md:mt-10">
     <nav className="flex flex-col h-full w-full">
       <div className="list-unstyled space-y-1">
-        {navLinks.map(({ href, label }) => (
+        {navLinks?.map(({ href, label }) => (
           <Link
             key={href}
             href={href}
@@ -87,7 +91,7 @@ const MainNavigation = ({ links, onClickLink = noop }) => {
   return (
     <nav className="flex flex-col w-full">
       <div className="list-unstyled space-y-6">
-        {links.map(({ href, label }) => (
+        {links?.map(({ href, label }) => (
           <Link
             key={href}
             href={href}
@@ -269,14 +273,17 @@ const DesktopSidebarNavigation = ({
   );
 };
 
-const TwoColumnLayout = ({
-  sidebarWidth = 316,
-  children,
-  links: subLinks,
-  pathname,
-}) => {
-  // TODO: Pull dynamically from CMS?
-  const links = [
+const TwoColumnLayout = ({ sidebarWidth = 316, children }) => {
+  const { links } = useContext(NavigationContext);
+  const { pathname } = useRouter();
+
+  console.log({
+    here: "123",
+    links,
+    pathname,
+  });
+
+  const analyticsLinks = [
     {
       label: "Overview",
       href: "/analytics",
@@ -324,14 +331,14 @@ const TwoColumnLayout = ({
       <div className="flex flex-col md:flex-row w-full h-full">
         <MobileNavigation
           currentPathname={pathname}
-          links={links}
-          subLinks={subLinks}
+          links={analyticsLinks}
+          subLinks={links}
         />
         <DesktopSidebarNavigation
           sidebarWidth={sidebarWidth}
           currentPathname={pathname}
-          links={links}
-          subLinks={subLinks}
+          links={analyticsLinks}
+          subLinks={links}
         />
         <div className="flex flex-col w-full h-full px-6 md:px-8 py-8 space-y-4 md:space-y-10">
           <div className="flex flex-row items-center justify-between w-full">

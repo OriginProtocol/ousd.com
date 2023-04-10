@@ -13,7 +13,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { GTM_ID, pageview } from "../lib/gtm";
 import transformLinks from "../src/utils/transformLinks";
 import { useContracts, usePreviousRoute } from "../src/hooks";
-import { createContext, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const defaultQueryFn = async ({ queryKey }) => {
   return await fetch(queryKey).then((res) => res.json());
@@ -32,6 +32,10 @@ export const GlobalContext = createContext({
   siteName: "",
 });
 
+export const NavigationContext = createContext({
+  links: [],
+});
+
 const { provider, webSocketProvider } = configureChains(
   [mainnet],
   [publicProvider()]
@@ -43,9 +47,41 @@ const wagmiClient = createClient({
   webSocketProvider,
 });
 
+const useNavigationLinks = () => {
+  const [links, setLinks] = useState([]);
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const { data } = await fetch("/api/navigation", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            params: {
+              populate: {
+                links: {
+                  populate: "*",
+                },
+              },
+            },
+          }),
+        }).then((res) => res.json());
+        console.log(data);
+        setLinks(data);
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  }, []);
+  return [{ links }];
+};
+
 const MyApp = ({ Component, pageProps }) => {
   const { global } = pageProps;
   const router = useRouter();
+  const [{ links }] = useNavigationLinks();
 
   const getLayout = Component.getLayout || ((page) => page);
 
@@ -83,10 +119,13 @@ const MyApp = ({ Component, pageProps }) => {
             }}
           />
           <WagmiConfig client={wagmiClient}>
-            {getLayout(<Component {...pageProps} />, {
-              links: pageProps?.navLinks,
-              pathname: router.pathname,
-            })}
+            <NavigationContext.Provider
+              value={{
+                links,
+              }}
+            >
+              {getLayout(<Component {...pageProps} />)}
+            </NavigationContext.Provider>
           </WagmiConfig>
         </QueryClientProvider>
       </GlobalContext.Provider>
@@ -98,30 +137,19 @@ MyApp.getInitialProps = async (ctx) => {
   const appProps = await App.getInitialProps(ctx);
 
   // Fetch global site settings from Strapi
-  const [globalRes, navRes] = await Promise.all([
-    fetchAPI("/global", {
-      populate: {
-        favicon: "*",
-        defaultSeo: {
-          populate: "*",
-        },
+  const globalRes = await fetchAPI("/global", {
+    populate: {
+      favicon: "*",
+      defaultSeo: {
+        populate: "*",
       },
-    }),
-    fetchAPI("/ousd-nav-links", {
-      populate: {
-        links: {
-          populate: "*",
-        },
-      },
-    }),
-  ]);
-
-  const navLinks = transformLinks(navRes?.data);
+    },
+  });
 
   // Pass the data to our page via props
   return {
     ...appProps,
-    pageProps: { global: globalRes?.data, navLinks },
+    pageProps: { global: globalRes?.data },
     styles: [
       process.env.NODE_ENV === "production" ? (
         <style
