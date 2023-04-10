@@ -2,7 +2,7 @@ import cx from "classnames";
 import { durationOptions } from "../utils";
 
 const DurationFilter = ({ value, onChange }) => (
-  <div className="hidden flex flex-row items-center w-full h-[36px] bg-origin-bg-black p-1 rounded-lg space-x-2">
+  <div className="flex flex-row items-center w-full h-[36px] bg-origin-bg-black p-1 rounded-lg space-x-2">
     {durationOptions.map((duration) => {
       const isActiveDuration = value === duration.value;
       return (

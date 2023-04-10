@@ -1,6 +1,11 @@
 import { useQuery } from "react-query";
 import { useMemo, useState } from "react";
-import { borderFormatting, createGradient } from "../utils";
+import {
+  borderFormatting,
+  createGradient,
+  filterByDuration,
+  formatDisplay,
+} from "../utils";
 
 export const useMarketshareChart = () => {
   const { data, isFetching } = useQuery(
@@ -20,14 +25,19 @@ export const useMarketshareChart = () => {
   });
 
   const chartData = useMemo(() => {
-    return {
-      labels: data?.labels,
-      datasets: data?.datasets?.map((dataset) => ({
-        ...dataset,
-        ...borderFormatting,
-        borderColor: createGradient(["#8C66FC", "#0274F1"]),
-      })),
-    };
+    return formatDisplay(
+      filterByDuration(
+        {
+          labels: data?.labels,
+          datasets: data?.datasets?.map((dataset) => ({
+            ...dataset,
+            ...borderFormatting,
+            borderColor: createGradient(["#8C66FC", "#0274F1"]),
+          })),
+        },
+        chartState.duration
+      )
+    );
   }, [JSON.stringify(data), chartState?.duration]);
 
   const onChangeFilter = (value) => {

@@ -1,6 +1,11 @@
 import { useQuery } from "react-query";
 import { useMemo, useState } from "react";
-import { borderFormatting, createGradient } from "../utils";
+import {
+  borderFormatting,
+  createGradient,
+  filterByDuration,
+  formatDisplay,
+} from "../utils";
 
 export const useTotalSupplyChart = () => {
   const { data, isFetching } = useQuery("/api/analytics/charts/totalSupply", {
@@ -18,21 +23,26 @@ export const useTotalSupplyChart = () => {
   });
 
   const chartData = useMemo(() => {
-    return {
-      labels: data?.labels,
-      datasets: data?.datasets?.reduce((acc, dataset) => {
-        if (!chartState?.typeOf || dataset.id === chartState?.typeOf) {
-          acc.push({
-            ...dataset,
-            ...borderFormatting,
-            borderWidth: 0,
-            backgroundColor: createGradient(["#8C66FC", "#0274F1"]),
-            fill: true,
-          });
-        }
-        return acc;
-      }, []),
-    };
+    return formatDisplay(
+      filterByDuration(
+        {
+          labels: data?.labels,
+          datasets: data?.datasets?.reduce((acc, dataset) => {
+            if (!chartState?.typeOf || dataset.id === chartState?.typeOf) {
+              acc.push({
+                ...dataset,
+                ...borderFormatting,
+                borderWidth: 0,
+                backgroundColor: createGradient(["#8C66FC", "#0274F1"]),
+                fill: true,
+              });
+            }
+            return acc;
+          }, []),
+        },
+        chartState.duration
+      )
+    );
   }, [JSON.stringify(data), chartState?.duration, chartState?.typeOf]);
 
   const onChangeFilter = (value) => {

@@ -1,5 +1,4 @@
 import DuneClient, { toChartData, jobsLookup } from "../../../../lib/dune";
-import { formatLabels } from "../../../../lib/dune/utils";
 
 export const getOUSDMarketshareRelativeToETH = async () => {
   try {
@@ -17,11 +16,11 @@ export const getOUSDMarketshareRelativeToETH = async () => {
     });
 
     return {
-      labels: formatLabels(labels),
+      labels,
       datasets: [
         {
           id: "total",
-          label: "Current",
+          label: "%",
           data: total.map((item) => item * 100),
         },
       ],
