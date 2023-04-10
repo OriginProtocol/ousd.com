@@ -7,8 +7,6 @@ This [Next.js](https://nextjs.org/) application powers the marketing pages for [
 First, install the necessary packages from the project directory:
 
 ```bash
-npm install
-# or
 yarn install
 ```
 
@@ -21,7 +19,5 @@ cp dev.env .env
 Finally, start the development server:
 
 ```bash
-npm run dev
-# or
 yarn dev
 ```
