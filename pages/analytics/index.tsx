@@ -28,7 +28,6 @@ import {
 import { useAPYChart } from "../../src/analytics/hooks/useAPYChart";
 import { useTotalSupplyChart } from "../../src/analytics/hooks/useTotalSupplyChart";
 import { useMarketshareChart } from "../../src/analytics/hooks/useMarketshareChart";
-// import { useCollateralChart } from "../../src/analytics/hooks/useCollateralChart";
 import { GetServerSideProps } from "next";
 import { fetchAllocation } from "../../lib/allocation";
 import { fetchCollateral } from "../../lib/collateral";

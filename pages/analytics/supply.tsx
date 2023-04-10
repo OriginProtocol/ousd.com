@@ -24,7 +24,6 @@ import { useMemo, useState } from "react";
 import { createGradient } from "../../src/analytics/utils";
 import { last } from "lodash";
 import { DurationFilter } from "../../src/analytics/components";
-// import { useCollateralChart } from "../../src/analytics/hooks/useCollateralChart";
 import { useSupplyDistributionChart } from "../../src/analytics/hooks/useSupplyDistributionChart";
 
 ChartJS.register(
