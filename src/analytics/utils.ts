@@ -232,7 +232,7 @@ export const sumOf = (data) => {
 
 const formatMonthDay = (d) => format(new Date(d), "MMM do");
 
-export const formatLabels = (labels) => labels.map(formatMonthDay);
+export const formatLabels = (labels) => labels?.map(formatMonthDay);
 
 export const formatDisplay = ({ labels, ...rest }) => ({
   labels: formatLabels(labels),
