@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { useMemo, useState } from "react";
 import { isMobile } from "react-device-detect";
-import { borderFormatting } from "../utils";
+import { borderFormatting, filterByDuration, formatDisplay } from "../utils";
 
 export const useProtocolRevenueChart = () => {
   const { data, isFetching } = useQuery(
@@ -21,7 +21,7 @@ export const useProtocolRevenueChart = () => {
     typeOf: "total",
   });
 
-  const chartData = useMemo(() => {
+  const baseData = useMemo(() => {
     return {
       labels: data?.labels,
       datasets: data?.datasets?.reduce((acc, dataset) => {
@@ -34,7 +34,11 @@ export const useProtocolRevenueChart = () => {
         return acc;
       }, []),
     };
-  }, [JSON.stringify(data), chartState?.duration, chartState?.typeOf]);
+  }, [JSON.stringify(data)]);
+
+  const chartData = useMemo(() => {
+    return formatDisplay(filterByDuration(baseData, chartState?.duration));
+  }, [JSON.stringify(baseData), chartState?.duration, chartState?.typeOf]);
 
   const onChangeFilter = (value) => {
     setChartState((prev) => ({
@@ -46,6 +50,8 @@ export const useProtocolRevenueChart = () => {
   return [
     {
       data: chartData,
+      // @ts-ignore
+      aggregations: data?.aggregations || {},
       filter: chartState,
       isFetching,
       chartOptions: {

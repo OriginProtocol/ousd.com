@@ -1,5 +1,4 @@
 import DuneClient, { toChartData, jobsLookup } from "../../../../lib/dune";
-import { formatLabels } from "../../../../lib/dune/utils";
 
 export const getApy = async () => {
   try {
@@ -18,7 +17,7 @@ export const getApy = async () => {
     });
 
     return {
-      labels: formatLabels(labels),
+      labels,
       datasets: [
         {
           id: "_7_day",
@@ -37,7 +36,7 @@ export const getApy = async () => {
         },
         {
           id: "total",
-          label: "Current",
+          label: "APY",
           data: total,
         },
       ],
