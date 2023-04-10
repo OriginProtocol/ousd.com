@@ -13,27 +13,27 @@ console.debug = function () {};
 
 export const jobsLookup = {
   apy: {
-    queryId: 2206479,
+    queryId: 2352075,
     expiresAfter: 86400,
   },
   totalSupplyOUSD: {
-    queryId: 2207035,
+    queryId: 2352077,
     expiresAfter: 86400,
   },
   protocolRevenue: {
-    queryId: 2294306,
+    queryId: 2352079,
     expiresAfter: 86400,
   },
   totalSupplyBreakdown: {
-    queryId: 2207179,
+    queryId: 2352080,
     expiresAfter: 86400,
   },
   ousdSupplyRelativeEthereum: {
-    queryId: 2207183,
+    queryId: 2352081,
     expiresAfter: 86400,
   },
   ousdTradingVolume: {
-    queryId: 2207189,
+    queryId: 2352082,
     expiresAfter: 86400,
   },
 };
