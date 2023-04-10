@@ -277,12 +277,6 @@ const TwoColumnLayout = ({ sidebarWidth = 316, children }) => {
   const { links } = useContext(NavigationContext);
   const { pathname } = useRouter();
 
-  console.log({
-    here: "123",
-    links,
-    pathname,
-  });
-
   const analyticsLinks = [
     {
       label: "Overview",

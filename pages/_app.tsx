@@ -68,7 +68,6 @@ const useNavigationLinks = () => {
             },
           }),
         }).then((res) => res.json());
-        console.log(data);
         setLinks(data);
       } catch (e) {
         console.error(e);
