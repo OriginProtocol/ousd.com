@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=14.19.1"
+    "node": "16"
   },
   "description": "Origin Protocol Website",
   "author": "Origin Protocol",
