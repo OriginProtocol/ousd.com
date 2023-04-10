@@ -234,9 +234,9 @@ const formatMonthDay = (d) => format(new Date(d), "MMM do");
 
 export const formatLabels = (labels) => labels?.map(formatMonthDay);
 
-export const formatDisplay = ({ labels, ...rest }) => ({
-  labels: formatLabels(labels),
-  ...rest,
+export const formatDisplay = ({ labels, datasets }) => ({
+  labels: labels ? formatLabels(labels) : [],
+  datasets: datasets || [],
 });
 
 export const filterByDuration = (data, duration = "all") => {
