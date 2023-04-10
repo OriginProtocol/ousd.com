@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import Head from "next/head";
 import { Bar } from "react-chartjs-2";
 import { LayoutBox, TwoColumnLayout } from "../../src/components";
