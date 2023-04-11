@@ -65,6 +65,11 @@ class DuneClient {
         tls: {
           rejectUnauthorized: false,
         },
+        lazyConnect: true,
+        retryStrategy(times) {
+          if (times > 5) return null;
+          return Math.min(times * 500, 2000);
+        },
       });
 
       this.cacheClient.on("ready", function () {
