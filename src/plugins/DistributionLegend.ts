@@ -3,8 +3,8 @@ import { BigNumber } from "ethers";
 import { smSize } from "../constants";
 
 const getOrCreateLegendList = (chart, id) => {
-  const legendContainer = document.getElementById(id);
-  let listContainer = legendContainer.querySelector("ul");
+  const legendContainer = document?.getElementById(id);
+  let listContainer = legendContainer?.querySelector("ul");
 
   if (!listContainer) {
     listContainer = createElement("ul", [], {
