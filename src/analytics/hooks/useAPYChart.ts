@@ -7,6 +7,7 @@ export const useAPYChart = () => {
     initialData: {
       labels: [],
       datasets: [],
+      error: null,
     },
     refetchOnWindowFocus: false,
     keepPreviousData: true,
@@ -18,6 +19,9 @@ export const useAPYChart = () => {
   });
 
   const chartData = useMemo(() => {
+    if (data?.error) {
+      return null;
+    }
     return formatDisplay(
       filterByDuration(
         {

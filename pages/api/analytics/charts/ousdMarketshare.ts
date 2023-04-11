@@ -8,7 +8,7 @@ export const getOUSDMarketshareRelativeToETH = async () => {
       result: { rows },
     } = await client.refresh(jobsLookup.ousdSupplyRelativeEthereum.queryId);
 
-    rows.reverse();
+    rows?.reverse();
 
     const { total, labels } = toChartData(rows, {
       ousd: "total",
@@ -37,7 +37,9 @@ const getHandler = async (req, res) => {
     return res.json(data);
   } catch (error) {
     return res.status(500).json({
-      error,
+      error:
+        error.message ||
+        "Internal server error on relative eth marketshare query",
     });
   }
 };
