@@ -65,6 +65,7 @@ class DuneClient {
         tls: {
           rejectUnauthorized: false,
         },
+        connectTimeout: 5000,
         lazyConnect: true,
         retryStrategy(times) {
           if (times > 5) return null;
@@ -80,6 +81,7 @@ class DuneClient {
 
   private async _checkCache<T>(key) {
     try {
+      if (this.cacheClient.status !== CACHE_READY_STATE) return null;
       return JSON.parse(await this.cacheClient.get(key));
     } catch (error) {
       console.error(

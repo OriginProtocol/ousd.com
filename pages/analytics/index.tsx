@@ -17,7 +17,11 @@ import {
 } from "chart.js";
 import { last, orderBy } from "lodash";
 import { Typography } from "@originprotocol/origin-storybook";
-import { LayoutBox, TwoColumnLayout } from "../../src/components";
+import {
+  ErrorBoundary,
+  LayoutBox,
+  TwoColumnLayout,
+} from "../../src/components";
 import { formatCurrency, formatPercentage } from "../../src/utils/math";
 import { aggregateCollateral, chartOptions } from "../../src/analytics/utils";
 import {
@@ -50,7 +54,7 @@ ChartJS.register(
 
 const APYChartContainer = () => {
   const [{ data, filter, isFetching }, { onChangeFilter }] = useAPYChart();
-  return (
+  return data ? (
     <LayoutBox
       loadingClassName="flex items-center justify-center h-[350px] w-full"
       isLoading={isFetching}
@@ -89,7 +93,7 @@ const APYChartContainer = () => {
         <Line options={chartOptions} data={data} />
       </div>
     </LayoutBox>
-  );
+  ) : null;
 };
 
 const TotalSupplyChartContainer = () => {
@@ -100,47 +104,49 @@ const TotalSupplyChartContainer = () => {
       loadingClassName="flex items-center justify-center h-[370px] w-full"
       isLoading={isFetching}
     >
-      <div className="flex flex-row justify-between w-full h-[210px] p-4 md:p-6">
-        <div className="flex flex-col w-full h-full">
-          <Typography.Caption className="text-subheading">
-            Total Supply
-          </Typography.Caption>
-          <Typography.H4>{`${formatCurrency(
-            last(data?.datasets?.[0]?.data) || 0,
-            2
-          )}`}</Typography.H4>
-          <div className="flex flex-col text-sm mb-2">
-            <div className="flex flex-row items-center space-x-2">
-              <div className="w-[6px] h-[6px] bg-gradient3 rounded-full" />
-              <Typography.Caption className="text-subheading">
-                Circulating OUSD
-              </Typography.Caption>
+      <ErrorBoundary>
+        <div className="flex flex-row justify-between w-full h-[210px] p-4 md:p-6">
+          <div className="flex flex-col w-full h-full">
+            <Typography.Caption className="text-subheading">
+              Total Supply
+            </Typography.Caption>
+            <Typography.H4>{`${formatCurrency(
+              last(data?.datasets?.[0]?.data) || 0,
+              2
+            )}`}</Typography.H4>
+            <div className="flex flex-col text-sm mb-2">
+              <div className="flex flex-row items-center space-x-2">
+                <div className="w-[6px] h-[6px] bg-gradient3 rounded-full" />
+                <Typography.Caption className="text-subheading">
+                  Circulating OUSD
+                </Typography.Caption>
+              </div>
+              {/*<div className="flex flex-row items-center space-x-2">*/}
+              {/*  <div className="w-[6px] h-[6px] bg-gradient2 rounded-full" />*/}
+              {/*  <Typography.Caption className="text-subheading">*/}
+              {/*    Protocol-owned OUSD*/}
+              {/*  </Typography.Caption>*/}
+              {/*</div>*/}
             </div>
-            {/*<div className="flex flex-row items-center space-x-2">*/}
-            {/*  <div className="w-[6px] h-[6px] bg-gradient2 rounded-full" />*/}
-            {/*  <Typography.Caption className="text-subheading">*/}
-            {/*    Protocol-owned OUSD*/}
-            {/*  </Typography.Caption>*/}
-            {/*</div>*/}
+            <Typography.Caption className="text-subheading">
+              {last(data?.labels)}
+            </Typography.Caption>
           </div>
-          <Typography.Caption className="text-subheading">
-            {last(data?.labels)}
-          </Typography.Caption>
+          <div className="flex flex-col space-y-2">
+            <DurationFilter
+              value={filter?.duration}
+              onChange={(duration) => {
+                onChangeFilter({
+                  duration: duration || "all",
+                });
+              }}
+            />
+          </div>
         </div>
-        <div className="flex flex-col space-y-2">
-          <DurationFilter
-            value={filter?.duration}
-            onChange={(duration) => {
-              onChangeFilter({
-                duration: duration || "all",
-              });
-            }}
-          />
+        <div className="mr-6">
+          <Line options={chartOptions} data={data} />
         </div>
-      </div>
-      <div className="mr-6">
-        <Line options={chartOptions} data={data} />
-      </div>
+      </ErrorBoundary>
     </LayoutBox>
   );
 };
@@ -149,38 +155,40 @@ const OUSDMarketshareContainer = () => {
   const [{ data, filter, isFetching }, { onChangeFilter }] =
     useMarketshareChart();
   // @ts-ignore
-  return (
+  return data ? (
     <LayoutBox
       loadingClassName="flex items-center justify-center h-[370px] w-full"
       isLoading={isFetching}
     >
-      <div className="flex flex-row justify-between w-full h-[180px] p-4 md:p-6">
-        <div className="flex flex-col w-full h-full">
-          <DefaultChartHeader
-            title="OUSD stablecoin market share on Ethereum"
-            display={`${formatCurrency(
-              last(data?.datasets?.[0]?.data) || 0,
-              4
-            )}%`}
-            date={last(data?.labels)}
-          />
+      <ErrorBoundary>
+        <div className="flex flex-row justify-between w-full h-[180px] p-4 md:p-6">
+          <div className="flex flex-col w-full h-full">
+            <DefaultChartHeader
+              title="OUSD stablecoin market share on Ethereum"
+              display={`${formatCurrency(
+                last(data?.datasets?.[0]?.data) || 0,
+                4
+              )}%`}
+              date={last(data?.labels)}
+            />
+          </div>
+          <div className="flex flex-col space-y-2">
+            <DurationFilter
+              value={filter?.duration}
+              onChange={(duration) => {
+                onChangeFilter({
+                  duration: duration || "all",
+                });
+              }}
+            />
+          </div>
         </div>
-        <div className="flex flex-col space-y-2">
-          <DurationFilter
-            value={filter?.duration}
-            onChange={(duration) => {
-              onChangeFilter({
-                duration: duration || "all",
-              });
-            }}
-          />
+        <div className="mr-6">
+          <Line options={chartOptions} data={data} />
         </div>
-      </div>
-      <div className="mr-6">
-        <Line options={chartOptions} data={data} />
-      </div>
+      </ErrorBoundary>
     </LayoutBox>
-  );
+  ) : null;
 };
 
 const CurrentCollateralContainer = ({ data }) => {
@@ -206,68 +214,70 @@ const CurrentCollateralContainer = ({ data }) => {
     }, 0);
   }, [JSON.stringify(data)]);
 
-  return (
+  return data ? (
     <LayoutBox
       className="min-h-[370px]"
       loadingClassName="flex items-center justify-center w-full h-[370px]"
     >
-      <div className="flex flex-row justify-between w-full h-[80px] p-4 md:p-6">
-        <div className="flex flex-col w-full h-full">
-          <Typography.Caption className="text-subheading">
-            Current Collateral
-          </Typography.Caption>
+      <ErrorBoundary>
+        <div className="flex flex-row justify-between w-full h-[80px] p-4 md:p-6">
+          <div className="flex flex-col w-full h-full">
+            <Typography.Caption className="text-subheading">
+              Current Collateral
+            </Typography.Caption>
+          </div>
         </div>
-      </div>
-      <div className="grid grid-cols-2 gap-4 w-full pb-4">
-        <div className="flex flex-col items-center justify-center flex-shrink-0 w-full h-[350px] px-6">
-          <Doughnut
-            options={{
-              responsive: true,
-              plugins: {
-                title: {
-                  display: false,
+        <div className="grid grid-cols-2 gap-4 w-full pb-4">
+          <div className="flex flex-col items-center justify-center flex-shrink-0 w-full h-[350px] px-6">
+            <Doughnut
+              options={{
+                responsive: true,
+                plugins: {
+                  title: {
+                    display: false,
+                  },
+                  legend: {
+                    display: false,
+                  },
+                  tooltip: {
+                    enabled: false,
+                  },
                 },
-                legend: {
-                  display: false,
-                },
-                tooltip: {
-                  enabled: false,
-                },
-              },
-              cutout: "75%",
-            }}
-            data={chartData}
-          />
-        </div>
-        <div className="flex flex-col flex-shrink-0 w-full h-full space-y-4 px-6">
-          {data.map(({ label, color, total }) => (
-            <div
-              key={label}
-              className="flex flex-row bg-origin-bg-black bg-opacity-50 rounded-md p-4"
-            >
-              <div className="flex flex-row space-x-4">
-                <div
-                  className="relative top-[6px] flex items-start w-[8px] h-[8px] rounded-full"
-                  style={{
-                    background: color,
-                  }}
-                />
-                <div className="flex flex-col space-y-1">
-                  <Typography.Caption>{label}</Typography.Caption>
-                  <Typography.Caption>
-                    {formatPercentage(total / totalSum)}
-                  </Typography.Caption>
-                  <Typography.Caption className="text-subheading">
-                    ${formatCurrency(total, 2)}
-                  </Typography.Caption>
+                cutout: "75%",
+              }}
+              data={chartData}
+            />
+          </div>
+          <div className="flex flex-col flex-shrink-0 w-full h-full space-y-4 px-6">
+            {data.map(({ label, color, total }) => (
+              <div
+                key={label}
+                className="flex flex-row bg-origin-bg-black bg-opacity-50 rounded-md p-4"
+              >
+                <div className="flex flex-row space-x-4">
+                  <div
+                    className="relative top-[6px] flex items-start w-[8px] h-[8px] rounded-full"
+                    style={{
+                      background: color,
+                    }}
+                  />
+                  <div className="flex flex-col space-y-1">
+                    <Typography.Caption>{label}</Typography.Caption>
+                    <Typography.Caption>
+                      {formatPercentage(total / totalSum)}
+                    </Typography.Caption>
+                    <Typography.Caption className="text-subheading">
+                      ${formatCurrency(total, 2)}
+                    </Typography.Caption>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </ErrorBoundary>
     </LayoutBox>
-  );
+  ) : null;
 };
 
 // const CurrentStrategiesChart = () => {
@@ -336,7 +346,7 @@ const CurrentCollateralContainer = ({ data }) => {
 
 const Analytics = ({ collateral }) => {
   return (
-    <>
+    <ErrorBoundary>
       <Head>
         <title>Analytics | Overview</title>
       </Head>
@@ -360,7 +370,7 @@ const Analytics = ({ collateral }) => {
         {/*  <OUSDChart />*/}
         {/*</div>*/}
       </div>
-    </>
+    </ErrorBoundary>
   );
 };
 

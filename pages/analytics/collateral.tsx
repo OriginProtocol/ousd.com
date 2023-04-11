@@ -14,7 +14,12 @@ import {
   Chart as ChartJS,
   LinearScale,
 } from "chart.js";
-import { LayoutBox, Image, TwoColumnLayout } from "../../src/components";
+import {
+  ErrorBoundary,
+  LayoutBox,
+  Image,
+  TwoColumnLayout,
+} from "../../src/components";
 import { DurationFilter } from "../../src/analytics/components";
 import {
   aggregateCollateral,
@@ -257,10 +262,11 @@ const CollateralPoolDistributions = ({ data = [] }) => {
 
 const AnalyticsCollateral = ({ strategies, collateral }) => {
   return (
-    <>
+    <ErrorBoundary>
       <Head>
         <title>Analytics | Collateral</title>
       </Head>
+
       <div className="grid grid-cols-12 gap-6">
         <div className="col-span-12">
           <CollateralAggregate data={collateral} />
@@ -272,7 +278,7 @@ const AnalyticsCollateral = ({ strategies, collateral }) => {
           <CollateralPoolDistributions data={strategies} />
         </div>
       </div>
-    </>
+    </ErrorBoundary>
   );
 };
 

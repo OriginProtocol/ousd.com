@@ -1,15 +1,15 @@
 import Head from "next/head";
-import { TwoColumnLayout } from "../../src/components";
+import { ErrorBoundary, TwoColumnLayout } from "../../src/components";
 import { GetServerSideProps } from "next";
 
 const AnalyticsHolders = () => {
   return (
-    <>
+    <ErrorBoundary>
       <Head>
         <title>Analytics | Holders</title>
       </Head>
       <div>TODO: Holders Breakdown</div>
-    </>
+    </ErrorBoundary>
   );
 };
 

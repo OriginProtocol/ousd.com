@@ -10,6 +10,7 @@ export const useProtocolRevenueChart = () => {
       initialData: {
         labels: [],
         datasets: [],
+        error: null,
       },
       refetchOnWindowFocus: false,
       keepPreviousData: true,
@@ -22,6 +23,9 @@ export const useProtocolRevenueChart = () => {
   });
 
   const baseData = useMemo(() => {
+    if (data?.error) {
+      return null;
+    }
     return {
       labels: data?.labels,
       datasets: data?.datasets?.reduce((acc, dataset) => {
@@ -37,7 +41,9 @@ export const useProtocolRevenueChart = () => {
   }, [JSON.stringify(data)]);
 
   const chartData = useMemo(() => {
-    return formatDisplay(filterByDuration(baseData, chartState?.duration));
+    return baseData
+      ? formatDisplay(filterByDuration(baseData, chartState?.duration))
+      : null;
   }, [JSON.stringify(baseData), chartState?.duration, chartState?.typeOf]);
 
   const onChangeFilter = (value) => {
