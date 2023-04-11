@@ -16,7 +16,7 @@ const getOrCreateLegendList = (chart, id) => {
       },
     }) as HTMLUListElement;
 
-    legendContainer.appendChild(listContainer);
+    legendContainer?.appendChild(listContainer);
   }
 
   return listContainer;
@@ -115,7 +115,7 @@ export const distributionLegendPlugin: (id: string) => Plugin = (
         }
       }
 
-      ul.appendChild(li);
+      ul?.appendChild(li);
 
       const mediaQuery = window.matchMedia(`(min-width: ${smSize}px)`);
       mediaQuery.addEventListener("change", checkMq);
@@ -139,7 +139,7 @@ const createElement = (
 
   if (children.length > 0) {
     children.forEach((child) => {
-      element.appendChild(child);
+      element?.appendChild(child);
     });
   }
 

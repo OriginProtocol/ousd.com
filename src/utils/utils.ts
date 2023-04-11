@@ -84,9 +84,9 @@ export function exportToCsv(filename, rows) {
       link.setAttribute("href", url);
       link.setAttribute("download", filename);
       link.style.visibility = "hidden";
-      document.body.appendChild(link);
+      document?.body?.appendChild(link);
       link.click();
-      document.body.removeChild(link);
+      document?.body.removeChild(link);
     }
   }
 }
