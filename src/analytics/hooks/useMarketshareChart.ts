@@ -14,6 +14,7 @@ export const useMarketshareChart = () => {
       initialData: {
         labels: [],
         datasets: [],
+        error: null,
       },
       refetchOnWindowFocus: false,
       keepPreviousData: true,
@@ -25,6 +26,9 @@ export const useMarketshareChart = () => {
   });
 
   const chartData = useMemo(() => {
+    if (data?.error) {
+      return null;
+    }
     return formatDisplay(
       filterByDuration(
         {

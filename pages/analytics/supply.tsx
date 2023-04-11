@@ -1,5 +1,9 @@
 import Head from "next/head";
-import { LayoutBox, TwoColumnLayout } from "../../src/components";
+import {
+  ErrorBoundary,
+  LayoutBox,
+  TwoColumnLayout,
+} from "../../src/components";
 import { GetServerSideProps } from "next";
 import { groupBy } from "lodash";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
@@ -409,7 +413,7 @@ const SupplyVolumeBreakdown = () => {
 
 const AnalyticsSupply = () => {
   return (
-    <>
+    <ErrorBoundary>
       <Head>
         <title>Analytics | Supply</title>
       </Head>
@@ -427,7 +431,7 @@ const AnalyticsSupply = () => {
           <SupplyVolumeBreakdown />
         </div>
       </div>
-    </>
+    </ErrorBoundary>
   );
 };
 

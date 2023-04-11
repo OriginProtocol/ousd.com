@@ -1,7 +1,10 @@
-import { GetServerSideProps } from "next";
 import { Typography } from "@originprotocol/origin-storybook";
 import Head from "next/head";
-import { LayoutBox, TwoColumnLayout } from "../../src/components";
+import {
+  ErrorBoundary,
+  LayoutBox,
+  TwoColumnLayout,
+} from "../../src/components";
 
 const monitoring = {
   macro: [
@@ -70,7 +73,7 @@ const monitoring = {
 
 const AnalyticsHealthMonitoring = () => {
   return (
-    <>
+    <ErrorBoundary>
       <Head>
         <title>Analytics | Health Monitoring</title>
       </Head>
@@ -169,16 +172,8 @@ const AnalyticsHealthMonitoring = () => {
           </div>
         </div>
       </div>
-    </>
+    </ErrorBoundary>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (): Promise<{
-  props;
-}> => {
-  return {
-    props: {},
-  };
 };
 
 export default AnalyticsHealthMonitoring;

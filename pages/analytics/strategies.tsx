@@ -5,6 +5,7 @@ import { groupBy, orderBy } from "lodash";
 import { Typography } from "@originprotocol/origin-storybook";
 import {
   Button,
+  ErrorBoundary,
   LayoutBox,
   TwoColumnLayout,
   ProgressBar,
@@ -115,7 +116,7 @@ const LookingForYield = () => {
 
 const AnalyticsStrategies = ({ protocols, total }) => {
   return (
-    <>
+    <ErrorBoundary>
       <Head>
         <title>Analytics | Strategies</title>
       </Head>
@@ -158,7 +159,7 @@ const AnalyticsStrategies = ({ protocols, total }) => {
           <LookingForYield />
         </div>
       </div>
-    </>
+    </ErrorBoundary>
   );
 };
 
