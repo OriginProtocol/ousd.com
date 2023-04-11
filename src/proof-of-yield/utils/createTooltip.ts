@@ -16,7 +16,7 @@ const createTooltip = (graphId: number) => {
       tooltipEl = document.createElement("div");
       tooltipEl.id = "dripper-tooltip" + graphId;
       tooltipEl.innerHTML = "<table></table>";
-      chart.appendChild(tooltipEl);
+      chart?.appendChild(tooltipEl);
     }
 
     // Hide if no tooltip
