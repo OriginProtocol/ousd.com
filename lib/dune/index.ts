@@ -65,7 +65,7 @@ class DuneClient {
         tls: {
           rejectUnauthorized: false,
         },
-        connectTimeout: 5000,
+        connectTimeout: 10000,
         lazyConnect: true,
         retryStrategy(times) {
           if (times > 5) return null;
@@ -81,7 +81,6 @@ class DuneClient {
 
   private async _checkCache<T>(key) {
     try {
-      if (this.cacheClient.status !== CACHE_READY_STATE) return null;
       return JSON.parse(await this.cacheClient.get(key));
     } catch (error) {
       console.error(
@@ -198,7 +197,7 @@ class DuneClient {
     queryID: number,
     parameters?: QueryParameter[],
     pingFrequency: number = 5,
-    cacheExpiration: number = 86400
+    cacheExpiration: number = 21600
   ): Promise<ResultsResponse> {
     console.info(
       logPrefix,
