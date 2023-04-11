@@ -36,7 +36,7 @@ const stakeLineOptions: ChartOptions<"line"> = {
           tooltipEl = document.createElement("div");
           tooltipEl.id = "ogv-staking-tooltip";
           tooltipEl.innerHTML = "<table></table>";
-          chart.appendChild(tooltipEl);
+          chart?.appendChild(tooltipEl);
         }
 
         // Hide if no tooltip
