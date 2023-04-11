@@ -1,7 +1,11 @@
 import React, { useMemo } from "react";
 import Head from "next/head";
 import { Bar } from "react-chartjs-2";
-import { LayoutBox, TwoColumnLayout } from "../../src/components";
+import {
+  ErrorBoundary,
+  LayoutBox,
+  TwoColumnLayout,
+} from "../../src/components";
 import classnames from "classnames";
 import { Typography } from "@originprotocol/origin-storybook";
 import {
@@ -10,15 +14,13 @@ import {
   Chart as ChartJS,
   LinearScale,
 } from "chart.js";
-import { last, takeRight } from "lodash";
+import { last } from "lodash";
 import {
   DefaultChartHeader,
   DurationFilter,
-  MovingAverageFilter,
 } from "../../src/analytics/components";
 import { useProtocolRevenueChart } from "../../src/analytics/hooks/useProtocolRevenueChart";
 import { formatCurrency } from "../../src/utils/math";
-import { sumOf, sumOfDifferences } from "../../src/analytics/utils";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement);
 
@@ -59,8 +61,7 @@ const ProtocolChart = ({
   chartOptions,
   filter,
 }) => {
-  const dailyRevenue = last(data?.datasets?.[0]?.data);
-  return (
+  return data ? (
     <LayoutBox
       loadingClassName="flex items-center justify-center h-[350px] w-full"
       isLoading={isFetching}
@@ -68,7 +69,7 @@ const ProtocolChart = ({
       <div className="flex flex-row justify-between w-full h-[150px] p-4 md:p-6">
         <DefaultChartHeader
           title="Daily Protocol Revenue"
-          display={`$${formatCurrency(dailyRevenue, 0)}`}
+          display={`$${formatCurrency(last(data?.datasets?.[0]?.data), 0)}`}
           date={last(data?.labels)}
         />
         <div className="flex flex-col space-y-2">
@@ -86,7 +87,7 @@ const ProtocolChart = ({
         <Bar options={chartOptions} data={data} />
       </div>
     </LayoutBox>
-  );
+  ) : null;
 };
 
 const AnalyticsProtocolRevenue = () => {
@@ -121,7 +122,7 @@ const AnalyticsProtocolRevenue = () => {
   }, [JSON.stringify(data)]);
 
   return (
-    <>
+    <ErrorBoundary>
       <Head>
         <title>Analytics | Protocol Revenue</title>
       </Head>
@@ -142,7 +143,7 @@ const AnalyticsProtocolRevenue = () => {
           />
         </div>
       </div>
-    </>
+    </ErrorBoundary>
   );
 };
 

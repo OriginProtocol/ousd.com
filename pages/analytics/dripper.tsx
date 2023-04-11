@@ -1,12 +1,16 @@
 import Head from "next/head";
 import { GetServerSideProps } from "next";
 import { Typography } from "@originprotocol/origin-storybook";
-import { LayoutBox, TwoColumnLayout } from "../../src/components";
+import {
+  ErrorBoundary,
+  LayoutBox,
+  TwoColumnLayout,
+} from "../../src/components";
 
 // TODO: Dripper Port
 const AnalyticsDripper = () => {
   return (
-    <>
+    <ErrorBoundary>
       <Head>
         <title>Analytics | Dripper</title>
       </Head>
@@ -45,7 +49,7 @@ const AnalyticsDripper = () => {
           </div>
         </div>
       </div>
-    </>
+    </ErrorBoundary>
   );
 };
 

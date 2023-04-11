@@ -23,7 +23,7 @@ import { useQuery } from "react-query";
 import { useMemo, useState } from "react";
 import { createGradient } from "../../src/analytics/utils";
 import { last } from "lodash";
-import { DurationFilter } from "../../src/analytics/components";
+import { ErrorBoundary, DurationFilter } from "../../src/analytics/components";
 import { useSupplyDistributionChart } from "../../src/analytics/hooks/useSupplyDistributionChart";
 
 ChartJS.register(
@@ -409,7 +409,7 @@ const SupplyVolumeBreakdown = () => {
 
 const AnalyticsSupply = () => {
   return (
-    <>
+    <ErrorBoundary>
       <Head>
         <title>Analytics | Supply</title>
       </Head>
@@ -427,7 +427,7 @@ const AnalyticsSupply = () => {
           <SupplyVolumeBreakdown />
         </div>
       </div>
-    </>
+    </ErrorBoundary>
   );
 };
 
