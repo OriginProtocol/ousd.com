@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import Head from "next/head";
 import { Bar } from "react-chartjs-2";
 import { LayoutBox, TwoColumnLayout } from "../../src/components";
@@ -18,7 +18,7 @@ import {
 } from "../../src/analytics/components";
 import { useProtocolRevenueChart } from "../../src/analytics/hooks/useProtocolRevenueChart";
 import { formatCurrency } from "../../src/utils/math";
-import { sumOfDifferences } from "../../src/analytics/utils";
+import { sumOf, sumOfDifferences } from "../../src/analytics/utils";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement);
 
@@ -59,7 +59,7 @@ const ProtocolChart = ({
   chartOptions,
   filter,
 }) => {
-  const dailyProtocolRevenue = "";
+  const dailyRevenue = last(data?.datasets?.[0]?.data);
   return (
     <LayoutBox
       loadingClassName="flex items-center justify-center h-[350px] w-full"
@@ -68,7 +68,7 @@ const ProtocolChart = ({
       <div className="flex flex-row justify-between w-full h-[150px] p-4 md:p-6">
         <DefaultChartHeader
           title="Daily Protocol Revenue"
-          display={dailyProtocolRevenue}
+          display={`$${formatCurrency(dailyRevenue, 0)}`}
           date={last(data?.labels)}
         />
         <div className="flex flex-col space-y-2">
@@ -80,16 +80,6 @@ const ProtocolChart = ({
               });
             }}
           />
-          <div className="flex justify-end">
-            <MovingAverageFilter
-              value={filter?.typeOf}
-              onChange={(typeOf) => {
-                onChangeFilter({
-                  typeOf: typeOf,
-                });
-              }}
-            />
-          </div>
         </div>
       </div>
       <div className="mr-6">
@@ -100,15 +90,17 @@ const ProtocolChart = ({
 };
 
 const AnalyticsProtocolRevenue = () => {
-  const [{ data, filter, chartOptions, isFetching }, { onChangeFilter }] =
-    useProtocolRevenueChart();
+  const [
+    { data, aggregations, filter, chartOptions, isFetching },
+    { onChangeFilter },
+  ] = useProtocolRevenueChart();
 
   const breakdowns = useMemo(() => {
-    const last7Days = takeRight(data?.datasets?.[0]?.data, 7);
-    const weeklyRevenue = sumOfDifferences(last7Days);
-    const last2Days = takeRight(data?.datasets?.[0]?.data, 2);
-    const dailyRevenue = sumOfDifferences(last2Days);
-    const allTimeRevenue = last(data?.datasets?.[0]?.data);
+    const {
+      dailyRevenue = 0,
+      weeklyRevenue = 0,
+      allTimeRevenue = 0,
+    } = aggregations || {};
     return [
       {
         label: "24H revenue",
@@ -121,7 +113,7 @@ const AnalyticsProtocolRevenue = () => {
         value: weeklyRevenue,
       },
       {
-        label: "All-time revenue",
+        label: "Total revenue",
         display: `$${formatCurrency(allTimeRevenue, 0)}`,
         value: allTimeRevenue,
       },

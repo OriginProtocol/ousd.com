@@ -1,5 +1,7 @@
+import { format, isAfter, subMonths, subWeeks } from "date-fns";
 import { isMobile } from "react-device-detect";
 import { ChartOptions } from "chart.js";
+import { slice } from "lodash";
 
 export const backingTokens = {
   DAI: {
@@ -217,4 +219,45 @@ export const sumOfDifferences = (data) => {
       }
       return acc;
     }, 0);
+};
+
+export const sumOf = (data) => {
+  return data?.reduce((acc, curr) => {
+    if (!isNaN(curr)) {
+      acc += curr;
+    }
+    return acc;
+  }, 0);
+};
+
+const formatMonthDay = (d) => format(new Date(d), "MMM do");
+
+export const formatLabels = (labels) => labels?.map(formatMonthDay);
+
+export const formatDisplay = ({ labels, datasets }) => ({
+  labels: labels ? formatLabels(labels) : [],
+  datasets: datasets || [],
+});
+
+export const filterByDuration = (data, duration = "all") => {
+  if (duration === "all") return data;
+  const { labels, datasets } = data;
+  const firstValidIndex = labels.findIndex((date) => {
+    const [sub] = duration.match(/(\d+)/);
+    const amount = sub ? parseInt(sub, 10) : 0;
+    const now = new Date();
+    const lowerBound = duration.includes("w")
+      ? subWeeks(now, amount)
+      : duration.includes("m")
+      ? subMonths(now, amount)
+      : now;
+    return isAfter(new Date(date), lowerBound);
+  });
+  return {
+    labels: slice(labels, firstValidIndex),
+    datasets: datasets?.map((dataset) => ({
+      ...dataset,
+      data: slice(dataset?.data, firstValidIndex),
+    })),
+  };
 };
