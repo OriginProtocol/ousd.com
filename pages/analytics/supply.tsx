@@ -1,5 +1,9 @@
 import Head from "next/head";
-import { LayoutBox, TwoColumnLayout } from "../../src/components";
+import {
+  ErrorBoundary,
+  LayoutBox,
+  TwoColumnLayout,
+} from "../../src/components";
 import { GetServerSideProps } from "next";
 import { groupBy } from "lodash";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
@@ -23,7 +27,7 @@ import { useQuery } from "react-query";
 import { useMemo, useState } from "react";
 import { createGradient } from "../../src/analytics/utils";
 import { last } from "lodash";
-import { ErrorBoundary, DurationFilter } from "../../src/analytics/components";
+import { DurationFilter } from "../../src/analytics/components";
 import { useSupplyDistributionChart } from "../../src/analytics/hooks/useSupplyDistributionChart";
 
 ChartJS.register(
