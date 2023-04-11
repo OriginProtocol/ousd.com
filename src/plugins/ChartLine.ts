@@ -4,10 +4,10 @@ export const ChartLine: Plugin = {
   id: "chart-line", //typescript crashes without id
   beforeDraw: function (chart: any, easing: any) {
     if (
-      chart.tooltip._active &&
-      chart.tooltip._active.length &&
-      chart.scales.x &&
-      chart.scales.y
+      chart.tooltip?._active &&
+      chart.tooltip?._active.length &&
+      chart.scales?.x &&
+      chart.scales?.y
     ) {
       const activePoint = chart.tooltip._active[0];
       const ctx = chart.ctx;
