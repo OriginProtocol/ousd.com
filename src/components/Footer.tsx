@@ -87,17 +87,17 @@ export default function Footer() {
                   Blog
                 </Typography.Body3>
               </Link>
-              {/*<Link
-                href={'/faq'}
-                target="_blank"
+              <Link
+                href={"/analytics"}
+                target="_parent"
                 rel="noopener noreferrer"
                 prefetch={false}
-                className="lg:mr-10 mt-[20px] lg:mt-2"
+                className="mr-10 mt-[20px] lg:mt-2"
               >
                 <Typography.Body3 className="text-[#fafbfb]">
-                  FAQ
+                  Analytics
                 </Typography.Body3>
-              </Link>*/}
+              </Link>
               <Link
                 href={"/ogv-dashboard"}
                 target="_parent"
