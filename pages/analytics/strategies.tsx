@@ -89,7 +89,7 @@ const LookingForYield = () => {
           OUSD’s yield is transparent, real and 100% verifiable on-chain. See
           the evidence of OUSD’s consistent performance over the past X days.
         </Typography.Body2>
-        <footer>
+        {/*<footer>
           <a
             href="https://www.ousd.com/ogv-dashboard"
             target="_blank"
@@ -108,7 +108,7 @@ const LookingForYield = () => {
               <Typography.Body2>View OUSD Proof of Yield</Typography.Body2>
             </Button>
           </a>
-        </footer>
+        </footer>*/}
       </div>
     </LayoutBox>
   );
