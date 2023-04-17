@@ -84,6 +84,7 @@ const moduleExports = {
   },
   experimental: { images: { allowFutureImage: true } },
   async redirects() {
+    console.log(dappRedirects);
     return [
       ...dappRedirects,
       {
@@ -107,8 +108,8 @@ const moduleExports = {
         permanent: true,
       },
       {
-        source: "/governance",
-        destination: `/`,
+        source: "/governance-info",
+        destination: `/governance`,
         permanent: true,
       },
     ];

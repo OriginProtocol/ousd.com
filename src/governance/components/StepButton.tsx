@@ -27,7 +27,7 @@ const StepButton = ({
   return (
     <div
       className={twMerge(
-        `bg-origin-bg-grey w-[294px] py-[22px] pl-6 rounded-lg cursor-pointer mt-2 hover:opacity-100 ${
+        `bg-origin-bg-grey w-[294px] py-[14px] lg:py-[22px] pl-6 rounded-lg cursor-pointer mt-2 hover:opacity-100 ${
           active === parseInt(number) ? "opacity-100" : "opacity-50"
         }`,
         className

@@ -12,7 +12,12 @@ const Step2 = ({ stakingApy, className }: Step2Props) => {
     <div className={className}>
       <Typography.Body2 className="font-medium text-blurry">
         With your OGV in a Web3 wallet (e.g. Metamask), connect to
-        <span className="ml-1 text-[#ffcf88]">
+        <span
+          className="ml-1 text-gradient1 cursor-pointer"
+          onClick={() =>
+            window.open("https://governance.ousd.com/stake", "_blank")
+          }
+        >
           the OUSD governance staking page.
         </span>
       </Typography.Body2>
