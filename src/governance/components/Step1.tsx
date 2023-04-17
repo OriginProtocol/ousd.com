@@ -21,11 +21,13 @@ const Step1 = ({ className }: Step1Props) => {
         <LogoBackground
           imgRoute={assetRootPath("/images/curve.svg")}
           imgSize={84}
+          link="https://curve.fi/#/ethereum/pools/factory-crypto-205/swap"
         />
         <LogoBackground
           imgRoute={assetRootPath("/images/uniswap.svg")}
           imgSize={96}
           className="ml-2"
+          link="https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet"
         />
       </div>
 
@@ -35,22 +37,27 @@ const Step1 = ({ className }: Step1Props) => {
         <LogoBackground
           imgRoute={assetRootPath("/images/huobi.svg")}
           imgSize={84}
+          link="https://www.huobi.com/en-us/exchange/ogv_usdt/"
         />
         <LogoBackground
           imgRoute={assetRootPath("/images/kucoin.svg")}
           imgSize={96}
+          link="https://www.kucoin.com/trade/OGV-USDT"
         />
         <LogoBackground
           imgRoute={assetRootPath("/images/gate.io.svg")}
           imgSize={84}
+          link="https://www.gate.io/trade/OGV_USDT"
         />
         <LogoBackground
           imgRoute={assetRootPath("/images/bitget.svg")}
           imgSize={84}
+          link="https://www.bitget.com/spot/OGVUSDT_SPBL"
         />
         <LogoBackground
           imgRoute={assetRootPath("/images/mexc-global.svg")}
           imgSize={124}
+          link="https://www.mexc.com/exchange/OGV_USDT"
         />
       </div>
 
@@ -69,20 +76,23 @@ const Step1 = ({ className }: Step1Props) => {
 interface LogoBackgroundProps {
   imgRoute: string;
   imgSize: number;
+  link: string;
   className?: string;
 }
 
 const LogoBackground = ({
   imgRoute,
   imgSize,
+  link,
   className,
 }: LogoBackgroundProps) => {
   return (
     <div
       className={twMerge(
-        "bg-origin-bg-greyt w-fit py-4 px-6 rounded-lg flex justify-center items-center m-1",
+        "bg-origin-bg-greyt hover:bg-origin-bg-grey cursor-pointer w-fit py-4 px-6 rounded-lg flex justify-center items-center m-1",
         className
       )}
+      onClick={() => window.open(link, "_blank")}
     >
       <Image src={imgRoute} width={imgSize} height={imgSize} alt="Logo" />
     </div>

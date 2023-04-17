@@ -40,17 +40,17 @@ const SmallScreenChooser = ({
           </StepButton>
           {
             {
-              1: <>{active[index + 1] && <Step1 className="my-5 ml-1" />}</>,
+              1: <>{active[index + 1] && <Step1 className="my-10 ml-1" />}</>,
               2: (
                 <>
                   {active[index + 1] && (
-                    <Step2 {...{ stakingApy }} className="my-5 ml-1" />
+                    <Step2 {...{ stakingApy }} className="my-10 ml-1" />
                   )}
                 </>
               ),
-              3: <>{active[index + 1] && <Step3 className="my-5 ml-1" />}</>,
-              4: <>{active[index + 1] && <Step4 className="my-5 ml-1" />}</>,
-              5: <>{active[index + 1] && <Step5 className="my-5 ml-1" />}</>,
+              3: <>{active[index + 1] && <Step3 className="my-10 ml-1" />}</>,
+              4: <>{active[index + 1] && <Step4 className="my-10 ml-1" />}</>,
+              5: <>{active[index + 1] && <Step5 className="my-10 ml-1" />}</>,
             }[index + 1]
           }
         </div>
@@ -63,8 +63,8 @@ const ArrowDown = () => {
   return (
     <Image
       src={assetRootPath("/images/arrow-down.svg")}
-      width={16}
-      height={16}
+      width={12}
+      height={12}
       alt="arrow-down"
       className="absolute top-1/2 -translate-y-1/2 right-4"
     />
@@ -75,8 +75,8 @@ const ArrowUp = () => {
   return (
     <Image
       src={assetRootPath("/images/arrow-up.svg")}
-      width={16}
-      height={16}
+      width={12}
+      height={12}
       alt="arrow-up"
       className="absolute top-1/2 -translate-y-1/2 right-4"
     />
