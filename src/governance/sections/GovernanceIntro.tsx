@@ -22,7 +22,7 @@ const GovernanceIntro = ({
   return (
     <Section
       className={sectionOverrideCss}
-      innerDivClassName="relative bg-origin-bg-black pt-8 lg:pt-20 overflow-hidden"
+      innerDivClassName="relative bg-origin-bg-black pt-8 lg:pt-20 overflow-hidden rounded-lg"
     >
       <Image
         src={assetRootPath("/images/splines20.png")}
@@ -32,7 +32,7 @@ const GovernanceIntro = ({
         className="absolute top-0 right-0 max-w-[300px] max-h-[300px] translate-x-[10%] lg:max-w-[500px] lg:max-h-[500px] xl:max-w-[700px] xl:max-h-[700px]"
       />
 
-      <Typography.H4 className="z-10 relative px-6 lg:px-20">
+      <Typography.H4 className="z-10 relative px-6 lg:px-20 text-4xl">
         Fully decentralized governance
       </Typography.H4>
 
@@ -50,7 +50,7 @@ const GovernanceIntro = ({
         rel="noopener noreferrer"
         href="https://docs.ousd.com/governance/overview"
       >
-        <div className="flex items-center mt-4 w-fit cursor-pointer px-6 lg:px-20">
+        <div className="flex items-center mt-4 w-fit cursor-pointer px-6 lg:px-20 hover:opacity-90">
           <Typography.Body3 className="text-sm text-gradient2">
             Learn more
           </Typography.Body3>

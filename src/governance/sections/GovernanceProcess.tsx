@@ -15,7 +15,7 @@ const GovernanceProcess = ({ sectionOverrideCss }: GovernanceProcessProps) => {
 
   return (
     <Section className={twMerge("pt-20", sectionOverrideCss)}>
-      <Typography.H6>The governance process</Typography.H6>
+      <Typography.H6 className="text-2xl">The governance process</Typography.H6>
       <GovernanceProcessItem
         imgRoute={"/images/discord.svg"}
         imgSize={width > lgSize ? 32 : 20}

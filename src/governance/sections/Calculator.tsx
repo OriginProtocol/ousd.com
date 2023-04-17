@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Typography } from "@originprotocol/origin-storybook";
 import { twMerge } from "tailwind-merge";
-import { Section } from "../../components";
+import { Gradient2Button, Section } from "../../components";
 import { RangeInput, RangeOutput } from "../components";
 import { commify } from "ethers/lib/utils";
 import {
@@ -140,6 +140,26 @@ const Calculator = ({ sectionOverrideCss }: CalculatorProps) => {
           className="w-full lg:w-1/2"
         />
       </div>
+
+      <Typography.Body3 className="text-xs text-table-title mt-8">
+        *The exchange rate between OGV and veOGV is constantly changing. By the
+        time you stake OGV, the amount of veOGV you receive will likely be
+        higher than the minimum required. This calculator will give an amount
+        that should be at least enough to participate in governance.
+      </Typography.Body3>
+
+      <Gradient2Button
+        className="bg-transparent hover:bg-transparent hover:opacity-90"
+        outerDivClassName="hover:opacity-90 text-center w-full md:w-fit md:px-10 md:py-[14px] mt-8"
+        onClick={() =>
+          window.open(
+            "https://app.uniswap.org/#/swap?outputCurrency=0x9c354503C38481a7A7a51629142963F98eCC12D0&chain=mainnet",
+            "_blank"
+          )
+        }
+      >
+        <Typography.Body2>Get OGV</Typography.Body2>
+      </Gradient2Button>
     </Section>
   );
 };

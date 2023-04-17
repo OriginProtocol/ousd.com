@@ -12,9 +12,17 @@ const Step3 = ({ className }: Step3Props) => {
   return (
     <div className={className}>
       <Typography.Body2 className="text-blurry">
-        In the <strong>ousd-governance-forum</strong> within the Origin Discord
-        server, you can create a new post summarizing your proposal or join an
-        existing discussion.
+        In the{" "}
+        <strong
+          className="text-gradient1 cursor-pointer"
+          onClick={() =>
+            window.open("https://governance.ousd.com/proposals", "_blank")
+          }
+        >
+          ousd-governance-forum
+        </strong>{" "}
+        within the Origin Discord server, you can create a new post summarizing
+        your proposal or join an existing discussion.
       </Typography.Body2>
 
       <Typography.Body2 className="text-white-grey mt-4">

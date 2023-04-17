@@ -33,7 +33,7 @@ const GovernanceProcessItem = ({
   className,
 }: GovernanceProcessItemProps) => {
   return (
-    <div className={twMerge("flex pb-8 lg:pb-20", className)}>
+    <div className={twMerge("flex pb-10 lg:pb-20", className)}>
       <div className="mr-4 lg:mr-14 relative">
         <div className="bg-white flex-[0_1_auto] relative w-[32px] h-[32px] lg:w-[56px] lg:h-[56px] rounded-full">
           <Image
@@ -51,7 +51,7 @@ const GovernanceProcessItem = ({
       </div>
       <div className="pt-0 lg:pt-4">
         <Typography.H7>{title}</Typography.H7>
-        <Typography.Body3 className="text-sm text-subheading max-w-[996px] mt-6">
+        <Typography.Body3 className="text-sm text-subheading max-w-[996px] mt-6 leading-6">
           {description}
         </Typography.Body3>
         {participationRequirments && (
@@ -61,24 +61,24 @@ const GovernanceProcessItem = ({
             </Typography.Body2>
 
             {/* Snapshot */}
-            <Typography.Body3 className="text-sm inline text-blurry">
-              {participationRequirments.snapshotMinimum}
-            </Typography.Body3>
-            <Typography.Body3 className="text-sm inline ml-1 text-subheading">
-              to create a Snapshot proposal
-            </Typography.Body3>
-
-            <br />
+            <div className="mb-2">
+              <Typography.Body3 className="text-sm inline text-blurry">
+                {participationRequirments.snapshotMinimum}
+              </Typography.Body3>
+              <Typography.Body3 className="text-sm inline ml-1 text-subheading">
+                to create a Snapshot proposal
+              </Typography.Body3>
+            </div>
 
             {/* Vote */}
-            <Typography.Body3 className="text-sm text-blurry inline">
-              {participationRequirments.voteMinimum}
-            </Typography.Body3>
-            <Typography.Body3 className="text-sm inline ml-1 text-subheading">
-              to vote on existing proposals{" "}
-            </Typography.Body3>
-
-            <br />
+            <div className="mb-2">
+              <Typography.Body3 className="text-sm text-blurry inline">
+                {participationRequirments.voteMinimum}
+              </Typography.Body3>
+              <Typography.Body3 className="text-sm inline ml-1 text-subheading">
+                to vote on existing proposals{" "}
+              </Typography.Body3>
+            </div>
 
             {/* Quorum */}
             <Typography.Body3 className="text-sm text-blurry inline">
@@ -90,14 +90,16 @@ const GovernanceProcessItem = ({
           </>
         )}
         <Gradient2Button
-          outerDivClassName="mt-4 lg:mt-10"
-          className="bg-transparent hover:bg-transparent"
+          outerDivClassName="mt-8 lg:mt-10"
+          className="bg-transparent hover:bg-transparent text-sm"
           onClick={() =>
             process.browser &&
             window.open(externalLink, "_blank", "noopener noreferrer")
           }
         >
-          {externalDescription}
+          <Typography.Body3 className="text-xs inline">
+            {externalDescription}
+          </Typography.Body3>
           <Image
             src={assetRootPath("/images/external-link-white.svg")}
             width={12}
