@@ -47,7 +47,7 @@ export default function Footer() {
                 </Typography.Body3>
               </Link>
               <Link
-                href={"https://governance.ousd.com/"}
+                href={"https://ousd.com/governance"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="lg:mr-10 mt-[20px] lg:mt-2"
