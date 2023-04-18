@@ -17,7 +17,7 @@ import {
   fetchVoterCount,
 } from "../src/governance/utils";
 
-const overrideCss = "px-4 sm:px-4 md:px-10 lg:px-10 bg-origin-bg-grey";
+const overrideCss = "bg-origin-bg-grey";
 
 interface GovernanceProps {
   navLinks: Link[];

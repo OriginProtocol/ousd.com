@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import Section from "../../components/Section";
 import Image from "next/image";
-import { lgSize, mdSize } from "../../constants";
+import { lgSize } from "../../constants";
 import { useViewWidth } from "../../hooks";
 import { Typography } from "@originprotocol/origin-storybook";
 import { assetRootPath } from "../../utils/image";
