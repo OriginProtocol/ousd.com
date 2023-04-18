@@ -75,17 +75,8 @@ const Home = ({
       </Head>
       <Seo seo={seo} />
 
-      <Header
-        className={sectionOverrideCss}
-        mappedLinks={navLinks}
-        webProperty="ousd"
-        active={active}
-      />
-      <Hero
-        daysToApy={daysToApy}
-        initialTvl={initialTvl}
-        sectionOverrideCss={sectionOverrideCss}
-      />
+      <Header mappedLinks={navLinks} webProperty="ousd" active={active} />
+      <Hero daysToApy={daysToApy} initialTvl={initialTvl} />
       <Apy daysToApy={daysToApy} apyData={apyHistory} />
       <Allocation strategies={strategies} />
       <Collateral collateral={collateral} strategies={strategies} />
