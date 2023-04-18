@@ -21,8 +21,6 @@ const fetchOgvStats = async () => {
     })
   );
 
-  console.log();
-
   return {
     price: get(ogvStats, "[0].data.OGV[0].quote.USD.price"),
     change24H: get(ogvStats, "[0].data.OGV[0].quote.USD.percent_change_24h"),
