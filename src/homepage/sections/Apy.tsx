@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import zipObject from "lodash/zipObject";
 import useApyHistoryQuery from "../../queries/useApyHistoryQuery";
 import { Chart as ChartJS } from "chart.js/auto";
 import { LineChart } from "../components";

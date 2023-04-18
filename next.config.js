@@ -84,7 +84,6 @@ const moduleExports = {
   },
   experimental: { images: { allowFutureImage: true } },
   async redirects() {
-    console.log(dappRedirects);
     return [
       ...dappRedirects,
       {
