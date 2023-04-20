@@ -5,7 +5,7 @@ import transformLinks from "../src/utils/transformLinks";
 import Error404 from "./404";
 
 const FallbackRenderer = ({ article, navLinks }) => {
-  if (!article || !article?.length) return <Error404 navLinks={navLinks} />;
+  if (!article) return <Error404 navLinks={navLinks} />;
   return <Article article={article} navLinks={navLinks} />;
 };
 
