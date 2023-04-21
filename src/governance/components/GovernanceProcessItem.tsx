@@ -66,7 +66,7 @@ const GovernanceProcessItem = ({
                 {participationRequirments.snapshotMinimum}
               </Typography.Body3>
               <Typography.Body3 className="text-sm inline ml-1 text-subheading">
-                to create a Snapshot proposal
+                to create a proposal
               </Typography.Body3>
             </div>
 
