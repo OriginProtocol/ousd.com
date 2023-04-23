@@ -114,10 +114,10 @@ export default function Footer() {
                 href={`${process.env.NEXT_PUBLIC_DAPP_URL}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="gradient2 w-full lg:w-[126px] px-6 lg:py-[6px] h-[56px] lg:h-auto mt-[20px] lg:mt-0 rounded-full flex lg:static items-center justify-center"
+                className="gradient2 w-full lg:w-fit px-6 lg:py-[6px] h-[56px] lg:h-auto mt-[20px] lg:mt-0 rounded-full flex lg:static items-center justify-center"
               >
                 <Typography.Body3 className="font-medium text-white">
-                  Get OUSD
+                  App
                 </Typography.Body3>
               </Link>
             </div>
