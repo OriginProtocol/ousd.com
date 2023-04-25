@@ -66,7 +66,7 @@ const Calculator = ({ sectionOverrideCss }: CalculatorProps) => {
     [blockTimestamp, lockupDuration]
   );
   const onChainReq = useMemo(
-    () => veOgvToOgv(blockTimestamp, 1_000_000, lockupDuration),
+    () => veOgvToOgv(blockTimestamp, 10_000_000, lockupDuration),
     [blockTimestamp, lockupDuration]
   );
 
@@ -135,7 +135,7 @@ const Calculator = ({ sectionOverrideCss }: CalculatorProps) => {
           className="w-full lg:w-1/2 mr-6"
         />
         <RangeOutput
-          title="On-chain proposal (1,000,000 veOGV)"
+          title="On-chain proposal (10,000,000 veOGV)"
           value={commify(onChainReq.toFixed(2))}
           className="w-full lg:w-1/2"
         />
