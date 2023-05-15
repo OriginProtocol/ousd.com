@@ -124,7 +124,7 @@ const MyApp = ({ Component, pageProps }) => {
               }}
             >
               <div>
-                <OethBanner />
+                {process.env.NEXT_PUBLIC_SHOW_BANNER && <OethBanner />}
                 {getLayout(<Component {...pageProps} />)}
               </div>
             </NavigationContext.Provider>
