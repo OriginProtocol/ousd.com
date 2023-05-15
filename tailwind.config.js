@@ -35,6 +35,8 @@ module.exports = {
         "gradient1-fromt": "#fedba833",
         "gradient1-to": "#cf75d5",
         "gradient1-tot": "#cf75d533",
+        "gradient-oeth-from": "#b362e6",
+        "gradient-oeth-to": "#6a36fc",
       },
       backgroundImage: {
         gradient:
