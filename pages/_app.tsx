@@ -11,9 +11,9 @@ import { fetchAPI } from "../lib/api";
 import { getStrapiMedia } from "../lib/media";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { GTM_ID, pageview } from "../lib/gtm";
-import transformLinks from "../src/utils/transformLinks";
 import { useContracts, usePreviousRoute } from "../src/hooks";
 import { createContext, useEffect, useState } from "react";
+import { OethBanner } from "../src/components";
 
 const defaultQueryFn = async ({ queryKey }) => {
   return await fetch(queryKey).then((res) => res.json());
@@ -123,7 +123,10 @@ const MyApp = ({ Component, pageProps }) => {
                 links,
               }}
             >
-              {getLayout(<Component {...pageProps} />)}
+              <div>
+                <OethBanner />
+                {getLayout(<Component {...pageProps} />)}
+              </div>
             </NavigationContext.Provider>
           </WagmiConfig>
         </QueryClientProvider>

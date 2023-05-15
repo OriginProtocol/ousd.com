@@ -11,3 +11,4 @@ export { default as Gradient2Button } from "./Gradient2Button";
 export { default as ProgressBar } from "./ProgressBar";
 export { default as RealTimeStats } from "./RealTimeStats";
 export { default as ErrorBoundary } from "./ErrorBoundary";
+export { default as OethBanner } from "./OethBanner";
