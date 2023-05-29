@@ -41,7 +41,13 @@ const GovernanceIntro = ({
         contracts on the Ethereum blockchain. This code, protected by a 48-hour
         timelock, is owned and controlled by a global community of OGV token
         holders who operate a decentralized autonomous organization, known as
-        the Origin Dollar DAO.
+        the Origin DeFi DAO.
+      </Typography.Body2>
+
+      <Typography.Body2 className="mt-4 lg:max-w-[90%] xl:max-w-[60%] relative z-10 px-6 lg:px-20">
+        Origin Ether, which shares over 90% of the same code as Origin Dollar, 
+        is initially governed by a 5 of 8 multi-sig with a 24-hour timelock 
+        but will be transferred to The Origin DeFi DAO after an initial period of stress testing.
       </Typography.Body2>
 
       {/* Learn more button */}

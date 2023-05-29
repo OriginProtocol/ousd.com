@@ -16,10 +16,10 @@ const Step3 = ({ className }: Step3Props) => {
         <strong
           className="text-gradient1 cursor-pointer"
           onClick={() =>
-            window.open("https://governance.ousd.com/proposals", "_blank")
+            window.open("hhttps://discord.com/channels/404673842007506945/1025438212908396564", "_blank")
           }
         >
-          ousd-governance-forum
+          defi-governance-forum
         </strong>{" "}
         within the Origin Discord server, you can create a new post summarizing
         your proposal or join an existing discussion.
@@ -27,7 +27,7 @@ const Step3 = ({ className }: Step3Props) => {
 
       <Typography.Body2 className="text-white-grey mt-4">
         There should be a forum post representing each proposal that exists on
-        Snapshot or the OUSD governance portal. It&apos;s best to go ahead and
+        Snapshot or the governance portal. It&apos;s best to go ahead and
         create a proposal and forum post at the same time rather than wait for
         approval. There&apos;s no harm in getting a signal and starting the
         conversation.
