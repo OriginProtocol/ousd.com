@@ -18,7 +18,7 @@ const Step2 = ({ stakingApy, className }: Step2Props) => {
             window.open("https://governance.ousd.com/stake", "_blank")
           }
         >
-          the OUSD governance staking page.
+          the Origin DeFi governance staking page.
         </span>
       </Typography.Body2>
 
