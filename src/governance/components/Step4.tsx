@@ -40,7 +40,7 @@ const Step4 = ({ className }: Step4Props) => {
         }
       >
         <Typography.Body2 className="inline">
-          OUSD Snapshot space{" "}
+          Origin DeFi Snapshot space{" "}
         </Typography.Body2>
         <Image
           src={assetRootPath("/images/external-link-white.svg")}
@@ -63,7 +63,7 @@ const Step4 = ({ className }: Step4Props) => {
         }
       >
         <Typography.Body2 className="inline">
-          OUSD governance portal
+          Origin DeFi governance portal
         </Typography.Body2>
         <Image
           src={assetRootPath("/images/external-link-white.svg")}
