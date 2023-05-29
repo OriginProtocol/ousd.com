@@ -24,14 +24,14 @@ const Heading = ({ stakingApy }: HeadingProps) => {
           </div>
         </div>
         <h1 className="flex items-center font-sansSailec font-bold text-5xl lg:text-6xl xl:text-7xl mt-6 md:mt-0 md:ml-6 lg:ml-12">
-          Origin Dollar <br /> Governance (OGV)
+          Origin DeFi <br /> Governance (OGV)
         </h1>
       </div>
       <div className="text-white py-8 text-base md:text-xl lg:text-2xl leading-6 lg:leading-8">
         <div className=" text-white mb-2 sm:mb-0 py-1.5">
           OGV is the
           <span className="text-gradient2 font-bold px-1">governance</span>
-          and value accrual token for OUSD.
+          and value accrual token for OUSD and OETH.
         </div>
         <div>
           Stake to earn
