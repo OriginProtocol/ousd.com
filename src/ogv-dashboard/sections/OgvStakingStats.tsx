@@ -27,7 +27,7 @@ const OgvStakingStats = ({ stakingData }: OgvStakingStatsProps) => {
       </Typography.H3>
       <Typography.Body className="mt-6 text-subheading px-[24px] sm:px-0">
         A significant portion of the OGV supply is locked voluntarily by holders
-        who believe in the long-term growth of OUSD. OGV stakers receive fees
+        who believe in the long-term growth of OUSD and OETH. OGV stakers receive fees
         and governance power in exchange for their commitment to the protocol.
       </Typography.Body>
 
