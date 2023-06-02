@@ -40,8 +40,8 @@ const DripperYieldData = ({ overrideCss }: DripperYieldDataProps) => {
         Yield in, Yield out
       </Typography.H5>
       <Typography.Body3 className="text-center text-sm text-table-title mt-3">
-        View the amount of yield the protocol earns vs what is distributed after
-        it&apos;s processed by the dripper
+        {`View the amount of yield the protocol earns vs what is distributed after
+        it's processed by the dripper`}
       </Typography.Body3>
 
       <div className="relative">
