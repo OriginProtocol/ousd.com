@@ -18,6 +18,9 @@ export const theme = createTheme({
     Morpho: {
       main: "#9bc3e9",
     },
+    Vault: {
+      main: "#8c66fc",
+    },
   },
 });
 
@@ -52,6 +55,12 @@ export const strategyMapping = {
     dai: "0x6b175474e89094c44da98b954eedeac495271d0f",
     usdc: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
     usdt: "0xdac17f958d2ee523a2206206994597c13d831ec7",
+    vault: true,
+    icons: {
+      DAI: "/images/dai-logo.svg",
+      USDC: "/images/usdc-logo.svg",
+      USDT: "/images/usdt-logo.svg",
+    },
   },
   threepoolstrat_holding: {
     protocol: "Convex",
