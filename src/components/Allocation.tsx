@@ -38,6 +38,15 @@ const Allocation = ({ strategies }) => {
               .toLowerCase()}.svg`,
           };
         });
+      } else if (strategyMapping[strategy]?.vault) {
+        return Object.keys(strategies[strategy]?.holdings).map((token) => {
+          return {
+            name: token,
+            protocol: strategyMapping[strategy]?.protocol,
+            total: strategies[strategy]?.holdings[token],
+            icon: strategyMapping[strategy]?.icons[token],
+          };
+        });
       }
       return {
         name: strategyMapping[strategy]?.name,
@@ -105,11 +114,7 @@ const Allocation = ({ strategies }) => {
                   <div className="flex flex-col justify-between">
                     {loaded &&
                       protocolsSorted?.map((protocol, i) => {
-                        if (
-                          protocol.name == "undefined" ||
-                          protocol.name === "Vault"
-                        )
-                          return;
+                        if (protocol.name == "undefined") return;
                         return (
                           <div
                             className="strategy rounded-xl border-2 p-[16px] md:p-8 my-[6px] md:my-[8px]"
@@ -124,17 +129,31 @@ const Allocation = ({ strategies }) => {
                           >
                             <div>
                               <div className="flex flex-row justify-between">
-                                <div className="relative w-1/3 md:w-1/3 lg:w-1/4">
-                                  <Image
-                                    src={protocolMapping[protocol.name]?.image}
-                                    fill
-                                    sizes="(max-width: 768px) 64px, 128px"
-                                    style={{
-                                      objectFit: "contain",
-                                      objectPosition: "0%",
-                                    }}
-                                    alt={protocol.name}
-                                  />
+                                <div
+                                  className={`relative ${
+                                    protocol.name !== "Vault"
+                                      ? "w-1/3 lg:w-1/4"
+                                      : "w-fit"
+                                  }`}
+                                >
+                                  {protocol.name !== "Vault" ? (
+                                    <Image
+                                      src={
+                                        protocolMapping[protocol.name]?.image
+                                      }
+                                      fill
+                                      sizes="(max-width: 768px) 64px, 128px"
+                                      style={{
+                                        objectFit: "contain",
+                                        objectPosition: "0%",
+                                      }}
+                                      alt={protocol.name}
+                                    />
+                                  ) : (
+                                    <Typography.Body>
+                                      Unallocated
+                                    </Typography.Body>
+                                  )}
                                 </div>
                                 <div>
                                   <Typography.H7
