@@ -35,7 +35,7 @@ const StakingBanner = ({ stakingApy, width }: StakingBannerProps) => {
             Fees and voting rights accrue to OGV stakers.{" "}
           </p>
           <p className="font-sansInter font-normal text-base md:text-lg mb-8">
-            Control the future of Origin's DeFi products and benefit from their growth.
+            {`Control the future of Origin's DeFi products and benefit from their growth.`}
           </p>
 
           {width < smSize && <StakeBannerButtons />}
