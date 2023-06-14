@@ -1,0 +1,14 @@
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions
+on:
+  issues:
+    types: [opened]
+jobs:
+  add-to-project:
+    name: Add issue to project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.5.0
+        with:
+          project-url: https://github.com/orgs/OriginProtocol/projects/4
+          github-token: ${{ secrets.PROJECT_WORKFLOWS }}
