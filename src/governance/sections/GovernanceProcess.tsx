@@ -42,7 +42,7 @@ const GovernanceProcess = ({ sectionOverrideCss }: GovernanceProcessProps) => {
         imgRoute="/images/ethereum.svg"
         imgSize={width > lgSize ? 20 : 12}
         title="On-chain implementation"
-        description="All configuration changes and improvements to the protocol's smart contracts must be executed on-chain. The Origin DeFi governance contracts are derived from OpenZeppelin's open-source code and require technical expertise to update. All on-chain proposals are reviewed for security risks and any changes to the code should be accompanied by a thorough security audit. A timelock provides an added layer of security preventing changes from taking effect immediately after an on-chain vote is passed. Note that on-chain improvements to OETH are intially managed by the 5 of 8 Admin multi-sig"
+        description="All configuration changes and improvements to the protocol's smart contracts must be executed on-chain. The Origin DeFi governance contracts are derived from OpenZeppelin's open-source code and require technical expertise to update. All on-chain proposals are reviewed for security risks and any changes to the code should be accompanied by a thorough security audit. A timelock provides an added layer of security preventing changes from taking effect immediately after an on-chain vote is passed."
         externalDescription="OUSD governance portal"
         externalLink="https://governance.ousd.com/"
         participationRequirments={{
