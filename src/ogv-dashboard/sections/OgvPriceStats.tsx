@@ -105,7 +105,7 @@ const OgvPriceStats = ({
                     </span>
                     <span className="block mt-2 mb-6 mx-8">
                       Circulating supply is calculated as the total supply minus
-                      the OGN balances of the following wallets:
+                      the OGV balances of the following wallets:
                     </span>
                     {nonCirculatingSupply
                       .filter((e) => e.balance !== "0")
