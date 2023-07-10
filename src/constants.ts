@@ -22,3 +22,6 @@ export const blankFill = "#141519";
 // Staking constants
 export const stakingDecayFactor = 1.8;
 export const beginEpoch = 1657584000;
+
+// daysPerAverageYear * hoursPerDay * minutesPerHour * secondsPerMinute / monthsPerYear = secondsPerMonth
+export const SECONDS_IN_A_MONTH = 2629800; // 365.25 * (24 * 60 * 60) / 12

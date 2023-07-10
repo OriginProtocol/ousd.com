@@ -1,8 +1,8 @@
-import { useQuery } from 'react-query'
+import { useQuery } from "react-query";
 
-import { QUERY_KEYS } from '../constants/queryKeys'
+import { QUERY_KEYS } from "../constants/queryKeys";
 
-import { circulatingSupplyService } from '../services/circulating-supply.service'
+import { circulatingSupplyService } from "../services/circulating-supply.service";
 
 const useCirculatingSupplyQuery = (circulating, options) => {
   return useQuery(
@@ -14,7 +14,7 @@ const useCirculatingSupplyQuery = (circulating, options) => {
       keepPreviousData: true,
       ...options,
     }
-  )
-}
+  );
+};
 
-export default useCirculatingSupplyQuery
+export default useCirculatingSupplyQuery;

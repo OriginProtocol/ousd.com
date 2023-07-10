@@ -12,9 +12,8 @@ import {
   SmallScreenChooser,
 } from "../components";
 import { assetRootPath } from "../../utils/image";
-import { useOgv, useViewWidth } from "../../hooks";
-import { getRewardsApy } from "../../utils/math";
-import { lgSize, stakingDecayFactor } from "../../constants";
+import { useStakingAPY, useViewWidth } from "../../hooks";
+import { lgSize } from "../../constants";
 import { ActiveSmall } from "../types";
 
 const titles = [
@@ -40,13 +39,7 @@ const StepByStep = ({ sectionOverrideCss }: StepByStepProps) => {
     5: false,
   });
 
-  const { totalVeSupply } = useOgv();
-  const stakingApy =
-    getRewardsApy(
-      100 * stakingDecayFactor ** (48 / 12),
-      100,
-      parseFloat(totalVeSupply)
-    ) || 0;
+  const { stakingAPY, loading: apyLoading } = useStakingAPY(100, 48)
 
   return (
     <Section
@@ -78,7 +71,8 @@ const StepByStep = ({ sectionOverrideCss }: StepByStepProps) => {
           <SmallScreenChooser
             active={activeSmall}
             setActive={setActiveSmall}
-            stakingApy={stakingApy}
+            stakingAPY={stakingAPY}
+            apyLoading={apyLoading}
             titles={titles}
           />
         )}
@@ -89,7 +83,7 @@ const StepByStep = ({ sectionOverrideCss }: StepByStepProps) => {
             {
               {
                 1: <Step1 />,
-                2: <Step2 stakingApy={stakingApy} />,
+                2: <Step2 stakingApy={stakingAPY} />,
                 3: <Step3 />,
                 4: <Step4 />,
                 5: <Step5 />,
