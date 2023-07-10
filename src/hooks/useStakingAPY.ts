@@ -47,7 +47,11 @@ const useStakingAPY = (amountStaked, duration) => {
       return 0;
     }
 
-    return getRewardsApy(veOgvReceived, amountStaked, parseFloat(totalVeSupply));
+    return getRewardsApy(
+      veOgvReceived,
+      amountStaked,
+      parseFloat(totalVeSupply)
+    );
   }, [veOgvReceived, amountStaked, totalVeSupply]);
 
   return {

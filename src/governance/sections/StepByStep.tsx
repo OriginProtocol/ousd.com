@@ -83,7 +83,7 @@ const StepByStep = ({ sectionOverrideCss }: StepByStepProps) => {
             {
               {
                 1: <Step1 />,
-                2: <Step2 stakingApy={stakingAPY} />,
+                2: <Step2 stakingAPY={stakingAPY} apyLoading={apyLoading} />,
                 3: <Step3 />,
                 4: <Step4 />,
                 5: <Step5 />,
