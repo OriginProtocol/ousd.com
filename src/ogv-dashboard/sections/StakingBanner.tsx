@@ -6,11 +6,12 @@ import { Button } from "@originprotocol/origin-storybook";
 import { smSize } from "../../constants";
 
 interface StakingBannerProps {
-  stakingApy: number;
+  stakingAPY: number;
+  apyLoading: boolean;
   width: number;
 }
 
-const StakingBanner = ({ stakingApy, width }: StakingBannerProps) => {
+const StakingBanner = ({ stakingAPY, apyLoading, width }: StakingBannerProps) => {
   return (
     <Section
       className="bg-origin-bg-black"
@@ -29,7 +30,7 @@ const StakingBanner = ({ stakingApy, width }: StakingBannerProps) => {
             Stake OGV
           </h4>
           <h4 className="font-sansSailec font-bold text-3xl md:text-4xl lg:text-5xl text-gradient1">
-            Earn {stakingApy.toFixed(2)}% APY
+            Earn {apyLoading ? "--.--" : stakingAPY.toFixed(2)}% APY
           </h4>
           <p className="font-sansInter font-normal text-base md:text-lg mt-4 mb-1">
             Fees and voting rights accrue to OGV stakers.{" "}

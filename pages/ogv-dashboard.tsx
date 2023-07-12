@@ -21,11 +21,10 @@ import {
   ChartData,
   Point,
 } from "chart.js";
-import { useViewWidth, useOgv } from "../src/hooks";
+import { useViewWidth, useStakingAPY } from "../src/hooks";
 import ogvAbi from "../src/constants/mainnetAbi/ogv.json";
 import { ChartLine, DistributionLegend } from "../src/plugins";
 import { BigNumber, ethers, providers } from "ethers";
-import { getRewardsApy } from "../src/utils/math";
 import { Link, PageSeo } from "../src/types";
 import { DashProps } from "../src/ogv-dashboard/types";
 import {
@@ -50,7 +49,6 @@ import {
   OgvStakingStats,
 } from "../src/ogv-dashboard/sections";
 import { fetchOgvStats } from "../src/utils";
-import { stakingDecayFactor } from "../src/constants";
 
 ChartJS.register(
   CategoryScale,
@@ -94,13 +92,7 @@ const OgvDashboard = ({
 }: DashProps) => {
   const width = useViewWidth();
 
-  const { totalVeSupply } = useOgv();
-  const stakingApy =
-    getRewardsApy(
-      100 * stakingDecayFactor ** (48 / 12),
-      100,
-      parseFloat(totalVeSupply)
-    ) || 0;
+  const { stakingAPY, loading: apyLoading } = useStakingAPY(100, 48);
 
   return (
     <>
@@ -111,7 +103,7 @@ const OgvDashboard = ({
       <Header mappedLinks={navLinks} webProperty="ousd" />
 
       {/* Heading */}
-      <Heading stakingApy={stakingApy} />
+      <Heading {...{ stakingAPY, apyLoading }} />
 
       {/* General OGV Price Stats */}
       <OgvPriceStats
@@ -137,7 +129,7 @@ const OgvDashboard = ({
       />
 
       {/* OGV Staking Banner*/}
-      <StakingBanner {...{ stakingApy, width }} />
+      <StakingBanner {...{ stakingAPY, apyLoading, width }} />
 
       {/* OGV Staking Stats */}
       <OgvStakingStats stakingData={stakingData} />

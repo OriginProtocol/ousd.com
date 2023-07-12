@@ -1,8 +1,8 @@
-import { useQuery } from 'react-query'
+import { useQuery } from "react-query";
 
-import { QUERY_KEYS } from '../constants/queryKeys'
+import { QUERY_KEYS } from "../constants/queryKeys";
 
-import { priceService } from '../services/price.service'
+import { priceService } from "../services/price.service";
 
 const usePriceQuery = (price, options) => {
   return useQuery(QUERY_KEYS.Price(), () => priceService.fetchPrice(), {
@@ -10,7 +10,7 @@ const usePriceQuery = (price, options) => {
     refetchOnWindowFocus: false,
     keepPreviousData: true,
     ...options,
-  })
-}
+  });
+};
 
-export default usePriceQuery
+export default usePriceQuery;
