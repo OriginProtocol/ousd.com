@@ -8,7 +8,8 @@ import { Step1, Step2, Step3, Step4, Step5 } from ".";
 interface SmallScreenChooserProps {
   active: ActiveSmall;
   setActive: Dispatch<SetStateAction<ActiveSmall>>;
-  stakingApy: number;
+  stakingAPY: number;
+  apyLoading: boolean;
   titles: string[];
 }
 
@@ -17,7 +18,8 @@ const steps = [Step1, Step2, Step3, Step4, Step5];
 const SmallScreenChooser = ({
   active,
   setActive,
-  stakingApy,
+  stakingAPY,
+  apyLoading,
   titles,
 }: SmallScreenChooserProps) => {
   return (
@@ -44,7 +46,7 @@ const SmallScreenChooser = ({
               2: (
                 <>
                   {active[index + 1] && (
-                    <Step2 {...{ stakingApy }} className="my-10 ml-1" />
+                    <Step2 {...{ stakingAPY, apyLoading }} className="my-10 ml-1" />
                   )}
                 </>
               ),

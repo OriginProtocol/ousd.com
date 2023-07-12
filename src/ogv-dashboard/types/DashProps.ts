@@ -3,7 +3,7 @@ import OgvRawData from "./OgvRawData";
 import { ChartData } from "chart.js";
 
 interface DashProps {
-  seo: PageSeo,
+  seo: PageSeo;
   navLinks: Link[];
   priceData24H: ChartData<"line", number[], number>;
   marketCapData24H: ChartData<"line", number[], number>;

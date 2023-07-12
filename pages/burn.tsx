@@ -7,12 +7,12 @@ import { Typography, Header } from "@originprotocol/origin-storybook";
 import Seo from "../src/components/strapi/seo";
 import formatSeo from "../src/utils/seo";
 import Footer from "../src/components/Footer";
-import { formatCurrency, getRewardsApy } from "../src/utils/math";
+import { formatCurrency } from "../src/utils/math";
 import { assetRootPath } from "../src/utils/image";
 import withIsMobile from "../src/hoc/withIsMobile";
 import { fetchAPI } from "../lib/api";
 import transformLinks from "../src/utils/transformLinks";
-import { useOgv } from "../src/hooks";
+import { useOgv, useStakingAPY } from "../src/hooks";
 
 const Burn = ({ locale, onLocale, seo, navLinks }) => {
   const {
@@ -34,8 +34,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
   const airdropAllocation = airdropAllocationOgn + airdropAllocationOusd;
   const burnedAmount = 369658070;
 
-  const stakingApy =
-    getRewardsApy(100 * 1.8 ** (48 / 12), 100, parseFloat(totalVeSupply)) || 0;
+  const { stakingAPY, loading: apyLoading } = useStakingAPY(100, 48)
 
   // @ts-ignore
   return (
@@ -414,7 +413,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                       className="inline-block text-[32px] leading-[36px]"
                       style={{ fontWeight: 700 }}
                     >
-                      {`${formatCurrency(stakingApy, 2)}%`}
+                      {`${apyLoading ? "--.--" : formatCurrency(stakingAPY, 2)}%`}
                     </Typography.H4>
                     <Typography.Body
                       className="inline-block text-[16px] leading-[28px]"

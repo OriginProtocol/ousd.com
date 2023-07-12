@@ -13,8 +13,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --write \"src/**/*.js\" \"pages/**/*.js\"",
-    "prettier:check": "prettier -c \"src/**/*.js\" \"pages/**/*.js\""
+    "prettier": "prettier --write \"src/**/*.ts\" \"pages/**/*.ts\"",
+    "prettier:check": "prettier -c \"src/**/*.ts\" \"pages/**/*.ts\""
   },
   "dependencies": {
     "@analytics/google-analytics": "^1.0.3",

@@ -5,10 +5,11 @@ import { assetRootPath } from "../../utils/image";
 import { Button } from "@originprotocol/origin-storybook";
 
 interface HeadingProps {
-  stakingApy: number;
+  stakingAPY: number;
+  apyLoading: boolean;
 }
 
-const Heading = ({ stakingApy }: HeadingProps) => {
+const Heading = ({ stakingAPY, apyLoading }: HeadingProps) => {
   return (
     <Section className="bg-origin-bg-black px-[24px]">
       <div className="flex flex-col md:flex-row relative">
@@ -36,7 +37,7 @@ const Heading = ({ stakingApy }: HeadingProps) => {
         <div>
           Stake to earn
           <span className="text-gradient2 font-bold px-1">
-            {stakingApy.toFixed(2)}% APY
+            {apyLoading ? "--.--" : stakingAPY.toFixed(2)}% APY
           </span>
         </div>
       </div>
