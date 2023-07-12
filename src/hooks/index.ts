@@ -8,3 +8,4 @@ export { default as usePreviousRoute } from "./usePreviousRoute";
 export { default as useGetPreviousRoute } from "./useGetPreviousRoute";
 export { default as useBlock } from "./useBlock";
 export { default as useContracts } from "./useContracts";
+export { default as useStakingAPY } from "./useStakingAPY";
