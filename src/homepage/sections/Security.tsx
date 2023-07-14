@@ -77,7 +77,7 @@ const Security = ({ audits, sectionOverrideCss }: SecurityProps) => {
       <div className="flex flex-col md:flex-row relative mb-10 md:mb-20 max-w-[1134px] mx-auto">
         <SecurityFeature
           title="48-hour timelock"
-          subtitle="If a malicious vote were to ever pass, users are given 48 hours to withdraw their funds before any new code is implemented."
+          subtitle="If a malicious governance vote were to ever pass, users are given 48 hours to withdraw their funds before any new code is implemented."
           className="mt-6 w-full md:w-1/2 md:mr-6"
         >
           <div className="w-full flex justify-center">
@@ -98,7 +98,7 @@ const Security = ({ audits, sectionOverrideCss }: SecurityProps) => {
         </SecurityFeature>
         <SecurityFeature
           title="Bug bounties"
-          subtitle="A $250,000 reward is offered through Immunefi, Web3's leading bug bounty platform. In over two years, no major vulnerability has been identified in OUSD's open-source code."
+          subtitle="A reward up to 1,000,000 is offered through Immunefi, Web3's leading bug bounty platform. In over two years, no major vulnerability has been identified in OUSD's open-source code."
           className="mt-6 w-full md:w-1/2"
         >
           <div className="w-full flex justify-center">
