@@ -3,7 +3,6 @@ import Moment from "react-moment";
 import Seo from "./strapi/seo";
 import { Typography, Header } from "@originprotocol/origin-storybook";
 import Image from "next/image";
-import Link from "next/link";
 import Footer from "../components/Footer";
 import styles from "../styles/Article.module.css";
 import formatSeo from "../utils/seo";
@@ -28,28 +27,6 @@ const Article = ({ article, navLinks }) => {
           <Header mappedLinks={navLinks} webProperty="ousd" />
           <div className="bg-[#141519] px-8 md:px-16 lg:px-[134px] pb-8 md:pb-12">
             <div className="max-w-[763px] mx-auto">
-              <Link
-                href={"/blog"}
-                className="inline-block p-[1px] rounded-full gradient2"
-              >
-                <div className="w-full h-full px-4 md:px-6 py-1.5 text-center rounded-full bg-[#141519]">
-                  <div className="flex flex-row justify-between space-x-3 md:space-x-5">
-                    <Image
-                      src="/images/arrow-left-gradient.svg"
-                      width="10"
-                      height="6"
-                      className=""
-                      alt="arrow"
-                    />
-                    <Typography.Body3
-                      className="text-[12px] md:text-[16px]"
-                      style={{ fontWeight: 500 }}
-                    >
-                      Back to News
-                    </Typography.Body3>
-                  </div>
-                </div>
-              </Link>
               <div className="mt-6 md:mt-12">
                 <Typography.H4
                   as="h1"
