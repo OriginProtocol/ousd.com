@@ -98,7 +98,7 @@ const Security = ({ audits, sectionOverrideCss }: SecurityProps) => {
         </SecurityFeature>
         <SecurityFeature
           title="Bug bounties"
-          subtitle="A reward up to 1,000,000 is offered through Immunefi, Web3's leading bug bounty platform. In over two years, no major vulnerability has been identified in OUSD's open-source code."
+          subtitle="A reward up to $1,000,000 is offered through Immunefi, Web3's leading bug bounty platform. In over two years, no major vulnerability has been identified in OUSD's open-source code."
           className="mt-6 w-full md:w-1/2"
         >
           <div className="w-full flex justify-center">
