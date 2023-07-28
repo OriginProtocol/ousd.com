@@ -103,7 +103,11 @@ const News = ({ articles, meta, categories, isMobile, pageRef }) => {
     order === "Most recent" ? articlesSorted : articlesSorted.reverse();
 
   const categoryArticles = category
-    ? articlesOrdered.filter((article) => article.category.slug === category)
+    ? articlesOrdered.filter(
+        (article) =>
+          article.category?.slug.toLocaleLowerCase() ===
+          category.toLocaleLowerCase()
+      )
     : articlesOrdered;
 
   const articlePages = Math.ceil(
@@ -144,7 +148,11 @@ const News = ({ articles, meta, categories, isMobile, pageRef }) => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 md:mt-20">
             {currentPageArticles.map((a, i) => {
-              if (!category || category === a.category.slug) {
+              if (
+                !category ||
+                category.toLocaleLowerCase() ===
+                  a.category.slug.toLocaleLowerCase()
+              ) {
                 return (
                   <Card
                     webProperty={"ousd"}
