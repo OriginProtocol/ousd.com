@@ -13,15 +13,15 @@ console.debug = function () {};
 
 export const jobsLookup = {
   apy: {
-    queryId: 2352075,
+    queryId: 2820851,
     expiresAfter: 86400,
   },
   totalSupplyOUSD: {
-    queryId: 2352077,
+    queryId: 2819052,
     expiresAfter: 86400,
   },
   protocolRevenue: {
-    queryId: 2352079,
+    queryId: 2819073,
     expiresAfter: 86400,
   },
   totalSupplyBreakdown: {

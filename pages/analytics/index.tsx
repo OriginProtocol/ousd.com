@@ -357,9 +357,9 @@ const Analytics = ({ collateral }) => {
         <div className="col-span-12">
           <TotalSupplyChartContainer />
         </div>
-        <div className="col-span-12 2xl:col-span-6">
+        {/* <div className="col-span-12 2xl:col-span-6">
           <OUSDMarketshareContainer />
-        </div>
+        </div> */}
         <div className="col-span-12 2xl:col-span-6">
           <CurrentCollateralContainer data={collateral} />
         </div>
