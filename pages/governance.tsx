@@ -42,7 +42,7 @@ const GovernanceInfo = ({
       <Header
         className={overrideCss}
         mappedLinks={navLinks}
-        webProperty="ousd"
+        webProperty="defi"
       />
 
       {/* Introduction */}
