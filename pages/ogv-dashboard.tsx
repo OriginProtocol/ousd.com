@@ -100,7 +100,7 @@ const OgvDashboard = ({
         <title>Dashboard</title>
       </Head>
       <Seo seo={seo} />
-      <Header mappedLinks={navLinks} webProperty="ousd" />
+      <Header mappedLinks={navLinks} webProperty="defi" />
 
       {/* Heading */}
       <Heading {...{ stakingAPY, apyLoading }} />
