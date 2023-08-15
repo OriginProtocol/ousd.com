@@ -219,7 +219,7 @@ const Allocation = ({ strategies }) => {
                                             />
                                           </div>
                                           <Typography.Body3 className="pl-[12px] pr-[16px] font-light text-[12px] md:text-[16px]">
-                                            {strategy.name}
+                                            {protocol.name !== 'Maker' ? strategy.name : 'DAI'}
                                           </Typography.Body3>
                                         </div>
                                         <Typography.Body3 className="text-subheading font-light text-[12px] md:text-[16px]">

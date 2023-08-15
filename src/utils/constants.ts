@@ -136,7 +136,7 @@ export const strategyMapping = {
     usdt: "0x81994b9607e06ab3d5cF3AffF9a67374f05F27d7",
   },
   dsr_strat: {
-    protocol: "Maker DSR",
+    protocol: "Maker",
     singleAsset: true,
     name: "Maker DSR",
     address: "0x6b69B755C629590eD59618A2712d8a2957CA98FC",
