@@ -18,6 +18,12 @@ export const theme = createTheme({
     Morpho: {
       main: "#9bc3e9",
     },
+    Flux: {
+      main: "#FFFFFF",
+    },
+    Maker: {
+      main: "#1AAB9B",
+    },
     Vault: {
       main: "#8c66fc",
     },
@@ -25,6 +31,16 @@ export const theme = createTheme({
 });
 
 export const protocolMapping = {
+  Aave: {
+    image: "/images/aave-strategy.svg",
+    description:
+      "Aave is a liquidity protocol where users can participate as suppliers or borrowers. Each loan is over-collateralized to ensure repayment. OUSD deploys stablecoins to three of the Aave V2 markets and earns interest approximately every 12 seconds. Additional yield is generated from protocol token incentives (AAVE), which are regularly sold for USDT on Uniswap and compounded.",
+  },
+  Compound: {
+    image: "/images/compound-strategy.svg",
+    description:
+      "Compound is an interest rate protocol allowing lenders to earn yield on digital assets by supplying them to borrowers. Each loan is over-collateralized to ensure repayment. OUSD deploys stablecoins to three of the Compound V2 markets and earns interest approximately every 12 seconds. Additional yield is generated from protocol token incentives (COMP), which are regularly sold for USDT on Uniswap and compounded.",
+  },
   Convex: {
     image: "/images/convex-strategy.svg",
     description:
@@ -35,15 +51,15 @@ export const protocolMapping = {
     description:
       "Morpho adds a peer-to-peer layer on top of Compound and Aave allowing lenders and borrowers to be matched more efficiently with better interest rates. When no matching opportunity exists, funds flow directly through to the underlying protocol. OUSD supplies stablecoins to three of Morpho’s Compound markets to earn interest. Additional yield is generated from protocol token incentives, including both COMP (regularly sold for USDT) and MORPHO (currently locked).",
   },
-  Aave: {
-    image: "/images/aave-strategy.svg",
+  Flux: {
+    image: "/images/flux-strategy.svg",
     description:
-      "Aave is a liquidity protocol where users can participate as suppliers or borrowers. Each loan is over-collateralized to ensure repayment. OUSD deploys stablecoins to three of the Aave V2 markets and earns interest approximately every 12 seconds. Additional yield is generated from protocol token incentives (AAVE), which are regularly sold for USDT on Uniswap and compounded.",
+      "Flux is a decentralized lending protocol built by the Ondo Finance team. The protocol is a fork of Compound V2 with additional functionality to support both permissionless and permissioned tokens. OUSD lends stablecoins to Flux borrowers whose positions are collateralized by OUSG. This gives OUSD indirect exposure to an ETF of short-term US Treasuries.",
   },
-  Compound: {
-    image: "/images/compound-strategy.svg",
+  Maker: {
+    image: "/images/maker-strategy.svg",
     description:
-      "Compound is an interest rate protocol allowing lenders to earn yield on digital assets by supplying them to borrowers. Each loan is over-collateralized to ensure repayment. OUSD deploys stablecoins to three of the Compound V2 markets and earns interest approximately every 12 seconds. Additional yield is generated from protocol token incentives (COMP), which are regularly sold for USDT on Uniswap and compounded.",
+      "MakerDAO is the decentralized organization responsible for issuing DAI. The Dai Savings Rate (DSR) is a key mechanism of the Maker protocol designed to stabilize the value and supply of DAI by incentivizing users to hold and save it. OUSD utilizes the DSR as its base strategy for earning yield from DAI holdings.",
   },
 };
 
@@ -109,6 +125,21 @@ export const strategyMapping = {
     dai: "0x5d3a536e4d6dbd6114cc1ead35777bab948e3643",
     usdc: "0x39aa39c021dfbae8fac545936693ac917d5e7563",
     usdt: "0xf650c3d88d12db855b8bf7d11be6c55a4e07dcc9",
+  },
+  flux_strat: {
+    protocol: "Flux",
+    singleAsset: true,
+    name: "Flux",
+    address: "0x76Bf500B6305Dc4ea851384D3d5502f1C7a0ED44",
+    dai: "0xe2bA8693cE7474900A045757fe0efCa900F6530b",
+    usdc: "0x465a5a630482f3abD6d3b84B39B29b07214d19e5",
+    usdt: "0x81994b9607e06ab3d5cF3AffF9a67374f05F27d7",
+  },
+  dsr_strat: {
+    protocol: "Maker DSR",
+    singleAsset: true,
+    name: "Maker DSR",
+    address: "0x6b69B755C629590eD59618A2712d8a2957CA98FC",
   },
 };
 
