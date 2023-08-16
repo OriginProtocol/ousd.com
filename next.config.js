@@ -111,6 +111,11 @@ const moduleExports = {
         destination: `/governance`,
         permanent: true,
       },
+      {
+        source: "/partners",
+        destination: `/ecosystem`,
+        permanent: true,
+      },
     ];
   },
   async rewrites() {
