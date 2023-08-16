@@ -10,7 +10,7 @@ import formatSeo from "../src/utils/seo";
 import transformLinks from "../src/utils/transformLinks";
 import capitalize from "lodash/capitalize";
 
-const Partners = ({ seo, navLinks, partners }) => {
+const Ecosystem = ({ seo, navLinks, partners }) => {
   const [category, setCategory] = useState("");
 
   const categoryPartners = partners?.filter((partner) => {
@@ -29,10 +29,10 @@ const Partners = ({ seo, navLinks, partners }) => {
   return (
     <>
       <Head>
-        <title>Partners</title>
+        <title>Ecosystem</title>
       </Head>
       <Seo seo={seo} />
-      <section className="partners black">
+      <section className="ecosystem black">
         <Header mappedLinks={navLinks} webProperty="ousd" active={"Partners"} />
         <div className="px-8 md:px-16 lg:px-[134px] pb-[132px] text-left">
           <div className="max-w-[1432px] mx-auto mt-5 md:mt-16">
@@ -41,7 +41,7 @@ const Partners = ({ seo, navLinks, partners }) => {
               className="text-[40px] leading-[40px] md:text-[64px] md:leading-[72px]"
               style={{ fontWeight: 500 }}
             >
-              Partners
+              Ecosystem
             </Typography.H2>
             <Typography.Body3 className="max-w-[943px] mt-2 md:mt-6 text-[16px] md:text-[20px] leading-[28px] md:leading-[36px] text-subheading">
               OUSD is a constantly evolving ecosystem offering the best-risk
@@ -140,14 +140,16 @@ const Partners = ({ seo, navLinks, partners }) => {
 };
 
 export async function getStaticProps() {
-  const partnerRes = await fetchAPI("/ousd-partners", {
+  const partnerRes = await fetchAPI(
+    "/ousd-partners?pagination[pageSize]=1000",
+    {
     populate: {
       logo: {
         populate: "*",
       },
     },
   });
-  const seoRes = await fetchAPI("/ousd/page/en/%2Fpartners");
+  const seoRes = await fetchAPI("/ousd/page/en/%2Fecosystem");
   const navRes = await fetchAPI("/ousd-nav-links", {
     populate: {
       links: {
@@ -168,4 +170,4 @@ export async function getStaticProps() {
   };
 }
 
-export default Partners;
+export default Ecosystem;

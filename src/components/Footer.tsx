@@ -67,13 +67,13 @@ export default function Footer() {
                 </Typography.Body3>
               </Link>
               <Link
-                href={"/partners"}
+                href={"/ecosystem"}
                 target="_parent"
                 rel="noopener noreferrer"
                 className="lg:mr-10 mt-[20px] lg:mt-2"
               >
                 <Typography.Body3 className="text-[#fafbfb]">
-                  Partners
+                  Ecosystem
                 </Typography.Body3>
               </Link>
               <Link
