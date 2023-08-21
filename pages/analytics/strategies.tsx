@@ -155,7 +155,7 @@ const AnalyticsStrategies = ({ protocols, total }) => {
             </LayoutBox>
           );
         })}
-{/*        <div className="col-span-12">
+        {/*        <div className="col-span-12">
           <LookingForYield />
         </div>*/}
       </div>
@@ -198,7 +198,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
         icon: strategyMapping[strategy]?.icon || null,
       };
     })
-    .filter((strategy) => !!strategy.protocol);
+    .filter((strategy) => !!strategy?.protocol);
 
   const protocols = groupBy(yieldSources, "protocol");
 
