@@ -39,11 +39,9 @@ const GovernanceInfo = ({
         <title>Governance</title>
       </Head>
 
-      <Header
-        className={overrideCss}
-        mappedLinks={navLinks}
-        webProperty="defi"
-      />
+      <div className={overrideCss}>
+        <Header mappedLinks={navLinks} webProperty="defi" />
+      </div>
 
       {/* Introduction */}
       <GovernanceIntro
