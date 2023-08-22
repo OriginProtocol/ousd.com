@@ -10,7 +10,7 @@ import formatSeo from "../src/utils/seo";
 import transformLinks from "../src/utils/transformLinks";
 import capitalize from "lodash/capitalize";
 
-const Ecosystem = ({ seo, navLinks, partners }) => {
+const Partners = ({ seo, navLinks, partners }) => {
   const [category, setCategory] = useState("");
 
   const categoryPartners = partners?.filter((partner) => {
@@ -140,16 +140,16 @@ const Ecosystem = ({ seo, navLinks, partners }) => {
 };
 
 export async function getStaticProps() {
-  const partnerRes = await fetchAPI(
-    "/ousd-partners?pagination[pageSize]=1000",
-    {
+  const partnerRes = await fetchAPI("/ousd-partners", {
     populate: {
       logo: {
         populate: "*",
       },
     },
   });
-  const seoRes = await fetchAPI("/ousd/page/en/%2Fecosystem");
+
+  const seoRes = await fetchAPI("/ousd/page/en/%2Fpartners");
+
   const navRes = await fetchAPI("/ousd-nav-links", {
     populate: {
       links: {
@@ -170,4 +170,4 @@ export async function getStaticProps() {
   };
 }
 
-export default Ecosystem;
+export default Partners;
