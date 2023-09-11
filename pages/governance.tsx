@@ -16,6 +16,7 @@ import {
   fetchImprovementProposals,
   fetchVoterCount,
 } from "../src/governance/utils";
+import { GetStaticProps } from "next";
 
 const overrideCss = "bg-origin-bg-grey";
 
@@ -65,10 +66,21 @@ const GovernanceInfo = ({
   );
 };
 
-export const getStaticProps = async (): Promise<{
-  props: GovernanceProps;
-  revalidate: number;
-}> => {
+export const getStaticProps: GetStaticProps = async ({
+  locale,
+}): Promise<
+  | {
+      props: GovernanceProps;
+      revalidate: number;
+    }
+  | { notFound: true }
+> => {
+  if (locale !== "en") {
+    return {
+      notFound: true,
+    };
+  }
+
   const navResPromise = fetchAPI("/ousd-nav-links", {
     populate: {
       links: {

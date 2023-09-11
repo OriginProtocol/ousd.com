@@ -89,7 +89,13 @@ const Home = ({
   );
 };
 
-export async function getStaticProps() {
+export async function getStaticProps({ locale }) {
+  if (locale !== "en") {
+    return {
+      notFound: true,
+    };
+  }
+
   const { vault, dripper } = setupContracts();
   const initialTvl = await fetchTvl(vault, dripper);
   const apyHistory = await fetchApyHistory();

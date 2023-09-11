@@ -37,6 +37,7 @@ export async function getStaticProps({ params, locale }) {
   if (!data) {
     return {
       notFound: true,
+      revalidate: 5 * 60, // Cache response for 5m
     };
   }
 
