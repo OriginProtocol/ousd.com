@@ -146,10 +146,22 @@ const OgvDashboard = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async (): Promise<{
-  props: DashProps;
-  revalidate: number;
-}> => {
+export const getStaticProps: GetStaticProps = async ({
+  locale,
+}): Promise<
+  | {
+      props: DashProps;
+      revalidate: number;
+    }
+  | {
+      notFound: true;
+    }
+> => {
+  if (locale !== "en") {
+    return {
+      notFound: true,
+    };
+  }
   const seoResPromise = fetchAPI("/ousd/page/en/%2Fogv-dashboard");
   const navResPromise = fetchAPI("/ousd-nav-links", {
     populate: {
