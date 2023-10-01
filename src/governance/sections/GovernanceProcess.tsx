@@ -29,7 +29,7 @@ const GovernanceProcess = ({ sectionOverrideCss }: GovernanceProcessProps) => {
         imgRoute="/images/lightning.svg"
         imgSize={width > lgSize ? 40 : 24}
         title="Snapshot vote"
-        description="All off-chain voting occurs on the Origin DeFi Governance Snapshot space. This allows for signaling votes and temperature checks to be conducted without participants needing to spend gas. Other proposals belong on Snapshot because they don't require on-chain execution to be implemented, such as the weekly funds reallocation or the initiation of new strategy development."
+        description="All off-chain voting occurs on the Origin DeFi Governance Snapshot space. This allows for signaling votes and temperature checks to be conducted without participants needing to spend gas. Other proposals belong on Snapshot because they don't require on-chain execution to be implemented, such as funds allocations and other Strategist actions."
         externalDescription="Snapshot space"
         participationRequirments={{
           snapshotMinimum: "10,000 veOGV",
