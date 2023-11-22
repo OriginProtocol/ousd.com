@@ -1,35 +1,45 @@
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { Card } from "@originprotocol/origin-storybook";
-import Moment from "react-moment";
-import { assetRootPath } from "../utils/image";
-import { capitalize } from "lodash";
-import withIsMobile from "../hoc/withIsMobile";
+import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
+import { Card } from '@originprotocol/origin-storybook'
+import Moment from 'react-moment'
+import { assetRootPath } from '../utils/image'
+import { capitalize } from 'lodash'
+import { useRouter } from 'next/router'
+import withIsMobile from '../hoc/withIsMobile'
 
 const Dropdown = ({ options, option, setOption, category }) => {
-  const [open, setOpen] = useState(false);
-  const optionsFormatted = category
-    ? [
-        {
-          name: "All news",
-          unavailable: false,
-        },
-      ].concat(
-        options.map((option) => {
+  const [open, setOpen] = useState(false)
+  const optionsFormatted =
+    category === 'category'
+      ? [
+          {
+            name: 'All news',
+            unavailable: false
+          }
+        ].concat(
+          options.map((option) => {
+            return {
+              name: capitalize(option.name),
+              unavailable: false
+            }
+          })
+        )
+      : category === 'locale'
+      ? options.map((locale) => {
           return {
-            name: capitalize(option.name),
-            unavailable: false,
-          };
+            name: locale[0],
+            value: locale[1],
+            unavailable: false
+          }
         })
-      )
-    : [
-        {
-          name: "Most recent",
-        },
-        {
-          name: "Least recent",
-        },
-      ];
+      : [
+          {
+            name: 'Most recent'
+          },
+          {
+            name: 'Least recent'
+          }
+        ]
 
   return (
     <div
@@ -39,14 +49,14 @@ const Dropdown = ({ options, option, setOption, category }) => {
     >
       <div
         className={`relative w-full md:w-[200px] px-6 py-3.5 gradient2 rounded-full cursor-pointer ${
-          category ? "z-40" : "z-20"
+          category ? 'z-40' : 'z-20'
         }`}
         onClick={() => {
-          setOpen(!open);
+          setOpen(!open)
         }}
       >
         <div className="flex flex-row justify-between">
-          {option || "All news"}
+          {option || 'All news'}
           <Image
             src={assetRootPath(`/images/caret-white.svg`)}
             width="20"
@@ -57,50 +67,61 @@ const Dropdown = ({ options, option, setOption, category }) => {
       </div>
       <div
         className={`absolute top-16 w-full md:w-[200px] bg-[#1e1f25] drop-shadow-ousd rounded-lg cursor-pointer ${
-          open ? "" : "hidden"
-        } ${category ? "z-30" : "z-10"}`}
+          open ? '' : 'hidden'
+        } ${category ? 'z-30' : 'z-10'}`}
       >
         {optionsFormatted.map((c, i) => {
           return (
             <div
               className={`w-full text-left px-6 py-3.5 hover:text-[#fafbfb] hover:bg-gradient-to-r hover:from-[#8c66fc] hover:to-[#0274f1] ${
-                i === 0 ? "rounded-t-lg" : ""
-              } ${i === optionsFormatted.length - 1 ? "rounded-b-lg" : ""}`}
+                i === 0 ? 'rounded-t-lg' : ''
+              } ${i === optionsFormatted.length - 1 ? 'rounded-b-lg' : ''}`}
               onClick={() => {
-                setOption(c.name === "All news" ? "" : c.name);
-                setOpen(false);
+                setOption(
+                  c.value ? c.value : c.name === 'All news' ? '' : c.name
+                )
+                setOpen(false)
               }}
               key={i}
             >
               {c.name}
             </div>
-          );
+          )
         })}
       </div>
     </div>
-  );
-};
+  )
+}
 
-const News = ({ articles, meta, categories, isMobile, pageRef }) => {
-  const [loaded, setLoaded] = useState(false);
-  const perPage = isMobile ? 3 : 9;
+const News = ({
+  articles,
+  meta,
+  categories,
+  isMobile,
+  pageRef,
+  locales,
+  currentLocale
+}) => {
+  const [loaded, setLoaded] = useState(false)
+  const perPage = isMobile ? 3 : 9
 
   useEffect(() => {
-    setLoaded(true);
-  }, []);
+    setLoaded(true)
+  }, [])
 
-  const [category, setCategory] = useState("");
-  const [page, setPage] = useState(1);
-  const [pageNumbers, setPageNumbers] = useState([]);
-  const [order, setOrder] = useState("Most recent");
+  const [category, setCategory] = useState('')
+  const [page, setPage] = useState(1)
+  const [pageNumbers, setPageNumbers] = useState([])
+  const [order, setOrder] = useState('Most recent')
+  const router = useRouter()
 
   const articlesSorted = articles.sort((a, b) =>
     (b.publishBackdate || b.publishedAt).localeCompare(
       a.publishBackdate || a.publishedAt
     )
-  );
+  )
   const articlesOrdered =
-    order === "Most recent" ? articlesSorted : articlesSorted.reverse();
+    order === 'Most recent' ? articlesSorted : articlesSorted.reverse()
 
   const categoryArticles = category
     ? articlesOrdered.filter(
@@ -108,25 +129,25 @@ const News = ({ articles, meta, categories, isMobile, pageRef }) => {
           article.category?.slug.toLocaleLowerCase() ===
           category.toLocaleLowerCase()
       )
-    : articlesOrdered;
+    : articlesOrdered
 
   const articlePages = Math.ceil(
     (category ? categoryArticles.length : meta.pagination.total) / perPage
-  );
+  )
   const currentPageArticles = articlesOrdered
     ? categoryArticles.slice(perPage * (page - 1), perPage * page)
-    : [];
+    : []
 
   useEffect(() => {
-    const pages = articlePages;
+    const pages = articlePages
 
-    let pageNumbers = [1, 2, pages, pages - 1, page, page - 1, page + 1];
-    pageNumbers = pageNumbers.filter((number) => number > 0 && number <= pages);
+    let pageNumbers = [1, 2, pages, pages - 1, page, page - 1, page + 1]
+    pageNumbers = pageNumbers.filter((number) => number > 0 && number <= pages)
     // @ts-ignore
-    pageNumbers = [...new Set(pageNumbers)];
-    pageNumbers = pageNumbers.sort((a, b) => a - b);
-    setPageNumbers(pageNumbers);
-  }, [page, articlePages]);
+    pageNumbers = [...new Set(pageNumbers)]
+    pageNumbers = pageNumbers.sort((a, b) => a - b)
+    setPageNumbers(pageNumbers)
+  }, [page, articlePages])
 
   return (
     <>
@@ -137,13 +158,24 @@ const News = ({ articles, meta, categories, isMobile, pageRef }) => {
               options={categories}
               option={category}
               setOption={setCategory}
-              category
+              category="category"
             />
             <Dropdown
               option={order}
               setOption={setOrder}
               options={undefined}
-              category={undefined}
+              category="publishedAt"
+            />
+            <Dropdown
+              options={locales}
+              option={
+                locales.find((locale) => locale[1] === currentLocale)?.[0] ??
+                'English (en)'
+              }
+              setOption={(locale) => {
+                router.push('/blog', '/blog', { locale })
+              }}
+              category="locale"
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 md:mt-20">
@@ -155,20 +187,20 @@ const News = ({ articles, meta, categories, isMobile, pageRef }) => {
               ) {
                 return (
                   <Card
-                    webProperty={"ousd"}
+                    webProperty={'ousd'}
                     title={a.title}
                     img={
                       <Image
                         src={
                           a.cardCover?.url ||
                           a.cover?.url ||
-                          assetRootPath("/images/card.svg")
+                          assetRootPath('/images/card.svg')
                         }
                         width="0"
                         height="0"
                         sizes="100vw"
                         className="w-full h-auto"
-                        alt={a.cover?.alternativeText || "cover"}
+                        alt={a.cover?.alternativeText || 'cover'}
                       />
                     }
                     body={
@@ -176,12 +208,16 @@ const News = ({ articles, meta, categories, isMobile, pageRef }) => {
                         {a.publishBackdate || a.publishedAt}
                       </Moment>
                     }
-                    linkText={"Read more"}
-                    linkHref={`/${a.slug}`}
-                    target={"_self"}
+                    linkText={'Read more'}
+                    linkHref={
+                      currentLocale === 'en'
+                        ? `/${a.slug}`
+                        : `/${currentLocale}/${a.slug}`
+                    }
+                    target={'_self'}
                     key={i}
                   />
-                );
+                )
               }
             })}
           </div>
@@ -189,22 +225,22 @@ const News = ({ articles, meta, categories, isMobile, pageRef }) => {
             <div
               className="flex items-center justify-center w-[33px] h-[33px] cursor-pointer"
               onClick={() => {
-                setPage(page - 1);
-                pageRef.current.scrollIntoView();
+                setPage(page - 1)
+                pageRef.current.scrollIntoView()
               }}
             >
               <Image
                 src={assetRootPath(`/images/arrow-left.svg`)}
                 width="10"
                 height="5"
-                className={`${page === 1 ? "hidden" : ""}`}
+                className={`${page === 1 ? 'hidden' : ''}`}
                 alt="arrow"
               />
             </div>
             {pageNumbers.map((pageNumber, index) => {
-              const isCurrent = pageNumber === page;
+              const isCurrent = pageNumber === page
               const skippedAPage =
-                index > 0 && pageNumber - pageNumbers[index - 1] !== 1;
+                index > 0 && pageNumber - pageNumbers[index - 1] !== 1
 
               return (
                 <div className="flex" key={pageNumber}>
@@ -215,33 +251,33 @@ const News = ({ articles, meta, categories, isMobile, pageRef }) => {
                   )}
                   <div
                     className={`w-[33px] h-[33px] text-[#fafbfb] cursor-pointer ${
-                      isCurrent ? "rounded-[6px] gradient2" : ""
+                      isCurrent ? 'rounded-[6px] gradient2' : ''
                     } flex items-center justify-center`}
                     onClick={() => {
                       if (isCurrent) {
-                        return;
+                        return
                       }
-                      setPage(pageNumber);
-                      pageRef.current.scrollIntoView();
+                      setPage(pageNumber)
+                      pageRef.current.scrollIntoView()
                     }}
                   >
                     {pageNumber}
                   </div>
                 </div>
-              );
+              )
             })}
             <div
               className="flex items-center justify-center w-[33px] h-[33px] cursor-pointer"
               onClick={() => {
-                setPage(page + 1);
-                pageRef.current.scrollIntoView();
+                setPage(page + 1)
+                pageRef.current.scrollIntoView()
               }}
             >
               <Image
                 src={assetRootPath(`/images/arrow-right.svg`)}
                 width="10"
                 height="5"
-                className={`${page === pageNumbers.length ? "hidden" : ""}`}
+                className={`${page === pageNumbers.length ? 'hidden' : ''}`}
                 alt="arrow"
               />
             </div>
@@ -258,7 +294,7 @@ const News = ({ articles, meta, categories, isMobile, pageRef }) => {
         }
       `}</style>
     </>
-  );
-};
+  )
+}
 
-export default withIsMobile(News);
+export default withIsMobile(News)
