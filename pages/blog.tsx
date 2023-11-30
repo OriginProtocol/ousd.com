@@ -1,27 +1,27 @@
-import React, { useRef } from "react";
-import Head from "next/head";
-import { Typography, Header } from "@originprotocol/origin-storybook";
-import News from "../src/components/News";
-import { useRouter } from "next/router";
-import Footer from "../src/components/Footer";
-import { fetchAPI } from "../lib/api";
-import Seo from "../src/components/strapi/seo";
-import formatSeo from "../src/utils/seo";
-import transformLinks from "../src/utils/transformLinks";
-import { capitalize } from "lodash";
+import React, { useRef } from 'react'
+import Head from 'next/head'
+import { Typography, Header } from '@originprotocol/origin-storybook'
+import News from '../src/components/News'
+import { useRouter } from 'next/router'
+import Footer from '../src/components/Footer'
+import { fetchAPI } from '../lib/api'
+import Seo from '../src/components/strapi/seo'
+import formatSeo from '../src/utils/seo'
+import transformLinks from '../src/utils/transformLinks'
+import { capitalize } from 'lodash'
 
 const Blog = ({
-  locale,
-  onLocale,
   articles,
   meta,
   categories,
   seo,
   navLinks,
+  locales,
+  currentLocale
 }) => {
-  const { pathname } = useRouter();
-  const active = capitalize(pathname.slice(1));
-  const pageRef = useRef(null);
+  const { pathname } = useRouter()
+  const active = capitalize(pathname.slice(1))
+  const pageRef = useRef(null)
 
   return (
     <div ref={pageRef}>
@@ -49,40 +49,46 @@ const Blog = ({
               meta={meta}
               categories={categories}
               pageRef={pageRef}
+              locales={locales}
+              currentLocale={currentLocale}
             />
           )}
         </div>
       </section>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export async function getStaticProps() {
+export async function getStaticProps({ locale = 'en' }) {
   // Run API calls in parallel
-  const articlesRes = await fetchAPI("/ousd/blog/en", {
+  const articlesRes = await fetchAPI(`/ousd/blog/${locale}`, {
     pagination: {
-      pageSize: 1000,
-    },
-  });
+      pageSize: 1000
+    }
+  })
 
-  const categories = {};
+  const categories = {}
   articlesRes?.data?.forEach((article) => {
     if (article && article.category) {
-      categories[article.category.slug] = article.category;
+      categories[article.category.slug] = article.category
     }
-  });
+  })
 
-  const seoRes = await fetchAPI("/ousd/page/en/%2Fblog");
-  const navRes = await fetchAPI("/ousd-nav-links", {
+  const seoRes = await fetchAPI(`/ousd/page/${locale}/%2Fblog`)
+  const navRes = await fetchAPI('/ousd-nav-links', {
     populate: {
       links: {
-        populate: "*",
-      },
-    },
-  });
+        populate: '*'
+      }
+    }
+  })
 
-  const navLinks = transformLinks(navRes.data);
+  const navLinks = transformLinks(navRes.data)
+  const localeRes = await fetchAPI('/i18n/locales')
+  const locales = localeRes.map((locale) => {
+    return [locale.name, locale.code]
+  })
 
   return {
     props: {
@@ -90,10 +96,12 @@ export async function getStaticProps() {
       meta: articlesRes?.meta || null,
       categories: Object.values(categories),
       seo: formatSeo(seoRes?.data),
-      navLinks,
+      locales,
+      currentLocale: locale,
+      navLinks
     },
-    revalidate: 5 * 60, // Cache response for 5m
-  };
+    revalidate: 5 * 60 // Cache response for 5m
+  }
 }
 
-export default Blog;
+export default Blog
