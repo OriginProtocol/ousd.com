@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Section } from '../../components'
 import { ChartButton } from '../components'
 import { smSize } from '../../constants'
-import { ChartData } from 'chart.js'
-import { Bar } from 'react-chartjs-2'
+import { Chart } from 'react-chartjs-2'
 import { ethers } from 'ethers'
 
 import {
@@ -71,14 +70,14 @@ const ProtocolRevenue = ({ width }: ProtocolRevenueProps) => {
       </div>
 
       <div id="ogv-price-chart" className="relative">
-        <Bar
+        <Chart
           className="my-6 border-2 border-origin-border rounded-lg !w-full !h-[120vw] sm:!h-[40vw] max-h-[30rem]"
+          type="bar"
           data={{
             labels: convertedData.labels,
             datasets: [
               {
                 backgroundColor: '#4AFFBE',
-                id: '_7_day',
                 label: '7 day MA',
                 data: convertedData.totalMA,
                 type: 'line',
@@ -137,7 +136,7 @@ const ProtocolRevenue = ({ width }: ProtocolRevenueProps) => {
                   label: (context) =>
                     `${context.dataset.label}: ${
                       chartType === 'eth' ? 'Ξ' : '$'
-                    }${context.raw.toLocaleString(undefined, {
+                    }${(context.raw as number).toLocaleString(undefined, {
                       maximumFractionDigits: chartType === 'usd' ? 2 : 4
                     })}`
                 }
