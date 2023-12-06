@@ -49,6 +49,7 @@ import {
   OgvStakingStats,
 } from "../src/ogv-dashboard/sections";
 import { fetchOgvStats } from "../src/utils";
+import ProtocolRevenue from "../src/ogv-dashboard/sections/ProtocolRevenue";
 
 ChartJS.register(
   CategoryScale,
@@ -115,6 +116,8 @@ const OgvDashboard = ({
           nonCirculatingSupply,
         }}
       />
+
+      <ProtocolRevenue {...{ width }} />
 
       {/* OGV Price Chart */}
       <OgvPriceChart
