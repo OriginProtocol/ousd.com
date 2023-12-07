@@ -28,6 +28,7 @@ import {
   DefaultChartHeader,
   DurationFilter,
   MovingAverageFilter,
+  ProtocolChart,
 } from "../../src/analytics/components";
 import { useAPYChart } from "../../src/analytics/hooks/useAPYChart";
 import { useTotalSupplyChart } from "../../src/analytics/hooks/useTotalSupplyChart";
@@ -356,6 +357,9 @@ const Analytics = ({ collateral }) => {
         </div>
         <div className="col-span-12">
           <TotalSupplyChartContainer />
+        </div>
+        <div className="col-span-12">
+          <ProtocolChart />
         </div>
         {/* <div className="col-span-12 2xl:col-span-6">
           <OUSDMarketshareContainer />

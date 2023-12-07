@@ -1,7 +1,7 @@
-import { useQuery } from "react-query";
-import { useMemo, useState } from "react";
-import { isMobile } from "react-device-detect";
-import { borderFormatting, filterByDuration, formatDisplay } from "../utils";
+import { useQuery } from 'react-query'
+import { useMemo, useState } from 'react'
+import { isMobile } from 'react-device-detect'
+import { barFormatting, filterByDuration, formatDisplay } from '../utils'
 
 export const useProtocolRevenueChart = () => {
   const { data, isFetching } = useQuery(
@@ -10,48 +10,65 @@ export const useProtocolRevenueChart = () => {
       initialData: {
         labels: [],
         datasets: [],
-        error: null,
+        error: null
       },
       refetchOnWindowFocus: false,
-      keepPreviousData: true,
+      keepPreviousData: true
     }
-  );
+  )
 
   const [chartState, setChartState] = useState({
-    duration: "all",
-    typeOf: "total",
-  });
+    duration: '6m',
+    typeOf: '_7_day'
+  })
+
+  const barsToShow = ['revenue_daily', 'yield_daily']
 
   const baseData = useMemo(() => {
     if (data?.error) {
-      return null;
+      return null
     }
     return {
       labels: data?.labels,
       datasets: data?.datasets?.reduce((acc, dataset) => {
-        if (!chartState?.typeOf || dataset.id === chartState?.typeOf) {
+        if (
+          barsToShow.includes(dataset.id) ||
+          !chartState?.typeOf ||
+          dataset.id === chartState?.typeOf
+        ) {
           acc.push({
+            ...barFormatting,
             ...dataset,
-            ...borderFormatting,
-          });
+            ...(dataset.type === 'line'
+              ? {
+                  type: 'line',
+                  borderColor: '#D72FC6',
+                  borderWidth: 2,
+                  tension: 0,
+                  borderJoinStyle: 'round',
+                  pointRadius: 0,
+                  pointHitRadius: 1
+                }
+              : {})
+          })
         }
-        return acc;
-      }, []),
-    };
-  }, [JSON.stringify(data)]);
+        return acc
+      }, [])
+    }
+  }, [JSON.stringify(data), JSON.stringify(chartState?.typeOf)])
 
   const chartData = useMemo(() => {
     return baseData
       ? formatDisplay(filterByDuration(baseData, chartState?.duration))
-      : null;
-  }, [JSON.stringify(baseData), chartState?.duration, chartState?.typeOf]);
+      : null
+  }, [JSON.stringify(baseData), chartState?.duration, chartState?.typeOf])
 
   const onChangeFilter = (value) => {
     setChartState((prev) => ({
       ...prev,
-      ...value,
-    }));
-  };
+      ...value
+    }))
+  }
 
   return [
     {
@@ -65,67 +82,77 @@ export const useProtocolRevenueChart = () => {
         aspectRatio: isMobile ? 1 : 3,
         plugins: {
           title: {
-            display: false,
+            display: false
           },
           legend: {
             display: false,
-            position: "bottom",
+            position: 'bottom'
           },
           tooltip: {
             enabled: true,
-          },
+            boxPadding: 5,
+            padding: 10,
+            cornerRadius: 10,
+            usePointStyle: true,
+            borderColor: '#ffffffcc',
+            borderWidth: 1,
+            callbacks: {
+              label: (context) =>
+                `${context.dataset.label}: $${Number(
+                  context.raw
+                ).toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2
+                })}`
+            }
+          }
         },
         interaction: {
-          mode: "nearest",
+          mode: 'nearest',
           intersect: false,
-          axis: "x",
+          axis: 'x'
         },
         scales: {
           x: {
+            stacked: true,
             border: {
-              color: "#4d505e",
-              width: 0.5,
+              color: '#4d505e',
+              width: 0.5
             },
             grid: {
-              display: false,
+              display: false
             },
             ticks: {
-              color: "#828699",
-              autoSkip: false,
-              maxRotation: 90,
+              color: '#828699',
+              autoSkip: true,
+              maxRotation: 0,
               minRotation: 0,
-              padding: 20,
-              callback: function (val, index) {
-                return (
-                  isMobile ? (index + 22) % 28 === 0 : (index + 8) % 14 === 0
-                )
-                  ? this.getLabelForValue(val)
-                  : null;
-              },
-            },
+              padding: 10
+            }
           },
           y: {
+            stacked: true,
             border: {
               display: false,
               dash: [2, 4],
-              dashOffset: 1,
+              dashOffset: 1
             },
             grid: {
-              color: "#4d505e",
-              lineWidth: 0.5,
+              color: '#4d505e',
+              lineWidth: 0.5
             },
             beginAtZero: true,
-            position: "right",
+            position: 'right',
             ticks: {
-              color: "#828699",
+              color: '#828699',
               callback: function (val) {
-                return val === 0 ? null : this.getLabelForValue(val);
-              },
-            },
-          },
-        },
-      },
+                return val === 0 ? null : this.getLabelForValue(val)
+              }
+            }
+          }
+        }
+      }
     },
-    { onChangeFilter },
-  ];
-};
+    { onChangeFilter }
+  ]
+}

@@ -1,28 +1,20 @@
-import React, { useMemo } from "react";
-import Head from "next/head";
-import { Bar } from "react-chartjs-2";
-import {
-  ErrorBoundary,
-  LayoutBox,
-  TwoColumnLayout,
-} from "../../src/components";
-import classnames from "classnames";
-import { Typography } from "@originprotocol/origin-storybook";
+import React, { useMemo } from 'react'
+import Head from 'next/head'
+import { Bar } from 'react-chartjs-2'
+import { ErrorBoundary, LayoutBox, TwoColumnLayout } from '../../src/components'
+import classnames from 'classnames'
+import { Typography } from '@originprotocol/origin-storybook'
 import {
   BarElement,
   CategoryScale,
   Chart as ChartJS,
-  LinearScale,
-} from "chart.js";
-import { last } from "lodash";
-import {
-  DefaultChartHeader,
-  DurationFilter,
-} from "../../src/analytics/components";
-import { useProtocolRevenueChart } from "../../src/analytics/hooks/useProtocolRevenueChart";
-import { formatCurrency } from "../../src/utils/math";
+  LinearScale
+} from 'chart.js'
+import { ProtocolChart } from '../../src/analytics/components'
+import { useProtocolRevenueChart } from '../../src/analytics/hooks/useProtocolRevenueChart'
+import { formatCurrency } from '../../src/utils/math'
 
-ChartJS.register(CategoryScale, LinearScale, BarElement);
+ChartJS.register(CategoryScale, LinearScale, BarElement)
 
 const ProtocolRevenueDetails = ({ breakdowns, isFetching }) => {
   return (
@@ -32,9 +24,9 @@ const ProtocolRevenueDetails = ({ breakdowns, isFetching }) => {
           key={label}
           isLoading={isFetching}
           className={classnames({
-            "rounded-tr-none rounded-br-none w-full h-full": index === 0,
-            "rounded-none": index > 0 && index !== breakdowns.length - 1, // middle sections
-            "rounded-tl-none rounded-bl-none": index === breakdowns.length - 1,
+            'rounded-tr-none rounded-br-none w-full h-full': index === 0,
+            'rounded-none': index > 0 && index !== breakdowns.length - 1, // middle sections
+            'rounded-tl-none rounded-bl-none': index === breakdowns.length - 1
           })}
         >
           <div className="flex flex-row w-full h-[110px] md:h-[150px] items-center space-x-6 px-6">
@@ -51,75 +43,73 @@ const ProtocolRevenueDetails = ({ breakdowns, isFetching }) => {
         </LayoutBox>
       ))}
     </div>
-  );
-};
+  )
+}
 
-const ProtocolChart = ({
-  data,
-  isFetching,
-  onChangeFilter,
-  chartOptions,
-  filter,
-}) => {
-  return data ? (
-    <LayoutBox
-      loadingClassName="flex items-center justify-center h-[350px] w-full"
-      isLoading={isFetching}
-    >
-      <div className="flex flex-row justify-between w-full h-[150px] p-4 md:p-6">
-        <DefaultChartHeader
-          title="Daily Protocol Revenue"
-          display={`$${formatCurrency(last(data?.datasets?.[0]?.data), 0)}`}
-          date={last(data?.labels)}
-        />
-        <div className="flex flex-col space-y-2">
-          <DurationFilter
-            value={filter?.duration}
-            onChange={(duration) => {
-              onChangeFilter({
-                duration: duration || "all",
-              });
-            }}
-          />
-        </div>
-      </div>
-      <div className="mr-6">
-        <Bar options={chartOptions} data={data} />
-      </div>
-    </LayoutBox>
-  ) : null;
-};
+// const ProtocolChart = ({
+//   data,
+//   isFetching,
+//   onChangeFilter,
+//   chartOptions,
+//   filter,
+// }) => {
+//   return data ? (
+//     <LayoutBox
+//       loadingClassName="flex items-center justify-center h-[350px] w-full"
+//       isLoading={isFetching}
+//     >
+//       <div className="flex flex-row justify-between w-full h-[150px] p-4 md:p-6">
+//         <DefaultChartHeader
+//           title="Daily Protocol Revenue"
+//           display={`$${formatCurrency(last(data?.datasets?.[0]?.data), 0)}`}
+//           date={last(data?.labels)}
+//         />
+//         <div className="flex flex-col space-y-2">
+//           <DurationFilter
+//             value={filter?.duration}
+//             onChange={(duration) => {
+//               onChangeFilter({
+//                 duration: duration || "all",
+//               });
+//             }}
+//           />
+//         </div>
+//       </div>
+//       <div className="mr-6">
+//         <Bar options={chartOptions} data={data} />
+//       </div>
+//     </LayoutBox>
+//   ) : null;
+// };
 
 const AnalyticsProtocolRevenue = () => {
-  const [
-    { data, aggregations, filter, chartOptions, isFetching },
-    { onChangeFilter },
-  ] = useProtocolRevenueChart();
+  const [{ data, aggregations, isFetching }, { onChangeFilter }] =
+    useProtocolRevenueChart()
 
   const breakdowns = useMemo(() => {
     const {
       dailyRevenue = 0,
       weeklyRevenue = 0,
-      allTimeRevenue = 0,
-    } = aggregations || {};
+      allTimeRevenue = 0
+    } = aggregations || {}
     return [
       {
-        label: "24H revenue",
+        label: '24H revenue',
         display: `$${formatCurrency(dailyRevenue, 0)}`,
-        value: dailyRevenue,
+        value: dailyRevenue
       },
       {
-        label: "7D revenue",
+        label: '7D revenue',
         display: `$${formatCurrency(weeklyRevenue, 0)}`,
-        value: weeklyRevenue,
+        value: weeklyRevenue
       },
       {
-        label: "Total revenue",
+        label: 'Total revenue',
         display: `$${formatCurrency(allTimeRevenue, 0)}`,
-        value: allTimeRevenue,
-      },
-    ];
-  }, [JSON.stringify(data)]);
+        value: allTimeRevenue
+      }
+    ]
+  }, [JSON.stringify(data)])
 
   return (
     <ErrorBoundary>
@@ -134,21 +124,15 @@ const AnalyticsProtocolRevenue = () => {
           />
         </div>
         <div className="col-span-12">
-          <ProtocolChart
-            data={data}
-            filter={filter}
-            chartOptions={chartOptions}
-            isFetching={isFetching}
-            onChangeFilter={onChangeFilter}
-          />
+          <ProtocolChart />
         </div>
       </div>
     </ErrorBoundary>
-  );
-};
+  )
+}
 
-export default AnalyticsProtocolRevenue;
+export default AnalyticsProtocolRevenue
 
 AnalyticsProtocolRevenue.getLayout = (page, props) => (
   <TwoColumnLayout {...props}>{page}</TwoColumnLayout>
-);
+)
