@@ -49,6 +49,7 @@ import {
   OgvStakingStats,
 } from "../src/ogv-dashboard/sections";
 import { fetchOgvStats } from "../src/utils";
+import ProtocolRevenue from "../src/ogv-dashboard/sections/ProtocolRevenue";
 
 ChartJS.register(
   CategoryScale,
@@ -127,6 +128,8 @@ const OgvDashboard = ({
           width,
         }}
       />
+
+      <ProtocolRevenue {...{ width }} />
 
       {/* OGV Staking Banner*/}
       <StakingBanner {...{ stakingAPY, apyLoading, width }} />

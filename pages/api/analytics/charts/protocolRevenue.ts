@@ -1,81 +1,114 @@
-import { chunk, last, takeRight, map } from "lodash";
-import DuneClient, { toChartData, jobsLookup } from "../../../../lib/dune";
-import { sumOf } from "../../../../src/analytics/utils";
+import { ethers } from 'ethers'
+const formatEther = ethers.utils.formatEther
 
 export const getProtocolRevenue = async () => {
   try {
-    const client = new DuneClient(process.env.DUNE_API_KEY);
+    const res = await fetch(process.env.NEXT_PUBLIC_SUBSQUID_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query: `query DailyFees {
+          ousdDailyStats(orderBy: blockNumber_DESC) {
+            id
+            timestamp
+            feesUSD
+          }
+        }`,
+        variables: null,
+        operationName: 'DailyFees'
+      })
+    })
 
-    const {
-      result: { rows },
-    } = await client.refresh(jobsLookup.protocolRevenue.queryId);
-
-    rows.reverse();
-
-    const chunked = chunk(rows, 2);
-
-    const dailyRevRows = chunked.reduce((acc, chunk) => {
-      const [before, after] = chunk;
-      if (after) {
-        acc.push({
-          // @ts-ignore
-          ousd_amount:
-            parseFloat(after?.ousd_amount) - parseFloat(before?.ousd_amount),
-          day: after?.day,
-        });
-      }
-      return acc;
-    }, []);
-
-    const { total, labels } = toChartData(dailyRevRows, {
-      ousd_amount: "total",
-      day: "labels",
-    });
-
-    const allRawAmounts = map(rows, "ousd_amount");
-    const dailyDevAmounts = map(dailyRevRows, "ousd_amount");
+    const json = await res.json()
+    const dailyStats = json.data.ousdDailyStats.reverse()
+    const today = dailyStats[dailyStats.length - 1]
 
     return {
-      labels,
+      labels: dailyStats.map((d) => new Date(d.timestamp)),
       datasets: [
         {
-          id: "total",
-          label: "Daily Revenue",
-          data: total,
+          id: '_7_day',
+          label: '7-day trailing avg',
+          data: movingAverage(dailyStats, 7),
+          type: 'line',
+          backgroundColor: '#D72FC6'
         },
+        {
+          id: '_30_day',
+          label: '30-day trailing avg',
+          data: movingAverage(dailyStats, 30),
+          type: 'line',
+          backgroundColor: '#D72FC6'
+        },
+        {
+          id: 'revenue_daily',
+          label: 'Fees Collected',
+          data: dailyStats.map((d) => formatEther(d.feesUSD)),
+          backgroundColor: '#4B3C6D'
+        }
       ],
       aggregations: {
-        dailyRevenue: last(dailyDevAmounts),
-        weeklyRevenue: sumOf(takeRight(dailyDevAmounts, 7)),
-        allTimeRevenue: last(allRawAmounts),
-      },
-    };
+        dailyRevenue: formatEther(today.feesUSD),
+        weeklyRevenue: dailyStats
+          .slice(dailyStats.length - 7, dailyStats.length)
+          .reduce((m, o) => {
+            return m + Number(formatEther(o.feesUSD))
+          }, 0),
+        allTimeRevenue: dailyStats.reduce((m, o) => {
+          return m + Number(formatEther(o.feesUSD))
+        }, 0)
+      }
+    }
   } catch (e) {
-    console.error(e);
-    throw e;
+    console.error(e)
+    throw e
   }
-};
+}
 
 const getHandler = async (req, res) => {
   try {
-    const data = await getProtocolRevenue();
-    return res.json(data);
+    const data = await getProtocolRevenue()
+    return res.json(data)
   } catch (error) {
     return res.status(500).json({
-      error,
-    });
+      error
+    })
   }
-};
+}
 
 const handler = async (req, res) => {
-  const { method } = req;
+  const { method } = req
   switch (method) {
-    case "GET":
-      return getHandler(req, res);
+    case 'GET':
+      return getHandler(req, res)
     default:
-      res.setHeader("Allow", ["GET", "OPTIONS"]);
-      res.status(405).end(`Method ${method} Not Allowed`);
+      res.setHeader('Allow', ['GET', 'OPTIONS'])
+      res.status(405).end(`Method ${method} Not Allowed`)
   }
-};
+}
 
-export default handler;
+export default handler
+
+interface FeeRecord {
+  feesUSD: bigint
+  fees7day?: number
+  fees30day?: number
+}
+
+function movingAverage(fees: FeeRecord[], days: number): number[] {
+  // Calculate the 7-day average for each element
+  return fees.map((_, index, array) => {
+    // Determine the start index for the 7-day range
+    const start = Math.max(0, index - days - 1)
+    // Slice the array to get the last 7 days (or fewer, if less than 7 days are available)
+    const lastSevenDays = array.slice(start, index + 1)
+    // Calculate the average
+    const average =
+      lastSevenDays.reduce(
+        (sum, record) => sum + Number(formatEther(record.feesUSD)),
+        0
+      ) / lastSevenDays.length
+    // Return a new object with the original fee and the calculated average
+    return average
+  })
+}
