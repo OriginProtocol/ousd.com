@@ -117,8 +117,6 @@ const OgvDashboard = ({
         }}
       />
 
-      <ProtocolRevenue {...{ width }} />
-
       {/* OGV Price Chart */}
       <OgvPriceChart
         {...{
@@ -130,6 +128,8 @@ const OgvDashboard = ({
           width,
         }}
       />
+
+      <ProtocolRevenue {...{ width }} />
 
       {/* OGV Staking Banner*/}
       <StakingBanner {...{ stakingAPY, apyLoading, width }} />
