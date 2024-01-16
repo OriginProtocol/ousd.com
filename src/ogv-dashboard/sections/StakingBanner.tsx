@@ -53,7 +53,7 @@ const StakeBannerButtons = () => {
       <a
         target="_blank"
         rel="noopener noreferrer"
-        href="https://governance.ousd.com/stake"
+        href="https://governance.ousd.com/#/staking"
         className="w-full flex justify-center"
       >
         <button className="rounded-full w-full sm:w-fit bg-gradient1 text-sm sm:text-base p-[1px] cursor-pointer text-center mb-2">
