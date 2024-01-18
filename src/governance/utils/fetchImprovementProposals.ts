@@ -60,7 +60,7 @@ const fetchOnChainProposalCount = async () => {
       })
     })
     const json = await res.json()
-    count = json.ogvProposalsConnection.totalCount
+    count = json.data.ogvProposalsConnection.totalCount
   } catch (err) {
     console.error("Error fetching proposal count from chain");
     throw err;
