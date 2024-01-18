@@ -44,11 +44,23 @@ const fetchOffChainProposalCount = async () => {
 };
 
 const fetchOnChainProposalCount = async () => {
-  const fetchUrl = `${process.env.NEXT_PUBLIC_GOV_URL}/api/proposals?onlyCount=true`;
-  let count: number;
+  let count = 0;
   try {
-    const response = await fetch(fetchUrl);
-    ({ count } = await response.json());
+    const res = await fetch(process.env.NEXT_PUBLIC_SUBSQUID_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query: ` query ProposalCount {
+          ogvProposalsConnection(orderBy: id_ASC, where: {status_not_in: Canceled}) {
+            totalCount
+          }
+        }`,
+        variables: null,
+        operationName: 'ProposalCount'
+      })
+    })
+    const json = await res.json()
+    count = json.ogvProposalsConnection.totalCount
   } catch (err) {
     console.error("Error fetching proposal count from chain");
     throw err;
