@@ -80,7 +80,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                 <Typography.Body>Buy OGV</Typography.Body>
               </Link>
               <Link
-                href="https://governance.ousd.com/stake"
+                href="https://governance.ousd.com/#/staking"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full md:w-[267px] px-20 py-3.5 md:py-5 rounded-full text-center border-[1px] hover:opacity-90"
@@ -423,7 +423,7 @@ const Burn = ({ locale, onLocale, seo, navLinks }) => {
                     </Typography.Body>
                   </div>
                   <Link
-                    href="https://governance.ousd.com/stake"
+                    href="https://governance.ousd.com/#/staking"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block w-full lg:max-w-[248px] mt-6 lg:mt-7 px-[60px] py-3.5 lg:py-5 rounded-full text-center gradient2 hover:opacity-90"

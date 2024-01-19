@@ -230,7 +230,7 @@ const Ogv = ({ stats }: OgvProps) => {
                   and profit from its growth.
                 </Typography.Body3>
                 <Link
-                  href="https://governance.ousd.com/stake"
+                  href="https://governance.ousd.com/#/staking"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bttn bg-black"

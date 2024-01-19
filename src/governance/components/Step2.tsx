@@ -16,7 +16,7 @@ const Step2 = ({ stakingAPY, apyLoading, className }: Step2Props) => {
         <span
           className="ml-1 text-gradient1 cursor-pointer"
           onClick={() =>
-            window.open("https://governance.ousd.com/stake", "_blank")
+            window.open("https://governance.ousd.com/#/staking", "_blank")
           }
         >
           the Origin DeFi governance staking page.
@@ -35,7 +35,7 @@ const Step2 = ({ stakingAPY, apyLoading, className }: Step2Props) => {
         onClick={() =>
           process.browser &&
           window.open(
-            "https://governance.ousd.com/stake",
+            "https://governance.ousd.com/#/staking",
             "_blank",
             "noopener noreferrer"
           )
