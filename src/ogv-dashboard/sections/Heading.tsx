@@ -53,7 +53,7 @@ const Heading = ({ stakingAPY, apyLoading }: HeadingProps) => {
       <a
         target="_blank"
         rel="noopener noreferrer"
-        href="https://governance.ousd.com/stake"
+        href="https://governance.ousd.com/#/staking"
         className="box-border"
       >
         <button className="rounded-full w-full sm:w-fit box-border bg-gradient1 text-base p-[1px] cursor-pointer text-center">
