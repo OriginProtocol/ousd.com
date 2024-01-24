@@ -6,7 +6,7 @@ import { slice } from 'lodash'
 export const backingTokens = {
   DAI: {
     label: 'DAI (DAI)',
-    logoSrc: '/images/dai-logos.svg',
+    logoSrc: '/images/dai-log.svg',
     color: '#FBC247'
   },
   USDC: {
