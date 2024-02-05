@@ -62,7 +62,7 @@ const Calculator = ({ sectionOverrideCss }: CalculatorProps) => {
   const block = useBlock();
   const blockTimestamp = block?.timestamp;
   const snapshotReq = useMemo(
-    () => veOgvToOgv(blockTimestamp, 10_000, lockupDuration),
+    () => veOgvToOgv(blockTimestamp, 300_000, lockupDuration),
     [blockTimestamp, lockupDuration]
   );
   const onChainReq = useMemo(
@@ -130,7 +130,7 @@ const Calculator = ({ sectionOverrideCss }: CalculatorProps) => {
       />
       <div className="flex flex-col lg:flex-row w-full">
         <RangeOutput
-          title="Snapshot proposal (10,000 veOGV)"
+          title="Snapshot proposal (300,000 veOGV)"
           value={commify(snapshotReq.toFixed(2))}
           className="w-full lg:w-1/2 mr-6"
         />

@@ -32,7 +32,7 @@ const GovernanceProcess = ({ sectionOverrideCss }: GovernanceProcessProps) => {
         description="All off-chain voting occurs on the Origin DeFi Governance Snapshot space. This allows for signaling votes and temperature checks to be conducted without participants needing to spend gas. Other proposals belong on Snapshot because they don't require on-chain execution to be implemented, such as funds allocations and other Strategist actions."
         externalDescription="Snapshot space"
         participationRequirments={{
-          snapshotMinimum: "10,000 veOGV",
+          snapshotMinimum: "300,000 veOGV",
           voteMinimum: "No minimum",
           quorumMinimum: "50 million veOGV",
         }}
