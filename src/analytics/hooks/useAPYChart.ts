@@ -25,7 +25,7 @@ export const useAPYChart = () => {
     return formatDisplay(
       filterByDuration(
         {
-          labels: data?.labels,
+          labels: data?.labels?.map(l => l.replace(' UTC', '')),
           datasets: data?.datasets?.reduce((acc, dataset) => {
             if (!chartState?.typeOf || dataset.id === chartState?.typeOf) {
               acc.push({
