@@ -8,14 +8,14 @@ import {
 } from '../utils'
 
 export const useTotalSupplyChart = () => {
-  const { data, isFetching } = useQuery("/api/analytics/charts/totalSupply", {
+  const { data, isFetching } = useQuery('/api/analytics/charts/totalSupply', {
     initialData: {
       labels: [],
-      datasets: [],
+      datasets: []
     },
     refetchOnWindowFocus: false,
-    keepPreviousData: true,
-  });
+    keepPreviousData: true
+  })
 
   const [chartState, setChartState] = useState({
     duration: 'all',
@@ -26,7 +26,7 @@ export const useTotalSupplyChart = () => {
     return formatDisplay(
       filterByDuration(
         {
-          labels: data?.labels.map((l) => l.replace(' UTC', '')),
+          labels: data?.labels?.map((l) => l.replace(' UTC', '')),
           datasets: data?.datasets?.reduce((acc, dataset) => {
             if (!chartState?.typeOf || dataset.id === chartState?.typeOf) {
               acc.push({
